@@ -129,6 +129,17 @@ public class User implements Comparable<User>,Cloneable {
 	}
 	
 	/**
+	 * @param 	password
+	 * 	the password that has to be checked
+	 * @return
+	 * 	true if the password matches this user's password
+	 * 	|	(getPassword().equals(password))
+	 */
+	public boolean isCorrectPassword(String password){
+		return (getPassword().equals(password));
+	}
+	
+	/**
 	 * compares user with other user
 	 * @return
 	 * 0 if the usernames of both users match
