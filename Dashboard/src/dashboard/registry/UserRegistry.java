@@ -1,6 +1,9 @@
 package dashboard.registry;
 
 import java.util.HashSet;
+
+import dashboard.error.EmailInUseException;
+import dashboard.error.UserNameInUseException;
 import dashboard.model.User;
 
 public class UserRegistry {
@@ -36,7 +39,7 @@ public class UserRegistry {
 	 * 	|	if(!user.contains(user.getName().equals(name)))
 	 *	|		return null
 	 */
-	public User getUserByName(String name){
+	public User getUserByUserName(String name){
 		for(User user: getUsers())
 			if(user.getName().equals(name))
 				return user;
@@ -60,6 +63,49 @@ public class UserRegistry {
 			if(user.getMail().equals(mail))
 				return user;
 		return null;
+	}
+	
+	/**
+	 * @param 	mail
+	 * 	the mail you are looking availability for
+	 * @return
+	 * 	true if the mail dosen't exist
+	 * 	|	(getUserByMail(mail) != null)
+	 */
+	private boolean isMailExisting(String mail){
+		return (getUserByMail(mail) != null);
+	}
+	
+	/**
+	 * @param 	userName
+	 * 	the userName you are looking availability for
+	 * @return
+	 * 	true if the userName dosen't exist
+	 * 	|	(getUserByUserName(userName) != null)
+	 */
+	private boolean isUserNameExisting(String userName){
+		return (getUserByUserName(userName) != null);
+	}
+	
+	/**
+	 * @param 	user
+	 * 	the user you want to add
+	 * @throws 	EmailInUseException 
+	 * 	|	(isMailExisting(user.getMail()))
+	 * @throws UserNameInUseException
+	 * 	|	 (isUserNameExisting(user.getUserName()))
+	 * @post
+	 * 	the user was added to users
+	 * 	|	new.getUsers().contains(user)
+	 */
+	public void addUser(User user) 
+			throws EmailInUseException, UserNameInUseException{
+		if(isMailExisting(user.getMail()))
+			throw new EmailInUseException();
+		else if(isUserNameExisting(user.getUserName()))
+			throw new UserNameInUseException();
+		else
+			getUsers().add(user);
 	}
 	
 }

@@ -1,5 +1,8 @@
 package dashboard.model;
 
+import dashboard.error.InvalidEmailException;
+import dashboard.error.InvalidUserNameException;
+
 public class User implements Comparable<User>,Cloneable {
 
 	private String name;
@@ -15,6 +18,10 @@ public class User implements Comparable<User>,Cloneable {
 	 * the username you want your user to have
 	 * @param	mail
 	 * the mail adress you want your user to have
+	 * @throws InvalidUserNameException 
+	 * 	|	(!isValidUserName(userName))
+	 * @throws InvalidEmailException 
+	 * 	|	(!isValidUserMail(mail))
 	 * @effect
 	 * setName(name);
 	 * @effect
@@ -24,9 +31,16 @@ public class User implements Comparable<User>,Cloneable {
 	 * @post
 	 * new.getMail() = mail
 	 */
-	public User(String name, String userName, String mail, String passWord){
-		this.userName = userName;
-		this.mail	= mail;
+	public User(String name, String userName, String mail, String passWord)
+			throws InvalidUserNameException, InvalidEmailException{
+		if(isValidUserName(userName))
+			this.userName = userName;
+		else
+			throw new InvalidUserNameException();
+		if(isValidMail(mail))
+			this.mail	= mail;
+		else
+			throw new InvalidEmailException();
 		setName(name);
 		setPassword(passWord);
 	}
@@ -80,12 +94,38 @@ public class User implements Comparable<User>,Cloneable {
 	
 	/**
 	 * @param password
-	 * the new password of the user
+	 * 	the new password of the user
 	 * @post	the password was changed
 	 * 	|	new.password = password
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	/**
+	 * checks the validity of the username
+	 * @param userName
+	 * 	the username that has to be checked
+	 * @return
+	 * 	true, if it is a valid username
+	 * 	|	(userName.length() > 5) && (userName.length() < 25) &&
+	 *	|	(userName.matches("^[a-zA-Z_0-9]+$"))
+	 */
+	private boolean isValidUserName(String userName){
+		return 	(userName.length() > 5) && (userName.length() < 25) &&
+				(userName.matches("^[a-zA-Z_0-9]+$"));
+	}
+	
+	/**
+	 * checks the validity of the mail address
+	 * @param mail
+	 * 	the mail address that has to be checked
+	 * @return
+	 * 	true, if it is a valid mail address
+	 * 	|	(mail.contains("@"))
+	 */
+	private boolean isValidMail(String mail) {
+		return	(mail.contains("@"));
 	}
 	
 	/**
@@ -113,7 +153,12 @@ public class User implements Comparable<User>,Cloneable {
 	 * 	|	clonedUser = new User(getName(),getUserName())
 	 */
 	protected Object clone() throws CloneNotSupportedException {
-		User clonedUser = new User(getName(),getUserName(),getMail(),getPassword());
+		User clonedUser = null;
+		try {
+			clonedUser = new User(getName(),getUserName(),getMail(),getPassword());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return clonedUser;
 	}
 
