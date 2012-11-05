@@ -79,6 +79,20 @@ public class UserRegistry {
 	}
 	
 	/**
+	 * @param 	userName
+	 * 	the username of the user
+	 * @param 	password
+	 * 	the password of the user
+	 * @return
+	 * 	|	(UserRegistry.getUserByUserName(userName).isCorrectPassword(password)) ||
+	 *	|	(UserRegistry.getUserByMail(userName).isCorrectPassword(password))
+	 */
+	public static boolean isValidlogIn(String userName, String password){
+		return	(UserRegistry.getUserByUserName(userName).isCorrectPassword(password)) ||
+				(UserRegistry.getUserByMail(userName).isCorrectPassword(password));
+	}
+	
+	/**
 	 * @param 	user
 	 * 	the user you want to add
 	 * @throws 	EmailInUseException 

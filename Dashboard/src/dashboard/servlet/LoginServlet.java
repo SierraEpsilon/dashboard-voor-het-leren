@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dashboard.error.InvalidLogInDataException;
 import dashboard.registry.UserRegistry;
 
 public class LoginServlet extends HttpServlet {
@@ -12,11 +13,9 @@ public class LoginServlet extends HttpServlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		
-		try{
-			UserRegistry.login(username,password);
+		if(UserRegistry.isValidlogIn(username, password))
 			resp.sendRedirect("/homepage.jsp");
-		} catch(Exception e){
+		else
 			resp.sendRedirect("/error.jsp");
-		}
 	}
 }
