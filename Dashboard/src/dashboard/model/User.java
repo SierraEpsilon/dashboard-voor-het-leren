@@ -4,15 +4,27 @@ public class User implements Comparable<User>,Cloneable {
 
 	private String name;
 	private final String userName;
+	private final String mail;
 	
 	/**
 	 * initiates a user
 	 * @param 	name
 	 * the name you want your student to have
+	 * @param	userName
+	 * the username you want your user to have
+	 * @param	mail
+	 * the mail adress you want your user to have
+	 * @post
+	 * new.getName() = name
+	 * @post
+	 * new.getUserName() = userName
+	 * @post
+	 * new.getMail() = mail
 	 */
-	public User(String name, String userName){
+	public User(String name, String userName, String mail){
 		this.name = name;
 		this.userName = userName;
+		this.mail	= mail;
 	}
 	
 	/**
@@ -32,6 +44,15 @@ public class User implements Comparable<User>,Cloneable {
 	 */
 	public String getUserName() {
 		return userName;
+	}
+	
+	/**
+	 * @return
+	 * the mail address of the user
+	 * 	|	mail
+	 */
+	public String getMail() {
+		return mail;
 	}
 	
 	/**
@@ -59,7 +80,7 @@ public class User implements Comparable<User>,Cloneable {
 	 * 	|	clonedUser = new User(getName(),getUserName())
 	 */
 	protected Object clone() throws CloneNotSupportedException {
-		User clonedUser = new User(getName(),getUserName());
+		User clonedUser = new User(getName(),getUserName(),getMail());
 		return clonedUser;
 	}
 
