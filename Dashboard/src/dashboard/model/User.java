@@ -1,6 +1,7 @@
 package dashboard.model;
 
 import dashboard.error.InvalidEmailException;
+import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 
 public class User implements Comparable<User>,Cloneable {
@@ -22,6 +23,8 @@ public class User implements Comparable<User>,Cloneable {
 	 * 	|	(!isValidUserName(userName))
 	 * @throws InvalidEmailException 
 	 * 	|	(!isValidUserMail(mail))
+	 * @throws InvalidPasswordException 
+	 * 	|	(!isValidPassword(password))
 	 * @effect
 	 * setName(name);
 	 * @effect
@@ -32,7 +35,7 @@ public class User implements Comparable<User>,Cloneable {
 	 * new.getMail() = mail
 	 */
 	public User(String name, String userName, String mail, String passWord)
-			throws InvalidUserNameException, InvalidEmailException{
+			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
 		if(isValidUserName(userName))
 			this.userName = userName;
 		else
@@ -41,8 +44,11 @@ public class User implements Comparable<User>,Cloneable {
 			this.mail	= mail;
 		else
 			throw new InvalidEmailException();
+		if(isValidPassword(passWord))
+			setPassword(passWord);
+		else
+			throw new InvalidPasswordException();
 		setName(name);
-		setPassword(passWord);
 	}
 	
 	/**
@@ -118,7 +124,7 @@ public class User implements Comparable<User>,Cloneable {
 	
 	/**
 	 * checks the validity of the mail address
-	 * @param mail
+	 * @param 	mail
 	 * 	the mail address that has to be checked
 	 * @return
 	 * 	true, if it is a valid mail address
@@ -127,6 +133,19 @@ public class User implements Comparable<User>,Cloneable {
 	private boolean isValidMail(String mail) {
 		return	(mail.contains("@"));
 	}
+	
+	/**
+	 * checks the validity of the password
+	 * @param	password
+	 * 	the password that has to be checked
+	 * @return
+	 * 	true, if the password is valid
+	 * 	|	(password.length() > 5) && (password.length() < 25)
+	 */
+	private boolean isValidPassword(String password){
+		return 	(password.length() > 5) && (password.length() < 25);
+	}
+	
 	
 	/**
 	 * @param 	password

@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import dashboard.error.*;
 
 public class RegistrationServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -16,15 +17,15 @@ public class RegistrationServlet extends HttpServlet {
 		try{
 			userRegistry.addUser(new User(username,email,firstName,lastName,password));
 			resp.sendRedirect("/registrationsuccess.jsp");
-		} catch (usernameInUseException){
+		} catch (UserNameInUseException e){
 			resp.sendRedirect("/error.jsp");
-		} catch (invalidUsernameException){
+		} catch (InvalidUserNameException e){
 			resp.sendRedirect("/error.jsp");
-		} catch (emailInUseException){
+		} catch (EmailInUseException e){
 			resp.sendRedirect("/error.jsp");
-		} catch (invalidEmailException){
+		} catch (InvalidEmailException e){
 			resp.sendRedirect("/error.jsp");
-		} catch (invalidPasswordException){
+		} catch (InvalidPasswordException e){
 			resp.sendRedirect("/error.jsp");
 		}
 	}
