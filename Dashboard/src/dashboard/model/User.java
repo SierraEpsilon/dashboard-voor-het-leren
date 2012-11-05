@@ -19,6 +19,8 @@ public class User implements Comparable<User>,Cloneable {
 	 * the username you want your user to have
 	 * @param	mail
 	 * the mail adress you want your user to have
+	 * @param	passWord
+	 * the password you want your user to have
 	 * @throws InvalidUserNameException 
 	 * 	|	(!isValidUserName(userName))
 	 * @throws InvalidEmailException 

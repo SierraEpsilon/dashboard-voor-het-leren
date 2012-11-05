@@ -8,22 +8,13 @@ import dashboard.model.User;
 
 public class UserRegistry {
 
-	private HashSet<User> users;
-	
-	/**
-	 * @post
-	 * 	the users set has been made
-	 * 	|	new.users = new HashMap<User>()
-	 */
-	public UserRegistry(){
-		users = new HashSet<User>();
-	}
+	private static HashSet<User> users = new HashSet<User>();
 	
 	/**
 	 * @return	the users of the userregistry
 	 * 	|	users
 	 */
-	public HashSet<User> getUsers() {
+	public static HashSet<User> getUsers() {
 		return users;
 	}
 	
@@ -39,7 +30,7 @@ public class UserRegistry {
 	 * 	|	if(!user.contains(user.getName().equals(name)))
 	 *	|		return null
 	 */
-	public User getUserByUserName(String name){
+	public static User getUserByUserName(String name){
 		for(User user: getUsers())
 			if(user.getName().equals(name))
 				return user;
@@ -58,7 +49,7 @@ public class UserRegistry {
 	 * 	|	if(!user.contains(user.getMail().equals(mail)))
 	 *	|		return null
 	 */
-	public User getUserByMail(String mail){
+	public static User getUserByMail(String mail){
 		for(User user: getUsers())
 			if(user.getMail().equals(mail))
 				return user;
@@ -72,7 +63,7 @@ public class UserRegistry {
 	 * 	true if the mail dosen't exist
 	 * 	|	(getUserByMail(mail) != null)
 	 */
-	private boolean isMailExisting(String mail){
+	public static boolean isMailExisting(String mail){
 		return (getUserByMail(mail) != null);
 	}
 	
@@ -83,7 +74,7 @@ public class UserRegistry {
 	 * 	true if the userName dosen't exist
 	 * 	|	(getUserByUserName(userName) != null)
 	 */
-	private boolean isUserNameExisting(String userName){
+	public static boolean isUserNameExisting(String userName){
 		return (getUserByUserName(userName) != null);
 	}
 	
@@ -98,7 +89,7 @@ public class UserRegistry {
 	 * 	the user was added to users
 	 * 	|	new.getUsers().contains(user)
 	 */
-	public void addUser(User user) 
+	public static void addUser(User user) 
 			throws EmailInUseException, UserNameInUseException{
 		if(isMailExisting(user.getMail()))
 			throw new EmailInUseException();
