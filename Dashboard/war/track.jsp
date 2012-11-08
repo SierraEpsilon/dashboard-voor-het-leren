@@ -20,6 +20,9 @@ if(request.getParameter("mode")=="stop"){
 	String course = request.getParameter("course");
 	out.println("<p>Course: " + course);
 	out.println("<p><form action='/track' method='post'><input type='submit' value='STOP'>");
+	out.println("<p><input type='hidden' name='amount' value='1'>");
+	out.println("<p><input type='hidden' name='kind' value='Theory'>");
+	out.println("</form>");
 	out.println("<p id='timePast'>");	
 }else{
 	start = 0;
