@@ -75,8 +75,17 @@ public class StudyMoment {
 	 * the kind of studymoment
 	 *  | kind
 	 */
-	public Kind getKind(){
+	public String getKind(){
 		return kind;
+	}
+	
+	/**	 
+	 * @param start
+	 * the date of start
+	 *  | date of start
+	 */
+	public void setStart(Date start){
+		this.start = start;
 	}
 	
 	/**	 
@@ -102,7 +111,7 @@ public class StudyMoment {
 	 * the kind of studymoment
 	 *  | kind
 	 */
-	public void setKind(Kind kind){
+	public void setKind(String kind){
 		this.kind = kind;
 	}
 	
