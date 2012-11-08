@@ -11,7 +11,7 @@
 </head>
 <body>
 <%
-String msg = (request.getParameter('msg')==null) ? "" : request.getParameter('msg');
+String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
 %>
 <form>
 <table>
