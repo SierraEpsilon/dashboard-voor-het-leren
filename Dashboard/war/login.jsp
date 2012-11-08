@@ -13,7 +13,7 @@
 <%
 String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
 %>
-<form>
+<form method='post' action='/login'>
 <table>
 <p><%= msg%>
 <tr><td>Gebruikersnaam</td><td><input type='text' name='username'></td></tr>

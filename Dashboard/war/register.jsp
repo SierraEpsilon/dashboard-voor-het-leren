@@ -55,7 +55,7 @@ $(document).ready(function(){
 <tr><td>Herhaal wachtwoord</td><td><input type='password' name='password2'></td></tr>
 </table>
 <p><button id='register'>REGISTREREN</button>
-<form name='submit' method='post'>
+<form name='submit' method='post' action='/register'>
 <input type='hidden' name='username'>
 <input type='hidden' name='firstname'>
 <input type='hidden' name='lastname'>
