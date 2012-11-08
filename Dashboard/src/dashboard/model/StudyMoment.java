@@ -1,14 +1,9 @@
 package dashboard.model;
 import java.util.*;
 
-import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
-
 import dashboard.error.AlreadyEndedException;
-import dashboard.error.InvalidEmailException;
-import dashboard.error.InvalidPasswordException;
-import dashboard.error.InvalidUserNameException;
+import dashboard.error.*;
 
-//I like mudkipz
 public class StudyMoment {
 
 	
@@ -28,14 +23,12 @@ public class StudyMoment {
 			throws InvalidEndDateException, InvalidAmountException{
 		this.start = start;
 		this.course = course;
-		if(isValidEnd(end)){
-			setEnd(end);
-		}else 
+		if(!isValidEnd(end))
 			throw new InvalidEndDateException();
-		if(isValidAmount(amount)){
-			setAmount(amount);
-		}else 
+		setEnd(end);
+		if(!isValidAmount(amount))
 			throw new InvalidAmountException();
+		setAmount(amount);
 		setKind(kind);
 		
 	}
