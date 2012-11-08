@@ -4,6 +4,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dashboard.registry.UserRegistry;
 
@@ -14,10 +15,13 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
+		HttpSession session = req.getSession();
 		
-		if(UserRegistry.isValidlogIn(username, password))
+		if(UserRegistry.isValidlogIn(username, password)){
+			session.setAttribute("user", UserRegistry.getUserByUserName(username));
 			resp.sendRedirect("/homepage.jsp");
-		else
+		} else {
 			resp.sendRedirect("/error.jsp");
+		}
 	}
 }
