@@ -11,6 +11,7 @@ public class Student implements Comparable<Student>,Cloneable {
 	private final String userName;
 	private final String mail;
 	private String password;
+	private StudyMoment currentStudyMoment;
 	
 	/**
 	 * initiates a user
@@ -104,10 +105,19 @@ public class Student implements Comparable<Student>,Cloneable {
 	}
 	
 	/**
+	 * @return
+	 * 	the current study moment 
+	 * 	|	currentStudyMoment
+	 */
+	public StudyMoment getCurrentStudyMoment() {
+		return currentStudyMoment;
+	}
+	
+	/**
 	 * @param firstName
 	 * the new first name of the user
 	 * @post	the first name was changed
-	 * 	|	new.firstName = firstName
+	 * 	|	new.getFirstName() = firstName
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -117,7 +127,7 @@ public class Student implements Comparable<Student>,Cloneable {
 	 * @param lastName
 	 * the new last name of the user
 	 * @post	the last name was changed
-	 * 	|	new.lastName = lastName
+	 * 	|	new.getLastName() = lastName
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -127,10 +137,20 @@ public class Student implements Comparable<Student>,Cloneable {
 	 * @param password
 	 * 	the new password of the user
 	 * @post	the password was changed
-	 * 	|	new.password = password
+	 * 	|	new.getPassword() = password
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	/**
+	 * @param currentStudyMoment
+	 * 	the studymoment you want to save as current studymoment
+	 * @post	the current studymoment was changed	
+	 * 	| 	new.getCurrentStudyMoment() = studyMoment
+	 */
+	public void setCurrentStudyMoment(StudyMoment currentStudyMoment) {
+		this.currentStudyMoment = currentStudyMoment;
 	}
 	
 	/**
