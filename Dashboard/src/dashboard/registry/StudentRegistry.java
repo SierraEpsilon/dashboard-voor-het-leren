@@ -84,12 +84,16 @@ public class StudentRegistry {
 	 * @param 	password
 	 * 	the password of the user
 	 * @return
-	 * 	|	(UserRegistry.getUserByUserName(userName).isCorrectPassword(password)) ||
-	 *	|	(UserRegistry.getUserByMail(userName).isCorrectPassword(password))
+	 * 	true if user exists and password is correct, false otherwise
 	 */
 	public static boolean isValidlogIn(String userName, String password){
-		return	(StudentRegistry.getUserByUserName(userName).isCorrectPassword(password)) ||
-				(StudentRegistry.getUserByMail(userName).isCorrectPassword(password));
+		if(getUserByUserName(userName) != null){
+			return	(StudentRegistry.getUserByUserName(userName).isCorrectPassword(password));
+		} else if(getUserByMail(userName) != null){
+			return (StudentRegistry.getUserByMail(userName).isCorrectPassword(password));
+		} else {
+			return false;
+		}
 	}
 	
 	/**
