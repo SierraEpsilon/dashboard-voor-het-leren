@@ -10,8 +10,12 @@
 <head>
 </head>
 <body>
+<%
+String msg = (request.getParameter('msg')==null) ? "" : request.getParameter('msg');
+%>
 <form>
 <table>
+<p><%= msg%>
 <tr><td>Gebruikersnaam</td><td><input type='text' name='username'></td></tr>
 <tr><td>Wachtwoord</td><td><input type='password' name='password'></td></tr>
 </table>
