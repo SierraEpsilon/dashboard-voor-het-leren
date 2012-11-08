@@ -16,7 +16,7 @@ String startTime;
 int start;
 if(request.getParameter("mode")=="stop"){
 	start = 1;
-	String startTime = request.getSession().getAttribute("startTracking");
+	startTime = (String) request.getSession().getAttribute("startTracking");
 	String course = request.getParameter("course");
 	out.println("<p>Course: " + course);
 	out.println("<p><form action='/track' method='post'><input type='submit' value='STOP'>");
