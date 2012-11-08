@@ -1,5 +1,7 @@
 package dashboard.model;
 
+import java.util.Date;
+
 import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
@@ -201,6 +203,10 @@ public class Student implements Comparable<Student>,Cloneable {
 	 */
 	public boolean isCorrectPassword(String password){
 		return (getPassword().equals(password));
+	}
+	
+	public void endStudying(Date end, int amount, String kind){
+		getCurrentStudyMoment().endMoment(end, amount, kind);
 	}
 	
 	/**
