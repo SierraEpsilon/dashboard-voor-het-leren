@@ -6,7 +6,7 @@ import dashboard.error.EmailInUseException;
 import dashboard.error.UserNameInUseException;
 import dashboard.model.Student;
 
-public class UserRegistry {
+public class StudentRegistry {
 
 	private static HashSet<Student> users = new HashSet<Student>();
 	
@@ -88,8 +88,8 @@ public class UserRegistry {
 	 *	|	(UserRegistry.getUserByMail(userName).isCorrectPassword(password))
 	 */
 	public static boolean isValidlogIn(String userName, String password){
-		return	(UserRegistry.getUserByUserName(userName).isCorrectPassword(password)) ||
-				(UserRegistry.getUserByMail(userName).isCorrectPassword(password));
+		return	(StudentRegistry.getUserByUserName(userName).isCorrectPassword(password)) ||
+				(StudentRegistry.getUserByMail(userName).isCorrectPassword(password));
 	}
 	
 	/**

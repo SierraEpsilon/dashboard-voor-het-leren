@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dashboard.registry.UserRegistry;
+import dashboard.registry.StudentRegistry;
 
 public class LoginServlet extends HttpServlet {
 
@@ -17,8 +17,8 @@ public class LoginServlet extends HttpServlet {
 		String password = req.getParameter("password");
 		HttpSession session = req.getSession();
 		
-		if(UserRegistry.isValidlogIn(username, password)){
-			session.setAttribute("user", UserRegistry.getUserByUserName(username));
+		if(StudentRegistry.isValidlogIn(username, password)){
+			session.setAttribute("student", StudentRegistry.getUserByUserName(username));
 			resp.sendRedirect("/homepage.jsp");
 		} else {
 			resp.sendRedirect("/error.jsp");

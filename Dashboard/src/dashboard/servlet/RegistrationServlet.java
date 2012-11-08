@@ -5,7 +5,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import dashboard.error.*;
-import dashboard.registry.UserRegistry;
+import dashboard.registry.StudentRegistry;
 import dashboard.model.Student;
 
 public class RegistrationServlet extends HttpServlet {
@@ -19,7 +19,7 @@ public class RegistrationServlet extends HttpServlet {
 		String password = req.getParameter("password");
 		
 		try{
-			UserRegistry.addUser(new Student(username,name,email,password));
+			StudentRegistry.addUser(new Student(username,name,email,password));
 			resp.sendRedirect("/registrationsuccess.jsp");
 		} catch (UserNameInUseException e){
 			resp.sendRedirect("/error.jsp");
