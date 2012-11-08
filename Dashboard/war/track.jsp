@@ -14,17 +14,17 @@
 <%
 String startTime;
 int start;
-if(request.getParameter("start")!=null){
+if(request.getParameter("mode")=="stop"){
 	start = 1;
-	startTime = request.getParameter("start");
+	String startTime = request.getSession().getAttribute("startTracking");
 	String course = request.getParameter("course");
 	out.println("<p>Course: " + course);
-	out.println("<p><form action='' method='post'><input type='submit' value='STOP'>");
+	out.println("<p><form action='/track' method='post'><input type='submit' value='STOP'>");
 	out.println("<p id='timePast'>");	
 }else{
 	start = 0;
 	startTime = "";
-	out.println("<form action='' method='post'>");
+	out.println("<form action='/track' method='post'>");
 	out.println("<p>Course: <select><option>Analyse</option></select>");
 	out.println("<p><input type='submit' value='START'>");
 	out.println("</form>");
@@ -36,38 +36,39 @@ $(document).ready(function(){
 	start = <%= start %>;
 	<% if(start==1) {System.out.println("start="+"start"+";");}
 	%>
-	setInterval(function(){
-		str = "";
-		start = new Date("<%= startTime%>");
-		now = new Date();
-		diff = (now.getTime() - start.getTime());
-		diff = Math.round(diff/1000);
-		sec = (diff%60);
-		if(diff<60){
-			str = sec + " seconden";
-		}else{
-			diff = ((diff-sec)/60);
-			min = (diff%60);
-			if(diff<60){
-				str = min + " minuten";
-			}else{
-				diff = ((diff-min)/60);
-				hours = (diff%24);
-				if(diff<24){
-					str = hours + "h" + min + "m";
-				}else{
-					days = ((diff-hours)/24);
-					str = days + " dagen en " + hours + " uren";
-				}
-			}
-		}
-		$('#timePast').text(str);
-	},1000);
+	setTimePast();
+	setInterval("setTimePast()",1000);
 	
 });
 
 function setTimePast(){
-
+	str = "";
+	start = new Date("<%= startTime%>");
+	now = new Date();
+	diff = (now.getTime() - start.getTime());
+	diff = Math.round(diff/1000);
+	sec = (diff%60);
+	if(diff<60){
+		String name = (diff==1) ? "seconde" : "seconden";
+		str = sec + " " + name;
+	}else{
+		diff = ((diff-sec)/60);
+		min = (diff%60);
+		if(diff<60){
+			String name = (diff==1) ? "minuut" : "minuten";
+			str = min + " " + name;
+		}else{
+			diff = ((diff-min)/60);
+			hours = (diff%24);
+			if(diff<24){
+				str = hours + "uur" + min + "minuten";
+			}else{
+				days = ((diff-hours)/24);
+				str = days + " dagen en " + hours + " uur";
+			}
+		}
+	}
+	$('#timePast').text(str);
 }
 </script>
 </body>
