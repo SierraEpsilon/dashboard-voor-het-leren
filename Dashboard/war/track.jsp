@@ -48,12 +48,12 @@ $(document).ready(function(){
 		}else{
 			diff = ((diff-sec)/60);
 			min = (diff%60);
-			if(min<60){
+			if(diff<60){
 				str = min + " minuten";
 			}else{
 				diff = ((diff-min)/60);
 				hours = (diff%24);
-				if(hours<24){
+				if(diff<24){
 					str = hours + "h" + min + "m";
 				}else{
 					days = ((diff-hours)/24);
