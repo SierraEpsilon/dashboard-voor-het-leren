@@ -19,7 +19,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(StudentRegistry.isValidlogIn(username, password)){
 			session.setAttribute("student", StudentRegistry.getUserByUserName(username));
-			resp.sendRedirect("/homepage.jsp");
+			resp.sendRedirect("/track.jsp");
 		} else {
 			resp.sendRedirect("/error.jsp");
 		}

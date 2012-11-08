@@ -19,11 +19,11 @@ public class TrackingServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
 		
-		//if(student.getCurrentStudyMoment() == null){
-			//Course course = (Course)req.getParameter("course");
-			//student.setCurrentStudyMoment(new StudyMoment(new Date(),course)));
-		//} else
-			//student.getCurrentStudyMoment().endMoment(new Date(), req.getParameter("kind"), req.getParameter("amount"));
+		if(student.getCurrentStudyMoment() == null){
+			Course course = (Course)req.getParameter("course");
+			student.setCurrentStudyMoment(new StudyMoment(new Date(),course)));
+		} else
+			student.getCurrentStudyMoment().endMoment(new Date(), req.getParameter("kind"), req.getParameter("amount"));
 	} 
 	
 }

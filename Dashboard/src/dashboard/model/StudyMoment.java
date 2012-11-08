@@ -39,6 +39,10 @@ public class StudyMoment {
 		this.course = course;
 		
 	}
+	private void setStart(Date start2) {
+		// TODO Auto-generated method stub
+		
+	}
 	public StudyMoment(Date start, Date end, Course course, int amount, String kind){
 		
 	}
