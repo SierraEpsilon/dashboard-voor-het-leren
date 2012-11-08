@@ -12,28 +12,30 @@
 </head>
 <body>
 <%
-String page = "";
+String startTime;
+int start;
 if(request.getParameter("start")!=null){
-	int start = 1;
-	String startTime = request.getParameter("start");
+	start = 1;
+	startTime = request.getParameter("start");
 	String course = request.getParameter("course");
-	page += ("<p>Course: " + course);
-	page += ("<p><form action='' method='post'><input type='submit' value='STOP'>");
-	page += ("<p id='timePast'>");	
+	out.println("<p>Course: " + course);
+	out.println("<p><form action='' method='post'><input type='submit' value='STOP'>");
+	out.println("<p id='timePast'>");	
 }else{
-	int start = 0;
-	page += ("<form action='' method='post'>");
-	page += ("<p>Course: <select><option>Analyse</option></select>");
-	page += ("<p><input type='submit' value='START'>");
-	page += ("</form>");
+	start = 0;
+	startTime = "";
+	out.println("<form action='' method='post'>");
+	out.println("<p>Course: <select><option>Analyse</option></select>");
+	out.println("<p><input type='submit' value='START'>");
+	out.println("</form>");
 	
 }
-System.out.println(page);
 %>
 <script>
 $(document).ready(function(){
 	start = <%= start %>;
-	<% if(start==1) System.out.println("start="+"start+";");
+	<% if(start==1) {System.out.println("start="+"start"+";");}
+	%>
 	setInterval(function(){
 		str = "";
 		start = new Date("<%= startTime%>");
@@ -54,7 +56,7 @@ $(document).ready(function(){
 				if(hours<24){
 					str = hours + "h" + min + "m";
 				}else{
-					days = (diff-hours)/24);
+					days = ((diff-hours)/24);
 					str = days + " dagen en " + hours + " uren";
 				}
 			}
@@ -64,10 +66,9 @@ $(document).ready(function(){
 	
 });
 
-setTimePast(){
+function setTimePast(){
 
 }
 </script>
-<button><%= buttonText %></button>
 </body>
 </html>
