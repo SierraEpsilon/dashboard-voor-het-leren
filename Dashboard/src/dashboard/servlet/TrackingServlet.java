@@ -21,8 +21,10 @@ public class TrackingServlet extends HttpServlet{
 		
 		if(student.getCurrentStudyMoment() == null){
 			Course course = new Course("analyse");
-			student.setCurrentStudyMoment(new StudyMoment(new Date(),course));
-			resp.addHeader("date", student.getCurrentStudyMoment().getStart().toString());
+			Date start = new Date();
+			student.setCurrentStudyMoment(new StudyMoment(start,course));
+			session.setAttribute("startTracking", start.toString());
+			resp.sendRedirect("/track.jsp?mode=stop");
 		} else
 			student.getCurrentStudyMoment().endMoment(new Date(), req.getParameter("kind"), req.getParameter("amount"));
 	} 
