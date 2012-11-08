@@ -3,47 +3,35 @@ import java.util.*;
 
 import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
 
+import dashboard.error.AlreadyEndedException;
 import dashboard.error.InvalidUserNameException;
 
 public class StudyMoment {
 
-	enum Kind {
-		
-		PAGE("page"),EXERCISE("exercise");
-		
-		private final String kind;
-		
-		private Kind(String kind){
-			this.kind = kind;
-		}
-		
-		/**
-		 * @return
-		 * 	the kind
-		 * 	|	kind
-		 */
-		public String getKind() {
-			return kind;
-		}
-	}
+	
 	
 	private final Date start;
 	private Date end;
 	private final Course course;
 	private int amount;
-	private Kind kind;
+	private String kind;
 	//opvragen of hij bezig is
 	
 	public StudyMoment(Date start, Course course){
 		setStart(start);
 		this.course = course;
-		
-	}
-	private void setStart(Date start2) {
-		// TODO Auto-generated method stub
-		
 	}
 	public StudyMoment(Date start, Date end, Course course, int amount, String kind){
+		setStart(start);
+		this.course = course;
+		if(isValidEnd(end)){
+			setEnd(end);
+		}else 
+			throw new InvalidEndDateException();
+		if(isValidAmount(amount)){
+			setAmount(amount);
+		}else 
+			throw new InvalidAmountException();
 		
 	}
 	
@@ -118,8 +106,25 @@ public class StudyMoment {
 		this.kind = kind;
 	}
 	
-	public void endMoment(Date end, int amount, Kind kind){
-		if(endthis.end = end;
+	/**
+	 * @param end
+	 * @param amount
+	 * @param kind
+	 * @throws AlreadyEndedException 
+	 * 	if the Moment has already been ended
+	 * 	|	!isEnded()
+	 * @post
+	 * 	|	new.getEnd() = end
+	 * @post
+	 * 	|	new.getAmount() = amount
+	 * @post
+	 * 	|	new.getkind() = kind
+	 */
+	public void endMoment(Date end, int amount, String kind) 
+			throws AlreadyEndedException{
+		if(!isEnded())
+			throw new AlreadyEndedException();
+		this.end = end;
 		this.amount = amount;
 		this.kind = kind;
 	}
@@ -127,16 +132,33 @@ public class StudyMoment {
 	/**
 	 * @return
 	 * studymoment has ended
-	 *  | studymoment ended
+	 *  | end != null
 	 */
 	private boolean isEnded(){
 		return(end != null);
 	}
 	
-	
+	/**
+	 * 
+	 * @param end
+	 * the end date you want to enter
+	 * @return
+	 * true if date is valid
+	 * | end.after(start)
+	 */
 	private boolean isValidEnd(Date end){
-		
+		return(end.after(start));
 	}
    
+	/**
+	 * 
+	 * @param amount
+	 * the given amount
+	 * @return
+	 * true if amount is positive
+	 */
+	private boolean isValidAmount(int amount){
+		return(amount > 0);
+	}
 }
 	
