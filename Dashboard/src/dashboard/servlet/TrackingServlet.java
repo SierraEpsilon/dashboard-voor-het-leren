@@ -20,8 +20,9 @@ public class TrackingServlet extends HttpServlet{
 		Student student = (Student)session.getAttribute("student");
 		
 		if(student.getCurrentStudyMoment() == null){
-			Course course = (Course)req.getParameter("course");
-			student.setCurrentStudyMoment(new StudyMoment(new Date(),course)));
+			Course course = new Course("analyse");
+			student.setCurrentStudyMoment(new StudyMoment(new Date(),course));
+			resp.addHeader("date", student.getCurrentStudyMoment().getStart().toString());
 		} else
 			student.getCurrentStudyMoment().endMoment(new Date(), req.getParameter("kind"), req.getParameter("amount"));
 	} 
