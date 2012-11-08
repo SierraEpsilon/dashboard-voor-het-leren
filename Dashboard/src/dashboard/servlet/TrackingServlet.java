@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dashboard.error.AlreadyEndedException;
 import dashboard.model.*;
 import dashboard.registry.StudentRegistry;
 
@@ -26,7 +27,13 @@ public class TrackingServlet extends HttpServlet{
 			session.setAttribute("startTracking", start.toString());
 			resp.sendRedirect("/track.jsp?mode=stop");
 		} else
-			student.getCurrentStudyMoment().endMoment(new Date(), req.getParameter("kind"), req.getParameter("amount"));
+			try {
+				student.getCurrentStudyMoment().endMoment(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));
+			} catch (NumberFormatException e) {
+				e.printStackTrace();
+			} catch (AlreadyEndedException e) {
+				e.printStackTrace();
+			}
 	} 
 	
 }
