@@ -4,7 +4,7 @@ import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 
-public class User implements Comparable<User>,Cloneable {
+public class Student implements Comparable<Student>,Cloneable {
 
 	private String name;
 	private final String userName;
@@ -36,7 +36,7 @@ public class User implements Comparable<User>,Cloneable {
 	 * @post
 	 * new.getMail() = mail
 	 */
-	public User(String name, String userName, String mail, String passWord)
+	public Student(String name, String userName, String mail, String passWord)
 			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
 		if(isValidUserName(userName))
 			this.userName = userName;
@@ -171,7 +171,7 @@ public class User implements Comparable<User>,Cloneable {
 	 * 	|	if(!other.getUserName().equals(getUserName()))
 	 *	|		return -1
 	 */
-	public int compareTo(User other) {
+	public int compareTo(Student other) {
 		if(other.getUserName().equals(getUserName()))
 			return 0;
 		else
@@ -185,9 +185,9 @@ public class User implements Comparable<User>,Cloneable {
 	 * 	|	clonedUser = new User(getName(),getUserName())
 	 */
 	protected Object clone() throws CloneNotSupportedException {
-		User clonedUser = null;
+		Student clonedUser = null;
 		try {
-			clonedUser = new User(getName(),getUserName(),getMail(),getPassword());
+			clonedUser = new Student(getName(),getUserName(),getMail(),getPassword());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
