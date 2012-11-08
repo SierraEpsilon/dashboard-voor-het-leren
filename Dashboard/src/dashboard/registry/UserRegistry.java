@@ -4,17 +4,17 @@ import java.util.HashSet;
 
 import dashboard.error.EmailInUseException;
 import dashboard.error.UserNameInUseException;
-import dashboard.model.User;
+import dashboard.model.Student;
 
 public class UserRegistry {
 
-	private static HashSet<User> users = new HashSet<User>();
+	private static HashSet<Student> users = new HashSet<Student>();
 	
 	/**
 	 * @return	the users of the userregistry
 	 * 	|	users
 	 */
-	public static HashSet<User> getUsers() {
+	public static HashSet<Student> getUsers() {
 		return users;
 	}
 	
@@ -30,8 +30,8 @@ public class UserRegistry {
 	 * 	|	if(!user.contains(user.getName().equals(name)))
 	 *	|		return null
 	 */
-	public static User getUserByUserName(String name){
-		for(User user: getUsers())
+	public static Student getUserByUserName(String name){
+		for(Student user: getUsers())
 			if(user.getName().equals(name))
 				return user;
 		return null;
@@ -49,8 +49,8 @@ public class UserRegistry {
 	 * 	|	if(!user.contains(user.getMail().equals(mail)))
 	 *	|		return null
 	 */
-	public static User getUserByMail(String mail){
-		for(User user: getUsers())
+	public static Student getUserByMail(String mail){
+		for(Student user: getUsers())
 			if(user.getMail().equals(mail))
 				return user;
 		return null;
@@ -103,7 +103,7 @@ public class UserRegistry {
 	 * 	the user was added to users
 	 * 	|	new.getUsers().contains(user)
 	 */
-	public static void addUser(User user) 
+	public static void addUser(Student user) 
 			throws EmailInUseException, UserNameInUseException{
 		if(isMailExisting(user.getMail()))
 			throw new EmailInUseException();
