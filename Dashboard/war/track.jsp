@@ -15,7 +15,7 @@
 String page = "";
 if(request.getParameter("start")!=null){
 	int start = 1;
-	String start = request.getParameter("start");
+	String startTime = request.getParameter("start");
 	String course = request.getParameter("course");
 	page += ("<p>Course: " + course);
 	page += ("<p><form action='' method='post'><input type='submit' value='STOP'>");
@@ -34,7 +34,33 @@ System.out.println(page);
 $(document).ready(function(){
 	start = <%= start %>;
 	<% if(start==1) System.out.println("start="+"start+";");
-	else
+	setInterval(function(){
+		str = "";
+		start = new Date("<%= startTime%>");
+		now = new Date();
+		diff = (now.getTime() - start.getTime());
+		diff = Math.round(diff/1000);
+		sec = (diff%60);
+		if(diff<60){
+			str = sec + " seconden";
+		}else{
+			diff = ((diff-sec)/60);
+			min = (diff%60);
+			if(min<60){
+				str = min + " minuten";
+			}else{
+				diff = ((diff-min)/60);
+				hours = (diff%24);
+				if(hours<24){
+					str = hours + "h" + min + "m";
+				}else{
+					days = (diff-hours)/24);
+					str = days + " dagen en " + hours + " uren";
+				}
+			}
+		}
+		$('#timePast').text(str);
+	},1000);
 	
 });
 
