@@ -19,20 +19,20 @@ public class StudentRegistry {
 	}
 	
 	/**
-	 * @param 	name
-	 * 	the name of the user you need
+	 * @param 	username
+	 * 	the username of the user you need
 	 * @return
 	 *	the user with the same name
-	 *	|	if(user.contains(user.getName().equals(name)))
+	 *	|	if(user.contains(user.getUsername().equals(username)))
 	 *	|		return user
 	 * @return
 	 * 	null if no such user exist
-	 * 	|	if(!user.contains(user.getName().equals(name)))
+	 * 	|	if(!user.contains(user.getUsername().equals(username)))
 	 *	|		return null
 	 */
-	public static Student getUserByUserName(String name){
+	public static Student getUserByUserName(String username){
 		for(Student user: getUsers())
-			if(user.getName().equals(name))
+			if(user.getUserName().equals(username))
 				return user;
 		return null;
 	}
