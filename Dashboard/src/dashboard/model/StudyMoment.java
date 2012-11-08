@@ -4,6 +4,8 @@ import java.util.*;
 import com.sun.corba.se.spi.legacy.connection.GetEndPointInfoAgainException;
 
 import dashboard.error.AlreadyEndedException;
+import dashboard.error.InvalidEmailException;
+import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 
 public class StudyMoment {
@@ -15,14 +17,15 @@ public class StudyMoment {
 	private final Course course;
 	private int amount;
 	private String kind;
-	//opvragen of hij bezig is
 	
 	public StudyMoment(Date start, Course course){
-		setStart(start);
+		this.start = start;
 		this.course = course;
 	}
-	public StudyMoment(Date start, Date end, Course course, int amount, String kind){
-		setStart(start);
+	
+	public StudyMoment(Date start, Date end, Course course, int amount, String kind)
+			throws InvalidEndDateException, InvalidAmountException{
+		this.start = start;
 		this.course = course;
 		if(isValidEnd(end)){
 			setEnd(end);
@@ -32,6 +35,7 @@ public class StudyMoment {
 			setAmount(amount);
 		}else 
 			throw new InvalidAmountException();
+		setKind(kind);
 		
 	}
 	
@@ -77,15 +81,6 @@ public class StudyMoment {
 	 */
 	public String getKind(){
 		return kind;
-	}
-	
-	/**	 
-	 * @param start
-	 * the date of start
-	 *  | date of start
-	 */
-	public void setStart(Date start){
-		this.start = start;
 	}
 	
 	/**	 
