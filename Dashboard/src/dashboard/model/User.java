@@ -22,11 +22,11 @@ public class User implements Comparable<User>,Cloneable {
 	 * @param	passWord
 	 * the password you want your user to have
 	 * @throws InvalidUserNameException 
-	 * 	|	(!isValidUserName(userName))
+	 *	|	(!isValidUserName(userName))
 	 * @throws InvalidEmailException 
-	 * 	|	(!isValidUserMail(mail))
+	 *	|	(!isValidUserMail(mail))
 	 * @throws InvalidPasswordException 
-	 * 	|	(!isValidPassword(password))
+	 *	|	(!isValidPassword(password))
 	 * @effect
 	 * setName(name);
 	 * @effect
@@ -55,7 +55,7 @@ public class User implements Comparable<User>,Cloneable {
 	
 	/**
 	 * @return	
-	 * the name of the student
+	 *	the name of the student
 	 * 	|	name
 	 */
 	public String getName() {
