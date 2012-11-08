@@ -6,15 +6,18 @@ import dashboard.error.InvalidUserNameException;
 
 public class Student implements Comparable<Student>,Cloneable {
 
-	private String name;
+	private String firstName;
+	private String lastName;
 	private final String userName;
 	private final String mail;
 	private String password;
 	
 	/**
 	 * initiates a user
-	 * @param 	name
-	 * the name you want your student to have
+	 * @param 	firstName
+	 * the first name you want your student to have
+	 * @param 	lastName
+	 * the last name you want your student to have
 	 * @param	userName
 	 * the username you want your user to have
 	 * @param	mail
@@ -36,7 +39,7 @@ public class Student implements Comparable<Student>,Cloneable {
 	 * @post
 	 * new.getMail() = mail
 	 */
-	public Student(String name, String userName, String mail, String passWord)
+	public Student(String firstName, String lastName, String userName, String mail, String passWord)
 			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
 		if(isValidUserName(userName))
 			this.userName = userName;
@@ -50,16 +53,26 @@ public class Student implements Comparable<Student>,Cloneable {
 			setPassword(passWord);
 		else
 			throw new InvalidPasswordException();
-		setName(name);
+		setFirstName(firstName);
+		setLastName(lastName);
 	}
 	
 	/**
 	 * @return	
-	 *	the name of the student
-	 * 	|	name
+	 *	the first name of the student
+	 * 	|	first name
 	 */
-	public String getName() {
-		return name;
+	public String getFirstName() {
+		return firstName;
+	}
+	
+	/**
+	 * @return	
+	 *	the last name of the student
+	 * 	|	last name
+	 */
+	public String getLastName() {
+		return lastName;
 	}
 	
 
@@ -91,13 +104,23 @@ public class Student implements Comparable<Student>,Cloneable {
 	}
 	
 	/**
-	 * @param name
-	 * the new name of the user
-	 * @post	the name was changed
-	 * 	|	new.name = name
+	 * @param firstName
+	 * the new first name of the user
+	 * @post	the first name was changed
+	 * 	|	new.firstName = firstName
 	 */
-	public void setName(String name) {
-		this.name = name;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	
+	/**
+	 * @param lastName
+	 * the new last name of the user
+	 * @post	the last name was changed
+	 * 	|	new.lastName = lastName
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	
 	/**
@@ -187,7 +210,7 @@ public class Student implements Comparable<Student>,Cloneable {
 	protected Object clone() throws CloneNotSupportedException {
 		Student clonedUser = null;
 		try {
-			clonedUser = new Student(getName(),getUserName(),getMail(),getPassword());
+			clonedUser = new Student(getFirstName(),getLastName(),getUserName(),getMail(),getPassword());
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
