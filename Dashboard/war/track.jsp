@@ -11,6 +11,11 @@
 <%@include file="inc/head.jsp"%>
 </head>
 <body>
+<div data-role="page">
+<div data-role="header">
+		<h1>Learnalyzer</h1>
+</div><!-- /header -->
+<div data-role="content">
 <%
 String startTime;
 int start;
@@ -67,5 +72,7 @@ function setTimePast(){
 	$('#timePast').text(str);
 }
 </script>
+</div><!-- /content -->
+</div><!-- /page -->
 </body>
 </html>
