@@ -8,19 +8,26 @@
 
 <html>
 <head>
+<%@include file="inc/head.jsp"%>
 </head>
 <body>
+<div data-role="page">
+<div data-role="header">
+		<h1>Register</h1>
+</div><!-- /header -->
+<div data-role="content">
 <%
 String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
 %>
 <form method='post' action='/login'>
-<table>
 <p><%= msg%>
-<tr><td>Gebruikersnaam</td><td><input type='text' name='username'></td></tr>
-<tr><td>Wachtwoord</td><td><input type='password' name='password'></td></tr>
+Gebruikersnaam</td><td><input type='text' name='username'>
+Wachtwoord</td><td><input type='password' name='password'>
 </table>
 <p><input type='submit' value='AANMELDEN'>
 <p><a href='register.jsp'>Nieuw account maken</a>
 </form>
+</div><!-- /content -->
+</div><!-- /page -->
 </body>
 </html>

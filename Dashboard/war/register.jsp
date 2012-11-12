@@ -8,9 +8,14 @@
 
 <html>
 <head>
- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<%@include file="inc/head.jsp"%>
 </head>
 <body>
+<div data-role="page">
+<div data-role="header">
+		<h1>Register</h1>
+</div><!-- /header -->
+<div data-role="content">
 <script>
 $(document).ready(function(){
 	$("#register").click(function(){
@@ -46,14 +51,12 @@ $(document).ready(function(){
 });
 </script>
 <p id='msg' style='color:red;'>
-<p><table>
-<tr><td>Voornaam</td><td><input type='text' name='firstname'></td></tr>
-<tr><td>Achternaam</td><td><input type='text' name='lastname'></td></tr>
-<tr><td>Gebruikersnaam</td><td><input type='text' name='username'></td></tr>
-<tr><td>E-mail</td><td><input type='text' name='mail'></td></tr>
-<tr><td>Wachtwoord</td><td><input type='password' name='password1'></td></tr>
-<tr><td>Herhaal wachtwoord</td><td><input type='password' name='password2'></td></tr>
-</table>
+<p>Voornaam<input type='text' name='firstname'>
+Achternaam<input type='text' name='lastname'>
+Gebruikersnaam<input type='text' name='username'></td></tr>
+E-mail<input type='text' name='mail'></td></tr>
+Wachtwoord<input type='password' name='password1'></td></tr>
+Herhaal wachtwoord<input type='password' name='password2'>
 <p><button id='register'>REGISTREREN</button>
 <form name='submit' method='post' action='/register'>
 <input type='hidden' name='username'>
@@ -62,5 +65,7 @@ $(document).ready(function(){
 <input type='hidden' name='password'>
 <input type='hidden' name='mail'>
 </form>
+</div><!-- /content -->
+</div><!-- /page -->
 </body>
 </html>
