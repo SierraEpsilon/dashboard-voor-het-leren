@@ -21,7 +21,9 @@ String startTime;
 int start;
 if(request.getParameter("mode")!=null){
 	start = 1;
-	startTime = (String) request.getSession().getAttribute("startTracking");
+	//startTime = (String) request.getSession().getAttribute("startTracking");
+	startTime = "Tue Oct 01 00:00:00 EDT 2002";
+	out.println("<p>Start: " + startTime);
 	String course = request.getParameter("course");
 	out.println("<p>Course: " + course);
 	out.println("<p><form action='/track' method='post'><input type='submit' value='STOP'>");
@@ -56,17 +58,18 @@ function setTimePast(){
 	diff = Math.round(diff/1000);
 	sec = (diff%60);
 	if(diff<60){
-		String name = (diff==1) ? "seconde" : "seconden";
+		name = (diff==1) ? " seconde" : " seconden";
 		str = sec + " " + name;
 	}else{
 		diff = ((diff-sec)/60);
 		min = (diff%60);
 		if(diff<60){
-			String name = (diff==1) ? "minuut" : "minuten";
+			name = (diff==1) ? " minuut" : " minuten";
 			str = min + " " + name;
 		}else{
 			diff = ((diff-min)/60);
-			str = hours + "uur" + min + "minuten";
+			hours = diff;
+			str = hours + " uur " + min + " minuten";
 		}
 	}
 	$('#timePast').text(str);
