@@ -12,6 +12,12 @@ public class RegistrationServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -5081331444892620046L;
 
+	/**
+	 * Called when a user is trying to register
+	 * @param req
+	 * @param resp
+	 * @throws IOException
+	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String username = req.getParameter("username");
 		String email = req.getParameter("mail");
@@ -20,7 +26,7 @@ public class RegistrationServlet extends HttpServlet {
 		String password = req.getParameter("password");
 		
 		try{
-			StudentRegistry.addUser(new Student(firstName,lastName,username,email,password));
+			StudentRegistry.addUser(new Student(firstName,lastName,username,email,password));//add the user to the list of existing users
 			resp.sendRedirect("/registrationsuccess.jsp");
 		} catch (UserNameInUseException e){
 			resp.sendRedirect("/error.jsp");

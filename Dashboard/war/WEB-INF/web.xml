@@ -23,6 +23,14 @@
  	    <servlet-name>track</servlet-name>
  	    <url-pattern>/track</url-pattern>
  	</servlet-mapping>
+ 	<servlet>
+ 	    <servlet-name>logout</servlet-name>
+ 	    <servlet-class>dashboard.servlet.LogoutServlet</servlet-class>
+ 	</servlet>
+ 	<servlet-mapping>
+ 	    <servlet-name>logout</servlet-name>
+ 	    <url-pattern>/logout</url-pattern>
+ 	</servlet-mapping>
     <welcome-file-list>
         <welcome-file>login.jsp</welcome-file>
     </welcome-file-list>
