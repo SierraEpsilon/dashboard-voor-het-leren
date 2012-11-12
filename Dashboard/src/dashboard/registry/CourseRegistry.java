@@ -1,15 +1,25 @@
 package dashboard.registry;
 
-import java.util.HashSet;
+import java.util.*;
 import dashboard.model.Course;
 import dashboard.model.Student;
 
 public class CourseRegistry {
 
-	private static HashSet<Course> courses = new HashSet<Course>();
+	private static HashMap<String,HashSet<Course>> branches = new HashMap<String,HashSet<Course>>();
+	
 	
 	private CourseRegistry(){
-		courses.add(new Course("Analyse I"));
+		branches.put("BaBi1", new HashSet<Course>());
+		branches.put("BaBi2", new HashSet<Course>());
+		branches.put("CwMa2", new HashSet<Course>());
+		branches.put("CwMa3", new HashSet<Course>());
+		branches.put("CwMi2", new HashSet<Course>());
+		branches.put("CwMi3", new HashSet<Course>());
+		branches.put("EtMa2", new HashSet<Course>());
+		branches.put("EtMa3", new HashSet<Course>());
+		branches.put("EtMi2", new HashSet<Course>());
+		branches.put("EtMi3", new HashSet<Course>());
 	}
 	
 	/**

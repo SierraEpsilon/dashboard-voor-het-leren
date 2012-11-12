@@ -18,7 +18,7 @@ public class Course {
 	 * 	the credit equals the given credit
 	 * 	|	new.getCredit() = credit
 	 */
-	public Course(String name, int phase, int credit,String[] diploma){
+	public Course(String name, int credit){
 		this.name = name;
 		this.credit = credit;
 	}
