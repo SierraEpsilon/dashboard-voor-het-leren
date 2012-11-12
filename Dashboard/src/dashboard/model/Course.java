@@ -11,9 +11,24 @@ public class Course {
 	 * initiates a course
 	 * @param 	name
 	 * 	the name of the course
+	 * @param 	phase
+	 * 	the phase of the course
+	 * @param 	credit
+	 * 	the credit of the course
+	 * @param 	diploma
+	 * 	the diploma of the course
 	 * @post	
 	 * 	the name equals the given name
 	 * 	|	new.getName() = name
+	 * @post	
+	 * 	the phase equals the given phase
+	 * 	|	new.getPhase() = phase
+	 * @post	
+	 * 	the credit equals the given credit
+	 * 	|	new.getCredit() = credit
+	 * @post	
+	 * 	the diploma equals the given diploma
+	 * 	|	new.getDiploma() = diploma
 	 */
 	public Course(String name, int phase, int credit,String[] diploma){
 		this.name = name;
