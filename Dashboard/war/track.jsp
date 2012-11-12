@@ -28,7 +28,7 @@ if(request.getParameter("mode")!=null){
 	start = 0;
 	startTime = "";
 	out.println("<form action='/track' method='post'>");
-	out.println("<p>Course: <select><option>Analyse</option></select>");
+	out.println("<p>Course: <select><option>Analyse</option><option>Mechanica</option></select>");
 	out.println("<p><input type='submit' value='START'>");
 	out.println("</form>");
 }
