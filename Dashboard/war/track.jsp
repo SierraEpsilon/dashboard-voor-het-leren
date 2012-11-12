@@ -14,7 +14,7 @@
 <%
 String startTime;
 int start;
-if(request.getParameter("mode")=="stop"){
+if(request.getParameter("mode")!=null){
 	start = 1;
 	startTime = (String) request.getSession().getAttribute("startTracking");
 	String course = request.getParameter("course");
@@ -31,7 +31,6 @@ if(request.getParameter("mode")=="stop"){
 	out.println("<p>Course: <select><option>Analyse</option></select>");
 	out.println("<p><input type='submit' value='START'>");
 	out.println("</form>");
-	
 }
 %>
 <script>
@@ -62,13 +61,7 @@ function setTimePast(){
 			str = min + " " + name;
 		}else{
 			diff = ((diff-min)/60);
-			hours = (diff%24);
-			if(diff<24){
-				str = hours + "uur" + min + "minuten";
-			}else{
-				days = ((diff-hours)/24);
-				str = days + " dagen en " + hours + " uur";
-			}
+			str = hours + "uur" + min + "minuten";
 		}
 	}
 	$('#timePast').text(str);
