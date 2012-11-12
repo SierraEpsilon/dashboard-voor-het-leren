@@ -111,4 +111,14 @@ public class CourseRegistry {
 	public static HashMap<String, HashSet<Course>> getBranches() {
 		return branches;
 	}
+	
+	/**
+	 * @param branch
+	 * 	the branch you want to get
+	 * @return a set with all courses of that branch
+	 * 	|	getBranches().get(branch)
+	 */
+	public static HashSet<Course> getBranch(String branch){
+		return getBranches().get(branch);
+	}
 }

@@ -3,9 +3,13 @@ package dashboard.model;
 import java.io.Serializable;
 import java.util.Date;
 
+import dashboard.error.AlreadyEndedException;
+import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEmailException;
+import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
+import dashboard.error.NotStudyingException;
 
 public class Student implements Comparable<Student>,Cloneable,Serializable {
 
@@ -205,11 +209,19 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	public boolean isCorrectPassword(String password){
 		return (getPassword().equals(password));
 	}
-	/*
-	public void endStudying(Date end, int amount, String kind){
-		getCurrentStudyMoment().endMoment(end, amount, kind);
+	
+	/**
+	 * @throws NotStudyingException 
+	 * 	|	getCurrentStudyMoment() == null
+	 * @effect
+	 * 	|	setCurrentStudyMoment(null)
+	 */
+	public void cancelCurrentStudyMoment() throws NotStudyingException{
+		if(getCurrentStudyMoment() == null)
+			throw new NotStudyingException();
+		setCurrentStudyMoment(null);
 	}
-	*/
+	
 	/**
 	 * compares user with other user
 	 * @return
