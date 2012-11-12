@@ -1,7 +1,6 @@
 package dashboard.model;
 import java.util.*;
 
-import dashboard.error.AlreadyEndedException;
 import dashboard.error.*;
 
 public class StudyMoment {
@@ -14,23 +13,49 @@ public class StudyMoment {
 	private int amount;
 	private String kind;
 	
+	/**
+	 * @param start
+	 * 	the start of the studymoment
+	 * @param course
+	 * 	the course of the studymoment
+	 * @post	the start was initialized
+	 * 	|	new.getStart() = start
+	 * @post	the course was initialized
+	 * 	| new.getCourse() = course
+	 */
 	public StudyMoment(Date start, Course course){
 		this.start = start;
 		this.course = course;
 	}
 	
+	/**
+	 * @param start
+	 * 	the start of the studymoment
+	 * @param course
+	 * 	the course of the studymoment
+	 * @param course
+	 * 	the course of the studymoment
+	 * @param amount
+	 * 	the amount of the studymoment
+	 * @param kind
+	 * 	the kind of the studymoment
+	 * @throws InvalidEndDateException
+	 *  if endMoment fails to succeed because of a InvalidEndDateException
+	 * @throws InvalidAmountException
+	 * 	if endMoment fails to succeed because of a InvalidAmountException
+	 * @effect	
+	 * 	|	this(start,course)
+	 * @effect
+	 * 	|	endMoment(end, amount, kind)
+	 */
 	public StudyMoment(Date start, Date end, Course course, int amount, String kind)
 			throws InvalidEndDateException, InvalidAmountException{
-		this.start = start;
-		this.course = course;
-		if(!isValidEnd(end))
-			throw new InvalidEndDateException();
-		setEnd(end);
-		if(!isValidAmount(amount))
-			throw new InvalidAmountException();
-		setAmount(amount);
-		setKind(kind);
-		
+		this(start,course);
+		try {
+			endMoment(end, amount, kind);
+		} catch (AlreadyEndedException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
@@ -80,7 +105,8 @@ public class StudyMoment {
 	/**	 
 	 * @param end
 	 * the date of end
-	 *  | date of end
+	 * @post	the end has been changed
+	 * 	|	new.getEnd() = end
 	 */
 	public void setEnd(Date end){
 		this.end = end;
@@ -89,7 +115,8 @@ public class StudyMoment {
 	/**	 
 	 * @param amount
 	 * the amount
-	 *  | amount
+	 * @post	the amount has been changed
+	 * 	|	new.getAmount() = amount 
 	 */
 	public void setAmount(int amount){
 		this.amount = amount;
@@ -98,32 +125,10 @@ public class StudyMoment {
 	/**	 
 	 * @param kind
 	 * the kind of studymoment
-	 *  | kind
+	 * @post	the kind has been changed
+	 * 	|	new.getKind() = kind
 	 */
 	public void setKind(String kind){
-		this.kind = kind;
-	}
-	
-	/**
-	 * @param end
-	 * @param amount
-	 * @param kind
-	 * @throws AlreadyEndedException 
-	 * 	if the Moment has already been ended
-	 * 	|	!isEnded()
-	 * @post
-	 * 	|	new.getEnd() = end
-	 * @post
-	 * 	|	new.getAmount() = amount
-	 * @post
-	 * 	|	new.getkind() = kind
-	 */
-	public void endMoment(Date end, int amount, String kind) 
-			throws AlreadyEndedException{
-		if(!isEnded())
-			throw new AlreadyEndedException();
-		this.end = end;
-		this.amount = amount;
 		this.kind = kind;
 	}
 	
@@ -135,9 +140,8 @@ public class StudyMoment {
 	private boolean isEnded(){
 		return(end != null);
 	}
-	
-	/**
-	 * 
+
+	/** 
 	 * @param end
 	 * the end date you want to enter
 	 * @return
@@ -147,7 +151,38 @@ public class StudyMoment {
 	private boolean isValidEnd(Date end){
 		return(end.after(start));
 	}
-   
+
+	/**
+	 * @param end
+	 * @param amount
+	 * @param kind
+	 * @throws AlreadyEndedException 
+	 * 	if the Moment has already been ended
+	 * 	|	!isEnded()
+	 * @throws InvalidEndDateException 
+	 * 	| 	!isValidEnd(end)
+	 * @throws InvalidAmountException 
+	 * 	| 	!isValidAmount(amount)
+	 * @effect
+	 * 	|	setEnd(end)
+	 * @effect
+	 * 	|	setAmount(amount)
+	 * @effect
+	 * 	|	setKind(kind)
+	 */
+	public void endMoment(Date end, int amount, String kind) 
+			throws AlreadyEndedException, InvalidEndDateException, InvalidAmountException{
+		if(!isEnded())
+			throw new AlreadyEndedException();
+		if(!isValidEnd(end))
+			throw new InvalidEndDateException();
+		if(!isValidAmount(amount))
+			throw new InvalidAmountException();
+		setEnd(end);
+		setAmount(amount);
+		setKind(kind);
+	}
+	
 	/**
 	 * 
 	 * @param amount
