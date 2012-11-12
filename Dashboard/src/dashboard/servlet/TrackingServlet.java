@@ -28,23 +28,31 @@ public class TrackingServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");//get the current user
 		
-		if(student.getCurrentStudyMoment() == null){//if the student is not studying yet
+		if(req.getParameter("submit")=="start" && student.getCurrentStudyMoment() == null){//if the student is not studying yet
 			Course course = new Course("analyse",1);
 			Date start = new Date();
 			student.setCurrentStudyMoment(new StudyMoment(start,course));//create a new study moment
 			session.setAttribute("startTracking", start.toString());
 			resp.sendRedirect("/track.jsp?mode=stop");
 		} else {//if the student was already studying
-			try {
-				student.getCurrentStudyMoment().endMoment(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));//end the current studymoment
-			} catch (NumberFormatException e) {
-				e.printStackTrace();
-			} catch (AlreadyEndedException e) {
-				e.printStackTrace();
-			} catch (InvalidEndDateException e) {
-				e.printStackTrace();
-			} catch (InvalidAmountException e) {
-				e.printStackTrace();
+			if(req.getParameter("submit") == "stop"){
+				try {
+					student.getCurrentStudyMoment().endMoment(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));//end the current studymoment
+				} catch (NumberFormatException e) {
+					e.printStackTrace();
+				} catch (AlreadyEndedException e) {
+					e.printStackTrace();
+				} catch (InvalidEndDateException e) {
+					e.printStackTrace();
+				} catch (InvalidAmountException e) {
+					e.printStackTrace();
+				}
+				resp.sendRedirect("/track.jsp");
+			} else if(req.getParameter("submit") == "cancel"){//cancel the study moment
+				student.cancelCurrentStudyMoment();
+				resp.sendRedirect("/track.jsp");
+			} else {
+				resp.sendRedirect("/error.jsp");
 			}
 		}
 	} 
