@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dashboard.error.AlreadyEndedException;
+import dashboard.error.InvalidAmountException;
+import dashboard.error.InvalidEndDateException;
 import dashboard.model.*;
 import dashboard.registry.StudentRegistry;
 
@@ -38,6 +40,10 @@ public class TrackingServlet extends HttpServlet{
 			} catch (NumberFormatException e) {
 				e.printStackTrace();
 			} catch (AlreadyEndedException e) {
+				e.printStackTrace();
+			} catch (InvalidEndDateException e) {
+				e.printStackTrace();
+			} catch (InvalidAmountException e) {
 				e.printStackTrace();
 			}
 		}
