@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<%@include file="inc/head.jsp"%>
 </head>
 <body>
 <%
