@@ -1,11 +1,13 @@
 package dashboard.model;
 import java.util.*;
 
+import java.io.Serializable;
+
 import javax.persistence.Id;
 
 import dashboard.error.*;
 
-public class StudyMoment {
+public class StudyMoment implements Serializable{
 
 	private Date start;
 	private Date end;
