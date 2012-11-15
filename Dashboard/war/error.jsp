@@ -5,7 +5,8 @@
 		<%
 			String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
 		%>
-		<p><%= msg%></p>
 		<p>Er is een fout opgetreden!</p>
+		<p style='color:red;'><%= msg%></p>
+		
 	</body>
 </html>
