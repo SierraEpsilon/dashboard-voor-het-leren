@@ -10,6 +10,7 @@ import javax.persistence.Transient;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.annotation.Unindexed;
 
 import dashboard.error.AlreadyEndedException;
 import dashboard.error.InvalidAmountException;
@@ -32,7 +33,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String userName;
 	private String mail;
 	private String password;
-	@Transient private StudyMoment currentStudyMoment;
+	@Unindexed private StudyMoment currentStudyMoment;
 	@Transient private ArrayList<StudyMoment> studyMoments;
 	@Transient private HashSet<CourseContract> courses;
 	
@@ -66,7 +67,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	public Student(String firstName, String lastName, String userName, String mail, String passWord)
 			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
 		Objectify ofy = ObjectifyService.begin();
-		ObjectifyService.register(Student.class);
 		if(isValidUserName(userName))
 			this.userName = userName;
 		else
