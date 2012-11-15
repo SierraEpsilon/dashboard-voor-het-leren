@@ -20,48 +20,48 @@ public class CourseRegistry {
 	 */
 	private void addCourses() {
 		Course tempCourse = new Course("Algemene en technische scheikunde", 7);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Toegepaste mechanica 1", 5);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Algemene natuurkunde", 7);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Thermodynamica", 3);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Inleiding tot de materiaalkunde", 3);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Elektrische netwerken", 3);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Methodiek van de informatica", 6);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Toegepaste algebra", 5);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Analyse 1", 6);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Analyse 2", 5);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("P&o 1", 4);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("P&o 2", 3);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		tempCourse = new Course("Wijsbegeerte", 3);
-		branches.get("Babi1").add(tempCourse);
+		branches.get("BaBi1").add(tempCourse);
 		
 		tempCourse = new Course("Organische scheikunde", 3);
-		branches.get("Babi2").add(tempCourse);
+		branches.get("BaBi2").add(tempCourse);
 		tempCourse = new Course("Toegepaste mechanica 2", 5);
-		branches.get("Babi2").add(tempCourse);
+		branches.get("BaBi2").add(tempCourse);
 		tempCourse = new Course("Informatieoverdracht en -verwerking", 5);
-		branches.get("Babi2").add(tempCourse);
+		branches.get("BaBi2").add(tempCourse);
 		tempCourse = new Course("Kansrekenen en statistiek", 3);
-		branches.get("Babi2").add(tempCourse);
+		branches.get("BaBi2").add(tempCourse);
 		tempCourse = new Course("Analyse 3", 3);
-		branches.get("Babi2").add(tempCourse);
+		branches.get("BaBi2").add(tempCourse);
 		tempCourse = new Course("Numerieke wiskunde", 4);
-		branches.get("Babi2").add(tempCourse);
+		branches.get("BaBi2").add(tempCourse);
 		tempCourse = new Course("P&o 3", 4);
-		branches.get("Babi2").add(tempCourse);
+		branches.get("BaBi2").add(tempCourse);
 		tempCourse = new Course("Economie", 3);
-		branches.get("Babi2").add(tempCourse);
+		branches.get("BaBi2").add(tempCourse);
 	}
 
 	/**

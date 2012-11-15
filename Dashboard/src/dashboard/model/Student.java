@@ -74,7 +74,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	
 	//moet weggehaald worden LATER
 	private void createFakeInfo(){
-		HashSet<Course> testCourses = CourseRegistry.getBranch("Babi1");
+		HashSet<Course> testCourses = CourseRegistry.getBranch("BaBi1");
 		for(Course course: testCourses)
 			addCourse(new CourseContract(course));
 	}
@@ -199,7 +199,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	the moment was added to the student's studymoments
 	 * 	|	new.studyMoments.contains(moment)
 	 */
-	public void addStudyMoment(StudyMoment moment) {
+	public void addStuddyMoment(StudyMoment moment) {
 		getStudyMoments().add(moment);
 	}
 	
@@ -290,11 +290,15 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	|	StudyMoment moment = getCurrentStudyMoment()
 	 * 	|	setCurrentStudyMoment(null)
 	 */
-	public void endStudying(Date endDate, int amount, String kind) 
-			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException{
+	public void endStudying(int amount, String kind) 
+			throws AlreadyEndedException, InvalidAmountException{
 		StudyMoment moment = getCurrentStudyMoment();
-		moment.endMoment(endDate, amount, kind);
-		addStudyMoment(moment);
+		try {
+			moment.endMoment(new Date(), amount, kind);
+		} catch (InvalidEndDateException e) {
+			e.printStackTrace();
+		}
+		addStuddyMoment(moment);
 		setCurrentStudyMoment(null);
 	}
 	
