@@ -32,7 +32,6 @@ public class TrackingServlet extends HttpServlet{
 				session.setAttribute("course", student.getCurrentStudyMoment().getCourse());
 				resp.sendRedirect("/track.jsp?mode=stop");
 			}
-			resp.sendRedirect("error.jsp");
 		}
 	}
 	/**
