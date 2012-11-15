@@ -93,9 +93,11 @@ public class StudentRegistry {
 	 *	|		return null
 	 */
 	public static Student getUserByMail(String mail){
-		for(Student user: getUsers())
+		for(Student user: getUsers()){
+			List<Student> userslist = getUsers();
 			if(user.getMail().equals(mail))
 				return user;
+		}
 		return null;
 	}
 	

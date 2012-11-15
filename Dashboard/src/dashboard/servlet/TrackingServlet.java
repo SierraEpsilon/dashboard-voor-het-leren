@@ -24,10 +24,15 @@ public class TrackingServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
 		
-		if(student.getCurrentStudyMoment() == null){
-			resp.sendRedirect("/track.jsp");
-		} else {
-			resp.sendRedirect("/track.jsp?mode=stop");
+		if(student!=null){
+			if(student.getCurrentStudyMoment() == null){
+				resp.sendRedirect("/track.jsp");
+			} else {
+				session.setAttribute("startTracking", student.getCurrentStudyMoment().getStart());
+				session.setAttribute("course", student.getCurrentStudyMoment().getCourse());
+				resp.sendRedirect("/track.jsp?mode=stop");
+			}
+			resp.sendRedirect("error.jsp");
 		}
 	}
 	/**
