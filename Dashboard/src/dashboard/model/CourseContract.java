@@ -2,9 +2,9 @@ package dashboard.model;
 
 public class CourseContract {
 	
-	private final CourseEnum course;
+	private final Course course;
 	
-	public CourseContract(CourseEnum course){
+	public CourseContract(Course course){
 		this.course = course;
 	}
 	
@@ -13,7 +13,7 @@ public class CourseContract {
 	 * 	the course of the student
 	 * 	|	course
 	 */
-	public CourseEnum getCourse() {
+	public Course getCourse() {
 		return course;
 	}
 	

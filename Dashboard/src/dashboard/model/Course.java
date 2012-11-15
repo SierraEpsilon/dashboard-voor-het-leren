@@ -1,10 +1,24 @@
 package dashboard.model;
 
-public class Course {
-
+public enum Course {
+		
+	H01A8A("Algemene en technishce scheikunde",7),
+	H01B0A("Toegepaste Mechanica 1",5),
+	H01B2A("Algemene natuurkunde",7),
+	H01B4A("Thermodynamica",3),
+	H01D0A("Inleiding to de materiaalkunde",3),
+	H01Z2A("Elektrische netwerken",3),
+	H01B6B("Methodiek van de informatica",6),
+	H01A4A("Toegepaste algebra",5),
+	H01A0B("Analyse 1",6),
+	H01A2A("Analyse 2",5),
+	H01B9A("P en O 1",4),
+	H01C2A("P en O 2",3),	
+	H01C4B("Wijsbegeerte",3);
+	
 	private final String name;
 	private final int credit;
-	
+		
 	/**
 	 * initiates a course
 	 * @param 	name
@@ -18,11 +32,11 @@ public class Course {
 	 * 	the credit equals the given credit
 	 * 	|	new.getCredit() = credit
 	 */
-	public Course(String name, int credit){
+	private Course(String name, int credit){
 		this.name = name;
 		this.credit = credit;
 	}
-	
+		
 	/**
 	 * @return
 	 * 	returns the name of the course
@@ -31,8 +45,8 @@ public class Course {
 	public String getName() {
 		return name;
 	}
-	
-	/**
+		
+	/**		 
 	 * @return
 	 * 	returns the credit of the course
 	 * 	| credit
@@ -40,12 +54,12 @@ public class Course {
 	public int getCredit() {
 		return credit;
 	}
-	
+		
 	/**
-	 * @return
-	 * 	the hours you should study for that particular course
-	 * 	|	getCredit()*28
-	 */
+	* @return
+	* 	the hours you should study for that particular course
+	* 	|	getCredit()*28
+	*/
 	public int getHoursNeeded(){
 		return getCredit()*28;
 	}

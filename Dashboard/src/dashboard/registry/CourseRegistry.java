@@ -4,7 +4,7 @@ import java.util.*;
 
 import dashboard.model.Branch;
 import dashboard.model.Course;
-import dashboard.model.CourseEnum;
+import dashboard.model.Course;
 import dashboard.model.Student;
 
 public class CourseRegistry {
@@ -37,7 +37,7 @@ public class CourseRegistry {
 	 * @return a set with all courses of that branch
 	 * 	|	getBranches().get(branch)
 	 */
-	public static ArrayList<CourseEnum> getBranch(String branch){
+	public static ArrayList<Course> getBranch(String branch){
 		return getBranches().get(branch).getCourses();
 	}
 }

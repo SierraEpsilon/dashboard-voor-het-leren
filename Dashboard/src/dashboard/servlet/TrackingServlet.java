@@ -11,7 +11,6 @@ import javax.servlet.http.HttpSession;
 import dashboard.error.AlreadyEndedException;
 import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEndDateException;
-import dashboard.error.NotStudyingException;
 import dashboard.model.*;
 import dashboard.registry.StudentRegistry;
 
@@ -29,17 +28,16 @@ public class TrackingServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");//get the current user
 		
-		if(student.getCurrentStudyMoment() == null && req.getParameter("submit").equals("start")){//if the student is not studying yet
+		if(req.getParameter("submit")=="start" && student.getCurrentStudyMoment() == null){//if the student is not studying yet
 			Course course = new Course("analyse",1);
 			Date start = new Date();
 			student.setCurrentStudyMoment(new StudyMoment(start,course));//create a new study moment
-			session.setAttribute("startTracking", start);
-			session.setAttribute("course", course);
+			session.setAttribute("startTracking", start.toString());
 			resp.sendRedirect("/track.jsp?mode=stop");
 		} else {//if the student was already studying
-			if(req.getParameter("submit").equals("stop")){
+			if(req.getParameter("submit") == "stop"){
 				try {
-					student.endStudying(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));//end the current studymoment
+					student.endCurrentStudyMoment(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));//end the current studymoment
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				} catch (AlreadyEndedException e) {
@@ -50,12 +48,8 @@ public class TrackingServlet extends HttpServlet{
 					e.printStackTrace();
 				}
 				resp.sendRedirect("/track.jsp");
-			} else if(req.getParameter("submit").equals("cancel")){//cancel the study moment
-				try {
-					student.cancelCurrentStudyMoment();
-				} catch (NotStudyingException e) {
-					e.printStackTrace();
-				}
+			} else if(req.getParameter("submit") == "cancel"){//cancel the study moment
+				student.cancelCurrentStudyMoment();
 				resp.sendRedirect("/track.jsp");
 			} else {
 				resp.sendRedirect("/error.jsp");
