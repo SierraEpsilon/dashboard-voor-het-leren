@@ -24,7 +24,7 @@ public class StudentRegistry {
 	 */
 	static{
 		loadFromDatastore();
-		addFakeUser();
+		//addFakeUser();
 		
 		
 	}
@@ -131,7 +131,6 @@ public class StudentRegistry {
 	 */
 	public static boolean isValidlogIn(String userName, String password){
 		if(getUserByUserName(userName) != null){
-			Student user = StudentRegistry.getUserByUserName(userName);
 			return	(StudentRegistry.getUserByUserName(userName).isCorrectPassword(password));
 		} else if(getUserByMail(userName) != null){
 			return (StudentRegistry.getUserByMail(userName).isCorrectPassword(password));

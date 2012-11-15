@@ -178,7 +178,7 @@ public class StudyMoment implements Serializable{
 	 */
 	public void endMoment(Date end, int amount, String kind) 
 			throws AlreadyEndedException, InvalidEndDateException, InvalidAmountException{
-		if(!isEnded())
+		if(isEnded())
 			throw new AlreadyEndedException();
 		if(!isValidEnd(end))
 			throw new InvalidEndDateException();
