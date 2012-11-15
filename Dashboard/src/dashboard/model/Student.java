@@ -66,7 +66,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public Student(String firstName, String lastName, String userName, String mail, String passWord)
 			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
-		Objectify ofy = ObjectifyService.begin();
 		if(isValidUserName(userName))
 			this.userName = userName;
 		else
@@ -84,7 +83,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		studyMoments = new ArrayList<StudyMoment>();
 		courses = new HashSet<CourseContract>();
 		createFakeInfo();
-		ofy.put(this);
+		OwnOfy.ofy().put(this);
 	}
 	
 	public Student(){
@@ -178,8 +177,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-		Objectify ofy = ObjectifyService.begin();
-		ofy.put(this);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**
@@ -190,8 +188,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-		Objectify ofy = ObjectifyService.begin();
-		ofy.put(this);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**
@@ -202,8 +199,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
-		Objectify ofy = ObjectifyService.begin();
-		ofy.put(this);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**
@@ -214,8 +210,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setCurrentStudyMoment(StudyMoment currentStudyMoment) {
 		this.currentStudyMoment = currentStudyMoment;
-		Objectify ofy = ObjectifyService.begin();
-		ofy.put(this);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**

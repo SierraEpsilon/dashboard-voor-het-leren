@@ -11,13 +11,13 @@ import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.UserNameInUseException;
+import dashboard.model.OwnOfy;
 import dashboard.model.Student;
 
 
 public class StudentRegistry {
 
 	private static List<Student> users = new ArrayList<Student>();
-	private static Objectify ofy = ObjectifyService.begin();
 		
 	/*
 	 * Temporary method to add fake user
@@ -45,9 +45,8 @@ public class StudentRegistry {
 	 * 
 	 */
 	private static void loadFromDatastore(){
-		ObjectifyService.register(Student.class);
 		
-		users = ofy.query(Student.class).list();
+		users = OwnOfy.ofy().query(Student.class).list();
 	}
 	
 	/**
