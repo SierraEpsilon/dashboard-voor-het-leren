@@ -53,9 +53,9 @@ $(document).ready(function(){
 <p id='msg' style='color:red;'>
 <p>Voornaam<input type='text' name='firstname'>
 Achternaam<input type='text' name='lastname'>
-Gebruikersnaam<input type='text' name='username'></td></tr>
-E-mail<input type='text' name='mail'></td></tr>
-Wachtwoord<input type='password' name='password1'></td></tr>
+Gebruikersnaam<input type='text' name='username'>
+E-mail<input type='text' name='mail'>
+Wachtwoord<input type='password' name='password1'>
 Herhaal wachtwoord<input type='password' name='password2'>
 <p><button id='register'>REGISTREREN</button>
 <form name='submit' method='post' action='/register'>
