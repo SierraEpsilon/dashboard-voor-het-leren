@@ -31,7 +31,7 @@ public class TrackingServlet extends HttpServlet{
 		Student student = (Student)session.getAttribute("student");//get the current user
 		
 		if(req.getParameter("submit").equals("start") && student.getCurrentStudyMoment() == null){//if the student is not studying yet
-			Course course = CourseRegistry.getCourse((String) req.getAttribute("course"));
+			Course course = CourseRegistry.getCourse((String) req.getAttribute("courseinput"));
 			Date start = new Date();
 			student.setCurrentStudyMoment(new StudyMoment(start,course));//create a new study moment
 			session.setAttribute("startTracking", start);

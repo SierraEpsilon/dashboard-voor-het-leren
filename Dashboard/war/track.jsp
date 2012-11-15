@@ -40,7 +40,7 @@ if(request.getParameter("mode")!=null){
 	startTime = "";
 	out.println("<form action='/track' method='post'>");
 	//course list
-	out.println("Course: <select name='course'>");
+	out.println("Course: <select name='courseinput'>");
 	
 	Student student = (Student)session.getAttribute("student");
 	HashSet<CourseContract> ccs = student.getCourses();
