@@ -34,6 +34,7 @@ public class TrackingServlet extends HttpServlet{
 			Date start = new Date();
 			student.setCurrentStudyMoment(new StudyMoment(start,course));//create a new study moment
 			session.setAttribute("startTracking", start);
+			session.setAttribute("course", course);
 			resp.sendRedirect("/track.jsp?mode=stop");
 		} else {//if the student was already studying
 			if(req.getParameter("submit").equals("stop")){
