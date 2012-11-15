@@ -27,7 +27,7 @@ public class RegistrationServlet extends HttpServlet {
 		
 		try{
 			StudentRegistry.addUser(new Student(firstName,lastName,username,email,password));//add the user to the list of existing users
-			resp.sendRedirect("/registrationsuccess.jsp");
+			resp.sendRedirect("/login.jsp?msg=Registration succes!");
 		} catch (UserNameInUseException e){
 			resp.sendRedirect("/error.jsp");
 		} catch (InvalidUserNameException e){
