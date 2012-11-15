@@ -17,7 +17,7 @@ public class LogoutServlet extends HttpServlet{
 	 * @param resp 
 	 * @throws IOException
 	 */
-	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException{
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		HttpSession session = req.getSession();
 		session.setAttribute("student",null);
 		resp.sendRedirect("/login.jsp");

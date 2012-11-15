@@ -1,12 +1,14 @@
 package dashboard.model;
 import java.util.*;
 
+import javax.persistence.Id;
+
 import dashboard.error.*;
 
 public class StudyMoment {
 
 	
-	
+	@Id Long id;
 	private final Date start;
 	private Date end;
 	private final Course course;

@@ -24,6 +24,7 @@ public class StudentRegistry {
 	 */
 	static{
 		loadFromDatastore();
+		/*
 		try {
 			addUser(new Student("voornaam","achternaam","username","mijn@email.com","password"));
 		} catch (EmailInUseException e) {
@@ -37,6 +38,7 @@ public class StudentRegistry {
 		} catch (InvalidPasswordException e) {
 			e.printStackTrace();
 		}
+		*/
 	}
 	
 	/**

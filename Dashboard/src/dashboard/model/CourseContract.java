@@ -1,7 +1,12 @@
 package dashboard.model;
 
-public class CourseContract {
-	
+import java.io.Serializable;
+
+import javax.persistence.Id;
+
+public class CourseContract{
+
+	@Id Long id;
 	private final Course course;
 	
 	public CourseContract(Course course){

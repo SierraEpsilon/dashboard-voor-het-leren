@@ -24,7 +24,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -6588617112517245777L;
+	private static final long serialVersionUID = -6268846212512642033L;
 	@Id private Long id;
 	private String firstName;
 	private String lastName;
@@ -32,9 +32,8 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String mail;
 	private String password;
 	private StudyMoment currentStudyMoment;
-	@Transient private ArrayList<StudyMoment> studyMoments;
-	@Transient private HashSet<CourseContract> courses;
-	@Transient private Objectify ofy;
+	private ArrayList<StudyMoment> studyMoments;
+	private HashSet<CourseContract> courses;
 	
 	/**
 	 * initiates a user
@@ -65,7 +64,8 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public Student(String firstName, String lastName, String userName, String mail, String passWord)
 			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
-		ofy = ObjectifyService.begin();
+		Objectify ofy = ObjectifyService.begin();
+		ObjectifyService.register(Student.class);
 		if(isValidUserName(userName))
 			this.userName = userName;
 		else
@@ -87,8 +87,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	public Student(){
-		createFakeInfo();
-		ofy = ObjectifyService.begin();
 	}
 	
 	//TODO moet weggehaald worden LATER
@@ -179,6 +177,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+		Objectify ofy = ObjectifyService.begin();
 		ofy.put(this);
 	}
 	
@@ -190,6 +189,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+		Objectify ofy = ObjectifyService.begin();
 		ofy.put(this);
 	}
 	
@@ -201,6 +201,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+		Objectify ofy = ObjectifyService.begin();
 		ofy.put(this);
 	}
 	
@@ -212,6 +213,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setCurrentStudyMoment(StudyMoment currentStudyMoment) {
 		this.currentStudyMoment = currentStudyMoment;
+		Objectify ofy = ObjectifyService.begin();
 		ofy.put(this);
 	}
 	
