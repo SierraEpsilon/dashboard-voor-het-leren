@@ -27,8 +27,11 @@ public class LoginServlet extends HttpServlet {
 		//TODO
 		//DIT MOET ER LATER UIT
 		//ZEER BELANGERIJK
-		if(username.equals("delete") && password.equals("delete"))
+		if(username.equals("delete") && password.equals("delete")){
 			OwnOfy.clearStudents();
+			StudentRegistry.deleteAll();
+			resp.sendRedirect("info erased");
+		}
 		//KIJK HIERBOVEN, DIT MOET ERUIT
 		//NIET OVERKIJKEN
 		else if(StudentRegistry.isValidlogIn(username, password)){//check whether username and password are correct
