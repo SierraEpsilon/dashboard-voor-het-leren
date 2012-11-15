@@ -15,14 +15,10 @@
 </head>
 <body>
 <script>
-$(document).ready(function(){
-	$("#myFormm").submit(function(){
-		alert("test");
-		return false;
-		var amount = $("#myFormm>input[name='amount']").val();
-		alert(amount);
-		return false;
-		var patt=/^[1-9][0-9]*$/;
+//$(document).ready(function(){
+	$("#myForm").submit(function(){
+		var amount = $("input[name='amount']").val();
+		var patt=/^[0-9]*$/;
 		if (patt.test(amount)) {
 			return true;
 		}else{
@@ -30,7 +26,13 @@ $(document).ready(function(){
 			return false;
 		}
 	});
-});
+	$("input[name='radio_name']:checked").change(function(){
+		if($(this).val()=="Oefeningen")
+			$("label[for='amount']").text("Aantal gemaakt:");
+		else
+			$("label[for='amount']").text("Bladzijden gestudeerd:");
+	});
+//});
 
 </script>
 <div data-role="page">
@@ -38,7 +40,7 @@ $(document).ready(function(){
 		<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
-	<form id="myFormm" method="post" action="/track">
+	<form id="myForm" method="post" action="/track">
 		
 	<fieldset data-role="controlgroup">
 
@@ -49,7 +51,7 @@ $(document).ready(function(){
 	     	<label for="radio-choice-2">Oefeningen</label>
 	
 	</fieldset>
-	Hoeveelheid:
+	<label for='amount'>Hoeveelheid:</label>
 	<input type='text' name='amount'>
 	<p id='msg' style='color:red;'></p>
 	<input type="submit" value='OPSLAAN'>
