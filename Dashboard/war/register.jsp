@@ -12,8 +12,9 @@
 </head>
 <body>
 <div data-role="page">
-<div data-role="header">
+<div data-role="header" data-id='header' data-position="fixed">
 		<h1>Register</h1>
+		<a href="login.jsp" data-icon="back">Terug</a>
 </div><!-- /header -->
 <div data-role="content">
 <script>

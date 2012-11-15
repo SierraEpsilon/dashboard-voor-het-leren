@@ -14,7 +14,7 @@
 </head>
 <body>
 <div data-role="page">
-<div data-role="header">
+<div data-role="header" data-id='header' data-position="fixed">
 		<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
