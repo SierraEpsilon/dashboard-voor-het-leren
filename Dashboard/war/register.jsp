@@ -8,7 +8,7 @@
 
 <html>
 <head>
-<%@include file="inc/head.jsp"%>
+<%@include file="inc/head.jsp"%> 
 </head>
 <body>
 <div data-role="page">
