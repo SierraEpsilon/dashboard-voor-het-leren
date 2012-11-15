@@ -13,7 +13,7 @@
 <body>
 <div data-role="page">
 <div data-role="header">
-		<h1>Register</h1>
+		<h1>Login</h1>
 </div><!-- /header -->
 <div data-role="content">
 <%
