@@ -9,6 +9,7 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
+<%@ page import="dashboard.model.*" %>
 <style type='text/css'>
 .containing-element .ui-slider-switch { width: 20em }
 </style>
