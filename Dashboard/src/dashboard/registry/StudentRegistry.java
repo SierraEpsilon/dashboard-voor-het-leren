@@ -1,6 +1,10 @@
 package dashboard.registry;
 
-import java.util.HashSet;
+import java.util.ArrayList;
+import java.util.List;
+
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
 
 import dashboard.error.EmailInUseException;
 import dashboard.error.InvalidEmailException;
@@ -9,39 +13,46 @@ import dashboard.error.InvalidUserNameException;
 import dashboard.error.UserNameInUseException;
 import dashboard.model.Student;
 
+
 public class StudentRegistry {
 
-	private static HashSet<Student> users = new HashSet<Student>();
+	private static List<Student> users = new ArrayList<Student>();
+	private static Objectify ofy = ObjectifyService.begin();
 		
 	/*
 	 * Temporary method to add fake user
 	 */
 	static{
+		loadFromDatastore();
 		try {
 			addUser(new Student("voornaam","achternaam","username","mijn@email.com","password"));
 		} catch (EmailInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (UserNameInUseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidUserNameException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidEmailException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (InvalidPasswordException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+	
+	/**
+	 * 
+	 */
+	private static void loadFromDatastore(){
+		ObjectifyService.register(Student.class);
+		
+		users = ofy.query(Student.class).list();
 	}
 	
 	/**
 	 * @return	the users of the userregistry
 	 * 	|	users
 	 */
-	public static HashSet<Student> getUsers() {
+	private static List<Student> getUsers() {
 		return users;
 	}
 	

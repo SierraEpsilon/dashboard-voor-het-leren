@@ -9,8 +9,7 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
-<%@page import="dashboard.model.*" %>
-<%@page import="java.util.*" %>
+<%@ page import="dashboard.servlet" %>
 </head>
 <body>
 <div data-role="page">
@@ -23,11 +22,13 @@ String startTime;
 int start;
 if(request.getParameter("mode")!=null){
 	start = 1;
-	Date startT = (Date) request.getSession().getAttribute("start");
-	Course course = (Course) request.getSession().getAttribute("course");
+	//startTime = (String) request.getSession().getAttribute("startTracking");
+	Date start = request.getSession().getAttribute("start");
+	Course course = (Course)request.getSession().getAttribute("course");
 	String courseName = course.getName();
-	startTime = startT.toString();
+	String startTime = start.toString();
 	out.println("<p>Start: " + startTime);
+	String course = request.getParameter("course");
 	out.println("<p>Course: " + courseName);
 	out.println("<p><form action='/track_finish.jsp' method='post'><input type='submit' value='STOP'>");
 	

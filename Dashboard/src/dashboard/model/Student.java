@@ -4,6 +4,11 @@ import java.io.Serializable;
 
 import java.util.*;
 
+import javax.persistence.Id;
+
+import com.googlecode.objectify.Objectify;
+import com.googlecode.objectify.ObjectifyService;
+
 import dashboard.error.AlreadyEndedException;
 import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEmailException;
@@ -15,14 +20,20 @@ import dashboard.registry.CourseRegistry;
 
 public class Student implements Comparable<Student>,Cloneable,Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6588617112517245777L;
+	@Id private long id;
 	private String firstName;
 	private String lastName;
-	private final String userName;
-	private final String mail;
+	private String userName;
+	private String mail;
 	private String password;
 	private StudyMoment currentStudyMoment;
 	private ArrayList<StudyMoment> studyMoments;
 	private HashSet<CourseContract> courses;
+	private Objectify ofy;
 	
 	/**
 	 * initiates a user
@@ -70,11 +81,13 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		studyMoments = new ArrayList<StudyMoment>();
 		courses = new HashSet<CourseContract>();
 		createFakeInfo();
+		ofy = ObjectifyService.begin();
+		ofy.put(this);
 	}
 	
-	//moet weggehaald worden LATER
+	//TODO moet weggehaald worden LATER
 	private void createFakeInfo(){
-		ArrayList<Course> testCourses = CourseRegistry.getBranch("BaBi1");
+		ArrayList<Course> testCourses = CourseRegistry.getBranch("Babi1");
 		for(Course course: testCourses)
 			addCourse(new CourseContract(course));
 	}
@@ -160,6 +173,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
+		ofy.put(this);
 	}
 	
 	/**
@@ -170,6 +184,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
+		ofy.put(this);
 	}
 	
 	/**
@@ -180,6 +195,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setPassword(String password) {
 		this.password = password;
+		ofy.put(this);
 	}
 	
 	/**
@@ -190,6 +206,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setCurrentStudyMoment(StudyMoment currentStudyMoment) {
 		this.currentStudyMoment = currentStudyMoment;
+		ofy.put(this);
 	}
 	
 	/**
@@ -199,7 +216,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	the moment was added to the student's studymoments
 	 * 	|	new.studyMoments.contains(moment)
 	 */
-	public void addStuddyMoment(StudyMoment moment) {
+	public void addStudyMoment(StudyMoment moment) {
 		getStudyMoments().add(moment);
 	}
 	
@@ -290,15 +307,11 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	|	StudyMoment moment = getCurrentStudyMoment()
 	 * 	|	setCurrentStudyMoment(null)
 	 */
-	public void endStudying(int amount, String kind) 
-			throws AlreadyEndedException, InvalidAmountException{
+	public void endStudying(Date endDate, int amount, String kind) 
+			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException{
 		StudyMoment moment = getCurrentStudyMoment();
-		try {
-			moment.endMoment(new Date(), amount, kind);
-		} catch (InvalidEndDateException e) {
-			e.printStackTrace();
-		}
-		addStuddyMoment(moment);
+		moment.endMoment(endDate, amount, kind);
+		addStudyMoment(moment);
 		setCurrentStudyMoment(null);
 	}
 	
