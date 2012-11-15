@@ -74,8 +74,8 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	
 	//moet weggehaald worden LATER
 	private void createFakeInfo(){
-		HashSet<Course> testCourses = CourseRegistry.getBranch("BaBi1");
-		for(Course course: testCourses)
+		ArrayList<CourseEnum> testCourses = CourseRegistry.getBranch("BaBi1");
+		for(CourseEnum course: testCourses)
 			addCourse(new CourseContract(course));
 	}
 	
