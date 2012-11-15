@@ -24,9 +24,12 @@ public class LoginServlet extends HttpServlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		HttpSession session = req.getSession();
-		
+		//DIT MOET ER LATER UIT
+		//ZEER BELANGERIJK
 		if(username.equals("delete") && password.equals("delete"))
 			OwnOfy.clearStudents();
+		//KIJK HIERBOVEN, DIT MOET ERUIT
+		//NIET OVERKIJKEN
 		else if(StudentRegistry.isValidlogIn(username, password)){//check whether username and password are correct
 			Student user = StudentRegistry.getUserByUserName(username);
 			session.setAttribute("student", user);//set the current student to the one who is trying to log in
