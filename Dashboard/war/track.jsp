@@ -8,7 +8,6 @@
 
 <html>
 <head>
-<%@include file="inc/head.jsp"%>
 <%@ page import="dashboard.model.*" %>
 <%@ page import="java.util.*" %>
 </head>
@@ -46,8 +45,9 @@ if(request.getParameter("mode")!=null){
 	HashSet<CourseContract> ccs = student.getCourses();
 	Iterator it = ccs.iterator();
 	while(it.hasNext()){
-		String name = it.next().getCourse().getName();
-		out.printl("<option value='" + name + "'>" + name + "</option>");
+		CourseContract courseC = (CourseContract)it.next();
+		String name = courseC.getCourse().getName();
+		out.println("<option value='" + name + "'>" + name + "</option>");
 	}
 	out.println("</select>");
 		//end course list
