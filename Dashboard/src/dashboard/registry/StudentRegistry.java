@@ -156,4 +156,10 @@ public class StudentRegistry {
 			getUsers().add(user);
 	}
 	
+	//TODO
+	//Remove later
+	public static void deleteAll(){
+		users = new ArrayList<Student>();
+	}
+	
 }
