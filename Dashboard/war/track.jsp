@@ -23,9 +23,8 @@ String startTime;
 int start;
 if(request.getParameter("mode")!=null){
 	start = 1;
-	//startTime = (String) request.getSession().getAttribute("startTracking");
-	Date startDate = (Date)request.getSession().getAttribute("start");
-	Course course = (Course)request.getSession().getAttribute("course");
+	Date startDate = (Date)session.getAttribute("startTracking");
+	Course course = (Course)session.getAttribute("course");
 	String courseName = course.getName();
 	startTime = startDate.toString();
 	out.println("<p>Start: " + startTime);
