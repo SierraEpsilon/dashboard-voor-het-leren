@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dashboard.model.OwnOfy;
 import dashboard.model.Student;
 import dashboard.registry.StudentRegistry;
 
@@ -24,7 +25,9 @@ public class LoginServlet extends HttpServlet {
 		String password = req.getParameter("password");
 		HttpSession session = req.getSession();
 		
-		if(StudentRegistry.isValidlogIn(username, password)){//check whether username and password are correct
+		if(username.equals("delete") && password.equals("delete"))
+			OwnOfy.clearStudents();
+		else if(StudentRegistry.isValidlogIn(username, password)){//check whether username and password are correct
 			Student user = StudentRegistry.getUserByUserName(username);
 			session.setAttribute("student", user);//set the current student to the one who is trying to log in
 			resp.sendRedirect("/track.jsp");

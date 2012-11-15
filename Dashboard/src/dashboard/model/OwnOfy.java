@@ -11,14 +11,13 @@ public class OwnOfy {
 	static {
         ObjectifyService.register(Student.class);
         ofy = ObjectifyService.begin();
-        clearStudents();
     }
 
     public static Objectify ofy() {
         return ofy;
     }
     
-    private static void clearStudents(){
+    public static void clearStudents(){
     	Iterable<Key<Student>> allKeys = ofy.query(Student.class).fetchKeys();
         ofy.delete(allKeys);
     }
