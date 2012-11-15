@@ -38,9 +38,18 @@ public class LoginServlet extends HttpServlet {
 		else if(StudentRegistry.isValidlogIn(username, password)){//check whether username and password are correct
 			Student user = StudentRegistry.getUserByUserName(username);
 			session.setAttribute("student", user);//set the current student to the one who is trying to log in
-			resp.sendRedirect("/track.jsp");
+			resp.sendRedirect("/track");
 		} else {
 			resp.sendRedirect("/login.jsp?msg=Gebruikersnaam en/of wachtwoord zijn ongeldig");
 		}
 	}
+	
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		HttpSession session = req.getSession();
+		if(session.getAttribute("student") != null)
+			resp.sendRedirect("/track");
+		else
+			resp.sendRedirect("/login.jsp");
+	}
+	
 }
