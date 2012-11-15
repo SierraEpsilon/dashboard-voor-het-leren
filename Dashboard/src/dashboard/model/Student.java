@@ -66,18 +66,15 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public Student(String firstName, String lastName, String userName, String mail, String passWord)
 			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
-		if(isValidUserName(userName))
-			this.userName = userName;
-		else
+		if(!isValidUserName(userName))
 			throw new InvalidUserNameException();
-		if(isValidMail(mail))
-			this.mail	= mail;
-		else
+		if(!isValidMail(mail))
 			throw new InvalidEmailException();
-		if(isValidPassword(passWord))
-			setPassword(passWord);
-		else
+		if(!isValidPassword(passWord))
 			throw new InvalidPasswordException();
+		this.userName = userName;
+		this.mail = mail;
+		this.password = password;
 		setFirstName(firstName);
 		setLastName(lastName);
 		studyMoments = new ArrayList<StudyMoment>();
