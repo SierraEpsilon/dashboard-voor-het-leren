@@ -20,7 +20,7 @@
 String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
 %>
 <form method='post' action='/login'>
-<p><%= msg%>
+<p style='color:red;'><%= msg%>
 <p>Gebruikersnaam<input type='text' name='username'>
 Wachtwoord<input type='password' name='password'>
 <p><input type='submit' value='AANMELDEN'>
