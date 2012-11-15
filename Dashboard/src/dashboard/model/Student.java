@@ -11,6 +11,7 @@ import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.NotStudyingException;
+import dashboard.registry.CourseRegistry;
 
 public class Student implements Comparable<Student>,Cloneable,Serializable {
 
@@ -21,6 +22,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String password;
 	private StudyMoment currentStudyMoment;
 	private ArrayList<StudyMoment> studyMoments;
+	private HashSet<CourseContract> courses;
 	
 	/**
 	 * initiates a user
@@ -66,11 +68,15 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		setFirstName(firstName);
 		setLastName(lastName);
 		studyMoments = new ArrayList<StudyMoment>();
+		courses = new HashSet<CourseContract>();
 		createFakeInfo();
 	}
 	
+	//moet weggehaald worden LATER
 	private void createFakeInfo(){
-		
+		HashSet<Course> testCourses = CourseRegistry.getBranch("Babi1");
+		for(Course course: testCourses)
+			addCourse(new CourseContract(course));
 	}
 	
 	/**
@@ -138,6 +144,15 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
+	 * @return
+	 * 	the courses of the student
+	 * 	|	courses
+	 */
+	public HashSet<CourseContract> getCourses() {
+		return courses;
+	}
+	
+	/**
 	 * @param firstName
 	 * the new first name of the user
 	 * @post	the first name was changed
@@ -186,6 +201,17 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void addStuddyMoment(StudyMoment moment) {
 		getStudyMoments().add(moment);
+	}
+	
+	/**
+	  * @param course
+	 * 	the course you want to add
+	 * @post
+	 * 	the courseContract was added to the student's courses
+	 * 	|	new.courses.contains(course)
+	 */
+	public void addCourse(CourseContract course){
+		getCourses().add(course);
 	}
 	
 	/**
@@ -264,10 +290,14 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	|	StudyMoment moment = getCurrentStudyMoment()
 	 * 	|	setCurrentStudyMoment(null)
 	 */
-	public void endCurrentStudyMoment( Date end, int amount, String kind) 
-			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException{
+	public void endStudying(int amount, String kind) 
+			throws AlreadyEndedException, InvalidAmountException{
 		StudyMoment moment = getCurrentStudyMoment();
-		moment.endMoment(end, amount, kind);
+		try {
+			moment.endMoment(new Date(), amount, kind);
+		} catch (InvalidEndDateException e) {
+			e.printStackTrace();
+		}
 		addStuddyMoment(moment);
 		setCurrentStudyMoment(null);
 	}
