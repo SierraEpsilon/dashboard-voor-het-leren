@@ -64,13 +64,13 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * @post
 	 * new.getMail() = mail
 	 */
-	public Student(String firstName, String lastName, String userName, String mail, String passWord)
+	public Student(String firstName, String lastName, String userName, String mail, String password)
 			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
 		if(!isValidUserName(userName))
 			throw new InvalidUserNameException();
 		if(!isValidMail(mail))
 			throw new InvalidEmailException();
-		if(!isValidPassword(passWord))
+		if(!isValidPassword(password))
 			throw new InvalidPasswordException();
 		this.userName = userName;
 		this.mail = mail;
