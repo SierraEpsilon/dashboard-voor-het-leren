@@ -9,18 +9,19 @@ import dashboard.model.Student;
 
 public class CourseRegistry {
 
-	private static HashMap<String,Branch> branches = new HashMap<String,Branch>();
+	private static HashMap<String,Branch> branches;
 	
 	
-	private CourseRegistry(){
+	static{
+		branches = new HashMap<String,Branch>();
 		addBranches();
 	}
 
 	/**
 	 * add all branches to branches
 	 */
-	private void addBranches() {
-		getBranches().put(Branch.BABI1.getName(),Branch.BABI1);
+	private static void addBranches() {
+		branches.put(Branch.BABI1.getName(),Branch.BABI1);
 	}
 	
 	/**

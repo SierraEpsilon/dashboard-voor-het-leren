@@ -16,7 +16,7 @@ public enum Course {
 	H01C2A("P en O 2",3),	
 	H01C4B("Wijsbegeerte",3),
 	H01C6A("Organische scheikunde",3),
-	H01C8A("Toegepaste Mechanica 2",5)
+	H01C8A("Toegepaste Mechanica 2",5);
 
 	
 	private final String name;

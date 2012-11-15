@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
@@ -24,16 +25,16 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -6588617112517245777L;
-	@Id private long id;
+	@Id private Long id;
 	private String firstName;
 	private String lastName;
 	private String userName;
 	private String mail;
 	private String password;
 	private StudyMoment currentStudyMoment;
-	private ArrayList<StudyMoment> studyMoments;
-	private HashSet<CourseContract> courses;
-	private Objectify ofy;
+	@Transient private ArrayList<StudyMoment> studyMoments;
+	@Transient private HashSet<CourseContract> courses;
+	@Transient private Objectify ofy;
 	
 	/**
 	 * initiates a user
@@ -64,6 +65,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public Student(String firstName, String lastName, String userName, String mail, String passWord)
 			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
+		ofy = ObjectifyService.begin();
 		if(isValidUserName(userName))
 			this.userName = userName;
 		else
@@ -81,13 +83,17 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		studyMoments = new ArrayList<StudyMoment>();
 		courses = new HashSet<CourseContract>();
 		createFakeInfo();
-		ofy = ObjectifyService.begin();
 		ofy.put(this);
+	}
+	
+	public Student(){
+		createFakeInfo();
+		ofy = ObjectifyService.begin();
 	}
 	
 	//TODO moet weggehaald worden LATER
 	private void createFakeInfo(){
-		ArrayList<Course> testCourses = CourseRegistry.getBranch("Babi1");
+		ArrayList<Course> testCourses = CourseRegistry.getBranch("BaBi1");
 		for(Course course: testCourses)
 			addCourse(new CourseContract(course));
 	}

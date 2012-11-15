@@ -12,7 +12,8 @@ public enum Branch {
 	private String name;
 	
 	private Branch(List<Course> courses, String name){
-		this.courses = (ArrayList<Course>)courses;
+		this.courses = new ArrayList<Course>();
+		this.courses.addAll(courses);
 		this.name = name;
 	}
 	
