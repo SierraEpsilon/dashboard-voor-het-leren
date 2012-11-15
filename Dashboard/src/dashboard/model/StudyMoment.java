@@ -193,5 +193,14 @@ public class StudyMoment {
 	private boolean isValidAmount(int amount){
 		return(amount > 0);
 	}
+	
+	/**
+	 * @return
+	 * returns time between beginning and end in seconds
+	 * 	|	(getStart().getTime() - getEnd().getTime())/1000
+	 */
+	public long getTime(){
+		return (getStart().getTime() - getEnd().getTime())/1000;
+	}
 }
 	
