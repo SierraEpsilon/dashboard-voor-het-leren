@@ -15,9 +15,18 @@
 </head>
 <body>
 <script>
-function submitKind(){
-	
-}
+$(document).ready(function(){
+	$("#myForm").submit(function(){
+		var amount = $("input[name='amount']").val();
+		var patt=/^[1-9][0-9]*$/;
+		if (patt.test(amount)) {
+			return true;
+		}else{
+			$("#msg").text("Geef een geldig getal op");
+			return false;
+		}
+	});
+});
 
 </script>
 <div data-role="page">
@@ -25,14 +34,24 @@ function submitKind(){
 		<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
-	Kies een vak:
-	<ul data-role="listview">
-<%
-HttpSession session = request.getSession();
-Student student = (Student)session.getAttribute("student");
+	<form id="myForm" method="post" action="/track">
+		
+	<fieldset data-role="controlgroup">
 
-%>	
-	</ul>
+	     	<input type="radio" name="kind" id="radio-choice-1" value="Theorie" checked="checked" />
+	     	<label for="radio-choice-1">Theorie</label>
+	
+	     	<input type="radio" name="kind" id="radio-choice-2" value="Oefeningen"  />
+	     	<label for="radio-choice-2">Oefeningen</label>
+	
+	</fieldset>
+	<label for='amount'>Hoeveelheid:</label>
+	<input type='text' name='amount'>
+	<p id='msg' style='color:red;'></p>
+	<input type="submit" value='OPSLAAN'>
+	<input type='hidden' name='submit' value='stop'>
+	</form>
+
 </div><!-- /content -->
 </div><!-- /page -->
 </body>
