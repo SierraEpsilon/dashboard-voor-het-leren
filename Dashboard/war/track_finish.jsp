@@ -9,72 +9,38 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
+<style type='text/css'>
+.containing-element .ui-slider-switch { width: 20em }
+</style>
 </head>
 <body>
+<script>
+function submitKind(){
+	
+}
+
+</script>
 <div data-role="page">
 <div data-role="header">
 		<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
-<%
-String startTime;
-int start;
-if(request.getParameter("mode")!=null){
-	start = 1;
-	//startTime = (String) request.getSession().getAttribute("startTracking");
-	startTime = "Tue Oct 01 00:00:00 EDT 2002";
-	out.println("<p>Start: " + startTime);
-	String course = request.getParameter("course");
-	out.println("<p>Course: " + course);
-	out.println("<p><form action='/track' method='post'><input type='submit' value='STOP'>");
-	out.println("<p><input type='hidden' name='amount' value='1'>");
-	out.println("<p><input type='hidden' name='kind' value='Theory'>");
-	out.println("</form>");
-	out.println("<p id='timePast'>");	
-}else{
-	start = 0;
-	startTime = "";
-	out.println("<form action='/track' method='post'>");
-	out.println("<p>Course: <select><option>Analyse</option><option>Mechanica</option></select>");
-	out.println("<p><input type='submit' value='START'>");
-	out.println("</form>");
-}
-%>
-<script>
-$(document).ready(function(){
-	start = <%= start %>;
-	<% if(start==1) {System.out.println("start="+"start"+";");}
-	%>
-	setTimePast();
-	setInterval("setTimePast()",1000);
-	
-});
+	<form name="kind" method="post" action="/track">
+		
+	<fieldset data-role="controlgroup">
 
-function setTimePast(){
-	str = "";
-	start = new Date("<%= startTime%>");
-	now = new Date();
-	diff = (now.getTime() - start.getTime());
-	diff = Math.round(diff/1000);
-	sec = (diff%60);
-	if(diff<60){
-		name = (diff==1) ? " seconde" : " seconden";
-		str = sec + " " + name;
-	}else{
-		diff = ((diff-sec)/60);
-		min = (diff%60);
-		if(diff<60){
-			name = (diff==1) ? " minuut" : " minuten";
-			str = min + " " + name;
-		}else{
-			diff = ((diff-min)/60);
-			hours = diff;
-			str = hours + " uur " + min + " minuten";
-		}
-	}
-	$('#timePast').text(str);
-}
-</script>
+	     	<input type="radio" name="kind" id="radio-choice-1" value="Theorie" checked="checked" />
+	     	<label for="radio-choice-1">Theorie</label>
+	
+	     	<input type="radio" name="kind" id="radio-choice-2" value="Oefeningen"  />
+	     	<label for="radio-choice-2">Oefeningen</label>
+	
+	</fieldset>
+	Hoeveelheid:
+	<input type='text' name='amount'>
+	</form>
+	<button type="submit" data-theme="b">Submit</button></div>
+
 </div><!-- /content -->
 </div><!-- /page -->
 </body>
