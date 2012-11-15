@@ -264,14 +264,10 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	|	StudyMoment moment = getCurrentStudyMoment()
 	 * 	|	setCurrentStudyMoment(null)
 	 */
-	public void endStudying(int amount, String kind) 
-			throws AlreadyEndedException, InvalidAmountException{
+	public void endCurrentStudyMoment( Date end, int amount, String kind) 
+			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException{
 		StudyMoment moment = getCurrentStudyMoment();
-		try {
-			moment.endMoment(new Date(), amount, kind);
-		} catch (InvalidEndDateException e) {
-			e.printStackTrace();
-		}
+		moment.endMoment(end, amount, kind);
 		addStuddyMoment(moment);
 		setCurrentStudyMoment(null);
 	}
