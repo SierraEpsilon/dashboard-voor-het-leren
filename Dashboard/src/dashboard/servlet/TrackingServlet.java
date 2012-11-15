@@ -20,6 +20,16 @@ public class TrackingServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -786837324508180891L;
 
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		HttpSession session = req.getSession();
+		Student student = (Student)session.getAttribute("student");
+		
+		if(student.getCurrentStudyMoment() == null){
+			resp.sendRedirect("/track.jsp");
+		} else {
+			resp.sendRedirect("/track.jsp?mode=stop");
+		}
+	}
 	/**
 	 * Called when a user starts or stops tracking a study moment
 	 * @param req
