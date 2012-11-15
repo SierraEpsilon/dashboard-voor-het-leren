@@ -40,7 +40,7 @@
 <script>
 	$("#myForm").submit(function(){
 		var amount = $("input[name='amount']").val();
-		var patt=/^[0-9]*$/;
+		var patt=/^[0-9][0-9]*$/;
 		if (patt.test(amount)) {
 			return true;
 		}else{
