@@ -13,6 +13,7 @@ import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEndDateException;
 import dashboard.error.NotStudyingException;
 import dashboard.model.*;
+import dashboard.registry.CourseRegistry;
 import dashboard.registry.StudentRegistry;
 
 public class TrackingServlet extends HttpServlet{
@@ -30,7 +31,7 @@ public class TrackingServlet extends HttpServlet{
 		Student student = (Student)session.getAttribute("student");//get the current user
 		
 		if(req.getParameter("submit").equals("start") && student.getCurrentStudyMoment() == null){//if the student is not studying yet
-			Course course = Course.H01A0B;
+			Course course = CourseRegistry.getCourse((String) req.getAttribute("course"));
 			Date start = new Date();
 			student.setCurrentStudyMoment(new StudyMoment(start,course));//create a new study moment
 			session.setAttribute("startTracking", start);
