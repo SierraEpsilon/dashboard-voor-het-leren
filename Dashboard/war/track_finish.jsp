@@ -14,27 +14,7 @@
 </style>
 </head>
 <body>
-<script>
-//$(document).ready(function(){
-	$("#myForm").submit(function(){
-		var amount = $("input[name='amount']").val();
-		var patt=/^[0-9]*$/;
-		if (patt.test(amount)) {
-			return true;
-		}else{
-			$("#msg").text("Geef een geldig getal op");
-			return false;
-		}
-	});
-	$("input[name='radio_name']:checked").change(function(){
-		if($(this).val()=="Oefeningen")
-			$("label[for='amount']").text("Aantal gemaakt:");
-		else
-			$("label[for='amount']").text("Bladzijden gestudeerd:");
-	});
-//});
 
-</script>
 <div data-role="page">
 <div data-role="header" data-id='header' data-position="fixed">
 		<h1>Learnalyzer</h1>
@@ -57,7 +37,25 @@
 	<input type="submit" value='OPSLAAN'>
 	<input type='hidden' name='submit' value='stop'>
 	</form>
+<script>
+	$("#myForm").submit(function(){
+		var amount = $("input[name='amount']").val();
+		var patt=/^[0-9]*$/;
+		if (patt.test(amount)) {
+			return true;
+		}else{
+			$("#msg").text("Geef een geldig getal op");
+			return false;
+		}
+	});
+	$("input[name='radio_name']:checked").change(function(){
+		if($(this).val()=="Oefeningen")
+			$("label[for='amount']").text("Aantal gemaakt:");
+		else
+			$("label[for='amount']").text("Bladzijden gestudeerd:");
+	});
 
+</script>
 </div><!-- /content -->
 </div><!-- /page -->
 </body>
