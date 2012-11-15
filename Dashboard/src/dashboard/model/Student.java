@@ -10,7 +10,7 @@ import javax.persistence.Transient;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.annotation.Unindexed;
+import com.googlecode.objectify.annotation.*;
 
 import dashboard.error.AlreadyEndedException;
 import dashboard.error.InvalidAmountException;
@@ -33,9 +33,9 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String userName;
 	private String mail;
 	private String password;
-	@Transient private StudyMoment currentStudyMoment;
-	@Transient private ArrayList<StudyMoment> studyMoments;
-	@Transient private HashSet<CourseContract> courses;
+	@Serialized private StudyMoment currentStudyMoment;
+	@Serialized private ArrayList<StudyMoment> studyMoments;
+	@Serialized private HashSet<CourseContract> courses;
 	
 	/**
 	 * initiates a user

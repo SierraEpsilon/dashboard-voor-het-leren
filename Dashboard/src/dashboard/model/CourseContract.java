@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.Id;
 
-public class CourseContract{
+public class CourseContract implements Serializable{
 
 	private Course course;
 	
