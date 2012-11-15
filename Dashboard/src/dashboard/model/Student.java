@@ -33,7 +33,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String userName;
 	private String mail;
 	private String password;
-	@Unindexed private StudyMoment currentStudyMoment;
+	@Transient private StudyMoment currentStudyMoment;
 	@Transient private ArrayList<StudyMoment> studyMoments;
 	@Transient private HashSet<CourseContract> courses;
 	

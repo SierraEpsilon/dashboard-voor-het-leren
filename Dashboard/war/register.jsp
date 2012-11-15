@@ -19,12 +19,12 @@
 <script>
 $(document).ready(function(){
 	$("#myForm").submit(function(){
-		var pass1 = $("input[name='password1']").val();
-		var pass2 = $("input[name='password2']").val();
-		var username = $("input[name='username']").val();
-		var firstname = $("input[name='firstname']").val();
-		var lastname = $("input[name='lastname']").val();
-		var mail = $("input[name='mail']").val();
+		var pass1 = $("#myForm>input[name='password1']").val();
+		var pass2 = $("#myForm>input[name='password2']").val();
+		var username = $("#myForm>input[name='username']").val();
+		var firstname = $("#myForm>input[name='firstname']").val();
+		var lastname = $("#myForm>input[name='lastname']").val();
+		var mail = $("#myForm>input[name='mail']").val();
 		var cont = true;
 		var patt=/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
 		cont = (pass1=="") ? false : cont;

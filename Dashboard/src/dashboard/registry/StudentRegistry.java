@@ -26,7 +26,7 @@ public class StudentRegistry {
 		loadFromDatastore();
 		/*
 		try {
-			addUser(new Student("voornaam","achternaam","username","mijn@email.com","password"));
+			addUser(new Student("voornaam","achternaam","testuser","user@email.com","password"));
 		} catch (EmailInUseException e) {
 			e.printStackTrace();
 		} catch (UserNameInUseException e) {
