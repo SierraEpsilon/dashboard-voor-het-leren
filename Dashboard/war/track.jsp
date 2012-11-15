@@ -9,7 +9,8 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
-<%@ page import="dashboard.servlet" %>
+<%@ page import="dashboard.model.*" %>
+<%@ page import="java.util.*" %>
 </head>
 <body>
 <div data-role="page">
@@ -23,12 +24,11 @@ int start;
 if(request.getParameter("mode")!=null){
 	start = 1;
 	//startTime = (String) request.getSession().getAttribute("startTracking");
-	Date start = request.getSession().getAttribute("start");
+	Date startDate = (Date)request.getSession().getAttribute("start");
 	Course course = (Course)request.getSession().getAttribute("course");
 	String courseName = course.getName();
-	String startTime = start.toString();
+	startTime = startDate.toString();
 	out.println("<p>Start: " + startTime);
-	String course = request.getParameter("course");
 	out.println("<p>Course: " + courseName);
 	out.println("<p><form action='/track_finish.jsp' method='post'><input type='submit' value='STOP'>");
 	
@@ -83,6 +83,9 @@ function setTimePast(){
 }
 </script>
 </div><!-- /content -->
+<div data-role='footer' data-id="foo1" data-position="fixed">
+	<a href="/logout" data-role="button" data-icon="back">Logout</a>
+</div>
 </div><!-- /page -->
 </body>
 </html>

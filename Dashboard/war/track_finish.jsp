@@ -15,9 +15,24 @@
 </head>
 <body>
 <script>
-function submitKind(){
-	
-}
+$(document).ready(function(){
+	$("#myForm").submit(function(){
+		var amount = $("input[name='amount']").val();
+		var patt=/^[1-9][0-9]*$/;
+		if (patt.test(amount)) {
+			return true;
+		}else{
+			$("#msg").text("Geef een geldig getal op");
+			return false;
+		}
+	});
+	$("input[name='radio_name']:checked").change(function(){
+		if($(this).val()=="Oefeningen")
+			$("label[for='amount']").text("Aantal gemaakt:");
+		else
+			$("label[for='amount']").text("Bladzijden gestudeerd:");
+	});
+});
 
 </script>
 <div data-role="page">
@@ -25,7 +40,7 @@ function submitKind(){
 		<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
-	<form name="kind" method="post" action="/track">
+	<form id="myForm" method="post" action="/track">
 		
 	<fieldset data-role="controlgroup">
 
@@ -36,8 +51,9 @@ function submitKind(){
 	     	<label for="radio-choice-2">Oefeningen</label>
 	
 	</fieldset>
-	Hoeveelheid:
+	<label for='amount'>Hoeveelheid:</label>
 	<input type='text' name='amount'>
+	<p id='msg' style='color:red;'></p>
 	<input type="submit" value='OPSLAAN'>
 	<input type='hidden' name='submit' value='stop'>
 	</form>
