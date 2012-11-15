@@ -18,7 +18,7 @@
 <div data-role="content">
 <script>
 $(document).ready(function(){
-	$("#register").click(function(){
+	$("#myForm").submit(function(){
 		var pass1 = $("input[name='password1']").val();
 		var pass2 = $("input[name='password2']").val();
 		var username = $("input[name='username']").val();
@@ -35,35 +35,30 @@ $(document).ready(function(){
 		cont = (mail=="") ? false : cont;
 		if(!cont){
 			$("#msg").text("Vul alle velden in");
+			return false;
 		}else if(pass1!=pass2){
 			$("#msg").text("De wachtwoorden komen niet overeen");
+			return false;
 		}else if(!patt.test(mail)){
 			$("#msg").text("Geef een geldig emailadres");
+			return false;
 		}else{
 			$("input[name='password']").attr("value",pass1);
-			$("input[name='username']").attr("value",username);
-			$("input[name='firstname']").attr("value",firstname);
-			$("input[name='lastname']").attr("value",lastname);
-			$("input[name='mail']").attr("value",mail);
-			$("form[name='submit']").submit();
+			return true;
 		}
 	});
 });
 </script>
 <p id='msg' style='color:red;'>
-<p>Voornaam<input type='text' name='firstname'>
+<form id='myForm' method='post' action='/register'>
+Voornaam<input type='text' name='firstname'>
 Achternaam<input type='text' name='lastname'>
 Gebruikersnaam<input type='text' name='username'>
 E-mail<input type='text' name='mail'>
+<input type='hidden' name='password'>
 Wachtwoord<input type='password' name='password1'>
 Herhaal wachtwoord<input type='password' name='password2'>
-<p><button id='register'>REGISTREREN</button>
-<form name='submit' method='post' action='/register'>
-<input type='hidden' name='username'>
-<input type='hidden' name='firstname'>
-<input type='hidden' name='lastname'>
-<input type='hidden' name='password'>
-<input type='hidden' name='mail'>
+<input type='submit' value='REGISTREREN'>
 </form>
 </div><!-- /content -->
 </div><!-- /page -->

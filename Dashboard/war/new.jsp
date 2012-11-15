@@ -8,9 +8,17 @@
 
 <html>
 <head>
+<%@include file="inc/head.jsp"%>
 </head>
+<script>
+$(document).ready(function(){
+	$("#myForm").submit(function(){
+		return false;
+	});
+});
+</script>
 <body>
-<form method='post' action='track.jsp?mode=stop'>
+<form id='myForm' method='post' action='track.jsp?mode=stop'>
 <p><input type='text' name='start' value='Tue Oct 01 00:00:00 EDT 2002'>
 <p><input type='submit' value='TESTEN'>
 </form>

@@ -21,9 +21,8 @@ String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("ms
 %>
 <form method='post' action='/login'>
 <p><%= msg%>
-<p>Gebruikersnaam</td><td><input type='text' name='username'>
-Wachtwoord</td><td><input type='password' name='password'>
-</table>
+<p>Gebruikersnaam<input type='text' name='username'>
+Wachtwoord<input type='password' name='password'>
 <p><input type='submit' value='AANMELDEN'>
 <p><a href='register.jsp'>Nieuw account maken</a>
 </form>
