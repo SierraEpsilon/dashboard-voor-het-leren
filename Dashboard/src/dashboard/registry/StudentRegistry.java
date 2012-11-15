@@ -3,12 +3,39 @@ package dashboard.registry;
 import java.util.HashSet;
 
 import dashboard.error.EmailInUseException;
+import dashboard.error.InvalidEmailException;
+import dashboard.error.InvalidPasswordException;
+import dashboard.error.InvalidUserNameException;
 import dashboard.error.UserNameInUseException;
 import dashboard.model.Student;
 
 public class StudentRegistry {
 
 	private static HashSet<Student> users = new HashSet<Student>();
+		
+	/*
+	 * Temporary method to add fake user
+	 */
+	static{
+		try {
+			addUser(new Student("voornaam","achternaam","username","mijn@email.com","password"));
+		} catch (EmailInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (UserNameInUseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidUserNameException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidEmailException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InvalidPasswordException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 	
 	/**
 	 * @return	the users of the userregistry

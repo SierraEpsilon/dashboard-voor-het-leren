@@ -37,7 +37,7 @@ public class TrackingServlet extends HttpServlet{
 		} else {//if the student was already studying
 			if(req.getParameter("submit") == "stop"){
 				try {
-					student.getCurrentStudyMoment().endMoment(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));//end the current studymoment
+					student.endCurrentStudyMoment(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));//end the current studymoment
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				} catch (AlreadyEndedException e) {
