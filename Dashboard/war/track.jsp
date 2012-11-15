@@ -40,7 +40,18 @@ if(request.getParameter("mode")!=null){
 	start = 0;
 	startTime = "";
 	out.println("<form action='/track' method='post'>");
-	out.println("<p>Course: <select><option>Analyse</option><option>Mechanica</option></select>");
+	//course list
+	out.println("Course: <select>");
+	HttpSession session = request.getSession();
+	Student student = (Student)session.getAttribute("student");
+	HashSet<CourseContract> ccs = student.getCourses();
+	Iterator it = ccs.iterator();
+	while(it.hasNext()){
+		String name = it.next().getCourse().getName();
+		out.printl("<option value='" + name + "'>" + name + "</option>");
+	}
+	out.println("</select>");
+		//end course list
 	out.println("<input type='hidden' name='submit' value='start'>");
 	out.println("<p><input type='submit' value='START'>");
 	out.println("</form>");
