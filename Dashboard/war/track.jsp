@@ -8,6 +8,7 @@
 
 <html>
 <head>
+<%@include file="inc/head.jsp"%>
 <%@ page import="dashboard.model.*" %>
 <%@ page import="java.util.*" %>
 </head>
