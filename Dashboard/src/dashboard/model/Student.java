@@ -199,7 +199,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	the moment was added to the student's studymoments
 	 * 	|	new.studyMoments.contains(moment)
 	 */
-	public void addStuddyMoment(StudyMoment moment) {
+	public void addStudyMoment(StudyMoment moment) {
 		getStudyMoments().add(moment);
 	}
 	
@@ -290,15 +290,11 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	|	StudyMoment moment = getCurrentStudyMoment()
 	 * 	|	setCurrentStudyMoment(null)
 	 */
-	public void endStudying(int amount, String kind) 
-			throws AlreadyEndedException, InvalidAmountException{
+	public void endStudying(Date endDate, int amount, String kind) 
+			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException{
 		StudyMoment moment = getCurrentStudyMoment();
-		try {
-			moment.endMoment(new Date(), amount, kind);
-		} catch (InvalidEndDateException e) {
-			e.printStackTrace();
-		}
-		addStuddyMoment(moment);
+		moment.endMoment(endDate, amount, kind);
+		addStudyMoment(moment);
 		setCurrentStudyMoment(null);
 	}
 	

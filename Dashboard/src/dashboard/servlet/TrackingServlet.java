@@ -33,12 +33,13 @@ public class TrackingServlet extends HttpServlet{
 			Course course = new Course("analyse",1);
 			Date start = new Date();
 			student.setCurrentStudyMoment(new StudyMoment(start,course));//create a new study moment
-			session.setAttribute("startTracking", start.toString());
+			session.setAttribute("startTracking", start);
+			session.setAttribute("course", course);
 			resp.sendRedirect("/track.jsp?mode=stop");
 		} else {//if the student was already studying
 			if(req.getParameter("submit").equals("stop")){
 				try {
-					student.endCurrentStudyMoment(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));//end the current studymoment
+					student.endStudying(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));//end the current studymoment
 				} catch (NumberFormatException e) {
 					e.printStackTrace();
 				} catch (AlreadyEndedException e) {
