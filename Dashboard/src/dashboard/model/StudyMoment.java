@@ -7,11 +7,9 @@ import dashboard.error.*;
 
 public class StudyMoment {
 
-	
-	@Id Long id;
-	private final Date start;
+	private Date start;
 	private Date end;
-	private final Course course;
+	private Course course;
 	private int amount;
 	private String kind;
 	
@@ -28,6 +26,10 @@ public class StudyMoment {
 	public StudyMoment(Date start, Course course){
 		this.start = start;
 		this.course = course;
+	}
+	
+	public StudyMoment(){
+		
 	}
 	
 	/**

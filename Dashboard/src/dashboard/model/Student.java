@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import java.util.*;
 
+import javax.persistence.Embedded;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
@@ -31,9 +32,9 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String userName;
 	private String mail;
 	private String password;
-	private StudyMoment currentStudyMoment;
-	private ArrayList<StudyMoment> studyMoments;
-	private HashSet<CourseContract> courses;
+	@Transient private StudyMoment currentStudyMoment;
+	@Transient private ArrayList<StudyMoment> studyMoments;
+	@Transient private HashSet<CourseContract> courses;
 	
 	/**
 	 * initiates a user

@@ -6,11 +6,14 @@ import javax.persistence.Id;
 
 public class CourseContract{
 
-	@Id Long id;
-	private final Course course;
+	private Course course;
 	
 	public CourseContract(Course course){
 		this.course = course;
+	}
+	
+	public CourseContract(){
+		
 	}
 	
 	/**
