@@ -24,6 +24,7 @@ public class LoginServlet extends HttpServlet {
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
 		HttpSession session = req.getSession();
+		//TODO
 		//DIT MOET ER LATER UIT
 		//ZEER BELANGERIJK
 		if(username.equals("delete") && password.equals("delete"))
