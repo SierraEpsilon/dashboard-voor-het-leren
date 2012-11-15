@@ -37,7 +37,7 @@ public class RegistrationServlet extends HttpServlet {
 		} catch (InvalidEmailException e){
 			resp.sendRedirect("/error.jsp?msg=email is not valid!");
 		} catch (InvalidPasswordException e){
-			resp.sendRedirect("/error.jsp?password is not valid!");
+			resp.sendRedirect("/error.jsp?msg=password is not valid!");
 		}
 	}
 }
