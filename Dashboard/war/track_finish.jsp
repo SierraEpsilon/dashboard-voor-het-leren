@@ -38,8 +38,9 @@ function submitKind(){
 	</fieldset>
 	Hoeveelheid:
 	<input type='text' name='amount'>
+	<input type="submit" value='OPSLAAN'>
+	<input type='hidden' name='submit' value='stop'>
 	</form>
-	<button type="submit" data-theme="b">Submit</button></div>
 
 </div><!-- /content -->
 </div><!-- /page -->
