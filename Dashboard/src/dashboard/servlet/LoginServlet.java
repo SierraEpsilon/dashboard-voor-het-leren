@@ -30,7 +30,7 @@ public class LoginServlet extends HttpServlet {
 		if(username.equals("delete") && password.equals("delete")){
 			OwnOfy.clearStudents();
 			StudentRegistry.deleteAll();
-			resp.sendRedirect("info erased");
+			resp.sendRedirect("/error.jsp?msg= info erased");
 		}
 		//KIJK HIERBOVEN, DIT MOET ERUIT
 		//NIET OVERKIJKEN
