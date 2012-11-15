@@ -144,7 +144,7 @@ public class StudyMoment implements Serializable{
 	 *  | end != null
 	 */
 	private boolean isEnded(){
-		return(end != null);
+		return (end != null);
 	}
 
 	/** 

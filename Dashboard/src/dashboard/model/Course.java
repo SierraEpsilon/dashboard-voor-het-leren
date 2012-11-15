@@ -25,7 +25,7 @@ public enum Course {
 	H01D7B("Economie",3);
 
 	
-	private final String name;
+	private final String realName;
 	private final int credit;
 		
 	/**
@@ -42,7 +42,7 @@ public enum Course {
 	 * 	|	new.getCredit() = credit
 	 */
 	private Course(String name, int credit){
-		this.name = name;
+		this.realName = name;
 		this.credit = credit;
 	}
 		
@@ -52,7 +52,7 @@ public enum Course {
 	 * 	|	name
 	 */
 	public String getName() {
-		return name;
+		return realName;
 	}
 		
 	/**		 

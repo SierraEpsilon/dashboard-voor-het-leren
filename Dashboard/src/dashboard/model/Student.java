@@ -328,13 +328,14 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 *	|		if(moment.getCourse().getName().equals(course))
 	 *	|			time += moment.getTime()
 	 */
-	public void getTime(String course){
+	public long getTime(String course){
 		long time = 0;
 		if(course.equals("all"))
 			time = getTotalTime();
 		for(StudyMoment moment : getStudyMoments())
 			if(moment.getCourse().getName().equals(course))
 				time += moment.getTime();
+		return time;
 	}
 
 	/**

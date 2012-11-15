@@ -16,8 +16,12 @@
 <body>
 <script>
 $(document).ready(function(){
-	$("#myForm").submit(function(){
-		var amount = $("input[name='amount']").val();
+	$("#myFormm").submit(function(){
+		alert("test");
+		return false;
+		var amount = $("#myFormm>input[name='amount']").val();
+		alert(amount);
+		return false;
 		var patt=/^[1-9][0-9]*$/;
 		if (patt.test(amount)) {
 			return true;
@@ -25,12 +29,6 @@ $(document).ready(function(){
 			$("#msg").text("Geef een geldig getal op");
 			return false;
 		}
-	});
-	$("input[name='radio_name']:checked").change(function(){
-		if($(this).val()=="Oefeningen")
-			$("label[for='amount']").text("Aantal gemaakt:");
-		else
-			$("label[for='amount']").text("Bladzijden gestudeerd:");
 	});
 });
 
@@ -40,7 +38,7 @@ $(document).ready(function(){
 		<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
-	<form id="myForm" method="post" action="/track">
+	<form id="myFormm" method="post" action="/track">
 		
 	<fieldset data-role="controlgroup">
 
@@ -51,7 +49,7 @@ $(document).ready(function(){
 	     	<label for="radio-choice-2">Oefeningen</label>
 	
 	</fieldset>
-	<label for='amount'>Hoeveelheid:</label>
+	Hoeveelheid:
 	<input type='text' name='amount'>
 	<p id='msg' style='color:red;'></p>
 	<input type="submit" value='OPSLAAN'>
