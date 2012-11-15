@@ -1,7 +1,8 @@
 package dashboard.model;
 
 import java.io.Serializable;
-import java.util.Date;
+
+import java.util.*;
 
 import dashboard.error.AlreadyEndedException;
 import dashboard.error.InvalidAmountException;
@@ -19,6 +20,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private final String mail;
 	private String password;
 	private StudyMoment currentStudyMoment;
+	private ArrayList<StudyMoment> studyMoments;
 	
 	/**
 	 * initiates a user
@@ -63,6 +65,12 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			throw new InvalidPasswordException();
 		setFirstName(firstName);
 		setLastName(lastName);
+		studyMoments = new ArrayList<StudyMoment>();
+		createFakeInfo();
+	}
+	
+	private void createFakeInfo(){
+		
 	}
 	
 	/**
@@ -121,6 +129,15 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
+	 * @return
+	 * 	the studymoments of this student
+	 * 	|	studyMoments
+	 */
+	public ArrayList<StudyMoment> getStudyMoments() {
+		return studyMoments;
+	}
+	
+	/**
 	 * @param firstName
 	 * the new first name of the user
 	 * @post	the first name was changed
@@ -158,6 +175,17 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setCurrentStudyMoment(StudyMoment currentStudyMoment) {
 		this.currentStudyMoment = currentStudyMoment;
+	}
+	
+	/**
+	 * @param moment
+	 * 	the moment you want to add
+	 * @post
+	 * 	the moment was added to the student's studymoments
+	 * 	|	new.studyMoments.contains(moment)
+	 */
+	public void addStuddyMoment(StudyMoment moment) {
+		getStudyMoments().add(moment);
 	}
 	
 	/**
@@ -219,6 +247,32 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	public void cancelCurrentStudyMoment() throws NotStudyingException{
 		if(getCurrentStudyMoment() == null)
 			throw new NotStudyingException();
+		setCurrentStudyMoment(null);
+	}
+	
+	/**
+	 * @param amount
+	 * 	the amount he studied
+	 * @param kind
+	 * 	what kind of studying he did
+	 * @throws AlreadyEndedException
+	 * @throws InvalidAmountException
+	 * @effect
+	 * 	|	StudyMoment moment = getCurrentStudyMoment()
+	 * 	|	addStuddyMoment(moment)
+	 * @effect
+	 * 	|	StudyMoment moment = getCurrentStudyMoment()
+	 * 	|	setCurrentStudyMoment(null)
+	 */
+	public void endStudying(int amount, String kind) 
+			throws AlreadyEndedException, InvalidAmountException{
+		StudyMoment moment = getCurrentStudyMoment();
+		try {
+			moment.endMoment(new Date(), amount, kind);
+		} catch (InvalidEndDateException e) {
+			e.printStackTrace();
+		}
+		addStuddyMoment(moment);
 		setCurrentStudyMoment(null);
 	}
 	
