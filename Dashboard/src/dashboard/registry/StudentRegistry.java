@@ -54,7 +54,7 @@ public class StudentRegistry {
 	 * @return	the users of the userregistry
 	 * 	|	users
 	 */
-	private static List<Student> getUsers() {
+	public static List<Student> getUsers() {
 		return users;
 	}
 	

@@ -72,4 +72,8 @@ public enum Course {
 	public int getHoursNeeded(){
 		return getCredit()*28;
 	}
+	
+	public String toString(){
+		return getName(); 
+	}
 }
