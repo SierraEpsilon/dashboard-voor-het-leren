@@ -33,7 +33,7 @@ public class RegistrationServlet extends HttpServlet {
 		} catch (InvalidUserNameException e){
 			resp.sendRedirect("/error.jsp?msg=username is not valid!");
 		} catch (EmailInUseException e){
-			resp.sendRedirect("/error.jsp?msg=Email is already in use!");
+			resp.sendRedirect("/error.jsp?msg=Email: " + email + " is already in use!");
 		} catch (InvalidEmailException e){
 			resp.sendRedirect("/error.jsp?msg=email is not valid!");
 		} catch (InvalidPasswordException e){

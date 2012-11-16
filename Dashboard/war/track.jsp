@@ -29,7 +29,7 @@ if(request.getParameter("mode")!=null){
 	startTime = startDate.toString();
 	out.println("<p>Start: " + startTime);
 	out.println("<p>Course: " + courseName);
-	out.println("<p><form action='/track_finish.jsp' method='post'><input type='submit' value='STOP'>");
+	out.println("<p><form action='/track_finish.jsp' method='post'><input type='submit' value='stop'>");
 	
 	out.println("</form>");
 	out.println("<form method='post' action='/track'>");
@@ -54,7 +54,7 @@ if(request.getParameter("mode")!=null){
 	out.println("</select>");
 		//end course list
 	out.println("<input type='hidden' name='submit' value='start'>");
-	out.println("<p><input type='submit' value='START'>");
+	out.println("<p><input type='submit' value='start'>");
 	out.println("</form>");
 }
 %>

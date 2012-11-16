@@ -219,6 +219,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void addStudyMoment(StudyMoment moment) {
 		getStudyMoments().add(moment);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**
@@ -230,6 +231,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void addCourse(CourseContract course){
 		getCourses().add(course);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**

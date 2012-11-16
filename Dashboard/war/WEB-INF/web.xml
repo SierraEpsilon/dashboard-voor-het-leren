@@ -31,6 +31,14 @@
  	    <servlet-name>logout</servlet-name>
  	    <url-pattern>/logout</url-pattern>
  	</servlet-mapping>
+ 	<servlet>
+        <servlet-name>stats</servlet-name>
+        <servlet-class>dashboard.servlet.statServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>stats</servlet-name>
+        <url-pattern>/stats</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login</welcome-file>
     </welcome-file-list>

@@ -32,7 +32,8 @@ public class TrackingServlet extends HttpServlet{
 				session.setAttribute("course", student.getCurrentStudyMoment().getCourse());
 				resp.sendRedirect("/track.jsp?mode=stop");
 			}
-		}
+		} else
+			resp.sendRedirect("/login.jsp");
 	}
 	/**
 	 * Called when a user starts or stops tracking a study moment
@@ -54,24 +55,28 @@ public class TrackingServlet extends HttpServlet{
 		} else {//if the student was already studying
 			if(req.getParameter("submit").equals("stop")){
 				try {
-					student.endStudying(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));//end the current studymoment
+					student.endStudying(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));
+					session.setAttribute("startTracking", null);
+					session.setAttribute("course", null);
+					resp.sendRedirect("/track");//end the current studymoment
 				} catch (NumberFormatException e) {
-					e.printStackTrace();
+					resp.sendRedirect("/error.jsp?msg=That;s no integer");
 				} catch (AlreadyEndedException e) {
-					e.printStackTrace();
+					resp.sendRedirect("/error.jsp?msg=Oops! you already stopped that moment");
 				} catch (InvalidEndDateException e) {
-					e.printStackTrace();
+					resp.sendRedirect("/error.jsp?msg=You appear to be a time traveler?!");
 				} catch (InvalidAmountException e) {
-					e.printStackTrace();
+					resp.sendRedirect("/error.jsp?msg=You can't have studied that kind of pages!");
 				}
-				resp.sendRedirect("/track.jsp");
 			} else if(req.getParameter("submit").equals("cancel")){//cancel the study moment
 				try {
 					student.cancelCurrentStudyMoment();
+					session.setAttribute("startTracking", null);
+					session.setAttribute("course", null);
+					resp.sendRedirect("/track");
 				} catch (NotStudyingException e) {
-					e.printStackTrace();
+					resp.sendRedirect("/error.jsp?msg=Awkward, you where not studying!");
 				}
-				resp.sendRedirect("/track.jsp");
 			} else {
 				resp.sendRedirect("/error.jsp");
 			}

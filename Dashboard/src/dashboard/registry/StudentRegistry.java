@@ -24,9 +24,7 @@ public class StudentRegistry {
 	 */
 	static{
 		loadFromDatastore();
-		//addFakeUser();
-		
-		
+		//addFakeUser();		
 	}
 	
 	public static void addFakeUser(){
@@ -49,7 +47,6 @@ public class StudentRegistry {
 	 * 
 	 */
 	private static void loadFromDatastore(){
-		
 		users = OwnOfy.ofy().query(Student.class).list();
 	}
 	
