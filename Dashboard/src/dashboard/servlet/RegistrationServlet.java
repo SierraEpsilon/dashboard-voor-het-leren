@@ -26,7 +26,7 @@ public class RegistrationServlet extends HttpServlet {
 		String password = req.getParameter("password");
 		
 		try{
-			StudentRegistry.addUser(new Student(firstName,lastName,username,email,password));//add the user to the list of existing users
+			StudentRegistry.addUser(firstName,lastName,username,email,password);//add the user to the list of existing users
 			resp.sendRedirect("/login.jsp?msg=Registration succes!");
 		} catch (UserNameInUseException e){
 			resp.sendRedirect("/error.jsp?msg=username is already in use!");

@@ -29,7 +29,7 @@ public class StudentRegistry {
 	
 	public static void addFakeUser(){
 		try {
-			addUser(new Student("voornaam","achternaam","testuser","user@email.com","password"));
+			addUser("voornaam","achternaam","testuser","user@email.com","password");
 		} catch (EmailInUseException e) {
 			e.printStackTrace();
 		} catch (UserNameInUseException e) {
@@ -145,18 +145,21 @@ public class StudentRegistry {
 	 * 	|	(isMailExisting(user.getMail()))
 	 * @throws UserNameInUseException
 	 * 	|	 (isUserNameExisting(user.getUserName()))
+	 * @throws InvalidPasswordException 
+	 * @throws InvalidEmailException 
+	 * @throws InvalidUserNameException 
 	 * @post
 	 * 	the user was added to users
 	 * 	|	new.getUsers().contains(user)
 	 */
-	public static void addUser(Student user) 
-			throws EmailInUseException, UserNameInUseException{
-		if(isMailExisting(user.getMail()))
+	public static void addUser(String firstName, String lastName, String username, String mail, String password) throws EmailInUseException, UserNameInUseException, InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
+		if(isMailExisting(mail)) {
 			throw new EmailInUseException();
-		else if(isUserNameExisting(user.getUserName()))
+		} else if(isUserNameExisting(username)){
 			throw new UserNameInUseException();
-		else
-			getUsers().add(user);
+		} else{
+			getUsers().add(new Student(firstName, lastName, username, mail, password));
+		}
 	}
 	
 	//TODO

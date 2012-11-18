@@ -26,14 +26,17 @@ public class TrackingServlet extends HttpServlet{
 		
 		if(student!=null){
 			if(student.getCurrentStudyMoment() == null){
-				resp.sendRedirect("/track.jsp");
+				session.setAttribute("startTracking", null);
+				session.setAttribute("course", null);
+				resp.sendRedirect("/track.jsp?mode=start");
 			} else {
 				session.setAttribute("startTracking", student.getCurrentStudyMoment().getStart());
 				session.setAttribute("course", student.getCurrentStudyMoment().getCourse());
 				resp.sendRedirect("/track.jsp?mode=stop");
 			}
-		} else
+		} else {
 			resp.sendRedirect("/login.jsp");
+		}
 	}
 	/**
 	 * Called when a user starts or stops tracking a study moment
@@ -60,7 +63,7 @@ public class TrackingServlet extends HttpServlet{
 					session.setAttribute("course", null);
 					resp.sendRedirect("/track");//end the current studymoment
 				} catch (NumberFormatException e) {
-					resp.sendRedirect("/error.jsp?msg=That;s no integer");
+					resp.sendRedirect("/error.jsp?msg=That's no integer");
 				} catch (AlreadyEndedException e) {
 					resp.sendRedirect("/error.jsp?msg=Oops! you already stopped that moment");
 				} catch (InvalidEndDateException e) {

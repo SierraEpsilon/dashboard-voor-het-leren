@@ -20,6 +20,8 @@ public class LogoutServlet extends HttpServlet{
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		HttpSession session = req.getSession();
 		session.setAttribute("student",null);
+		session.setAttribute("startTracking",null);
+		session.setAttribute("course", null);
 		resp.sendRedirect("/login.jsp");
 	}
 }
