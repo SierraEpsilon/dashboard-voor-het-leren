@@ -9,6 +9,7 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
+<%@include file="inc/redirect.jsp"%>
 <style type='text/css'>
 .containing-element .ui-slider-switch { width: 20em }
 </style>
