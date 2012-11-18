@@ -9,6 +9,7 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
+<%@include file="inc/redirect.jsp"%>
 <%@ page import="dashboard.model.*" %>
 <%@ page import="java.util.*" %>
 </head>
