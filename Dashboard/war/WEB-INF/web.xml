@@ -39,6 +39,14 @@
         <servlet-name>stats</servlet-name>
         <url-pattern>/stats</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>achievements</servlet-name>
+        <servlet-class>dashboard.servlet.AchievementServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>achievements</servlet-name>
+        <url-pattern>/achievements</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login</welcome-file>
     </welcome-file-list>
