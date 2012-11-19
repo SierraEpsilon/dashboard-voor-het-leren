@@ -16,7 +16,9 @@
 <script>
 $(document).bind("pageinit",function(){
 
-	//javascript code that needs to access the DOM goes here
+	$("label[name='startdate']").change(function(){
+	 $("label[name='enddate']").attr("value")=$("label[name='startdate']").attr("value");
+	});
 	
 });
 </script>
@@ -29,15 +31,15 @@ $(document).bind("pageinit",function(){
 <div data-role="content">
 <b>Starttijd</b>
 	         <label for="date">Datum:</label>
-	         <input type="date" name="date" id="date" value="" />
+	         <input type="date" name="startdate" id="date" value="" />
 	         <label for="time">Tijd:</label>
-	         <input type="time" name="time" id="time" value="" />
+	         <input type="time" name="starttime" id="time" value="" />
 
 <b>Eindtijd</b>
 	         <label for="date">Datum:</label>
-	         <input type="date" name="date" id="date" value="" />
+	         <input type="date" name="enddate" id="date" value="" />
 	         <label for="time">Tijd:</label>
-	         <input type="time" name="time" id="time" value="" />
+	         <input type="time" name="endtime" id="time" value="" />
 	         
 </div><!-- /content -->
 <div data-role='footer' data-id="foo1" data-position="fixed">
