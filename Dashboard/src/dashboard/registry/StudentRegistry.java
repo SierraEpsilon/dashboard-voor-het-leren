@@ -17,7 +17,7 @@ import dashboard.model.Student;
 
 public class StudentRegistry {
 
-	private static List<Student> users = new ArrayList<Student>();
+	//private static List<Student> users = new ArrayList<Student>();
 		
 	/*
 	 * Temporary method to add fake user
@@ -47,7 +47,7 @@ public class StudentRegistry {
 	 * 
 	 */
 	private static void loadFromDatastore(){
-		users = OwnOfy.ofy().query(Student.class).list();
+		//users = OwnOfy.ofy().query(Student.class).list();
 	}
 	
 	/**
@@ -55,7 +55,7 @@ public class StudentRegistry {
 	 * 	|	users
 	 */
 	public static List<Student> getUsers() {
-		return users;
+		return OwnOfy.ofy().query(Student.class).list();
 	}
 	
 	/**
@@ -161,11 +161,4 @@ public class StudentRegistry {
 			getUsers().add(new Student(firstName, lastName, username, mail, password));
 		}
 	}
-	
-	//TODO
-	//Remove later
-	public static void deleteAll(){
-		users = new ArrayList<Student>();
-	}
-	
 }
