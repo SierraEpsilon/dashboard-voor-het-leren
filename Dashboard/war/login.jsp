@@ -25,6 +25,7 @@ String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("ms
 Wachtwoord<input type='password' name='password'>
 <p><input type='submit' value='AANMELDEN'>
 <p><a href='register.jsp'>Nieuw account maken</a>
+<p><a href='/stats'>Debug data</a>
 </form>
 </div><!-- /content -->
 </div><!-- /page -->
