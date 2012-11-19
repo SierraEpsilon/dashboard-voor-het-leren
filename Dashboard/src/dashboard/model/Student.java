@@ -24,9 +24,6 @@ import dashboard.util.OwnOfy;
 
 public class Student implements Comparable<Student>,Cloneable,Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6268846212512642033L;
 	@Id private Long id;
 	private String firstName;
@@ -36,7 +33,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String password;
 	@Serialized private StudyMoment currentStudyMoment;
 	@Serialized private ArrayList<StudyMoment> studyMoments;
-	@Serialized private HashSet<CourseContract> courses;
+	@Serialized private ArrayList<CourseContract> courses;
 	
 	/**
 	 * initiates a user
@@ -79,7 +76,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		setFirstName(firstName);
 		setLastName(lastName);
 		studyMoments = new ArrayList<StudyMoment>();
-		courses = new HashSet<CourseContract>();
+		courses = new ArrayList<CourseContract>();
 		createFakeInfo();
 		OwnOfy.ofy().put(this);
 	}
@@ -163,7 +160,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	the courses of the student
 	 * 	|	courses
 	 */
-	public HashSet<CourseContract> getCourses() {
+	public ArrayList<CourseContract> getCourses() {
 		return courses;
 	}
 	
