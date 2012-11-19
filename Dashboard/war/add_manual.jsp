@@ -20,6 +20,11 @@ $(document).bind("pageinit",function(){
 	 $("label[name='enddate']").attr("value")=$("label[name='startdate']").attr("value");
 	});
 	
+	
+	
+	
+	
+	
 });
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
@@ -29,18 +34,27 @@ $(document).bind("pageinit",function(){
 
 </div><!-- /header -->
 <div data-role="content">
-<b>Starttijd</b>
-	         <label for="date">Datum:</label>
-	         <input type="date" name="startdate" id="date" value="" />
-	         <label for="time">Tijd:</label>
-	         <input type="time" name="starttime" id="time" value="" />
 
-<b>Eindtijd</b>
-	         <label for="date">Datum:</label>
+<form id="myForm" method="post" action="/manual">
+
+
+	<b>Starttijd</b>
+	<p>
+	         <label for="startdate">Datum:</label>
+	         <input type="date" name="startdate" id="date" value="" />
+	         <label for="starttime">Tijd:</label>
+	         <input type="time" name="starttime" id="time" value="" />
+	<p>
+	<b>Eindtijd</b>
+	<p>
+	         <label for="enddate">Datum:</label>
 	         <input type="date" name="enddate" id="date" value="" />
-	         <label for="time">Tijd:</label>
+	         <label for="endtime">Tijd:</label>
 	         <input type="time" name="endtime" id="time" value="" />
 	         
+ 	<p id='msg' style='color:red;'></p>
+ 
+ 
 </div><!-- /content -->
 <div data-role='footer' data-id="foo1" data-position="fixed">
 
