@@ -31,7 +31,7 @@ public class LoginServlet extends HttpServlet {
 			OwnOfy.clearStudents();
 			StudentRegistry.deleteAll();
 			StudentRegistry.addFakeUser();
-			resp.sendRedirect("/error.jsp?msg= info erased");
+			resp.sendRedirect("/error.jsp?msg= Info erased");
 		}
 		//KIJK HIERBOVEN, DIT MOET ERUIT
 		//NIET OVERKIJKEN
@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("student", user);//set the current student to the one who is trying to log in
 			resp.sendRedirect("/track");
 		} else {
-			resp.sendRedirect("/login.jsp?msg=Gebruikersnaam en/of wachtwoord zijn ongeldig");
+			resp.sendRedirect("/login.jsp?msg=The combination of the given username and password is invalid.");
 		}
 	}
 	

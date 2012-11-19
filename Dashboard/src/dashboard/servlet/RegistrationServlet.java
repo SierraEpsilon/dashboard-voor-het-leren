@@ -29,15 +29,15 @@ public class RegistrationServlet extends HttpServlet {
 			StudentRegistry.addUser(firstName,lastName,username,email,password);//add the user to the list of existing users
 			resp.sendRedirect("/login.jsp?msg=Registration succes!");
 		} catch (UserNameInUseException e){
-			resp.sendRedirect("/error.jsp?msg=username is already in use!");
+			resp.sendRedirect("/error.jsp?msg=This username is already in use!");
 		} catch (InvalidUserNameException e){
-			resp.sendRedirect("/error.jsp?msg=username is not valid!");
+			resp.sendRedirect("/error.jsp?msg=This username is not valid!");
 		} catch (EmailInUseException e){
 			resp.sendRedirect("/error.jsp?msg=Email: " + email + " is already in use!");
 		} catch (InvalidEmailException e){
-			resp.sendRedirect("/error.jsp?msg=email is not valid!");
+			resp.sendRedirect("/error.jsp?msg=This email is not valid!");
 		} catch (InvalidPasswordException e){
-			resp.sendRedirect("/error.jsp?msg=password is not valid!");
+			resp.sendRedirect("/error.jsp?msg=This password is not valid!");
 		}
 	}
 }
