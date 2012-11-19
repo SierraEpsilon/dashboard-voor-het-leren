@@ -40,6 +40,14 @@
         <url-pattern>/stats</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>settings</servlet-name>
+        <servlet-class>dashboard.servlet.SettingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>settings</servlet-name>
+        <url-pattern>/settings</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>achievements</servlet-name>
         <servlet-class>dashboard.servlet.AchievementServlet</servlet-class>
     </servlet>
