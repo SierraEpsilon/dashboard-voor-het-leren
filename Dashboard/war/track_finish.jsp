@@ -9,9 +9,7 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
-<link rel="stylesheet" href="jquery.ui.datepicker.mobile.css" /> 
-<script src="jQuery.ui.datepicker.js"></script>
-<script src="jquery.ui.datepicker.mobile.js"></script>
+
 <%@include file="inc/redirect.jsp"%>
 <style type='text/css'>
 .containing-element .ui-slider-switch { width: 20em }
