@@ -1,6 +1,5 @@
 package dashboard.servlet;
 
-import java.util.*;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServlet;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import dashboard.model.Course;
 import dashboard.model.Student;
 import dashboard.registry.StudentRegistry;
-import dashboard.util.OwnOfy;
 
 
 public class LiveFeedServlet extends HttpServlet {
@@ -25,6 +23,7 @@ public class LiveFeedServlet extends HttpServlet {
 		Course course = currentStudent.getCurrentStudyMoment().getCourse();
 		
 		session.setAttribute("studyMates", StudentRegistry.getActiveUsersbyCourse(course).size());
+		session.setAttribute("allMates", StudentRegistry.getActiveUsers().size());
 		
 	
 	}

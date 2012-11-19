@@ -109,15 +109,28 @@ public class StudentRegistry {
 	 * | 
 	 */
 	public static List<Student> getActiveUsersbyCourse(Course course){
+		List<Student> studyMates = new ArrayList();
+		for(Student user: getActiveUsers()){
+			if(user.getCurrentStudyMoment().getCourse().equals(course)){
+				studyMates.add(user);
+			}
+		}
+		return studyMates;
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 * arraylist with all the students that are studying the course right now
+	 * 
+	 */
+	
+	public static List<Student> getActiveUsers(){
 		List<Student> activeStudents = new ArrayList();
 		List<Student> allStudents = getUsers();
 		for(Student user: allStudents){
-			StudyMoment currentStudyMoment = user.getCurrentStudyMoment();
-			if(currentStudyMoment !=null ){
-				if(currentStudyMoment.getCourse().equals(course)){
-					activeStudents.add(user);
-				}
-			}
+			if(user.getCurrentStudyMoment() != null)
+			activeStudents.add(user);
 		}
 		return activeStudents;
 	}
