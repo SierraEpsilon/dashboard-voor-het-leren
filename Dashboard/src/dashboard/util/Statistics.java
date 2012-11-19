@@ -1,10 +1,10 @@
 package dashboard.util;
 
 import java.util.ArrayList;
+
 import java.util.HashMap;
 
-import dashboard.model.CourseContract;
-import dashboard.model.StudyMoment;
+import dashboard.model.*;
 
 public class Statistics {
 
@@ -22,10 +22,10 @@ public class Statistics {
 	 *	|		if(moment.getCourse().getName().equals(course))
 	 *	|			time += moment.getTime()
 	 */
-	public static long getTime(String course, ArrayList<StudyMoment> moments){
+	public static long getTime(Course course, ArrayList<StudyMoment> moments){
 		long time = 0;
 		for(StudyMoment moment : moments)
-			if(moment.getCourse().getName().equals(course))
+			if(moment.getCourse().equals(course))
 				time += moment.getTime();
 		return time;
 	}
@@ -58,10 +58,9 @@ public class Statistics {
 		long total = getTotalTime(moments);
 		HashMap<String, Double> result = new HashMap<String, Double>();
 		for(CourseContract course: courses){
-			String name = course.getCourse().getName();
-			long part = getTime(name, moments);
+			long part = getTime(course.getCourse(), moments);
 			double percent = part/total;
-			result.put(name, percent);
+			result.put(course.getCourse().getName(), percent);
 		}
 		return result;
 	}
