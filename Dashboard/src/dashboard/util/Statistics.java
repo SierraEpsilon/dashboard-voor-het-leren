@@ -1,7 +1,9 @@
 package dashboard.util;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import dashboard.model.CourseContract;
 import dashboard.model.StudyMoment;
 
 public class Statistics {
@@ -9,6 +11,8 @@ public class Statistics {
 	/**
 	 * @param course
 	 * the course you ant to get the time from
+	 * @param moments
+	 * 	the moments you want to use to get the time from
 	 * @return
 	 * 	the total time if course was "all"
 	 * 	|	getTotalTime()
@@ -18,26 +22,47 @@ public class Statistics {
 	 *	|		if(moment.getCourse().getName().equals(course))
 	 *	|			time += moment.getTime()
 	 */
-	public long getTime(String course, ArrayList<StudyMoment> moments){
+	public static long getTime(String course, ArrayList<StudyMoment> moments){
 		long time = 0;
-		if(course.equals("all"))
-			time = getTotalTime();
 		for(StudyMoment moment : moments)
 			if(moment.getCourse().getName().equals(course))
 				time += moment.getTime();
+		return time;
 	}
 
 	/**
+	 * @param moments
+	 * 	the moments you want to use to get the time from
 	 * @return
 	 * 	returns the total time the student has studied
-	 * 	|	for(StudyMoment moment : getStudyMoments())
+	 * 	|	for(StudyMoment moment : moments)
 	 *	|	time += moment.getTime()
 	 */
-	private long getTotalTime() {
+	public static long getTotalTime(ArrayList<StudyMoment> moments) {
 		long time = 0;
-		for(StudyMoment moment : getStudyMoments())
+		for(StudyMoment moment : moments)
 			time += moment.getTime();
 		return time;
 	}
 	
+	/**
+	 * @param moments
+	 * 	the moments of a student
+	 * @param courses
+	 * 	the courses of a student
+	 * @return
+	 * 	a hashmap filled with the courses and the percentage of time
+	 *  put into those courses based on total time
+	 */
+	public static HashMap<String, Double> getPercents(ArrayList<StudyMoment> moments,ArrayList<CourseContract> courses){
+		long total = getTotalTime(moments);
+		HashMap<String, Double> result = new HashMap<String, Double>();
+		for(CourseContract course: courses){
+			String name = course.getCourse().getName();
+			long part = getTime(name, moments);
+			double percent = part/total;
+			result.put(name, percent);
+		}
+		return result;
+	}
 }
