@@ -320,40 +320,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
-	 * @param course
-	 * the course you ant to get the time from
-	 * @return
-	 * 	the total time if course was "all"
-	 * 	|	getTotalTime()
-	 * @return
-	 * 	the total time studied for that course
-	 * 	|	for(StudyMoment moment : getStudyMoments())
-	 *	|		if(moment.getCourse().getName().equals(course))
-	 *	|			time += moment.getTime()
-	 */
-	public void getTime(String course){
-		long time = 0;
-		if(course.equals("all"))
-			time = getTotalTime();
-		for(StudyMoment moment : getStudyMoments())
-			if(moment.getCourse().getName().equals(course))
-				time += moment.getTime();
-	}
-
-	/**
-	 * @return
-	 * 	returns the total time the student has studied
-	 * 	|	for(StudyMoment moment : getStudyMoments())
-	 *	|	time += moment.getTime()
-	 */
-	private long getTotalTime() {
-		long time = 0;
-		for(StudyMoment moment : getStudyMoments())
-			time += moment.getTime();
-		return time;
-	}
-	
-	/**
 	 * compares user with other user
 	 * @return
 	 * 0 if the usernames of both users match
