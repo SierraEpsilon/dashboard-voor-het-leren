@@ -77,18 +77,10 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		setLastName(lastName);
 		studyMoments = new ArrayList<StudyMoment>();
 		courses = new ArrayList<CourseContract>();
-		createFakeInfo();
 		OwnOfy.ofy().put(this);
 	}
 	
 	public Student(){
-	}
-	
-	//TODO moet weggehaald worden LATER
-	private void createFakeInfo(){
-		ArrayList<Course> testCourses = CourseRegistry.getBranch("BaBi1");
-		for(Course course: testCourses)
-			addCourse(new CourseContract(course));
 	}
 	
 	/**
