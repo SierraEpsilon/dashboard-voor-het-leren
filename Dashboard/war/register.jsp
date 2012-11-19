@@ -9,6 +9,7 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
+<%@ page import="java.util.*" %>
 </head>
 <body>
 <div data-role="page">
@@ -52,13 +53,32 @@ $(document).ready(function(){
 </script>
 <p id='msg' style='color:red;'>
 <form id='myForm' method='post' action='/register'>
-Voornaam<input type='text' name='firstname'>
-Achternaam<input type='text' name='lastname'>
-Gebruikersnaam<input type='text' name='username'>
-E-mail<input type='text' name='mail'>
+<%
+String firstname = "";
+String lastname = "";
+String username = "";
+String mail = "";
+if(session.getAttribute("register.jsp")!=null){
+	HashMap<String,String> values = (HashMap<String,String>)session.getAttribute("register.jsp");
+	firstname = values.get("firstname");
+	lastname = values.get("lastname");
+	username = values.get("username");
+	mail = values.get("mail");
+}
+%>
+<label for="firstname">Voornaam</label>
+<input type='text' name='firstname' value='<%=firstname%>'>
+<label for="lastname">Achternaam</label>
+<input type='text' name='lastname' value='<%=lastname%>'>
+<label for="username">Gebruikersnaam</label>
+<input type='text' name='username' value='<%=username%>'>
+<label for="mail">Email</label>
+<input type='text' name='mail' value='<%=mail%>'>
 <input type='hidden' name='password'>
-Wachtwoord<input type='password' name='password1'>
-Herhaal wachtwoord<input type='password' name='password2'>
+<label for="password1">Wachtwoord</label>
+<input type='password' name='password1'>
+<label for="password2">Herhaal wachtwoord</label>
+<input type='password' name='password2'>
 <input type='submit' value='REGISTREREN'>
 </form>
 </div><!-- /content -->
