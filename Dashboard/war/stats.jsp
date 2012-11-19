@@ -37,6 +37,9 @@
 	out.println("</table>");
 %>
 </div><!-- /content -->
+<div data-role='footer' data-id="foo1" data-position="fixed">
+	<a href="/track" data-role="button" data-icon="back">Track</a>
+</div>
 </div><!-- /page -->
 </body>
 </html>

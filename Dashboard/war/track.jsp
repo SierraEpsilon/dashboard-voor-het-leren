@@ -97,6 +97,7 @@ function setTimePast(){
 </div><!-- /content -->
 <div data-role='footer' data-id="foo1" data-position="fixed">
 	<a href="/logout" data-role="button" data-icon="back">Logout</a>
+	<a href="/stats" data-role="button" data-icon="grid">Stats</a>
 </div>
 </div><!-- /page -->
 </body>
