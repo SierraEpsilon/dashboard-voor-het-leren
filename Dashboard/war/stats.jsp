@@ -10,6 +10,7 @@
 <head>
 <%@include file="inc/head.jsp"%>
 <%@ page import="dashboard.model.*" %>
+<%@ page import="dashboard.registry.*" %>
 <%@ page import="java.util.*" %>
 </head>
 <body>
@@ -34,6 +35,21 @@
 								+ endDate 	+ "</td></tr>");
 	}
 	out.println("</table>");
+	out.println("<ul>");
+	List<Student> users = StudentRegistry.getUsers();
+	it = users.iterator();
+	while(it.hasNext()){
+		Student user = (Student)it.next();
+		String name = user.getUserName();
+		String email = user.getMail();
+		String moment = "geen";
+		if(user.getCurrentStudyMoment() != null)
+			moment = user.getCurrentStudyMoment().getCourse().toString();
+		out.println("<li>" + name + " " + email + "</li>");
+		out.println("<p>currentVak:" + moment + "</p>");
+		out.println("<p>" + user.getStudyMoments().size() + "</p>");
+	}
+	out.println("</ul>");
 %>
 </div><!-- /content -->
 </div><!-- /page -->
