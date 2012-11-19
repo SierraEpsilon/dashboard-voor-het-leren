@@ -31,6 +31,7 @@ public class CourseRegistry {
 	
 	private static void addCourses(){
 		courses.addAll(Branch.BABI1.getCourses());
+		courses.addAll(Branch.BABI2.getCourses());
 	}
 	
 	/**
