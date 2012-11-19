@@ -25,6 +25,8 @@ public class CourseRegistry {
 	 */
 	private static void addBranches() {
 		branches.put(Branch.BABI1.getName(),Branch.BABI1);
+		branches.put(Branch.BABI2.getName(),Branch.BABI2);
+
 	}
 	
 	private static void addCourses(){

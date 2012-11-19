@@ -12,6 +12,8 @@ import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.UserNameInUseException;
 import dashboard.model.Student;
+import dashboard.model.StudyMoment;
+import dashboard.model.Course;
 import dashboard.util.OwnOfy;
 
 
@@ -97,6 +99,42 @@ public class StudentRegistry {
 		}
 		return null;
 	}
+	
+	/**
+	 * 
+	 * @param course
+	 * the course which you want to know if other students are studying 
+	 * @return 
+	 * arraylist with all the students that are studying the course right now
+	 * | 
+	 */
+	public static List<Student> getActiveUsersbyCourse(Course course){
+		List<Student> studyMates = new ArrayList();
+		for(Student user: getActiveUsers()){
+			if(user.getCurrentStudyMoment().getCourse().equals(course)){
+				studyMates.add(user);
+			}
+		}
+		return studyMates;
+	}
+	
+	/**
+	 * 
+	 * @return 
+	 * arraylist with all the students that are studying the course right now
+	 * 
+	 */
+	
+	public static List<Student> getActiveUsers(){
+		List<Student> activeStudents = new ArrayList();
+		List<Student> allStudents = getUsers();
+		for(Student user: allStudents){
+			if(user.getCurrentStudyMoment() != null)
+			activeStudents.add(user);
+		}
+		return activeStudents;
+	}
+	
 	
 	/**
 	 * @param 	mail

@@ -24,9 +24,6 @@ import dashboard.util.OwnOfy;
 
 public class Student implements Comparable<Student>,Cloneable,Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -6268846212512642033L;
 	@Id private Long id;
 	private String firstName;
@@ -36,7 +33,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String password;
 	@Serialized private StudyMoment currentStudyMoment;
 	@Serialized private ArrayList<StudyMoment> studyMoments;
-	@Serialized private HashSet<CourseContract> courses;
+	@Serialized private ArrayList<CourseContract> courses;
 	
 	/**
 	 * initiates a user
@@ -79,19 +76,11 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		setFirstName(firstName);
 		setLastName(lastName);
 		studyMoments = new ArrayList<StudyMoment>();
-		courses = new HashSet<CourseContract>();
-		createFakeInfo();
+		courses = new ArrayList<CourseContract>();
 		OwnOfy.ofy().put(this);
 	}
 	
 	public Student(){
-	}
-	
-	//TODO moet weggehaald worden LATER
-	private void createFakeInfo(){
-		ArrayList<Course> testCourses = CourseRegistry.getBranch("BaBi1");
-		for(Course course: testCourses)
-			addCourse(new CourseContract(course));
 	}
 	
 	/**
@@ -163,7 +152,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	the courses of the student
 	 * 	|	courses
 	 */
-	public HashSet<CourseContract> getCourses() {
+	public ArrayList<CourseContract> getCourses() {
 		return courses;
 	}
 	
@@ -209,6 +198,16 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	public void setCurrentStudyMoment(StudyMoment currentStudyMoment) {
 		this.currentStudyMoment = currentStudyMoment;
 		OwnOfy.ofy().put(this);
+	}
+	
+	/**
+	 * @param courses
+	 * @post
+	 * 	the courses have been changed
+	 * 	|	new.getCourses() = courses
+	 */
+	public void setCourses(ArrayList<CourseContract> courses) {
+		this.courses = courses;
 	}
 	
 	/**
@@ -351,6 +350,18 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			e.printStackTrace();
 		}
 		return clonedUser;
+	}
+	
+	/**
+	 * Returns a list of the courses the student is taking, NOT THE COURSECONTRACTS!!!!
+	 * @return
+	 */
+	public ArrayList<Course> getCourseList(){
+		ArrayList<Course> courseList = new ArrayList<Course>();
+		for(CourseContract courseContract: courses){
+			courseList.add(courseContract.getCourse());
+		}
+		return courseList;
 	}
 
 }
