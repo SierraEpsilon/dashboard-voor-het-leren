@@ -46,7 +46,7 @@ if(request.getParameter("mode")!=null&&request.getParameter("mode").equals("stop
 	out.println("Course: <select name='courseinput'>");
 	
 	Student student = (Student)session.getAttribute("student");
-	HashSet<CourseContract> ccs = student.getCourses();
+	ArrayList<CourseContract> ccs = student.getCourses();
 	Iterator it = ccs.iterator();
 	while(it.hasNext()){
 		CourseContract courseC = (CourseContract)it.next();
@@ -61,7 +61,7 @@ if(request.getParameter("mode")!=null&&request.getParameter("mode").equals("stop
 }
 %>
 <script>
-$(document).ready(function(){
+$(document).bind("pageinit",function(){
 	start = <%= start %>;
 	<% if(start==1) {System.out.println("start="+"start"+";");}
 	%>
