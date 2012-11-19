@@ -12,7 +12,6 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.*;
 
-import dashboard.error.AlreadyAFriendException;
 import dashboard.error.AlreadyEndedException;
 import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEmailException;
@@ -20,9 +19,7 @@ import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.NotStudyingException;
-import dashboard.error.isNotAFriendException;
 import dashboard.registry.CourseRegistry;
-import dashboard.registry.StudentRegistry;
 import dashboard.util.OwnOfy;
 
 public class Student implements Comparable<Student>,Cloneable,Serializable {
@@ -37,7 +34,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String userName;
 	private String mail;
 	private String password;
-	private ArrayList<String> friendList;
 	@Serialized private StudyMoment currentStudyMoment;
 	@Serialized private ArrayList<StudyMoment> studyMoments;
 	@Serialized private HashSet<CourseContract> courses;
@@ -84,7 +80,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		setLastName(lastName);
 		studyMoments = new ArrayList<StudyMoment>();
 		courses = new HashSet<CourseContract>();
-		friendList = new ArrayList<String>();
 		createFakeInfo();
 		OwnOfy.ofy().put(this);
 	}
@@ -173,15 +168,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
-	 * @return
-	 * the friend list of the student
-	 *  | friendList
-	 */
-	public ArrayList<String> getFriendList(){
-		return friendList;
-	}
-	
-	/**
 	 * @param firstName
 	 * the new first name of the user
 	 * @post	the first name was changed
@@ -250,33 +236,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
-	 * 
-	 * @param userName
-	 * the username you want to add
-	 * @throws AlreadyAFriendException
-	 * @throws InvalidUserNameException
-	 */
-	public void addFriend(String userName) 
-			throws AlreadyAFriendException, InvalidUserNameException{
-		if(isFriend(userName))
-			throw new AlreadyAFriendException();
-		if(StudentRegistry.isUserNameExisting(userName))
-			throw new InvalidUserNameException();
-		friendList.add(userName);
-	}
-	
-	/**
-	 * @param userName
-	 * the username you want to remove
-	 * @throws isNotAFriendException
-	 */
-	public void removeFriend(String userName) throws isNotAFriendException{
-		if(!friendList.contains(userName))
-			throw new isNotAFriendException();
-		friendList.remove(userName);
-	}
-	
-	/**
 	 * checks the validity of the username
 	 * @param userName
 	 * 	the username that has to be checked
@@ -327,17 +286,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
-	 * @param userName
-	 * the username that has to be checked
-	 * @return
-	 * true if the friendlist already contains the username
-	 *  |	(friendList.contains(userName))
-	 */
-	public boolean isFriend(String userName){
-		return friendList.contains(userName);
-	}
-	
-	/**
 	 * @throws NotStudyingException 
 	 * 	|	getCurrentStudyMoment() == null
 	 * @effect
@@ -369,40 +317,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		moment.endMoment(endDate, amount, kind);
 		addStudyMoment(moment);
 		setCurrentStudyMoment(null);
-	}
-	
-	/**
-	 * @param course
-	 * the course you ant to get the time from
-	 * @return
-	 * 	the total time if course was "all"
-	 * 	|	getTotalTime()
-	 * @return
-	 * 	the total time studied for that course
-	 * 	|	for(StudyMoment moment : getStudyMoments())
-	 *	|		if(moment.getCourse().getName().equals(course))
-	 *	|			time += moment.getTime()
-	 */
-	public void getTime(String course){
-		long time = 0;
-		if(course.equals("all"))
-			time = getTotalTime();
-		for(StudyMoment moment : getStudyMoments())
-			if(moment.getCourse().getName().equals(course))
-				time += moment.getTime();
-	}
-
-	/**
-	 * @return
-	 * 	returns the total time the student has studied
-	 * 	|	for(StudyMoment moment : getStudyMoments())
-	 *	|	time += moment.getTime()
-	 */
-	private long getTotalTime() {
-		long time = 0;
-		for(StudyMoment moment : getStudyMoments())
-			time += moment.getTime();
-		return time;
 	}
 	
 	/**
@@ -439,6 +353,16 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		return clonedUser;
 	}
 	
-	
+	/**
+	 * Returns a list of the courses the student is taking, NOT THE COURSECONTRACTS!!!!
+	 * @return
+	 */
+	public ArrayList<Course> getCourseList(){
+		ArrayList<Course> courseList = new ArrayList<Course>();
+		for(CourseContract courseContract: courses){
+			courseList.add(courseContract.getCourse());
+		}
+		return courseList;
+	}
 
 }
