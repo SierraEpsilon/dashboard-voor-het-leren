@@ -209,6 +209,16 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
+	 * @param courses
+	 * @post
+	 * 	the courses have been changed
+	 * 	|	new.getCourses() = courses
+	 */
+	public void setCourses(ArrayList<CourseContract> courses) {
+		this.courses = courses;
+	}
+	
+	/**
 	 * @param moment
 	 * 	the moment you want to add
 	 * @post
