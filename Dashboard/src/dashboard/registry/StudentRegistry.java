@@ -11,8 +11,8 @@ import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.UserNameInUseException;
-import dashboard.model.OwnOfy;
 import dashboard.model.Student;
+import dashboard.util.OwnOfy;
 
 
 public class StudentRegistry {

@@ -20,6 +20,7 @@ import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.NotStudyingException;
 import dashboard.registry.CourseRegistry;
+import dashboard.util.OwnOfy;
 
 public class Student implements Comparable<Student>,Cloneable,Serializable {
 

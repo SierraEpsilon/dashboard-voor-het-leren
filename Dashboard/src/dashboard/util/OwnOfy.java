@@ -1,4 +1,4 @@
-package dashboard.model;
+package dashboard.util;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyFactory;

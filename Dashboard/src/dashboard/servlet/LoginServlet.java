@@ -6,9 +6,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dashboard.model.OwnOfy;
 import dashboard.model.Student;
 import dashboard.registry.StudentRegistry;
+import dashboard.util.OwnOfy;
 
 public class LoginServlet extends HttpServlet {
 
