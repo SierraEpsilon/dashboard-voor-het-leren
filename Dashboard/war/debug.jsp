@@ -22,7 +22,7 @@
 <%
 	out.println("<ul>");
 	List<Student> users = StudentRegistry.getUsers();
-	it = users.iterator();
+	Iterator it = users.iterator();
 	while(it.hasNext()){
 		Student user = (Student)it.next();
 		String name = user.getUserName();
