@@ -21,16 +21,12 @@ $(document).bind("pageinit",function(){
 	});
 	
 	
-	
-	
-	
-	
 });
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
 
 	<h1>Toevoegen van studiemoment</h1>
-	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">BUTTON EXAMPLE</a>
+	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Logout</a>
 
 </div><!-- /header -->
 <div data-role="content">
