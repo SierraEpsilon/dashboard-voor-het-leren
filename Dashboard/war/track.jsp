@@ -16,7 +16,8 @@
 <body>
 <div data-role="page">
 <div data-role="header" data-id='header' data-position="fixed">
-		<h1>Learnalyzer</h1>
+	<h1>Learnalyzer</h1>
+	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Logout</a>
 </div><!-- /header -->
 <div data-role="content">
 <%
@@ -96,7 +97,6 @@ function setTimePast(){
 </script>
 </div><!-- /content -->
 <div data-role='footer' data-id="foo1" data-position="fixed">
-	<a href="/logout" data-role="button" data-icon="back">Logout</a>
 	<a href="/stats" data-role="button" data-icon="grid">Stats</a>
 </div>
 </div><!-- /page -->
