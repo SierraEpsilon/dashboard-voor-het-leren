@@ -18,11 +18,12 @@ $(document).bind("pageinit",function(){
 
 	$("input[name='startdate']").change(function(){
 		var start = $("input[name='startdate']").val();
-		
-		$("input[name='enddate']").val(start);
+		if($("input[name='enddate']").val() == ''){
+		$("input[name='enddate']").val(start);}
+		if($("input[name='enddate']").val() < start){
+		$("input[name='enddate']").val(start);}
 	});
 	
-
 	$("input[name='amount']").change(function(){
 		var given = $("input[name='amount']").val();
 		if(given<1){
@@ -31,7 +32,6 @@ $(document).bind("pageinit",function(){
 		}else{$("#msg2").text("");
 		}
 	});
-	
 	
 	$("input[name='enddate']").change(function(){
 		var start =  $("input[name='startdate']").val();
@@ -42,12 +42,6 @@ $(document).bind("pageinit",function(){
 		}else{$("#msg").text("");
 		}
 	});
-	
-	
-	
-	
-	
-
 
 });
 </script>
