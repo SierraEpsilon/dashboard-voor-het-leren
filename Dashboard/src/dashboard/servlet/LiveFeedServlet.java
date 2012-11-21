@@ -2,10 +2,14 @@ package dashboard.servlet;
 
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
+import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 import dashboard.model.Course;
 import dashboard.model.Student;
@@ -25,7 +29,14 @@ public class LiveFeedServlet extends HttpServlet {
 		session.setAttribute("studyMates", StudentRegistry.getActiveUsersbyCourse(course).size());
 		session.setAttribute("allMates", StudentRegistry.getActiveUsers().size());
 		
-	
+		JSONObject obj=new JSONObject();
+		obj.put("studyMates", StudentRegistry.getActiveUsersbyCourse(course).size());
+		obj.put("AllMates", StudentRegistry.getActiveUsers().size());
+		
+		resp.setContentType("application/json");
+		PrintWriter out = resp.getWriter();
+		out.print(obj);
+		out.flush();
 	}
 			
 
