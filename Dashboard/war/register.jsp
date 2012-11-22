@@ -51,7 +51,10 @@ $(document).ready(function(){
 	});
 });
 </script>
-<p id='msg' style='color:red;'>
+<%
+String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
+%>
+<p id='msg' style='color:red;'><%=msg%></p>
 <form id='myForm' method='post' action='/register'>
 <%
 String firstname = "";
