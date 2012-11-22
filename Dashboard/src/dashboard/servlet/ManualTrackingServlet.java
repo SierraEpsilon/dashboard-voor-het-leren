@@ -1,3 +1,5 @@
+package dashboard.servlet;
+
 import java.io.IOException;
 import java.util.Date;
 
@@ -6,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dashboard.error.InvalidAmountException;
+import dashboard.error.InvalidEndDateException;
 import dashboard.model.Student;
 import dashboard.registry.CourseRegistry;
 import dashboard.model.StudyMoment;
@@ -21,13 +25,20 @@ public class ManualTrackingServlet extends HttpServlet{
 			Date startDate = new Date(session.getAttribute("startdate") +" " + session.getAttribute("starttime"));
 			Date endDate = new Date(session.getAttribute("enddate") + " "+ session.getAttribute("endtime"));
 			
-			int amount = session.getAttribute("amount");
+			int amount = (Integer) session.getAttribute("amount");
 			
 			Course usedCourse = CourseRegistry.getCourse((String) session.getAttribute("course"));
 			
-			String kind = session.getAttribute("kind");
+			String kind = (String) session.getAttribute("kind");
 			
-			student.addStudyMoment(new StudyMoment(startDate, endDate, usedCourse, amount, kind));
+			try {
+				student.addStudyMoment(new StudyMoment(startDate, endDate, usedCourse, amount, kind));
+			} catch (InvalidEndDateException e) {
+				resp.sendRedirect("/error.jsp?msg=You appear to be a time traveler?!");
+			} catch (InvalidAmountException e) {
+				resp.sendRedirect("/error.jsp?msg=You can't have studied that kind of pages!");
+			} 
+			
 			
 		} else {
 			resp.sendRedirect("/login.jsp");
