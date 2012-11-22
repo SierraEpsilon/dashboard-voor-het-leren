@@ -45,15 +45,6 @@ $(document).bind("pageinit",function(){
 		%>
 	</ul>
 </div><!-- /content -->
-<div data-role='footer' data-id="foo1" data-position="fixed">
-
-	INSERT FOOTER CONTENT
-	<div data-role="navbar"><ul>
-		<li><a href="#" data-role="button" data-icon="delete">BUTTON1</a></li>
-		<li><a href="#" data-role="button" data-icon="check">BUTTON2</a></li>
-	</ul></div>
-
-</div>
 </div><!-- /page -->
 </body>
 </html>
