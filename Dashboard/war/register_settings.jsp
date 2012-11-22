@@ -17,16 +17,17 @@
 <div data-role="page">
 <script>
 $(document).bind("pageinit",function(){
-	$("#myForm").submit(function(){x
+	$("#myForm").submit(function(){
 		var ret = '';
 		$("input[type='checkbox']").each(function(){
 			if($(this).attr("checked")=="checked"){
 				ret += ($(this).attr("name") + ";");
 			}
 			$("#myForm>input[name='courses']").attr("value",ret);
-			alert(ret);
-			return true;
 		});
+		alert(ret);
+		alert($("#myForm>input[name='courses']").attr("value"));
+		return true;
 	});
 });
 </script>
@@ -38,7 +39,7 @@ $(document).bind("pageinit",function(){
 	<input type='submit' name='submit' value='registreren'>
 	<input type='hidden' name='courses'>
 </form>
-	<ul data-role='listview'>
+	<ul data-role='listview' style="margin-top: 5px">
 	<%
 		Set<String> branchNames = CourseRegistry.getBranches().keySet();
 		HashMap<String,Branch> branches = CourseRegistry.getBranches();
