@@ -19,6 +19,21 @@ public class SettingServlet extends HttpServlet {
 	private static final long serialVersionUID = 383365373572564568L;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-
+		HttpSession session = req.getSession();
+		Student student = (Student)session.getAttribute("student");
+		String action = req.getParameter("submit");
+		if(action.contains("remove_")){
+			String vak = action.replace("remove_","");
+			remove(vak,student,req,resp);
+		}
+	}
+	
+	private void remove(String vak,Student student,HttpServletRequest req, HttpServletResponse resp) 
+			throws IOException{
+		try {
+			student.removeCourse(vak);
+		} catch (NoSuchCourseException e) {
+			resp.sendRedirect("/error.jsp?msg= tried to remove an unexisting course");
+		}
 	}
 }
