@@ -19,9 +19,11 @@ import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.InvalidUserNameException;
+import dashboard.error.NotFriendException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.error.NotStudyingException;
 import dashboard.registry.CourseRegistry;
+import dashboard.registry.StudentRegistry;
 import dashboard.util.OwnOfy;
 
 public class Student implements Comparable<Student>,Cloneable,Serializable {
@@ -36,6 +38,9 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	@Serialized private StudyMoment currentStudyMoment;
 	@Serialized private ArrayList<StudyMoment> studyMoments;
 	@Serialized private ArrayList<CourseContract> courses;
+	@Serialized private ArrayList<String> friendList;
+	@Serialized private ArrayList<String> friendRequestsByStudent;
+	@Serialized private ArrayList<String> friendRequestsByOthers;
 	
 	/**
 	 * initiates a user
@@ -79,6 +84,9 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		setLastName(lastName);
 		studyMoments = new ArrayList<StudyMoment>();
 		courses = new ArrayList<CourseContract>();
+		friendList = new ArrayList<String>();
+		friendRequestsByStudent = new ArrayList<String>();
+		friendRequestsByOthers = new ArrayList<String>();
 		OwnOfy.ofy().put(this);
 	}
 	
@@ -156,6 +164,33 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public ArrayList<CourseContract> getCourses() {
 		return courses;
+	}
+	
+	/**
+	 * @return
+	 *  the friend list of the student
+	 *  | 	friendList
+	 */
+	public ArrayList<String> getFriendList(){
+		return friendList;
+	}
+	
+	/**
+	 * @return
+	 *  the requested friends of the student
+	 *  |	friendRequestsByStudent 
+	 */
+	public ArrayList<String> getFriendRequestsByStudent(){
+		return friendRequestsByStudent;
+	}
+	
+	/**
+	 * @return
+	 *  the others who requested the student
+	 *  |	friendRequestsByOthers 
+	 */
+	public ArrayList<String> getFriendRequestsByOthers(){
+		return friendRequestsByOthers;
 	}
 	
 	/**
@@ -251,9 +286,53 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		for(CourseContract course : getCourses())
 			if(course.getCourse().getName().equals(courseName)){
 				getCourses().remove(course);
+				OwnOfy.ofy().put(this);
 				return;
 			}
 		throw(new NoSuchCourseException());
+	}
+	
+	/**
+	 * @param userName
+	 * @throws InvalidUserNameException
+	 */
+	public void requestFriend(String userName) throws InvalidUserNameException{
+		if(!StudentRegistry.isUserNameExisting(userName))
+			throw new InvalidUserNameException();
+		if(userName.equals(getUserName()))
+			throw new InvalidUserNameException();
+		friendRequestsByStudent.add(userName);
+	}
+	
+	public void requestedAsFriend(String username){
+		friendRequestsByOthers.add(userName);
+	}
+	
+	/**
+	 * @param userName
+	 */
+	public void acceptFriend(String userName){
+		//if(!friendRequestsByOthers.contains(userName))
+			
+	}
+	
+	/**
+	 * @param userName
+	 * @throws InvalidUserNameException 
+	 * 
+	 */
+	private void addFriend(String userName) {
+		
+	}
+	
+	/**
+	 * @param userName
+	 * 
+	 */
+	public void removeFriend(String userName) throws NotFriendException{
+		if(!isAFriend(userName))
+			throw new NotFriendException();
+		friendList.remove(userName);
 	}
 	
 	/**
@@ -306,6 +385,24 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		return (getPassword().equals(password));
 	}
 	
+	/**
+	 * @param userName
+	 * the user name that has to be checked
+	 * @return
+	 * true is the user name matches a friend's user name
+	 * |	friendList.contains(userName)
+	 */
+	public boolean isAFriend(String userName){
+		return friendList.contains(userName);
+	}
+	
+	/**
+	 * @param moment
+	 * the moment that has to be checked
+	 * @return
+	 * true if the studymoment is valid
+	 *  |	!moment.overlaps(studyMoments)
+	 */
 	private boolean IsValidStudyMoment(StudyMoment moment) {
 		boolean isValidMoment = true;
 		for(int i = 0; i < studyMoments.size(); i++){
@@ -317,7 +414,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			if(c.after(a) && c.before(b))
 				isValidMoment = false;			
 			if(d.after(a) && d.before(b))
-					isValidMoment = false;
+				isValidMoment = false;
 			if(a.after(c) && a.before(d))
 				isValidMoment = false;
 		}
