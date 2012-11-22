@@ -1,5 +1,6 @@
 package dashboard.registry;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import dashboard.model.Course;
 import dashboard.model.Student;
@@ -10,6 +11,7 @@ public class AchievementRegistry {
 	private static ArrayList<Achievement> achievementList;
 	
 	static{
+		achievementList = new ArrayList<Achievement>();
 		fillAchievementList();
 	}
 	
@@ -17,8 +19,12 @@ public class AchievementRegistry {
 	 * fills the achievement list with all possible achievements		
 	 */
 	private static void fillAchievementList(){
-		Achievement achievement1 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "5 min gestudeerd in totaal.", null, 300);
-		achievementList.add(achievement1);
+		ArrayList<TimeStudied> timeStudiedList = new ArrayList<TimeStudied>();
+		timeStudiedList.addAll(Arrays.asList(
+				new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "Study for 5 minutes for any course.", null, 300),
+				new TimeStudied("TIME_STUDIED_TOTAL_2", "Studying apprentice", "Study for 10 minutes for any course.", null, 600),
+				new TimeStudied("TIME_STUDIED_TOTAL_3", "Studying noob", "Study for 15 minutes for any course.", null, 900)));
+		achievementList.addAll(timeStudiedList);
 	}
 	
 	/**

@@ -1,10 +1,16 @@
 package dashboard.model.achievement;
 
+import java.io.Serializable;
+
 import dashboard.model.Course;
 import dashboard.model.Student;
 
-public abstract class Achievement {
+public abstract class Achievement implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4773912395822659711L;
 	String id;
 	String name;
 	String desc;

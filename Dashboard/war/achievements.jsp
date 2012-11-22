@@ -33,17 +33,17 @@ $(document).bind("pageinit",function(){
 </div><!-- /header -->
 <div data-role="content">
 <% Student student = (Student)session.getAttribute("student"); %>
-	<li>
+	<ul>
 		<% 
 			ArrayList<Achievement> achievementList = (ArrayList<Achievement>)session.getAttribute("achievementList");
-			//Iterator<Achievement> it = achievementList.iterator();
-			//while(it.hasNext()){
-				//Achievement achievement = it.next();
-				//out.println("<ul>" + achievement.getName() + " " + Math.round(achievement.getProgress(student) * 100) + "%</ul>");
-			//}
+			Iterator<Achievement> it = achievementList.iterator();
+			while(it.hasNext()){
+				Achievement achievement = it.next();
+				out.println("<li>" + achievement.getName() + " " + Math.round(achievement.getProgress(student) * 100) + "%</li>");
+			}
 		
 		%>
-	</li>
+	</ul>
 </div><!-- /content -->
 <div data-role='footer' data-id="foo1" data-position="fixed">
 
