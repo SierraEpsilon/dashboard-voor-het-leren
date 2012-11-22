@@ -16,11 +16,33 @@
 <script>
 $(document).bind("pageinit",function(){
 
-	$("label[name='startdate']").change(function(){
-	 $("label[name='enddate']").attr("value")=$("label[name='startdate']").attr("value");
+	$("input[name='startdate']").change(function(){
+		var start = $("input[name='startdate']").val();
+		if($("input[name='enddate']").val() == ''){
+		$("input[name='enddate']").val(start);}
+		if($("input[name='enddate']").val() < start){
+		$("input[name='enddate']").val(start);}
 	});
 	
+	$("input[name='amount']").change(function(){
+		var given = $("input[name='amount']").val();
+		if(given<1){
+			$("#msg2").text("Geef een geldig getal op");
+			$("input[name='amount']").val('');
+		}else{$("#msg2").text("");
+		}
+	});
 	
+	$("input[name='enddate']").change(function(){
+		var start =  $("input[name='startdate']").val();
+		var end = $("input[name='enddate']").val();
+		if(end<start){
+			$("#msg").text("De einddatum valt na de begindatum!");
+			$("input[name='enddate']").val(start);
+		}else{$("#msg").text("");
+		}
+	});
+
 });
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
@@ -32,8 +54,7 @@ $(document).bind("pageinit",function(){
 <div data-role="content">
 
 <form id="myForm" method="post" action="/manual">
-
-
+	
 	<b>Starttijd</b>
 	<p>
 	         <label for="startdate">Datum:</label>
@@ -50,12 +71,30 @@ $(document).bind("pageinit",function(){
 	         
  	<p id='msg' style='color:red;'></p>
  
+ 	<b>Vak</b>
+ 	
+ 	<fieldset data-role="controlgroup">
+
+	     	<input type="radio" name="kind" id="radio-choice-1" value="Theorie" checked="checked" />
+	     	<label for="radio-choice-1">Theorie</label>
+	
+	     	<input type="radio" name="kind" id="radio-choice-2" value="Oefeningen"  />
+	     	<label for="radio-choice-2">Oefeningen</label>
+	
+	</fieldset>
+	<label for='amount'>Hoeveelheid:</label>
+	<input type='number' name='amount'>
+	<p id='msg2' style='color:red;'></p>
+	
+	
+ 	
+ 
+ 	</form>
  
 </div><!-- /content -->
 <div data-role='footer' data-id="foo1" data-position="fixed">
-
-	
 	<div data-role="navbar"><ul>
+
 		<li><a href="#" data-role="button" data-icon="check">Opslaan</a></li>
 		<li><a href="#" data-role="button" data-icon="delete">Annuleren</a></li>
 	</ul></div>
