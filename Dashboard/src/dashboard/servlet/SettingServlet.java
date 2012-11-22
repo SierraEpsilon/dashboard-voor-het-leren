@@ -24,7 +24,7 @@ public class SettingServlet extends HttpServlet {
 		if(student == null)
 			resp.sendRedirect("/login");
 		else
-			resp.sendRedirect("/settings.jsp");
+			resp.sendRedirect("/settings_info.jsp");
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
