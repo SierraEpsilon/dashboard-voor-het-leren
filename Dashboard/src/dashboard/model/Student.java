@@ -17,7 +17,7 @@ import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
-import dashboard.error.InvalidStudymomentException;
+import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.error.NotStudyingException;
@@ -216,14 +216,14 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	/**
 	 * @param moment
 	 * 	the moment you want to add
-	 * @throws InvalidStudymomentException 
+	 * @throws InvalidStudyMomentException 
 	 * @post
 	 * 	the moment was added to the student's studymoments
 	 * 	|	new.studyMoments.contains(moment)
 	 */
-	public void addStudyMoment(StudyMoment moment) throws InvalidStudymomentException {
+	public void addStudyMoment(StudyMoment moment) throws InvalidStudyMomentException {
 		if(!IsValidStudyMoment(moment))
-			throw new InvalidStudymomentException();
+			throw new InvalidStudyMomentException();
 		getStudyMoments().add(moment);
 		OwnOfy.ofy().put(this);
 	}
@@ -344,7 +344,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	what kind of studying he did
 	 * @throws AlreadyEndedException
 	 * @throws InvalidAmountException
-	 * @throws InvalidStudymomentException 
+	 * @throws InvalidStudyMomentException 
 	 * @effect
 	 * 	|	StudyMoment moment = getCurrentStudyMoment()
 	 * 	|	addStuddyMoment(moment)
@@ -353,7 +353,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	|	setCurrentStudyMoment(null)
 	 */
 	public void endStudying(Date endDate, int amount, String kind) 
-			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException, InvalidStudymomentException{
+			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException, InvalidStudyMomentException{
 		StudyMoment moment = getCurrentStudyMoment();
 		moment.endMoment(endDate, amount, kind);
 		addStudyMoment(moment);
