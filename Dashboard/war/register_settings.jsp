@@ -23,10 +23,10 @@ $(document).bind("pageinit",function(){
 			if($(this).attr("checked")=="checked"){
 				ret += ($(this).attr("name") + ";");
 			}
-			$("#myForm>input[name='courses']").attr("value",ret);
+			$("#myCourseForm>input[name='courses']").attr("value",ret);
 		});
 		alert(ret);
-		alert($("#myForm>input[name='courses']").attr("value"));
+		alert($("#myCourseForm>input[name='courses']").attr("value"));
 		return true;
 	});
 });
