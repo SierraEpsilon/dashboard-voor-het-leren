@@ -44,43 +44,42 @@ $(document).bind("pageinit",function(){
 	});
 	
 	$("#opslaan").click(function(){
-		$("#myFormm").submit(function(){
 		
-			var startd = $("input[name='startdate']").val();
-			var startt = $("input[name='starttime']").val();
-			var endd = $("input[name='enddate']").val();
-			var endt = $("input[name='endtime']").val();
-			var amount = $("input[name='amount']").val();
+		alert("submitting");
+		var startd = $("input[name='startdate']").val();
+		var startt = $("input[name='starttime']").val();
+		var endd = $("input[name='enddate']").val();
+		var endt = $("input[name='endtime']").val();
+		var amount = $("input[name='amount']").val();
 		alert("check");
-			var cont = true;
-			cont = (startd=="") ? false : cont;
-			cont = (startt=="") ? false : cont;
-			cont = (endd=="") ? false : cont;
-			cont = (endt=="") ? false : cont;
-			cont = (amount=="") ? false : cont;
-			if(!cont){
-				$("#msg").text("Vul alle velden in!");
-				return false;}
-			else if(startd == endd){
-					if(!(startt<endt)){
-						$("#msg2").text("De einddatum valt na de begindatum!");
-						$("input[name='endtime']").val('');
-						return false;}
-					}
-			else if(endd < startd){
-					$("#msg2").text("De einddatum valt na de begindatum!");
-					$("input[name='endtime']").val('');
-					return false;
-					}
-			else if (amount < 1){
-					$("#msg3").text("Geef een geldig getal op!");
-					$("input[name='amount']").val('');
-					return false;
-					}
-			else {
-				$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
-				return true;}
-		});
+		var cont = true;
+		cont = (startd=="") ? false : cont;
+		cont = (startt=="") ? false : cont;
+		cont = (endd=="") ? false : cont;
+		cont = (endt=="") ? false : cont;
+		cont = (amount=="") ? false : cont;
+		if(!cont){
+			$("#msg").text("Vul alle velden in!");
+		}
+		else if(startd == endd){
+			if(!(startt<endt)){
+				$("#msg2").text("De einddatum valt na de begindatum!");
+				$("input[name='endtime']").val('');
+			}
+		}
+		else if(endd < startd){
+			$("#msg2").text("De einddatum valt na de begindatum!");
+			$("input[name='endtime']").val('');
+		}
+		else if (amount < 1){
+			$("#msg3").text("Geef een geldig getal op!");
+			$("input[name='amount']").val('');
+		}
+		else {
+			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
+			$("#myFormm").submit();
+		}
+		
 	});
 });
 </script>
@@ -134,7 +133,7 @@ $(document).bind("pageinit",function(){
 <div data-role='footer' data-id="foo1" data-position="fixed">
 	<div data-role="navbar"><ul>
 
-		<li><a href="#" data-role="button" data-icon="check" id="opslaan" >Opslaan</a></li>
+		<li><a href="" data-role="button" data-icon="check" id="opslaan" >Opslaan</a></li>
 		<li><a href="/menu.jsp" data-role="button" data-icon="delete">Annuleren</a></li>
 	</ul></div>
 
