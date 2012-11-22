@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dashboard.error.NoSuchCourseException;
 import dashboard.model.CourseContract;
 import dashboard.model.Student;
 import dashboard.registry.CourseRegistry;
@@ -30,9 +31,14 @@ public class CourseAddServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
 		String action = req.getParameter("submit");
-		CourseContract course = new CourseContract(CourseRegistry.getCourse(action));
-		student.addCourse(course);
-		resp.sendRedirect("/settings");
+		CourseContract course;
+		try {
+			course = new CourseContract(CourseRegistry.getCourse(action));
+			student.addCourse(course);
+			resp.sendRedirect("/settings");
+		} catch (NoSuchCourseException e) {
+			resp.sendRedirect("/error.jsp?msg=trying to add unexisting course");
+		}
 	}
 			
 

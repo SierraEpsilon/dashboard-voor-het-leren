@@ -2,6 +2,7 @@ package dashboard.registry;
 
 import java.util.*;
 
+import dashboard.error.NoSuchCourseException;
 import dashboard.model.Branch;
 import dashboard.model.Course;
 import dashboard.model.Course;
@@ -52,12 +53,12 @@ public class CourseRegistry {
 		return getBranches().get(branch).getCourses();
 	}
 	
-	public static Course getCourse(String coursename){
+	public static Course getCourse(String coursename) throws NoSuchCourseException{
 		for(Course course: courses){
 			if(course.getName().equals(coursename)){
 				return course;
 			}
 		}
-		return null;
+		throw new NoSuchCourseException();
 	}
 }

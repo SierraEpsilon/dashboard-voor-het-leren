@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidStudyMomentException;
+import dashboard.error.NoSuchCourseException;
 import dashboard.model.Student;
 import dashboard.registry.CourseRegistry;
 import dashboard.model.StudyMoment;
@@ -28,11 +29,9 @@ public class ManualTrackingServlet extends HttpServlet{
 			
 			int amount = (Integer) session.getAttribute("amount");
 			
-			Course usedCourse = CourseRegistry.getCourse((String) session.getAttribute("course"));
-			
-			String kind = (String) session.getAttribute("kind");
-			
 			try {
+				Course usedCourse = CourseRegistry.getCourse((String) session.getAttribute("course"));
+				String kind = (String) session.getAttribute("kind");
 				student.addStudyMoment(new StudyMoment(startDate, endDate, usedCourse, amount, kind));
 			} catch (InvalidEndDateException e) {
 				resp.sendRedirect("/error.jsp?msg=You appear to be a time traveler?!");
@@ -40,6 +39,8 @@ public class ManualTrackingServlet extends HttpServlet{
 				resp.sendRedirect("/error.jsp?msg=You can't have studied that kind of pages!");
 			} catch (InvalidStudyMomentException e) {
 				resp.sendRedirect("/error.jsp?msg=You were already studying at the time!");
+			} catch (NoSuchCourseException e1) {
+				resp.sendRedirect("/error.jsp?msg=no such course!");
 			}
 			
 			
