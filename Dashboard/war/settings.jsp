@@ -19,6 +19,7 @@
 	<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
+<form method='post' action='/settings'>
 	<%
 		Student student = (Student)session.getAttribute("student");
 	%>
@@ -46,12 +47,13 @@
 			for(CourseContract course :student.getCourses() ){
 				String name = course.getCourse().getName();
 				out.println("<li data-inline='true'>" + name + "</li>");
-				out.println("<button input type='submit' value='remove_" + name + "'>remove</button>");
+				out.println("<button n='submit' name='submit' value='remove_" + name + "'>remove</button>");
 			}
 		%>
 		</ul>
-		<input type="submit" value="Voeg een vak toe" />
+		<button type="submit" name="submit" value="voeg">Voeg een vak toe</button>
 	</div>
+</form>
 </div><!-- /content -->
 </div><!-- /page -->
 </body>

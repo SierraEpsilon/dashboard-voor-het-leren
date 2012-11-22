@@ -19,7 +19,7 @@
 	<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
-<form method='post' action='/course_add'>
+<form method='post' action='/add_course'>
 	<ul data-role='listview'>
 	<%
 		Set<String> branchNames = CourseRegistry.getBranches().keySet();
@@ -37,7 +37,7 @@
 		out.println("</div>"); 
  	%>
  	</ul>
- </form>
+</form>
 </div><!-- /content -->
 </div><!-- /page -->
 </body>

@@ -17,7 +17,7 @@ public class CourseAddServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 696129415243839733L;
 
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
 		String action = req.getParameter("submit");
