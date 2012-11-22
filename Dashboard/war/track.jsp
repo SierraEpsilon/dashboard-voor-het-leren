@@ -23,7 +23,7 @@
 <%
 String startTime;
 int start;
-if(request.getParameter("mode")!=null&&request.getParameter("mode").equals("stop")){
+if(request.getParameter("mode")!=null && request.getParameter("mode").equals("stop")){
 	start = 1;
 	Date startDate = (Date)session.getAttribute("startTracking");
 	Course course = (Course)session.getAttribute("course");
@@ -37,8 +37,7 @@ if(request.getParameter("mode")!=null&&request.getParameter("mode").equals("stop
 	out.println("<form method='post' action='/track'>");
 	out.println("<input type='submit' name='submit' value='cancel'>");
 	out.println("</form>");
-	out.println("<p id='timePast'>");
-	out.println("<div id='liveFeed'></div>");	
+	out.println("<p id='timePast'>");	
 }else{
 	start = 0;
 	startTime = "";
@@ -68,9 +67,6 @@ $(document).bind("pageinit",function(){
 	%>
 	setTimePast();
 	setInterval("setTimePast()",1000);
-	updateFeed();
-	setInterval("updateFeed()",3000);
-	
 	
 });
 
@@ -97,17 +93,6 @@ function setTimePast(){
 		}
 	}
 	$('#timePast').text(str);
-}
-
-function updateFeed(){
-	JQuery.getJSON("/feed",function(data){
-		divText = "";
-		all = data.AllMates;
-		divText += ("<table><tr><td>Totaal:</td><td>" + all + "</td></tr>");
-		course = data.StudyMates;
-		divText += ("<table><tr><td>Per vak:</td><td>" + course + "</td></tr>");
-		$("#liveFeed").text(divText);
-	});
 }
 </script>
 </div><!-- /content -->

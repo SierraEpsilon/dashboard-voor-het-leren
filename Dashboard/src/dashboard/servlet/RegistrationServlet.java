@@ -62,7 +62,7 @@ public class RegistrationServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student_temp");
 		ArrayList<CourseContract> courseList = new ArrayList<CourseContract>();
-		for(int i = 0; i < courses.length; i++)
+		for(int i = 1; i < courses.length; i++)
 			courseList.add(new CourseContract(CourseRegistry.getCourse(courses[i])));
 		student.setCourses(courseList);
 		session.removeAttribute("student_temp");
