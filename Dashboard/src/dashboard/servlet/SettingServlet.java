@@ -19,13 +19,6 @@ public class SettingServlet extends HttpServlet {
 	private static final long serialVersionUID = 383365373572564568L;
 
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String[] courses = req.getParameter("courses").split(";");
-		HttpSession session = req.getSession();
-		Student student = (Student)session.getAttribute("student");
-		ArrayList<CourseContract> courseList = new ArrayList<CourseContract>();
-		for(int i = 0; i < courses.length; i++)
-			courseList.add(new CourseContract(CourseRegistry.getCourse(courses[i])));
-		student.setCourses(courseList);
-		resp.sendRedirect("/track");
+
 	}
 }
