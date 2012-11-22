@@ -25,10 +25,7 @@ public class TrackingServlet extends HttpServlet{
 		Student student = (Student)session.getAttribute("student");
 		
 		if(student!=null){
-			if(student.getCourses().isEmpty()){
-				session.setAttribute("student_temp", student);
-				resp.sendRedirect("/register_settings.jsp");
-			} else if(student.getCurrentStudyMoment() == null){
+			if(student.getCurrentStudyMoment() == null){
 				session.setAttribute("startTracking", null);
 				session.setAttribute("course", null);
 				resp.sendRedirect("/track.jsp?mode=start");

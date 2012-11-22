@@ -4,8 +4,6 @@ import java.util.*;
 
 import dashboard.model.Branch;
 import dashboard.model.Course;
-import dashboard.model.Course;
-import dashboard.model.Student;
 
 public class CourseRegistry {
 

@@ -25,25 +25,15 @@ public class RegistrationServlet extends HttpServlet {
 	 * @throws IOException
 	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String action = req.getParameter("submit");
-		if(action.equals("volgende"))
-			addStudent(req, resp);
-		else if(action.equals("registreren"))
-			addCourses(req, resp);
-	}
-
-	private void addStudent(HttpServletRequest req, HttpServletResponse resp)
-			throws IOException {
 		String username = req.getParameter("username");
 		String email = req.getParameter("mail");
 		String firstName = req.getParameter("firstname");
 		String lastName = req.getParameter("lastname");
 		String password = req.getParameter("password");
-		HttpSession session = req.getSession();
+		
 		try{
 			StudentRegistry.addUser(firstName,lastName,username,email,password);//add the user to the list of existing users
-			session.setAttribute("student_temp",StudentRegistry.getUserByUserName(username));
-			resp.sendRedirect("/register_settings.jsp");
+			resp.sendRedirect("/login.jsp?msg=Registration succes!");
 		} catch (UserNameInUseException e){
 			resp.sendRedirect("/error.jsp?msg=This username is already in use!");
 		} catch (InvalidUserNameException e){
@@ -60,13 +50,11 @@ public class RegistrationServlet extends HttpServlet {
 	private void addCourses(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String[] courses = req.getParameter("courses").split(";");
 		HttpSession session = req.getSession();
-		Student student = (Student)session.getAttribute("student_temp");
+		Student student = (Student)session.getAttribute("student");
 		ArrayList<CourseContract> courseList = new ArrayList<CourseContract>();
 		for(int i = 0; i < courses.length; i++)
 			courseList.add(new CourseContract(CourseRegistry.getCourse(courses[i])));
 		student.setCourses(courseList);
-		session.setAttribute("student_temp",null);
-		session.setAttribute("student",student);
 		resp.sendRedirect("/track");
 	}
 }
