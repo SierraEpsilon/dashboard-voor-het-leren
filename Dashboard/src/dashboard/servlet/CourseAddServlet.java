@@ -17,13 +17,22 @@ public class CourseAddServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 696129415243839733L;
 
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		HttpSession session = req.getSession();
+		Student student = (Student)session.getAttribute("student");
+		if(student == null)
+			resp.sendRedirect("/login");
+		else
+			resp.sendRedirect("/add_course.jsp");
+	}
+	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
 		String action = req.getParameter("submit");
 		CourseContract course = new CourseContract(CourseRegistry.getCourse(action));
 		student.addCourse(course);
-		resp.sendRedirect("/settings.jsp");
+		resp.sendRedirect("/settings");
 	}
 			
 

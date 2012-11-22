@@ -18,6 +18,15 @@ public class SettingServlet extends HttpServlet {
 
 	private static final long serialVersionUID = 383365373572564568L;
 
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		HttpSession session = req.getSession();
+		Student student = (Student)session.getAttribute("student");
+		if(student == null)
+			resp.sendRedirect("/login");
+		else
+			resp.sendRedirect("/settings.jsp");
+	}
+	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
@@ -25,8 +34,9 @@ public class SettingServlet extends HttpServlet {
 		if(action.contains("remove_")){
 			String vak = action.replace("remove_","");
 			remove(vak,student,req,resp);
+			resp.sendRedirect("/settings");
 		} else if(action.equals("voeg")){
-			resp.sendRedirect("/add_course.jsp");
+			resp.sendRedirect("/add_course");
 		}
 	}
 	

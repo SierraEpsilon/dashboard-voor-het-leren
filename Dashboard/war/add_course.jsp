@@ -17,6 +17,7 @@
 <div data-role="page">
 <div data-role="header" data-id='header' data-position="fixed">
 	<h1>Learnalyzer</h1>
+	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 </div><!-- /header -->
 <div data-role="content">
 <form method='post' action='/add_course'>
