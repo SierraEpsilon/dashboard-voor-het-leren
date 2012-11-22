@@ -33,8 +33,8 @@ $(document).bind("pageinit",function(){
 	<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
-<form id='myForm' action="/settings" method="post">
-	<input type='submit' value='verzenden'>
+<form id='myForm' action="/register" method="post">
+	<input type='submit' name='submit' value='registreren'>
 	<input type='hidden' name='courses'>
 </form>
 	<ul data-role='listview'>

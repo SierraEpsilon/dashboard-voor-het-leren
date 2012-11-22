@@ -79,7 +79,7 @@ if(session.getAttribute("register.jsp")!=null){
 <input type='password' name='password1'>
 <label for="password2">Herhaal wachtwoord</label>
 <input type='password' name='password2'>
-<input type='submit' value='REGISTREREN'>
+<input type='submit' name='submit' value='volgende'>
 </form>
 </div><!-- /content -->
 </div><!-- /page -->
