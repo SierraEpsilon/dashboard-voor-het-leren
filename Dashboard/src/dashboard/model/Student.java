@@ -288,14 +288,14 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * |	!getCourses().contains(course)
 	 */
 	public void removeCourse(String courseName) throws NoSuchCourseException {
-		for(CourseContract course : getCourses())
+		for(CourseContract course : getCourses()){
 			if(course.getCourse().getName().equals(courseName)){
 				getCourses().remove(course);
 				OwnOfy.ofy().put(this);
-				return;
+			}else throw(new NoSuchCourseException());
 			}
-		throw(new NoSuchCourseException());
 	}
+	
 	
 	/**
 	 * @param userName
@@ -320,22 +320,33 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	
 	/**
 	 * @param userName
+	 * the user name you want to accept as a friend
 	 * @throws UnrequestedFriendException 
 	 */
 	public void acceptFriend(String userName) throws UnrequestedFriendException{
 		if(!friendRequestsByOthers.contains(userName))
 			throw new UnrequestedFriendException();
-		friendList.add(userName);
+		addFriend(userName);
 		friendRequestsByOthers.remove(userName);
 	}
 	
 	/**
 	 * @param userName
+	 * the user name who accepted you as a friend
+	 */
+	public void acceptedAsfriend(String userName){
+		addFriend(userName);
+		friendRequestsByStudent.remove(userName);
+	}
+	
+	/**
+	 * @param userName
+	 * the user name to add to friend list
 	 * @throws InvalidUserNameException 
 	 * 
 	 */
 	private void addFriend(String userName) {
-		
+		friendList.add(userName);
 	}
 	
 	/**
