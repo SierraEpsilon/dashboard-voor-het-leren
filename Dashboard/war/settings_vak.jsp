@@ -19,6 +19,13 @@
 	<h1>Learnalyzer</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 </div><!-- /header -->
+<div data-role="navbar">
+	<ul>
+		<li><a href="/settings_info.jsp">Personal</a></li>
+		<li><a href="/settings_pass.jsp">Password</a></li>
+		<li><a href="/settings_vak.jsp">Vakken</a></li>
+	</ul>
+</div><!-- /navbar -->
 <div data-role="content">
 <form method='post' action='/settings'>
 	<%
