@@ -27,19 +27,21 @@
 	<div>
 		<h3>Persoonlijke informatie</h3>
 		<label for="name">Voornaam:</label>
-		<input type="text" name="name" id="name" value="<%=student.getFirstName()%>"/>
+		<input type="text" name="firstname" value="<%=student.getFirstName()%>"/>
 		</h>
 		<label for="name">Naam:</label>
-		<input type="text" name="name" id="name" value="<%=student.getLastName()%>"/>
+		<input type="text" name="lastname" value="<%=student.getLastName()%>"/>
+		<button type="submit" name="submit" value="namechange">Verander naam</button>
 	</div>
 	<div style="margin-top: 50px">
 		<h3>Paswoord</h3>
 		<label for="name">Oud paswoord:</label>
-		<input type="text" name="name" id="name" value=""/>
+		<input type="text" name="pass1" value=""/>
 		<label for="name">Nieuw paswoord:</label>
-		<input type="text" name="name" id="name" value=""/>
+		<input type="text" name="pass2" value=""/>
 		<label for="name">Herhaal nieuw paswoord:</label>
-		<input type="text" name="name" id="name" value=""/>
+		<input type="text" name="pass3" value=""/>
+		<button type="submit" name="submit" value="passchange">Verander paswoord</button>
 	</div>
 	<div style="margin-top: 50px">
 		<h3>Vakken</h3>
