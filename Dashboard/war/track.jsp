@@ -23,7 +23,7 @@
 <%
 String startTime;
 int start;
-if(request.getParameter("mode")!=null&&request.getParameter("mode").equals("stop")){
+if(request.getParameter("mode")!=null && request.getParameter("mode").equals("stop")){
 	start = 1;
 	Date startDate = (Date)session.getAttribute("startTracking");
 	Course course = (Course)session.getAttribute("course");
