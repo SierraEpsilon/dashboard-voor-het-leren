@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("student", user);//set the current student to the one who is trying to log in
 			resp.sendRedirect("/track");
 		} else {
-			resp.sendRedirect("/login.jsp?msg=The combination of the given username and password is invalid.");
+			resp.sendRedirect("/login.jsp?msg=De opgegeven combinatie van gebruikersnaam en paswoord is niet geldig.");
 		}
 	}
 	
