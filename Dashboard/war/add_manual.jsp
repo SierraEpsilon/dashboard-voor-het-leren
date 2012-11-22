@@ -37,21 +37,18 @@ $(document).bind("pageinit",function(){
 		var start =  $("input[name='startdate']").val();
 		var end = $("input[name='enddate']").val();
 		if(end<start){
-			$("#msg2").text("De einddatum valt na de begindatum!");
+			$("#msg2").text("De eindtijd moet na de begintijd vallen!");
 			$("input[name='enddate']").val(start);
 		}else{$("#msg2").text("");
 		}
 	});
 	
 	$("#opslaan").click(function(){
-		
-		alert("submitting");
 		var startd = $("input[name='startdate']").val();
 		var startt = $("input[name='starttime']").val();
 		var endd = $("input[name='enddate']").val();
 		var endt = $("input[name='endtime']").val();
 		var amount = $("input[name='amount']").val();
-		alert("check");
 		var cont = true;
 		cont = (startd=="") ? false : cont;
 		cont = (startt=="") ? false : cont;
@@ -63,12 +60,12 @@ $(document).bind("pageinit",function(){
 		}
 		else if(startd == endd){
 			if(!(startt<endt)){
-				$("#msg2").text("De einddatum valt na de begindatum!");
+				$("#msg2").text("De eindtijd moet na de begintijd vallen!");
 				$("input[name='endtime']").val('');
 			}
 		}
 		else if(endd < startd){
-			$("#msg2").text("De einddatum valt na de begindatum!");
+			$("#msg2").text("De eindtijd moet na de begintijd vallen!");
 			$("input[name='endtime']").val('');
 		}
 		else if (amount < 1){

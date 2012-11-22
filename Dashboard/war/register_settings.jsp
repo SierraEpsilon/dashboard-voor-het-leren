@@ -17,13 +17,14 @@
 <div data-role="page">
 <script>
 $(document).bind("pageinit",function(){
-	$("#myForm").submit(function(){
+	$("#myForm").submit(function(){x
 		var ret = '';
 		$("input[type='checkbox']").each(function(){
 			if($(this).attr("checked")=="checked"){
 				ret += ($(this).attr("name") + ";");
 			}
 			$("#myForm>input[name='courses']").attr("value",ret);
+			alert(ret);
 			return true;
 		});
 	});
@@ -33,8 +34,8 @@ $(document).bind("pageinit",function(){
 	<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
-<form id='myForm' action="/settings" method="post">
-	<input type='submit' value='verzenden'>
+<form id='myForm' action="/register" method="post">
+	<input type='submit' name='submit' value='registreren'>
 	<input type='hidden' name='courses'>
 </form>
 	<ul data-role='listview'>

@@ -9,6 +9,7 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
+<%@include file="inc/redirect.jsp"%>
 </head>
 <body>
 <div data-role="page">
@@ -21,8 +22,8 @@ $(document).bind("pageinit",function(){
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
 
-	<h1>INSERT PAGE HEADER</h1>
-	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">BUTTON EXAMPLE</a>
+	<h1>Menu</h1>
+	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Logout</a>
 
 </div><!-- /header -->
 <div data-role="content">
@@ -30,22 +31,13 @@ $(document).bind("pageinit",function(){
 	<ul data-role="listview">
 	<li><a href="/stat.jsp">Statistieken</a></li>
 	<li><a href="/track.jsp">Tracken</a></li>
-	<li><a href="/achiements">Achievements</a></li>
+	<li><a href="/achievements.jsp">Achievements</a></li>
 	<li><a href="/settings.jsp">Instellingen</a></li>
 	
 </ul>
 	
 	
 </div><!-- /content -->
-<div data-role='footer' data-id="foo1" data-position="fixed">
-
-	INSERT FOOTER CONTENT
-	<div data-role="navbar"><ul>
-		<li><a href="#" data-role="button" data-icon="delete">BUTTON1</a></li>
-		<li><a href="#" data-role="button" data-icon="check">BUTTON2</a></li>
-	</ul></div>
-
-</div>
 </div><!-- /page -->
 </body>
 </html>
