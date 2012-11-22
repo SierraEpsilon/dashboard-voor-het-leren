@@ -27,9 +27,9 @@ $(document).bind("pageinit",function(){
 	$("input[name='amount']").change(function(){
 		var given = $("input[name='amount']").val();
 		if(given<1){
-			$("#msg2").text("Geef een geldig getal op");
+			$("#msg3").text("Geef een geldig getal op");
 			$("input[name='amount']").val('');
-		}else{$("#msg2").text("");
+		}else{$("#msg3").text("");
 		}
 	});
 	
@@ -37,12 +37,51 @@ $(document).bind("pageinit",function(){
 		var start =  $("input[name='startdate']").val();
 		var end = $("input[name='enddate']").val();
 		if(end<start){
-			$("#msg").text("De einddatum valt na de begindatum!");
+			$("#msg2").text("De einddatum valt na de begindatum!");
 			$("input[name='enddate']").val(start);
-		}else{$("#msg").text("");
+		}else{$("#msg2").text("");
 		}
 	});
-
+	
+	$("#opslaan").click(function(){
+		$("#myFormm").submit(function(){
+		
+			var startd = $("input[name='startdate']").val();
+			var startt = $("input[name='starttime']").val();
+			var endd = $("input[name='enddate']").val();
+			var endt = $("input[name='endtime']").val();
+			var amount = $("input[name='amount']").val();
+		alert("check");
+			var cont = true;
+			cont = (startd=="") ? false : cont;
+			cont = (startt=="") ? false : cont;
+			cont = (endd=="") ? false : cont;
+			cont = (endt=="") ? false : cont;
+			cont = (amount=="") ? false : cont;
+			if(!cont){
+				$("#msg").text("Vul alle velden in!");
+				return false;}
+			else if(startd == endd){
+					if(!(startt<endt)){
+						$("#msg2").text("De einddatum valt na de begindatum!");
+						$("input[name='endtime']").val('');
+						return false;}
+					}
+			else if(endd < startd){
+					$("#msg2").text("De einddatum valt na de begindatum!");
+					$("input[name='endtime']").val('');
+					return false;
+					}
+			else if (amount < 1){
+					$("#msg3").text("Geef een geldig getal op!");
+					$("input[name='amount']").val('');
+					return false;
+					}
+			else {
+				$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
+				return true;}
+		});
+	});
 });
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
@@ -53,8 +92,9 @@ $(document).bind("pageinit",function(){
 </div><!-- /header -->
 <div data-role="content">
 
-<form id="myForm" method="post" action="/manual">
+<form id="myFormm" method="post" action='/manual'>
 	
+	<p id='msg' style='color:red;'></p>
 	<b>Starttijd</b>
 	<p>
 	         <label for="startdate">Datum:</label>
@@ -69,7 +109,7 @@ $(document).bind("pageinit",function(){
 	         <label for="endtime">Tijd:</label>
 	         <input type="time" name="endtime" id="time" value="" />
 	         
- 	<p id='msg' style='color:red;'></p>
+ 	<p id='msg2' style='color:red;'></p>
  
  	<b>Vak</b>
  	
@@ -84,19 +124,18 @@ $(document).bind("pageinit",function(){
 	</fieldset>
 	<label for='amount'>Hoeveelheid:</label>
 	<input type='number' name='amount'>
-	<p id='msg2' style='color:red;'></p>
-	
-	
- 	
+	<p id='msg3' style='color:red;'></p>
+
+</form>
  
- 	</form>
+ 
  
 </div><!-- /content -->
 <div data-role='footer' data-id="foo1" data-position="fixed">
 	<div data-role="navbar"><ul>
 
-		<li><a href="#" data-role="button" data-icon="check">Opslaan</a></li>
-		<li><a href="#" data-role="button" data-icon="delete">Annuleren</a></li>
+		<li><a href="#" data-role="button" data-icon="check" id="opslaan" >Opslaan</a></li>
+		<li><a href="/menu.jsp" data-role="button" data-icon="delete">Annuleren</a></li>
 	</ul></div>
 
 </div>
