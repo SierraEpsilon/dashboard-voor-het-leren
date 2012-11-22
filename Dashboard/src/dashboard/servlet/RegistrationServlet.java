@@ -64,7 +64,8 @@ public class RegistrationServlet extends HttpServlet {
 		ArrayList<CourseContract> courseList = new ArrayList<CourseContract>();
 		for(int i = 0; i < courses.length; i++)
 			courseList.add(new CourseContract(CourseRegistry.getCourse(courses[i])));
-		student.setCourses(courseList);
+		if(courseList != null)
+			student.setCourses(courseList);
 		session.removeAttribute("student_temp");
 		session.setAttribute("student",student);
 		resp.sendRedirect("/track");
