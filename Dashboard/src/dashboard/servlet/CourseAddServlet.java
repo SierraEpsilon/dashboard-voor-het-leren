@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dashboard.error.CourseAlreadyTakenException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.model.CourseContract;
 import dashboard.model.Student;
@@ -38,6 +39,8 @@ public class CourseAddServlet extends HttpServlet {
 			resp.sendRedirect("/settings");
 		} catch (NoSuchCourseException e) {
 			resp.sendRedirect("/error.jsp?msg=trying to add unexisting course");
+		} catch (CourseAlreadyTakenException e) {
+			resp.sendRedirect("/error.jsp?msg=can't add courses twice");
 		}
 	}
 			
