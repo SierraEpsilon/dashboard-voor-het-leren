@@ -55,7 +55,10 @@ $(document).bind("pageinit",function(){
 	</fieldset>
 	<label for='amount'>Hoeveelheid:</label>
 	<input type='text' name='amount'>
-	<p id='msg' style='color:red;'></p>
+	<%
+		String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
+	%>
+	<p id='msg' style='color:red;'><%=msg%></p>
 	<input type="submit" value='OPSLAAN'>
 	<input type='hidden' name='submit' value='stop'>
 	</form>
