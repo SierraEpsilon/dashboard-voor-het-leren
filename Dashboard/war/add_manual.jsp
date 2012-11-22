@@ -83,7 +83,7 @@ $(document).bind("pageinit",function(){
 <div data-role="header" data-id='header' data-position="fixed">
 
 	<h1>Toevoegen van studiemoment</h1>
-	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Logout</a>
+	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 
 </div><!-- /header -->
 <div data-role="content">

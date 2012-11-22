@@ -33,6 +33,7 @@ $(document).bind("pageinit",function(){
 	<li><a href="/track.jsp">Tracken</a></li>
 	<li><a href="/achievements.jsp">Achievements</a></li>
 	<li><a href="/settings.jsp">Instellingen</a></li>
+	<li><a href="/add_manual.jsp">Toevoegen van studiemoment</a></li>
 	
 </ul>
 	
