@@ -9,6 +9,7 @@
 <html>
 <head>
 <%@include file="inc/head.jsp"%>
+<%@include file="inc/redirect.jsp"%>
 </head>
 <body>
 <div data-role="page">
@@ -22,7 +23,7 @@ $(document).bind("pageinit",function(){
 <div data-role="header" data-id='header' data-position="fixed">
 
 	<h1>INSERT PAGE HEADER</h1>
-	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">BUTTON EXAMPLE</a>
+	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Logout</a>
 
 </div><!-- /header -->
 <div data-role="content">
@@ -37,15 +38,7 @@ $(document).bind("pageinit",function(){
 	
 	
 </div><!-- /content -->
-<div data-role='footer' data-id="foo1" data-position="fixed">
 
-	INSERT FOOTER CONTENT
-	<div data-role="navbar"><ul>
-		<li><a href="#" data-role="button" data-icon="delete">BUTTON1</a></li>
-		<li><a href="#" data-role="button" data-icon="check">BUTTON2</a></li>
-	</ul></div>
-
-</div>
 </div><!-- /page -->
 </body>
 </html>
