@@ -22,7 +22,7 @@ $(document).bind("pageinit",function(){
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
 
-	<h1>INSERT PAGE HEADER</h1>
+	<h1>Menu</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Logout</a>
 
 </div><!-- /header -->
@@ -31,15 +31,13 @@ $(document).bind("pageinit",function(){
 	<ul data-role="listview">
 	<li><a href="/stat.jsp">Statistieken</a></li>
 	<li><a href="/track.jsp">Tracken</a></li>
-	<li><a href="/achiements">Achievements</a></li>
+	<li><a href="/achievements.jsp">Achievements</a></li>
 	<li><a href="/settings.jsp">Instellingen</a></li>
-	<li><a href="/add_manual.jsp">Toevoegen van studiemoment</a></li>
 	
 </ul>
 	
 	
 </div><!-- /content -->
-
 </div><!-- /page -->
 </body>
 </html>
