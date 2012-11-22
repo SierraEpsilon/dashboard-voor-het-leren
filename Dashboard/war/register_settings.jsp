@@ -25,8 +25,6 @@ $(document).bind("pageinit",function(){
 			}
 			$("#myCourseForm>input[name='courses']").attr("value",ret);
 		});
-		alert(ret);
-		alert($("#myCourseForm>input[name='courses']").attr("value"));
 		return true;
 	});
 });
