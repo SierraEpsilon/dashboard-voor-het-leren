@@ -17,6 +17,7 @@ import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
+import dashboard.error.InvalidStudymomentException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.error.NotStudyingException;
@@ -214,14 +215,18 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	/**
 	 * @param moment
 	 * 	the moment you want to add
+	 * @throws InvalidStudymomentException 
 	 * @post
 	 * 	the moment was added to the student's studymoments
 	 * 	|	new.studyMoments.contains(moment)
 	 */
-	public void addStudyMoment(StudyMoment moment) {
+	public void addStudyMoment(StudyMoment moment) throws InvalidStudymomentException {
+		if(!IsValidStudyMoment(moment))
+			throw new InvalidStudymomentException();
 		getStudyMoments().add(moment);
 		OwnOfy.ofy().put(this);
 	}
+	
 	
 	/**
 	  * @param course
@@ -300,6 +305,25 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		return (getPassword().equals(password));
 	}
 	
+	private boolean IsValidStudyMoment(StudyMoment moment) {
+		boolean isValidMoment = true;
+		for(int i = 0; i < studyMoments.size(); i++){
+			StudyMoment momentToCheck = studyMoments.get(i);
+			Date a = momentToCheck.getStart();
+			Date b = momentToCheck.getEnd();
+			Date c = moment.getStart();
+			Date d = moment.getEnd();
+			if(c.after(a) && c.before(b))
+				isValidMoment = false;			
+			if(d.after(a) && d.before(b))
+					isValidMoment = false;
+			if(a.after(c) && a.before(d))
+				isValidMoment = false;
+		}
+			return isValidMoment;
+	}
+
+	
 	/**
 	 * @throws NotStudyingException 
 	 * 	|	getCurrentStudyMoment() == null
@@ -319,6 +343,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	what kind of studying he did
 	 * @throws AlreadyEndedException
 	 * @throws InvalidAmountException
+	 * @throws InvalidStudymomentException 
 	 * @effect
 	 * 	|	StudyMoment moment = getCurrentStudyMoment()
 	 * 	|	addStuddyMoment(moment)
@@ -327,7 +352,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	|	setCurrentStudyMoment(null)
 	 */
 	public void endStudying(Date endDate, int amount, String kind) 
-			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException{
+			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException, InvalidStudymomentException{
 		StudyMoment moment = getCurrentStudyMoment();
 		moment.endMoment(endDate, amount, kind);
 		addStudyMoment(moment);
