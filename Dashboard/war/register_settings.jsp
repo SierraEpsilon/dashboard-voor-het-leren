@@ -17,7 +17,7 @@
 <div data-role="page">
 <script>
 $(document).bind("pageinit",function(){
-	$("#myForm").submit(function(){
+	$("#myCourseForm").submit(function(){
 		var ret = '';
 		$("input[type='checkbox']").each(function(){
 			if($(this).attr("checked")=="checked"){
@@ -35,27 +35,26 @@ $(document).bind("pageinit",function(){
 	<h1>Learnalyzer</h1>
 </div><!-- /header -->
 <div data-role="content">
-<form id='myForm' action="/register" method="post">
+<form id='myCourseForm' action="/register" method="post">
 	<input type='submit' name='submit' value='registreren'>
 	<input type='hidden' name='courses'>
+</form>
 	<ul data-role='listview' style="margin-top: 5px">
 	<%
 		Set<String> branchNames = CourseRegistry.getBranches().keySet();
 		HashMap<String,Branch> branches = CourseRegistry.getBranches();
-		for(String branch: branchNames){
 		out.println("<div data-role='collapsible-set'>");
+		for(String branch: branchNames){
 		out.println("<div data-role='collapsible'>"); 
 				out.println("<h3>" + branch + "</h3>"); 
 				out.println("<div data-role='controlgroup'>");
 				for(Course course :branches.get(branch).getCourses()){
 				out.println("<li><label><input type='checkbox' name='" + course + "' />" + course + "</label>");
 				}
-	%>
-				</div>
-		</div>
-	</div>	
-	<% } %>
-</form>
+				out.println("</div></div>"); 
+ 		} 
+		out.println("</div>"); 
+ %>
 </div><!-- /content -->
 </div><!-- /page -->
 </body>
