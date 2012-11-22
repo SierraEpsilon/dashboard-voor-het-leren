@@ -39,9 +39,6 @@
 		<label for="name">Herhaal nieuw paswoord:</label>
 		<input type="text" name="name" id="name" value=""/>
 	</div>
-	<script>
-		$('a').buttonMarkup({ inline: true });
-	</script>
 	<div style="margin-top: 50px">
 		<h3>Vakken</h3>
 		<ul data-role="listview" style="margin: 5px">

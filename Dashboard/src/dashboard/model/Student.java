@@ -18,6 +18,7 @@ import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
+import dashboard.error.NoSuchCourseException;
 import dashboard.error.NotStudyingException;
 import dashboard.registry.CourseRegistry;
 import dashboard.util.OwnOfy;
@@ -232,6 +233,21 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	public void addCourse(CourseContract course){
 		getCourses().add(course);
 		OwnOfy.ofy().put(this);
+	}
+	
+	/**
+	 * @param	courseName
+	 * 	the name of the course you want to remove
+	 * @throws NoSuchCourseException 
+	 * |	!getCourses().contains(course)
+	 */
+	public void removeCourse(String courseName) throws NoSuchCourseException {
+		for(CourseContract course : getCourses())
+			if(course.getCourse().getName().equals(courseName)){
+				getCourses().remove(course);
+				return;
+			}
+		throw(new NoSuchCourseException());
 	}
 	
 	/**
