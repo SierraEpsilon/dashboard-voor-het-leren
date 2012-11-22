@@ -16,6 +16,10 @@ $(document).ready(function(){
 		return false;
 	});
 });
+$.getJSON("/feed",function(data){
+		all = data.AllMates;
+		course = data.StudyMates;
+});
 </script>
 <body>
 <form id='myForm' method='post' action='track.jsp?mode=stop'>
