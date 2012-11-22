@@ -26,13 +26,13 @@ public class ManualTrackingServlet extends HttpServlet{
 		if(student!=null){
 			Date startDate = new Date(session.getAttribute("startdate") +" " + session.getAttribute("starttime"));
 			Date endDate = new Date(session.getAttribute("enddate") + " "+ session.getAttribute("endtime"));
-			
 			int amount = (Integer) session.getAttribute("amount");
 			
 			try {
 				Course usedCourse = CourseRegistry.getCourse((String) session.getAttribute("course"));
 				String kind = (String) session.getAttribute("kind");
 				student.addStudyMoment(new StudyMoment(startDate, endDate, usedCourse, amount, kind));
+				resp.sendRedirect("add_manual.jsp");
 			} catch (InvalidEndDateException e) {
 				resp.sendRedirect("/error.jsp?msg=You appear to be a time traveler?!");
 			} catch (InvalidAmountException e) {
