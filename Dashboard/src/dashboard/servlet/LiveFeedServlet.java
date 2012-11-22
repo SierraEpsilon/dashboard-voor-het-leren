@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
 import dashboard.model.Course;
@@ -27,13 +28,18 @@ public class LiveFeedServlet extends HttpServlet {
 		Course course = currentStudent.getCurrentStudyMoment().getCourse();
 		
 		JSONObject obj=new JSONObject();
-		obj.put("studyMates", StudentRegistry.getActiveUsersbyCourse(course).size());
-		obj.put("AllMates", StudentRegistry.getActiveUsers().size());
+		try {
+			obj.put("studyMates", StudentRegistry.getActiveUsersbyCourse(course).size());
+			obj.put("AllMates", StudentRegistry.getActiveUsers().size());
+			resp.setContentType("application/json");
+			PrintWriter out = resp.getWriter();
+			out.print(obj);
+			out.flush();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		resp.setContentType("application/json");
-		PrintWriter out = resp.getWriter();
-		out.print(obj);
-		out.flush();
 	}
 			
 
