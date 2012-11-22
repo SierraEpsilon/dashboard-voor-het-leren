@@ -26,9 +26,6 @@ public class LiveFeedServlet extends HttpServlet {
 		Student currentStudent = (Student)session.getAttribute("student");
 		Course course = currentStudent.getCurrentStudyMoment().getCourse();
 		
-		session.setAttribute("studyMates", StudentRegistry.getActiveUsersbyCourse(course).size());
-		session.setAttribute("allMates", StudentRegistry.getActiveUsers().size());
-		
 		JSONObject obj=new JSONObject();
 		obj.put("studyMates", StudentRegistry.getActiveUsersbyCourse(course).size());
 		obj.put("AllMates", StudentRegistry.getActiveUsers().size());
