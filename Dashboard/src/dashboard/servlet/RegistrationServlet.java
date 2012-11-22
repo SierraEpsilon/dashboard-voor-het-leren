@@ -45,15 +45,15 @@ public class RegistrationServlet extends HttpServlet {
 			session.setAttribute("student_temp",StudentRegistry.getUserByUserName(username));
 			resp.sendRedirect("/register_settings.jsp");
 		} catch (UserNameInUseException e){
-			resp.sendRedirect("/error.jsp?msg=This username is already in use!");
+			resp.sendRedirect("/register.jsp?msg=This username is already in use!");
 		} catch (InvalidUserNameException e){
-			resp.sendRedirect("/error.jsp?msg=This username is not valid!");
+			resp.sendRedirect("/register.jsp?msg=This username is not valid!");
 		} catch (EmailInUseException e){
-			resp.sendRedirect("/error.jsp?msg=Email: " + email + " is already in use!");
+			resp.sendRedirect("/register.jsp?msg=Email: " + email + " is already in use!");
 		} catch (InvalidEmailException e){
-			resp.sendRedirect("/error.jsp?msg=This email is not valid!");
+			resp.sendRedirect("/register.jsp?msg=This email is not valid!");
 		} catch (InvalidPasswordException e){
-			resp.sendRedirect("/error.jsp?msg=This password is not valid!");
+			resp.sendRedirect("/register.jsp?msg=This password is not valid!");
 		}
 	}
 	
