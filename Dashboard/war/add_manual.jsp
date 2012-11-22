@@ -90,7 +90,10 @@ $(document).bind("pageinit",function(){
 
 <form id="myFormm" method="post" action='/manual'>
 	
-	<p id='msg' style='color:red;'></p>
+	<%
+		String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
+	%>
+	<p id='msg' style='color:red;'><%=msg%></p>
 	<b>Starttijd</b>
 	<p>
 	         <label for="startdate">Datum:</label>
@@ -105,7 +108,10 @@ $(document).bind("pageinit",function(){
 	         <label for="endtime">Tijd:</label>
 	         <input type="time" name="endtime" id="time" value="" />
 	         
- 	<p id='msg2' style='color:red;'></p>
+ 	<%
+		String msg2 = (request.getParameter("msg2")==null) ? "" : request.getParameter("msg2");
+	%>
+	<p id='msg2' style='color:red;'><%=msg2%></p>
  
  	<b>Vak</b>
  	
@@ -120,7 +126,10 @@ $(document).bind("pageinit",function(){
 	</fieldset>
 	<label for='amount'>Hoeveelheid:</label>
 	<input type='number' name='amount'>
-	<p id='msg3' style='color:red;'></p>
+	<%
+		String msg3 = (request.getParameter("msg3")==null) ? "" : request.getParameter("msg3");
+	%>
+	<p id='msg3' style='color:red;'><%=msg3%></p>
 
 </form>
  
