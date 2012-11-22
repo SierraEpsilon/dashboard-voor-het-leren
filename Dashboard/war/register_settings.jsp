@@ -17,13 +17,14 @@
 <div data-role="page">
 <script>
 $(document).bind("pageinit",function(){
-	$("#myForm").submit(function(){
+	$("#myForm").submit(function(){x
 		var ret = '';
 		$("input[type='checkbox']").each(function(){
 			if($(this).attr("checked")=="checked"){
 				ret += ($(this).attr("name") + ";");
 			}
 			$("#myForm>input[name='courses']").attr("value",ret);
+			alert(ret);
 			return true;
 		});
 	});
