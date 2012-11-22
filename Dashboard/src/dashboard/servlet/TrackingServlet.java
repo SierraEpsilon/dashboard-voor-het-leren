@@ -11,6 +11,7 @@ import javax.servlet.http.HttpSession;
 import dashboard.error.AlreadyEndedException;
 import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEndDateException;
+import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.NotStudyingException;
 import dashboard.model.*;
 import dashboard.registry.CourseRegistry;
@@ -74,6 +75,9 @@ public class TrackingServlet extends HttpServlet{
 					resp.sendRedirect("/error.jsp?msg=You appear to be a time traveler?!");
 				} catch (InvalidAmountException e) {
 					resp.sendRedirect("/error.jsp?msg=You can't have studied that kind of pages!");
+				} catch (InvalidStudyMomentException e) {
+					resp.sendRedirect("/error.jsp?msg=Overlap");
+					e.printStackTrace();
 				}
 			} else if(req.getParameter("submit").equals("cancel")){//cancel the study moment
 				try {
