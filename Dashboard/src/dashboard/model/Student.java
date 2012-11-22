@@ -13,6 +13,7 @@ import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.annotation.*;
 
 import dashboard.error.AlreadyEndedException;
+import dashboard.error.CourseAlreadyTakenException;
 import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidEndDateException;
@@ -22,6 +23,7 @@ import dashboard.error.InvalidUserNameException;
 import dashboard.error.NotFriendException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.error.NotStudyingException;
+import dashboard.error.UnrequestedFriendException;
 import dashboard.registry.CourseRegistry;
 import dashboard.registry.StudentRegistry;
 import dashboard.util.OwnOfy;
@@ -267,11 +269,14 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	/**
 	  * @param course
 	 * 	the course you want to add
+	 * @throws CourseAlreadyTakenException 
 	 * @post
 	 * 	the courseContract was added to the student's courses
 	 * 	|	new.courses.contains(course)
 	 */
-	public void addCourse(CourseContract course){
+	public void addCourse(CourseContract course) throws CourseAlreadyTakenException{
+		if(courses.contains(course))
+			throw new CourseAlreadyTakenException();
 		getCourses().add(course);
 		OwnOfy.ofy().put(this);
 	}
@@ -294,6 +299,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	
 	/**
 	 * @param userName
+	 * the user name you want to request as a friend
 	 * @throws InvalidUserNameException
 	 */
 	public void requestFriend(String userName) throws InvalidUserNameException{
@@ -304,16 +310,23 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		friendRequestsByStudent.add(userName);
 	}
 	
+	/**
+	 * @param username
+	 * the user name who requested you as a friend
+	 */
 	public void requestedAsFriend(String username){
 		friendRequestsByOthers.add(userName);
 	}
 	
 	/**
 	 * @param userName
+	 * @throws UnrequestedFriendException 
 	 */
-	public void acceptFriend(String userName){
-		//if(!friendRequestsByOthers.contains(userName))
-			
+	public void acceptFriend(String userName) throws UnrequestedFriendException{
+		if(!friendRequestsByOthers.contains(userName))
+			throw new UnrequestedFriendException();
+		friendList.add(userName);
+		friendRequestsByOthers.remove(userName);
 	}
 	
 	/**
