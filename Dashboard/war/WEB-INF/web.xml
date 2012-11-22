@@ -56,6 +56,14 @@
         <url-pattern>/achievements</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>manualtracking</servlet-name>
+        <servlet-class>dashboard.servlet.ManualTrackingServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>manualtracking</servlet-name>
+        <url-pattern>/manualtracking</url-pattern>
+    </servlet-mapping>
+    <servlet>
         <servlet-name>feed</servlet-name>
         <servlet-class>dashboard.servlet.LiveFeedServlet</servlet-class>
     </servlet>
