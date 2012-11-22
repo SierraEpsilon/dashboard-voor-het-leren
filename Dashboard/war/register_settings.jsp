@@ -38,7 +38,6 @@ $(document).bind("pageinit",function(){
 <form id='myForm' action="/register" method="post">
 	<input type='submit' name='submit' value='registreren'>
 	<input type='hidden' name='courses'>
-</form>
 	<ul data-role='listview' style="margin-top: 5px">
 	<%
 		Set<String> branchNames = CourseRegistry.getBranches().keySet();
@@ -56,6 +55,7 @@ $(document).bind("pageinit",function(){
 		</div>
 	</div>	
 	<% } %>
+</form>
 </div><!-- /content -->
 </div><!-- /page -->
 </body>
