@@ -334,10 +334,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		setCurrentStudyMoment(null);
 	}
 	
-	public void addManualStudyMoment(StudyMoment moment){
-		addStudyMoment(moment);
-	}
-	
 	/**
 	 * compares user with other user
 	 * @return
