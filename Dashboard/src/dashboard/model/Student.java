@@ -210,6 +210,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setCourses(ArrayList<CourseContract> courses) {
 		this.courses = courses;
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**
