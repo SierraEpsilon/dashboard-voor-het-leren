@@ -25,6 +25,8 @@ public class SettingServlet extends HttpServlet {
 		if(action.contains("remove_")){
 			String vak = action.replace("remove_","");
 			remove(vak,student,req,resp);
+		} else if(action.equals("voeg")){
+			resp.sendRedirect("/add_course.jsp");
 		}
 	}
 	
