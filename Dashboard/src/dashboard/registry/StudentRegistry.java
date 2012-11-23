@@ -200,7 +200,7 @@ public class StudentRegistry {
 		}
 	}
 	
-	public void sendFriendRequest(Student requestor, String friendlyName){
+	public static void sendFriendRequest(Student requestor, String friendlyName){
 		if(requestor.getFriendRequests().contains(friendlyName))
 			createFriends(requestor, friendlyName);
 		else{
@@ -210,7 +210,7 @@ public class StudentRegistry {
 			
 	}
 	
-	public void createFriends(Student acceptor,String requestor){
+	public static void createFriends(Student acceptor,String requestor){
 		if(acceptor.getFriendRequests().contains("requestor")){
 			Student reqUser = getUserByUserName(requestor);
 			acceptor.addFriend(requestor);
