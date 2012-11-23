@@ -34,7 +34,7 @@ public class SettingServlet extends HttpServlet {
 		if(action.contains("remove_")){
 			String vak = action.replace("remove_","");
 			remove(vak,student,req,resp);
-			resp.sendRedirect("/settings");
+			resp.sendRedirect("/settings_vak.jsp");
 		} else if(action.equals("voeg")){
 			resp.sendRedirect("/add_course");
 		} else if(action.equals("namechange")){
@@ -49,7 +49,7 @@ public class SettingServlet extends HttpServlet {
 			String pass3 = req.getParameter("pass3");
 			if(student.isCorrectPassword(pass1) && (pass2.equals(pass3))){
 				student.setPassword(pass2);
-				resp.sendRedirect("/settings");
+				resp.sendRedirect("/settings_pass.jsp");
 			} else
 				resp.sendRedirect("/error.jsp/msg=wrong passwords");
 		}

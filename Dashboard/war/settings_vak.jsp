@@ -46,6 +46,9 @@
 	</div>
 </form>
 </div><!-- /content -->
+<div data-role='footer' data-id="footer_settings" data-position="fixed">
+	<a href="/menu.jsp" data-role="button" data-icon="back">menu</a>
+</div>
 </div><!-- /page -->
 </body>
 </html>

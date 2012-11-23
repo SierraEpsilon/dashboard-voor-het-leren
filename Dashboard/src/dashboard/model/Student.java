@@ -275,8 +275,11 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	|	new.courses.contains(course)
 	 */
 	public void addCourse(CourseContract course) throws CourseAlreadyTakenException{
-		if(courses.contains(course))
-			throw new CourseAlreadyTakenException();
+		for(CourseContract userCourse : getCourses()){
+			if(userCourse.getCourse().getName().equals(course.getCourse().getName())){
+				throw(new CourseAlreadyTakenException());
+			}
+		}
 		getCourses().add(course);
 		OwnOfy.ofy().put(this);
 	}
@@ -292,8 +295,10 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			if(course.getCourse().getName().equals(courseName)){
 				getCourses().remove(course);
 				OwnOfy.ofy().put(this);
-			}else throw(new NoSuchCourseException());
+				return;
 			}
+		}
+		throw(new NoSuchCourseException());
 	}
 	
 	

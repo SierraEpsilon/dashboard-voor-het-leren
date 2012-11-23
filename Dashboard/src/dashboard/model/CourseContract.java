@@ -2,8 +2,6 @@ package dashboard.model;
 
 import java.io.Serializable;
 
-import javax.persistence.Id;
-
 public class CourseContract implements Serializable{
 
 	private Course course;
@@ -27,7 +25,7 @@ public class CourseContract implements Serializable{
 	
 	/**
 	 * @param time
-	 * 	the time yuo studied
+	 * 	the time you studied
 	 * @return
 	 * 	the level
 	 */
