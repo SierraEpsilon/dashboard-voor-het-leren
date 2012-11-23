@@ -1,6 +1,8 @@
 package dashboard.servlet;
 
 import java.io.IOException;
+
+import javax.mail.Session;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,6 +39,7 @@ public class FriendServlet extends HttpServlet {
 			HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String interestingPerson = action.replace("req_", "");
 		StudentRegistry.sendFriendRequest(student, interestingPerson);
+		req.getSession().setAttribute("student", student);
 		resp.sendRedirect("/friends_friends.jsp");
 	}
 
@@ -44,6 +47,7 @@ public class FriendServlet extends HttpServlet {
 			HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String stranger = action.replace("deny_", "");
 		student.removeRequest(stranger);
+		req.getSession().setAttribute("student", student);
 		resp.sendRedirect("/friends_friends.jsp");
 	}
 
@@ -51,6 +55,7 @@ public class FriendServlet extends HttpServlet {
 			HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String friend = action.replace("add_", "");
 		StudentRegistry.createFriends(student, friend);
+		req.getSession().setAttribute("student", student);
 		resp.sendRedirect("/friends_friends.jsp");
 	}	
 }
