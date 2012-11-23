@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
+import com.googlecode.objectify.Query;
 
 import dashboard.error.EmailInUseException;
 import dashboard.error.InvalidEmailException;
@@ -73,10 +74,12 @@ public class StudentRegistry {
 	 *	|		return null
 	 */
 	public static Student getUserByUserName(String username){
-		for(Student user: getUsers())
+		/*for(Student user: getUsers())
 			if(user.getUserName().equals(username))
 				return user;
-		return null;
+		*/
+		Student student = OwnOfy.ofy().query(Student.class).filter("userName",username).get();
+		return student;
 	}
 	
 	/**
@@ -92,12 +95,13 @@ public class StudentRegistry {
 	 *	|		return null
 	 */
 	public static Student getUserByMail(String mail){
-		for(Student user: getUsers()){
+		/*for(Student user: getUsers()){
 			List<Student> userslist = getUsers();
 			if(user.getMail().equals(mail))
 				return user;
-		}
-		return null;
+		}*/
+		Student student = OwnOfy.ofy().query(Student.class).filter("mail",mail).get();
+		return student;
 	}
 	
 	/**
@@ -109,13 +113,14 @@ public class StudentRegistry {
 	 * | 
 	 */
 	public static List<Student> getActiveUsersbyCourse(Course course){
-		List<Student> studyMates = new ArrayList();
+		/*List<Student> studyMates = new ArrayList();
 		for(Student user: getActiveUsers()){
 			if(user.getCurrentStudyMoment().getCourse().equals(course)){
 				studyMates.add(user);
 			}
-		}
-		return studyMates;
+		}*/
+		Query<Student> querry = OwnOfy.ofy().query(Student.class).filter("currentStudyMoment.course.name = ", course.getName());
+		return querry.list();
 	}
 	
 	/**
@@ -196,7 +201,8 @@ public class StudentRegistry {
 		} else if(isUserNameExisting(username)){
 			throw new UserNameInUseException();
 		} else{
-			getUsers().add(new Student(firstName, lastName, username, mail, password));
+			Student student = new Student(firstName, lastName, username, mail, password);
+			getUsers().add(student);
 		}
 	}
 	

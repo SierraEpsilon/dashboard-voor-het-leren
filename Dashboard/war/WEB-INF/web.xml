@@ -48,6 +48,14 @@
         <url-pattern>/settings</url-pattern>
     </servlet-mapping>
      <servlet>
+        <servlet-name>friends</servlet-name>
+        <servlet-class>dashboard.servlet.FriendServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>friends</servlet-name>
+        <url-pattern>/friends</url-pattern>
+    </servlet-mapping>
+     <servlet>
         <servlet-name>add_course</servlet-name>
         <servlet-class>dashboard.servlet.CourseAddServlet</servlet-class>
     </servlet>

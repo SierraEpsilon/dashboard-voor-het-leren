@@ -12,6 +12,15 @@ import dashboard.util.OwnOfy;
 
 public class FriendServlet extends HttpServlet {
 
+	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		HttpSession session = req.getSession();
+		Student student = (Student)session.getAttribute("student");
+		if(student != null)
+			resp.sendRedirect("/friends_friends.jsp");
+		else
+			resp.sendRedirect("/login");
+	}
+	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
@@ -20,6 +29,14 @@ public class FriendServlet extends HttpServlet {
 			addFriend(action,student,req,resp);
 		else if(action.contains("remove_"))
 			denyFriend(action,student,req,resp);
+		else if(action.contains("req_"))
+			requestFriend(action,student,req,resp);
+	}
+
+	private void requestFriend(String action, Student student,
+			HttpServletRequest req, HttpServletResponse resp) {
+		String interestingPerson = action.replace("req_", "");
+		StudentRegistry.sendFriendRequest(student, interestingPerson);
 	}
 
 	private void denyFriend(String action, Student student,

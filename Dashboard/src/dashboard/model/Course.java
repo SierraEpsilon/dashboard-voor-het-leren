@@ -1,6 +1,8 @@
 package dashboard.model;
 
-public enum Course {
+import java.io.Serializable;
+
+public enum Course implements Serializable{
 		
 	H01A8A("Algemene en Technische Scheikunde",7),
 	H01B0A("Toegepaste Mechanica 1",5),

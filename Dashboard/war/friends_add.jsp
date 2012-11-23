@@ -30,9 +30,12 @@
 <form method='post' action='/friends'>
 	<ul data-role="listview" data-filter="true" data-theme="b">
 	<%
+		Student currentStudent = (Student)session.getAttribute("student");
 		for(Student student: StudentRegistry.getUsers()){
-			String name = student.getUserName();
-			out.println("<li>" + name + "</li>");
+			if(!currentStudent.getUserName().equals(student.getUserName())){
+				String name = student.getUserName();
+				out.println("<li type='submit' name='submit' value='req_'" + name + ">" + name + "</li>");
+			}
 		}
 	%>
 	</ul>
