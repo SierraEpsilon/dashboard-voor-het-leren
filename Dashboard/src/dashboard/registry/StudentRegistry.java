@@ -216,8 +216,7 @@ public class StudentRegistry {
 		else{
 			Student friendlyUser = getUserByUserName(friendlyName);
 			friendlyUser.requestedAsFriend(requestor.getUserName());
-		}
-			
+		}	
 	}
 	
 	public static void createFriends(Student acceptor,String requestor){

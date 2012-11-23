@@ -362,8 +362,9 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * @param username
 	 * the user name who requested you as a friend
 	 */
-	public void requestedAsFriend(String username){
-		friendRequests.add(userName);
+	public void requestedAsFriend(String userName){
+		getFriendRequests().add(userName);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**

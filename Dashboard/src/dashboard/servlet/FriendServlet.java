@@ -34,20 +34,23 @@ public class FriendServlet extends HttpServlet {
 	}
 
 	private void requestFriend(String action, Student student,
-			HttpServletRequest req, HttpServletResponse resp) {
+			HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String interestingPerson = action.replace("req_", "");
 		StudentRegistry.sendFriendRequest(student, interestingPerson);
+		resp.sendRedirect("/friends_friends.jsp");
 	}
 
 	private void denyFriend(String action, Student student,
-			HttpServletRequest req, HttpServletResponse resp) {
+			HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String stranger = action.replace("remove_", "");
 		student.removeRequest(stranger);
+		resp.sendRedirect("/friends_friends.jsp");
 	}
 
 	private void addFriend(String action, Student student,
-			HttpServletRequest req, HttpServletResponse resp) {
+			HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String friend = action.replace("add_", "");
 		StudentRegistry.createFriends(student, friend);
+		resp.sendRedirect("/friends_friends.jsp");
 	}	
 }
