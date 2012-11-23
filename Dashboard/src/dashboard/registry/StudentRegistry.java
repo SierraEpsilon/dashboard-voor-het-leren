@@ -199,4 +199,23 @@ public class StudentRegistry {
 			getUsers().add(new Student(firstName, lastName, username, mail, password));
 		}
 	}
+	
+	public void sendFriendRequest(Student requestor, String friendlyName){
+		if(requestor.getFriendRequests().contains(friendlyName))
+			createFriends(requestor, friendlyName);
+		else{
+			Student friendlyUser = getUserByUserName(friendlyName);
+			friendlyUser.requestedAsFriend(requestor.getUserName());
+		}
+			
+	}
+	
+	public void createFriends(Student acceptor,String requestor){
+		if(acceptor.getFriendRequests().contains("requestor")){
+			Student reqUser = getUserByUserName(requestor);
+			acceptor.addFriend(requestor);
+			acceptor.removeRequest(requestor);
+			reqUser.addFriend(acceptor.getUserName());
+		}
+	}
 }
