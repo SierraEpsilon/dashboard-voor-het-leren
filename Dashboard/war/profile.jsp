@@ -31,6 +31,17 @@
 		<h4>Naam:</h4>
 		<p><%=student.getLastName()%></p>
 	</div>
+	<div style="margin-top: 50px">
+		<h3>Vakken</h3>
+		<ul data-role="listview" style="margin: 5px">
+		<%
+			for(CourseContract course :student.getCourses() ){
+				String name = course.getCourse().getName();
+				out.println("<li>" + name + "</li>");
+			}
+		%>
+		</ul>
+	</div>
 </div><!-- /content -->
 <div data-role='footer' data-id="footer_settings" data-position="fixed">
 	<from><input type="button" value="back" data-inline="true" data-icon="back" onClick="history.go(-1);return true;"></form>
