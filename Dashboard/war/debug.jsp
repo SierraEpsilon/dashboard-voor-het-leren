@@ -28,11 +28,15 @@
 		String name = user.getUserName();
 		String email = user.getMail();
 		String moment = "geen";
+		int size = 0;
 		if(user.getCurrentStudyMoment() != null)
 			moment = user.getCurrentStudyMoment().getCourse().toString();
+		if(user.getStudyMoments()  != null)
+			size = user.getStudyMoments().size();
 		out.println("<li>" + name + " " + email + "</li>");
-		out.println("<p>currentVak:" + moment + "</p>");
-		out.println("<p>" + user.getStudyMoments().size() + "</p>");
+		out.println("<p>currentVak:" + moment 
+				+ "</p>");
+		out.println("<p>" + size + "</p>");
 	}
 	out.println("</ul>");
 %>
