@@ -10,6 +10,8 @@
 <head>
 <%@include file="inc/head.jsp"%>
 <%@include file="inc/redirect.jsp"%>
+<%@ page import="dashboard.model.*" %>
+<%@ page import="java.util.*" %>
 </head>
 <body>
 <div data-role="page">
@@ -48,12 +50,14 @@ $(document).bind("pageinit",function(){
 		var startt = $("input[name='starttime']").val();
 		var endd = $("input[name='enddate']").val();
 		var endt = $("input[name='endtime']").val();
+		var course = $("input[name='course']").val();
 		var amount = $("input[name='amount']").val();
 		var cont = true;
 		cont = (startd=="") ? false : cont;
 		cont = (startt=="") ? false : cont;
 		cont = (endd=="") ? false : cont;
 		cont = (endt=="") ? false : cont;
+		cont = (course=="") ? false : cont;
 		cont = (amount=="") ? false : cont;
 		if(!cont){
 			$("#msg").text("Vul alle velden in!");
@@ -114,7 +118,19 @@ $(document).bind("pageinit",function(){
 	<p id='msg2' style='color:red;'><%=msg2%></p>
  
  	<b>Vak</b>
- 	
+ 	<%
+ 	out.println("<select name='course'>");
+	
+	Student student = (Student)session.getAttribute("student");
+	ArrayList<CourseContract> ccs = student.getCourses();
+	Iterator it = ccs.iterator();
+	while(it.hasNext()){
+		CourseContract courseC = (CourseContract)it.next();
+		String name = courseC.getCourse().getName();
+		out.println("<option value='" + name + "'>" + name + "</option>");
+	}
+	out.println("</select>");
+	%>
  	<fieldset data-role="controlgroup">
 
 	     	<input type="radio" name="kind" id="radio-choice-1" value="Theorie" checked="checked" />
