@@ -19,6 +19,9 @@ import dashboard.model.Course;
 
 
 public class ManualTrackingServlet extends HttpServlet{
+	
+	private static final long serialVersionUID = 8568509987539754981L;
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
@@ -48,5 +51,4 @@ public class ManualTrackingServlet extends HttpServlet{
 			resp.sendRedirect("/login.jsp");
 		}
 	}
-	
 }
