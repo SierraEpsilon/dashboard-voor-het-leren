@@ -36,6 +36,7 @@ public class CourseAddServlet extends HttpServlet {
 		try {
 			course = new CourseContract(CourseRegistry.getCourse(action));
 			student.addCourse(course);
+			session.setAttribute("student",student);
 			resp.sendRedirect("/settings_vak.jsp");
 		} catch (NoSuchCourseException e) {
 			resp.sendRedirect("/error.jsp?msg=trying to add unexisting course");
