@@ -35,6 +35,8 @@
 			boolean already = false;
 			if(student.getFriendRequests() != null)
 				already = student.getFriendRequests().contains(currentStudent.getUserName());
+			if(student.getFriendList() != null)
+				already = (already) || (student.getFriendList().contains(currentStudent.getUserName()));
 			if(!currentStudent.getUserName().equals(student.getUserName()) && !already){
 				String name = student.getUserName();
 				out.println("<li><button type='submit' name='submit' value='req_" + name + "'>" + name + "</button></li>");

@@ -27,7 +27,7 @@ public class FriendServlet extends HttpServlet {
 		String action = req.getParameter("submit");
 		if(action.contains("add_"))
 			addFriend(action,student,req,resp);
-		else if(action.contains("remove_"))
+		else if(action.contains("deny_"))
 			denyFriend(action,student,req,resp);
 		else if(action.contains("req_"))
 			requestFriend(action,student,req,resp);
@@ -42,7 +42,7 @@ public class FriendServlet extends HttpServlet {
 
 	private void denyFriend(String action, Student student,
 			HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		String stranger = action.replace("remove_", "");
+		String stranger = action.replace("deny_", "");
 		student.removeRequest(stranger);
 		resp.sendRedirect("/friends_friends.jsp");
 	}

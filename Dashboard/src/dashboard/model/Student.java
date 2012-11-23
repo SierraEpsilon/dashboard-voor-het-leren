@@ -356,6 +356,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	public void removeRequest(String username){
 		if(getFriendRequests().contains(username))
 			getFriendRequests().remove(username);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**
@@ -374,7 +375,8 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 
 	 */
 	public void addFriend(String userName) {
-		friendList.add(userName);
+		getFriendList().add(userName);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**

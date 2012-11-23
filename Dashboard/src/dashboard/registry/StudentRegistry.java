@@ -220,7 +220,7 @@ public class StudentRegistry {
 	}
 	
 	public static void createFriends(Student acceptor,String requestor){
-		if(acceptor.getFriendRequests().contains("requestor")){
+		if(acceptor.getFriendRequests().contains(requestor)){
 			Student reqUser = getUserByUserName(requestor);
 			acceptor.addFriend(requestor);
 			acceptor.removeRequest(requestor);
