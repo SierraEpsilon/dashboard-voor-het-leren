@@ -28,7 +28,7 @@
 </div><!-- /navbar -->
 <div data-role="content">
 <form method='post' action='/friends'>
-	<ul data-role="listview" data-filter="true" data-theme="b">
+	<ul data-role="listview" data-filter="true">
 	<%
 		Student currentStudent = (Student)session.getAttribute("student");
 		for(Student student: StudentRegistry.getUsers()){

@@ -19,32 +19,21 @@
 	<h1>Learnalyzer</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 </div><!-- /header -->
-<div data-role="navbar">
-	<ul>
-		<li><a href="/friends_friends.jsp">friends</a></li>
-		<li><a href="/friends_requests.jsp">requests</a></li>
-		<li><a href="/friends_add.jsp">add friend</a></li>
-	</ul>
-</div><!-- /navbar -->
 <div data-role="content">
-<form method='post' action='/friends'>
 	<%
-		Student student = (Student)session.getAttribute("student");
+		String std = (request.getParameter("std")==null) ? "" : request.getParameter("std");
+		Student student = StudentRegistry.getUserByUserName(std);
 	%>
 	<div>
-		<h3>Vrienden</h3>
-		<ul data-role="listview" style="margin: 5px">
-		<%
-			for(String friend :student.getFriendList() ){
-				out.println("<li><a href='/profile.jsp?std="+ friend +"'>"+ friend + "</a></li>");
-			}
-		%>
-		</ul>
+		<h3>Persoonlijke informatie</h3>
+		<h4>Voornaam:</h4>
+		<p><%=student.getFirstName()%></p>
+		<h4>Naam:</h4>
+		<p><%=student.getLastName()%></p>
 	</div>
-</form>
 </div><!-- /content -->
 <div data-role='footer' data-id="footer_settings" data-position="fixed">
-	<a href="/menu.jsp" data-role="button" data-icon="back">menu</a>
+	<from><input type="button" value="back" data-inline="true" data-icon="back" onClick="history.go(-1);return true;"></form>
 </div>
 </div><!-- /page -->
 </body>
