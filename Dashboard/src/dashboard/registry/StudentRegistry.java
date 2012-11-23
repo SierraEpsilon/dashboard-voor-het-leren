@@ -79,6 +79,8 @@ public class StudentRegistry {
 				return user;
 		*/
 		Student student = OwnOfy.ofy().query(Student.class).filter("userName",username).get();
+		if(student != null)
+			student.convertEmptyArrayLists();
 		return student;
 	}
 	
@@ -101,6 +103,8 @@ public class StudentRegistry {
 				return user;
 		}*/
 		Student student = OwnOfy.ofy().query(Student.class).filter("mail",mail).get();
+		if(student != null)
+			student.convertEmptyArrayLists();
 		return student;
 	}
 	

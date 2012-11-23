@@ -86,10 +86,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		this.password = password;
 		setFirstName(firstName);
 		setLastName(lastName);
-		studyMoments = new ArrayList<StudyMoment>();
-		courses = new ArrayList<CourseContract>();
-		friendList = new ArrayList<String>();
-		friendRequests = new ArrayList<String>();
+		convertEmptyArrayLists();
 		//friendRequestsByStudent = new ArrayList<String>();
 		//friendRequestsByOthers = new ArrayList<String>();
 		OwnOfy.ofy().put(this);
@@ -555,6 +552,17 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			courseList.add(courseContract.getCourse());
 		}
 		return courseList;
+	}
+	
+	public void convertEmptyArrayLists(){
+		if(studyMoments == null)
+			studyMoments = new ArrayList<StudyMoment>();
+		if(courses == null)
+			courses = new ArrayList<CourseContract>();
+		if(friendList == null)
+			friendList = new ArrayList<String>();
+		if(friendRequests == null)
+			friendRequests = new ArrayList<String>();
 	}
 
 }
