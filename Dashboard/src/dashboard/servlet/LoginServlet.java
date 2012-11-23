@@ -38,7 +38,11 @@ public class LoginServlet extends HttpServlet {
 		else if(StudentRegistry.isValidlogIn(username, password)){//check whether username and password are correct
 			Student user = StudentRegistry.getUserByUserName(username);
 			session.setAttribute("student", user);//set the current student to the one who is trying to log in
-			resp.sendRedirect("/track");
+			if(user.getCourses().isEmpty()){
+				session.setAttribute("student_temp", user);
+				resp.sendRedirect("/login_warning.jsp");
+			} else 
+				resp.sendRedirect("/track");
 		} else {
 			resp.sendRedirect("/login.jsp?msg=De opgegeven combinatie van gebruikersnaam en paswoord is niet geldig.");
 		}

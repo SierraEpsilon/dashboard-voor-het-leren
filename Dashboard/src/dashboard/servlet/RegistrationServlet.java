@@ -30,6 +30,12 @@ public class RegistrationServlet extends HttpServlet {
 			addStudent(req, resp);
 		else if(action.equals("registreren"))
 			addCourses(req, resp);
+		else if(action.equals("register2")){
+			HttpSession session = req.getSession();
+			Student student = (Student)session.getAttribute("student");
+			session.setAttribute("student_temp",student);
+			resp.sendRedirect("/register_settings.jsp");
+		}
 	}
 
 	private void addStudent(HttpServletRequest req, HttpServletResponse resp)
