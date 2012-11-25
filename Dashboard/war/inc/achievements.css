@@ -1,0 +1,35 @@
+.ui-progressbar{
+	height: initial;
+}
+
+.ui-progressbar .ui-progressbar-value{
+	background: #39728E;
+	border: 0;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	position: absolute;
+	height: initial;
+	margin: initial;
+	z-index: 1;
+}
+
+.ui-progressbar.completed .ui-progressbar-value{
+	background: #CCCC7A;
+}
+
+.textinachievement{
+	font-size: 24px;
+	text-shadow: 0px 0px #000000;
+	position: absolute; 
+	z-index: 2;
+}
+
+.ui-btn-inner{
+	border-top: 0;
+}
+
+.ui-btn-text{
+	height: 100%;
+}
