@@ -33,7 +33,7 @@ $(document).bind("pageinit",function(){
 	<li><a href="/track">Tracken</a></li>
 	<li><a href="/achievements">Achievements</a></li>
 	<li><a href="/settings">Instellingen</a></li>
-	<li><a href="/manualtracking">Toevoegen van studiemoment</a></li>
+	<li><a href="/add_manual">Toevoegen van studiemoment</a></li>
 	<li><a href="/friends">Vrienden</a></li>
 	
 </ul>
