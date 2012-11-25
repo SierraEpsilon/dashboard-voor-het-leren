@@ -21,9 +21,9 @@ public class AchievementRegistry {
 	private static void fillAchievementList(){
 		ArrayList<TimeStudied> timeStudiedList = new ArrayList<TimeStudied>();
 		timeStudiedList.addAll(Arrays.asList(
-				new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "Study for 5 minutes for any course.", null, 300),
-				new TimeStudied("TIME_STUDIED_TOTAL_2", "Studying apprentice", "Study for 10 minutes for any course.", null, 600),
-				new TimeStudied("TIME_STUDIED_TOTAL_3", "Studying pro", "Study for 15 minutes for any course.", null, 900),
+				new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "Study for 15 minutes for any course.", null, 900),
+				new TimeStudied("TIME_STUDIED_TOTAL_2", "Studying apprentice", "Study for 60 minutes for any course.", null, 3600),
+				new TimeStudied("TIME_STUDIED_TOTAL_3", "Studying pro", "Study for 180 minutes for any course.", null, 10800),
 				new TimeStudied("TIME_STUDIED_ANALYSE1_1", "Analyse 1 noob", "Study for 5 minutes for Analyse 1.", Course.H01A0B, 300),
 				new TimeStudied("TIME_STUDIED_ANALYSE1_2", "Analyse 1 apprentice", "Study for 10 minutes for Analyse 1.", Course.H01A0B, 600),
 				new TimeStudied("TIME_STUDIED_ANALYSE1_3", "Analyse 1 pro", "Study for 15 minutes for Analyse 1.", Course.H01A0B, 900)));

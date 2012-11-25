@@ -206,7 +206,7 @@ public class StudyMoment implements Serializable{
 	 * 	|	(getStart().getTime() - getEnd().getTime())/1000
 	 */
 	public long getTime(){
-		return (getStart().getTime() - getEnd().getTime())/1000;
+		return (getEnd().getTime() - getStart().getTime())/1000;
 	}
 }
 	
