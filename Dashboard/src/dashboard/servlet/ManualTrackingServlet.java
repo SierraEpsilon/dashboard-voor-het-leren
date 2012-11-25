@@ -12,29 +12,27 @@ import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.NoSuchCourseException;
-import dashboard.model.Student;
+import dashboard.model.*;
 import dashboard.registry.CourseRegistry;
-import dashboard.model.StudyMoment;
-import dashboard.model.Course;
 
 
 public class ManualTrackingServlet extends HttpServlet{
 	
 	private static final long serialVersionUID = 8568509987539754981L;
 
-	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
 		
 		if(student!=null){
-			Date startDate = new Date(session.getAttribute("startdate") +" " + session.getAttribute("starttime"));
-			Date endDate = new Date(session.getAttribute("enddate") + " "+ session.getAttribute("endtime"));
-			int amount = (Integer) session.getAttribute("amount");
+			Date startD = new Date((String) req.getParameter("startdate") +" " + req.getParameter("starttime"));
+			Date endD = new Date((String) req.getParameter("enddate") + " "+ req.getParameter("endtime"));
+			int amount = (Integer) Integer.parseInt(req.getParameter("amount"));
 			
 			try {
-				Course usedCourse = CourseRegistry.getCourse((String) session.getAttribute("course"));
-				String kind = (String) session.getAttribute("kind");
-				student.addStudyMoment(new StudyMoment(startDate, endDate, usedCourse, amount, kind));
+				Course usedCourse = CourseRegistry.getCourse((String) req.getParameter("courseinput"));
+				String kind = (String) req.getParameter("kind");
+				student.addStudyMoment(new StudyMoment(startD, endD, usedCourse, amount, kind));
 				resp.sendRedirect("add_manual.jsp");
 			} catch (InvalidEndDateException e) {
 				resp.sendRedirect("/error.jsp?msg=You appear to be a time traveler?!");

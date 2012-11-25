@@ -50,14 +50,14 @@ $(document).bind("pageinit",function(){
 		var startt = $("input[name='starttime']").val();
 		var endd = $("input[name='enddate']").val();
 		var endt = $("input[name='endtime']").val();
-		var course = $("input[name='course']").val();
+		var courseinput = $("input[name='courseinput']").val();
 		var amount = $("input[name='amount']").val();
 		var cont = true;
 		cont = (startd=="") ? false : cont;
 		cont = (startt=="") ? false : cont;
 		cont = (endd=="") ? false : cont;
 		cont = (endt=="") ? false : cont;
-		cont = (course=="") ? false : cont;
+		cont = (courseinput=="") ? false : cont;
 		cont = (amount=="") ? false : cont;
 		if(!cont){
 			$("#msg").text("Vul alle velden in!");
@@ -119,7 +119,7 @@ $(document).bind("pageinit",function(){
  
  	<b>Vak</b>
  	<%
- 	out.println("<select name='course'>");
+ 	out.println("<select name='courseinput'>");
 	
 	Student student = (Student)session.getAttribute("student");
 	ArrayList<CourseContract> ccs = student.getCourses();
