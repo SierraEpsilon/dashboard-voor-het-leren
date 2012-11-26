@@ -99,7 +99,7 @@ $(document).bind("pageinit",function(){
 </div><!-- /header -->
 <div data-role="content">
 
-<form id="myFormm" method="post" action='/manual'>
+<form id="myFormm" method="post" action='/add_manual'>
 	
 	<%
 		String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
