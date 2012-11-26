@@ -19,8 +19,14 @@
 <body>
 <div data-role="page">
 <script>
-$(document).bind("pageinit",function(){
+  //reset type=date inputs to text
+  $( document ).bind( "mobileinit", function(){
+    
+  });	
+</script>	
 
+<script>
+$(document).bind("pageinit",function(){
 	$("input[name='startdate']").change(function(){
 		var start = $("input[name='startdate']").val();
 		if($("input[name='enddate']").val() == ''){
