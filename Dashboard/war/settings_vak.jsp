@@ -38,7 +38,7 @@
 			for(CourseContract course :student.getCourses() ){
 				String name = course.getCourse().getName();
 				out.println("<li data-inline='true'>" + name + "</li>");
-				out.println("<button type='submit' name='submit' value='remove_" + name + "'>remove</button>");
+				out.println("<button  type='submit' data-inline='true' data-icon='delete' name='submit' value='remove_" + name + "'>remove</button>");
 			}
 		%>
 		</ul>
