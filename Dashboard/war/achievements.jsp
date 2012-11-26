@@ -19,8 +19,8 @@
 </head>
 <body>
 <div data-role="page">
-<div data-role="header" data-id='header' data-position="fixed">
-
+<div data-role="header" data-id='header' data-position='fixed'>
+	<a href="/menu.jsp" data-role="button" data-icon="grid">Menu</a>
 	<h1>Achievements</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 
@@ -36,11 +36,12 @@
 			int id = 1;
 			while(it.hasNext()){
 				Achievement achievement = it.next();
-				out.println("<li id='progressbar" + id + "' data-icon='false'><a href='menu.jsp'><img class='ui-li-icon' src='http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
+				out.println("<li id='progressbar" + id + "' data-icon='false'><a href='/achievement_detail.jsp?id="+ achievement.getId() + "'><img class='ui-li-icon' src='http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
 				progBarJS += ("$('#progressbar" + id + "').progressbar({ max: 100 });");
 				progBarJS += ("$('#progressbar" + id + "').progressbar({ value: " + Math.round(achievement.getProgress(student) * 100) + " });");
 				progBarJS += ("$('#progressbar" + id + "').removeClass('ui-corner-all');");
 				progBarJS += ("$('#progressbar" + id + "').removeClass('completed');");
+				progBarJS += ("$('#progressbar" + id + "').addClass('list-edited');");
 				if(achievement.getProgress(student) >= 1){
 					progBarJS += ("$('#progressbar" + id + "').addClass('completed');");
 				}
@@ -55,9 +56,6 @@
 	$("div.ui-progressbar-value").removeClass("ui-corner-right");
 </script>
 </div><!-- /content -->
-<div data-role='footer' data-id="foo1" data-position="fixed">
-	<a href="/menu.jsp" data-role="button" data-icon="grid">Menu</a>
-</div>
 </div><!-- /page -->
 </body>
 </html>

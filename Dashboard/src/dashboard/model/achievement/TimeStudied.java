@@ -12,8 +12,8 @@ public class TimeStudied extends Achievement {
 	private static final long serialVersionUID = -4658676420666138891L;
 	float seconds;
 	
-	public TimeStudied(String id, String name, String desc, Course course, float seconds){
-		super(id, name, desc, course);
+	public TimeStudied(String id, String name, String desc, Course course, float seconds, String icon){
+		super(id, name, desc, course, icon);
 		this.seconds = seconds;
 	}
 	

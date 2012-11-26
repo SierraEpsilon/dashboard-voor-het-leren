@@ -1,4 +1,4 @@
-.ui-progressbar{
+.ui-progressbar.list-edited{
 	height: initial;
 }
 
@@ -6,6 +6,9 @@
 	background: #39728E;
 	background: -webkit-linear-gradient( #618EA5,#39728E );
 	opacity: 0.5;
+}
+
+.ui-progressbar.list-edited .ui-progressbar-value{
 	border: 0;
 	top: 0;
 	bottom: 0;

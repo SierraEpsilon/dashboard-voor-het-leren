@@ -15,12 +15,14 @@ public abstract class Achievement implements Serializable {
 	String name;
 	String desc;
 	Course course;
+	String icon;
 	
-	protected Achievement(String id, String name, String desc, Course course){
+	protected Achievement(String id, String name, String desc, Course course, String icon){
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.course = course;
+		this.icon = icon;
 	}
 	
 	public String getId() {
@@ -37,6 +39,10 @@ public abstract class Achievement implements Serializable {
 
 	public Course getCourse() {
 		return course;
+	}
+	
+	public String getIcon(){
+		return icon;
 	}
 	
 	/**
