@@ -36,39 +36,35 @@ public class ManualTrackingServlet extends HttpServlet{
 		Student student = (Student)session.getAttribute("student");
 		SimpleDateFormat df = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 		
-			Date startDate = new Date();
+			Date startD = new Date();
 			try {
-				startDate = df.parse((String) req.getParameter("startdate") +" " + (String)req.getParameter("starttime"));
+				startD = df.parse((String) req.getParameter("startdate") +" " + (String)req.getParameter("starttime"));
+			} catch (ParseException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			Date endD = new Date();
+			try {
+				endD = df.parse((String) req.getParameter("enddate") +" " + (String) req.getParameter("endtime"));
 			} catch (ParseException e2) {
 				// TODO Auto-generated catch block
 				e2.printStackTrace();
 			}
 			
-			Date endDate = new Date();
-			try {
-				endDate = df.parse((String) req.getParameter("enddate") +" " + (String) req.getParameter("endtime"));
-			} catch (ParseException e2) {
-				// TODO Auto-generated catch block
-				e2.printStackTrace();
-			}
-			
-			
-			
-			int amount = (Integer) Integer.parseInt(req.getParameter("amount"));
-			
+			int number = (Integer) Integer.parseInt(req.getParameter("amount"));	
 			try {
 				Course usedCourse = CourseRegistry.getCourse((String) req.getParameter("courseinput"));
-				String kind = (String) req.getParameter("kind");
-				student.addStudyMoment(new StudyMoment(startDate, endDate, usedCourse, amount, kind));
-				resp.sendRedirect("menu.jsp");
+				String kindStudied = (String) req.getParameter("kind");
+				student.addStudyMoment(new StudyMoment(startD, endD, usedCourse, number, kindStudied));
+				resp.sendRedirect("/add_manual.jsp?msg=Studiemoment correct toegevoegd");
 			} catch (InvalidEndDateException e) {
-				resp.sendRedirect("/error.jsp?msg=You appear to be a time traveler?!");
+				resp.sendRedirect("/add_manual.jsp?msg=You appear to be a time traveler?!");
 			} catch (InvalidAmountException e) {
-				resp.sendRedirect("/error.jsp?msg=You can't have studied that kind of pages!");
+				resp.sendRedirect("/add_manual.jsp?msg=You can't have studied that kind of pages!");
 			} catch (InvalidStudyMomentException e) {
-				resp.sendRedirect("/error.jsp?msg=You were already studying at the time!");
+				resp.sendRedirect("/add_manual.jsp?msg=You were already studying at the time!");
 			} catch (NoSuchCourseException e1) {
-				resp.sendRedirect("/error.jsp?msg=no such course!");
+				resp.sendRedirect("/add_manual.jsp?msg=no such course!");
 			}
 			
 	}
