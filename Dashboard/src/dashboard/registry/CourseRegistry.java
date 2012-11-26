@@ -61,4 +61,8 @@ public class CourseRegistry {
 		}
 		throw new NoSuchCourseException();
 	}
+	
+	public static ArrayList<Course> getAllCourses(){
+		return courses;
+	}
 }
