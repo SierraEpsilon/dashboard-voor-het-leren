@@ -229,10 +229,13 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	/**
 	 * @param password
 	 * 	the new password of the user
+	 * @throws InvalidPasswordException 
 	 * @post	the password was changed
 	 * 	|	new.getPassword() = password
 	 */
-	public void setPassword(String password) {
+	public void setPassword(String password) throws InvalidPasswordException {
+		if(!isValidPassword(password))
+			throw new InvalidPasswordException();
 		this.password = password;
 		OwnOfy.ofy().put(this);
 	}
