@@ -12,9 +12,9 @@
 <%@include file="inc/redirect.jsp"%>
 <%@ page import="dashboard.model.*" %>
 <%@ page import="java.util.*" %>
-<link rel="stylesheet" href="jquery.ui.datepicker.mobile.css" /> 
+<link rel="stylesheet" href="http://jquerymobile.com/demos/1.0a4.1/experiments/ui-datepicker/jquery.ui.datepicker.mobile.css" /> 
   <script src="http://jquerymobile.com/demos/1.0a4.1/experiments/ui-datepicker/jQuery.ui.datepicker.js"></script>
-  <script src="jquery.ui.datepicker.mobile.js"></script>
+  <script src="http://jquerymobile.com/demos/1.0a4.1/experiments/ui-datepicker/jquery.ui.datepicker.mobile.js"></script>
 </head>
 <body>
 <div data-role="page">
