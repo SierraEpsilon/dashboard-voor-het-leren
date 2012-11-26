@@ -1,0 +1,28 @@
+[
+{
+	"name":"Studievooruitgang",
+	"graphs":[
+		{"type":"pie","data":[[
+			["Theorie",35],
+			["Examen",35],
+			["Oefeningen",65]
+		]]},
+		{"type":"scatter","data":[[4,6,8,2,5]]}
+	]
+},{
+	"name":"Vakken",
+	"graphs":[
+		{"type":"scatter","data":[[4,6,8,2,5]]}
+	]
+},{
+	"name":"Test",
+	"graphs":[
+		{"type":"lijn"}
+	]
+},{
+	"name":"Locaties",
+	"graphs":[
+		{"type":"lijn"}
+	]
+}
+]

@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+<html>
+<head>
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" src="inc/jQPlot/plugins/jqplot.canvasTextRenderer.min.js"></script>
+<script type="text/javascript" src="inc/plugins/jqplot.canvasAxisLabelRenderer.min.js"></script>
+<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="inc/jQPlot/excanvas.js"></script><![endif]-->
+<script language="javascript" type="text/javascript" src="inc/jQPlot/jquery.min.js"></script>
+<script language="javascript" type="text/javascript" src="inc/jQPlot/jquery.jqplot.min.js"></script>
+<link rel="stylesheet" type="text/css" href="inc/jQPlot/jquery.jqplot.css" />
+<script type="text/javascript" src="inc/jQPlot/plugins/jqplot.pieRenderer.min.js"></script>
+<script type="text/javascript" src="inc/jQPlot/plugins/jqplot.donutRenderer.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1"> 
+<link rel="stylesheet" href="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.css" />
+<script src="http://code.jquery.com/mobile/1.2.0/jquery.mobile-1.2.0.min.js"></script>
+<script src="inc/plot.js"></script>
+</head>
+<body>
+<div data-role="page">
+
+	<div data-role="header">
+		<h1>Statistics</h1>
+	</div><!-- /header -->
+
+	<div data-role="content">
+		<a  id='catButton' onclick='changeCat()' data-role="button">Cat</a> 
+		<a  id='graphButton' onclick='changeGraph()' data-role="button">Graph</a>
+		<div id='graphDiv'></div>
+	</div><!-- /content -->
+
+</div><!-- /page -->
+</body>
+</html>
