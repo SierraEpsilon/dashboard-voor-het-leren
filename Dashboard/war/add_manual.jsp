@@ -12,6 +12,9 @@
 <%@include file="inc/redirect.jsp"%>
 <%@ page import="dashboard.model.*" %>
 <%@ page import="java.util.*" %>
+<link rel="stylesheet" href="jquery.ui.datepicker.mobile.css" /> 
+  <script src="jQuery.ui.datepicker.js"></script>
+  <script src="jquery.ui.datepicker.mobile.js"></script>
 </head>
 <body>
 <div data-role="page">
@@ -66,6 +69,10 @@ $(document).bind("pageinit",function(){
 			if(!(startt<endt)){
 				$("#msg2").text("De eindtijd moet na de begintijd vallen!");
 				$("input[name='endtime']").val('');
+			}
+			else {
+			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
+			$("#myFormm").submit();
 			}
 		}
 		else if(endd < startd){
