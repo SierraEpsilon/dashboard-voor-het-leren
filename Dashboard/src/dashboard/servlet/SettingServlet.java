@@ -44,7 +44,7 @@ public class SettingServlet extends HttpServlet {
 			student.setFirstName(firstName);
 			student.setLastName(lastName);
 			session.setAttribute("student",student);
-			resp.sendRedirect("/settings");
+			resp.sendRedirect("/settings_message.jsp?msg=name");
 		} else if(action.equals("passchange")){
 			String pass1 = req.getParameter("pass1");
 			String pass2 = req.getParameter("pass2");
@@ -52,7 +52,7 @@ public class SettingServlet extends HttpServlet {
 			if(student.isCorrectPassword(pass1) && (pass2.equals(pass3))){
 				student.setPassword(pass2);
 				session.setAttribute("student",student);
-				resp.sendRedirect("/settings_pass.jsp");
+				resp.sendRedirect("/settings_message.jsp?msg=password");
 			} else
 				resp.sendRedirect("/error.jsp/msg=wrong passwords");
 		}
