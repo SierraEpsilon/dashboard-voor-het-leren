@@ -63,8 +63,9 @@ public class SettingServlet extends HttpServlet {
 				} catch (InvalidPasswordException e) {
 					resp.sendRedirect("/settings_pass.jsp?msg=invalid password");;
 				}
-			} else
-				resp.sendRedirect("/settings_pass.jsp/msg=wrong passwords");
+			} else {
+				resp.sendRedirect("/settings_pass.jsp?msg=wrong passwords");
+			}
 		}
 	}
 	
