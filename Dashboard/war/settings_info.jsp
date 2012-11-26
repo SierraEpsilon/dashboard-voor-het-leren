@@ -30,8 +30,8 @@
 <script>
 $(document).ready(function(){
 	$("#settings1").submit(function(){
-		var firstname = $("#myForm>input[name='firstname']").val();
-		var lastname = $("#myForm>input[name='lastname']").val();
+		var firstname = $("#settings1>input[name='firstname']").val();
+		var lastname = $("#settings1>input[name='lastname']").val();
 		var cont = true;
 		cont = (firstname=="") ? false : cont;
 		cont = (lastname=="") ? false : cont;
