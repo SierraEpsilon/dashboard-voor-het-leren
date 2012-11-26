@@ -36,7 +36,7 @@
 			int id = 1;
 			while(it.hasNext()){
 				Achievement achievement = it.next();
-				out.println("<li id='progressbar" + id + "' data-icon='false'><a href='menu.jsp'><img src='http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
+				out.println("<li id='progressbar" + id + "' data-icon='false'><a href='menu.jsp'><img class='ui-li-icon' src='http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
 				progBarJS += ("$('#progressbar" + id + "').progressbar({ max: 100 });");
 				progBarJS += ("$('#progressbar" + id + "').progressbar({ value: " + Math.round(achievement.getProgress(student) * 100) + " });");
 				progBarJS += ("$('#progressbar" + id + "').removeClass('ui-corner-all');");
@@ -51,7 +51,6 @@
 	</ul>
 <script type="text/javascript">
 	<%=progBarJS%>
-	
 	$("div.ui-progressbar-value").removeClass("ui-corner-left");
 	$("div.ui-progressbar-value").removeClass("ui-corner-right");
 </script>
