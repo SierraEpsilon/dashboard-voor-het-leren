@@ -36,9 +36,9 @@
 		if(percent >= 100){
 			JSpbar += "$('#pbar').addClass('completed');";
 		}
-	%>
-	<img height='160' width='160' src='http://icons.iconarchive.com/icons/deleket/sleek-xp-software/256/Yahoo-Messenger-icon.png'>
-	<% out.println("<p>Voortgang: " + percent + "% </p>"); %>
+		
+		out.println("<img height='160' width='160' src='/inc/icons/" + achievement.getIcon() + "'>");
+		out.println("<p>Voortgang: " + percent + "% </p>"); %>
 	<div id=pbar></div>
 	<% out.println("<p>" + achievement.getDesc() + "</p>"); %>
 	<script>
