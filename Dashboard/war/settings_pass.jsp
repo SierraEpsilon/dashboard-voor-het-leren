@@ -36,11 +36,11 @@
 	<div style="margin-top: 50px">
 		<h3>Paswoord</h3>
 		<label for="name">Oud paswoord:</label>
-		<input type="text" name="pass1" value=""/>
+		<input type="password" name="pass1" value=""/>
 		<label for="name">Nieuw paswoord:</label>
-		<input type="text" name="pass2" value=""/>
+		<input type="password" name="pass2" value=""/>
 		<label for="name">Herhaal nieuw paswoord:</label>
-		<input type="text" name="pass3" value=""/>
+		<input type="password" name="pass3" value=""/>
 		<button type="submit" name="submit" value="passchange">Verander paswoord</button>
 	</div>
 </form>
