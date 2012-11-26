@@ -30,9 +30,9 @@
 <script>
 $(document).ready(function(){
 	$("#settings2").submit(function(){
-		var pass1 = $("#myForm>input[name='pass1']").val();
-		var pass2 = $("#myForm>input[name='pass2']").val();
-		var pass3 = $("#myForm>input[name='pass3']").val();
+		var pass1 = $("#settings2>input[name='pass1']").val();
+		var pass2 = $("#settings2>input[name='pass2']").val();
+		var pass3 = $("#settings2>input[name='pass3']").val();
 		var cont = true;
 		cont = (pass1=="") ? false : cont;
 		cont = (pass2=="") ? false : cont;
