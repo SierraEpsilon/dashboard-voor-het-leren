@@ -27,23 +27,6 @@
 	</ul>
 </div><!-- /navbar -->
 <div data-role="content">
-<script>
-$(document).ready(function(){
-	$("#settings1").submit(function(){
-		var firstname = $("#settings1>input[name='firstname']").val();
-		var lastname = $("#settings1>input[name='lastname']").val();
-		var cont = true;
-		cont = (firstname=="") ? false : cont;
-		cont = (lastname=="") ? false : cont;
-		if(!cont){
-			$("#msg").text("Vul alle velden in");
-			return false;
-		}else{
-			return true;
-		}
-	});
-});
-</script>
 	<%
 		Student student = (Student)session.getAttribute("student");
 		String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");

@@ -41,18 +41,28 @@ public class SettingServlet extends HttpServlet {
 		} else if(action.equals("namechange")){
 			String firstName = req.getParameter("firstname");
 			String lastName = req.getParameter("lastname");
-			student.setFirstName(firstName);
-			student.setLastName(lastName);
-			session.setAttribute("student",student);
-			resp.sendRedirect("/settings_message.jsp?msg=name");
+			if(firstName.equals("") || lastName.equals(""))
+				resp.sendRedirect("/settings_info.jsp?msg=vul alle velden in!");
+			else{
+				student.setFirstName(firstName);
+				student.setLastName(lastName);
+				session.setAttribute("student",student);
+				resp.sendRedirect("/settings_message.jsp?msg=name");
+			}
 		} else if(action.equals("passchange")){
 			String pass1 = req.getParameter("pass1");
 			String pass2 = req.getParameter("pass2");
 			String pass3 = req.getParameter("pass3");
-			if(student.isCorrectPassword(pass1) && (pass2.equals(pass3))){
-				student.setPassword(pass2);
-				session.setAttribute("student",student);
-				resp.sendRedirect("/settings_message.jsp?msg=password");
+			if(pass1.equals("") || pass2.equals("") || pass3.equals(""))
+				resp.sendRedirect("/settings_pass.jsp?msg=vul alle velden in!");
+			else if(student.isCorrectPassword(pass1) && (pass2.equals(pass3))){
+				try {
+					student.setPassword(pass2);
+					session.setAttribute("student",student);
+					resp.sendRedirect("/settings_message.jsp?msg=password");
+				} catch (InvalidPasswordException e) {
+					resp.sendRedirect("/settings_message.jsp?msg=invalid password");;
+				}
 			} else
 				resp.sendRedirect("/error.jsp/msg=wrong passwords");
 		}

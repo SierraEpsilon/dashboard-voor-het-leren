@@ -27,29 +27,6 @@
 	</ul>
 </div><!-- /navbar -->
 <div data-role="content">
-<script>
-$(document).ready(function(){
-	$("#settings2").submit(function(){
-		var pass1 = $("#settings2>input[name='pass1']").val();
-		var pass2 = $("#settings2>input[name='pass2']").val();
-		var pass3 = $("#settings2>input[name='pass3']").val();
-		var cont = true;
-		cont = (pass1=="") ? false : cont;
-		cont = (pass2=="") ? false : cont;
-		cont = (pass3=="") ? false : cont;
-		if(!cont){
-			$("#msg").text("Vul alle velden in");
-			return false;
-		}else if(pass2!=pass2){
-			$("#msg").text("De wachtwoorden komen niet overeen");
-			return false;
-		}else{
-			$("input[name='password']").attr("value",pass1);
-			return true;
-		}
-	});
-});
-</script>
 	<%
 		Student student = (Student)session.getAttribute("student");
 		String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
