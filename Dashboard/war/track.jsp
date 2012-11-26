@@ -22,9 +22,9 @@
 <div data-role="content">
 <%
 String startTime;
-int start;
+int stop;
 if(request.getParameter("mode")!=null && request.getParameter("mode").equals("stop")){
-	start = 1;
+	stop = 1;
 	Date startDate = (Date)session.getAttribute("startTracking");
 	Course course = (Course)session.getAttribute("course");
 	String courseName = course.getName();
@@ -37,9 +37,10 @@ if(request.getParameter("mode")!=null && request.getParameter("mode").equals("st
 	out.println("<form method='post' action='/track'>");
 	out.println("<input type='submit' name='submit' value='cancel'>");
 	out.println("</form>");
-	out.println("<p id='timePast'>");	
+	out.println("<p id='timePast'>");
+	out.println("<p id='liveFeed'>");		
 }else{
-	start = 0;
+	stop = 0;
 	startTime = "";
 	out.println("<form action='/track' method='post'>");
 	//course list
@@ -62,11 +63,13 @@ if(request.getParameter("mode")!=null && request.getParameter("mode").equals("st
 %>
 <script>
 $(document).bind("pageinit",function(){
-	start = <%= start %>;
-	<% if(start==1) {System.out.println("start="+"start"+";");}
-	%>
-	setTimePast();
-	setInterval("setTimePast()",1000);
+	stop = <%= stop %>;
+	if(stop){
+		setTimePast();
+		setInterval("setTimePast()",1000);
+		updateLiveFeed();
+		setInterval("updateLiveFeed()",10000);
+	}
 	
 });
 
@@ -93,6 +96,14 @@ function setTimePast(){
 		}
 	}
 	$('#timePast').text(str);
+}
+
+function updateLiveFeed(){
+	$.getJSON("/feed",function(json){
+		var str = "<table><tr><td>All students:</td><td>"+json.AllMates+"</td></tr>";
+		str += ("<tr><td>Course students:</td><td>"+json.studyMates+"</td></tr></table>");
+		$("#liveFeed").html(str);
+	});
 }
 </script>
 </div><!-- /content -->
