@@ -8,16 +8,18 @@ import dashboard.model.*;
 
 public class Statistics {
 
+	private static Calendar calendar;
+	
+	static{
+		calendar = Calendar.getInstance();
+	}
 	/**
 	 * @param course
 	 * the course you ant to get the time from
 	 * @param moments
 	 * 	the moments you want to use to get the time from
 	 * @return
-	 * 	the total time if course was "all"
-	 * 	|	getTotalTime()
-	 * @return
-	 * 	the total time studied for that course
+	 * 	the total time studied for that course in seconds
 	 * 	|	for(StudyMoment moment : moments))
 	 *	|		if(moment.getCourse().getName().equals(course))
 	 *	|			time += moment.getTime()
@@ -34,7 +36,7 @@ public class Statistics {
 	 * @param moments
 	 * 	the moments you want to use to get the time from
 	 * @return
-	 * 	returns the total time the student has studied
+	 * 	returns the total time the student has studied in seconds
 	 * 	|	for(StudyMoment moment : moments)
 	 *	|	time += moment.getTime()
 	 */
@@ -49,16 +51,31 @@ public class Statistics {
 	 * @param moments
 	 * 	the moments you want to use to get the time from
 	 * @return
-	 * 	returns the total time the student has studied
-	 * 	|	for(StudyMoment moment : moments)
-	 *	|	time += moment.getTime()
+	 * 	an arrayList with the moments the student studied last week
 	 */
 	public static ArrayList<StudyMoment> getMomentsWeek(ArrayList<StudyMoment> moments) {
-		java.util.Date lastWeek = new java.util.Date();
-		lastWeek = new java.util.Date(lastWeek.getTime() - 604800000);
+		calendar.setTime(new java.util.Date());
+		calendar.setWeekDate(calendar.YEAR, calendar.WEEK_OF_YEAR, 1);
+		java.util.Date lastWeek = calendar.getTime();
 		ArrayList<StudyMoment> weekMoments = new ArrayList<StudyMoment>();
 		for(StudyMoment moment : moments)
 			if(moment.getStart().after(lastWeek))
+				weekMoments.add(moment);
+		return weekMoments;
+	}
+	
+	/**
+	 * @param moments
+	 * 	the moments you want to use to get the time from
+	 * @return
+	 * 	an arrayList with the moments the student studied last week
+	 */
+	public static ArrayList<StudyMoment> getMomentsMonth(ArrayList<StudyMoment> moments) {
+		java.util.Date lastMonth = new java.util.Date();
+		lastMonth = new java.util.Date(lastMonth.getTime() - 604800000);
+		ArrayList<StudyMoment> weekMoments = new ArrayList<StudyMoment>();
+		for(StudyMoment moment : moments)
+			if(moment.getStart().after(lastMonth))
 				weekMoments.add(moment);
 		return weekMoments;
 	}
