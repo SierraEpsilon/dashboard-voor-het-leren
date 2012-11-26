@@ -1,8 +1,8 @@
 package dashboard.util;
 
-import java.util.ArrayList;
+import java.util.*;
 
-import java.util.HashMap;
+import org.apache.tools.ant.types.resources.comparators.Date;
 
 import dashboard.model.*;
 
@@ -43,6 +43,24 @@ public class Statistics {
 		for(StudyMoment moment : moments)
 			time += moment.getTime();
 		return time;
+	}
+	
+	/**
+	 * @param moments
+	 * 	the moments you want to use to get the time from
+	 * @return
+	 * 	returns the total time the student has studied
+	 * 	|	for(StudyMoment moment : moments)
+	 *	|	time += moment.getTime()
+	 */
+	public static ArrayList<StudyMoment> getMomentsWeek(ArrayList<StudyMoment> moments) {
+		java.util.Date lastWeek = new java.util.Date();
+		lastWeek = new java.util.Date(lastWeek.getTime() - 604800000);
+		ArrayList<StudyMoment> weekMoments = new ArrayList<StudyMoment>();
+		for(StudyMoment moment : moments)
+			if(moment.getStart().after(lastWeek))
+				weekMoments.add(moment);
+		return weekMoments;
 	}
 	
 	/**
