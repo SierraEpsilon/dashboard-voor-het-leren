@@ -1,3 +1,11 @@
+.ui-collapsible-set.list-edited{
+	margin-top: -15px;
+}
+
+.ui-collapsible.list-edited .ui-icon{
+	display: none;
+}
+
 .ui-progressbar.list-edited{
 	height: initial;
 }
@@ -22,13 +30,27 @@
 
 .ui-progressbar.completed .ui-progressbar-value{
 	background: #CCCC7A;
-	background: -webkit-linear-gradient( #D6D695,#CCCC7A );
+	background: -webkit-linear-gradient( #F0F0D7,#CCCC7A );
 }
 
 .textinachievement{
 	text-shadow: 0px 0px #000000;
 	position: absolute; 
 	z-index: 2;
+}
+
+.ui-collapsible-heading.list-edited .ui-btn-up-c{
+	background: #E65C5C;
+	background: -webkit-linear-gradient( #FFC2C2,#E65C5C );
+}
+
+.ui-collapsible-heading.list-edited .ui-btn-hover-c{
+	background: #99CCFF;
+	background: -webkit-linear-gradient( #E0F0FF,#99CCFF );
+}
+
+.ui-collapsible-heading.list-edited .ui-btn-down-c{
+	background: #99CCFF;
 }
 
 .ui-btn-inner{

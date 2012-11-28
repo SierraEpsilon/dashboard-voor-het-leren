@@ -28,25 +28,7 @@ public class AchievementServlet extends HttpServlet{
 		if(student==null){
 			resp.sendRedirect("/login.jsp");
 		}
-		session.setAttribute("achievementMap", getAchievements(student));
+		session.setAttribute("achievementMap", AchievementRegistry.getAchievements(student));
 		resp.sendRedirect("/achievements.jsp");
-	}
-	
-	private HashMap<Course,ArrayList<Achievement>> getAchievements(Student student){
-		HashMap<Course,ArrayList<Achievement>> achievementMap = new HashMap<Course,ArrayList<Achievement>>();
-		Iterator<Course> it = student.getCourseList().iterator();
-		while(it.hasNext()){
-			Course course = it.next();
-			ArrayList<Achievement> tempAchievementList = new ArrayList<Achievement>();
-			Iterator<Achievement> ait = AchievementRegistry.getAchievements(student).iterator();
-			while(ait.hasNext()){
-				Achievement achievement = ait.next();
-				if(achievement.getCourse() == course){
-					tempAchievementList.add(ait.next());
-				}
-			}
-			achievementMap.put(course,tempAchievementList);
-		}
-		return achievementMap;
 	}
 }

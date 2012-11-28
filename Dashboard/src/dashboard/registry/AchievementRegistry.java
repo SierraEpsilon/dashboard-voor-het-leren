@@ -1,6 +1,7 @@
 package dashboard.registry;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import dashboard.model.Course;
@@ -49,19 +50,28 @@ public class AchievementRegistry {
 	}
 	
 	/**
-	 * returns an arraylist with the achievements applicable to the student
+	 * returns a hashmap containing a course key corresponding to an ArrayList containing all achievements bound to that course applicable to the student
 	 * @param student
 	 * @return
 	 */
-	public static ArrayList<Achievement> getAchievements(Student student){
-		ArrayList<Course> courseList = student.getCourseList();
-		ArrayList<Achievement> personalAchievementList = new ArrayList<Achievement>();
+	public static HashMap<Course,ArrayList<Achievement>> getAchievements(Student student){
+		HashMap<Course,ArrayList<Achievement>> achievementMap = new HashMap<Course,ArrayList<Achievement>>();
+		ArrayList<Achievement> noCourseAchievementList = new ArrayList<Achievement>();
 		for(Achievement achievement: achievementList){
-			if(achievement.getCourse() == null || courseList.contains(achievement.getCourse())){
-				personalAchievementList.add(achievement);
+			if(achievement.getCourse()==null){
+				noCourseAchievementList.add(achievement);
+			} else if(student.getCourseList().contains(achievement.getCourse())){
+				if(achievementMap.containsKey((achievement).getCourse())){
+					achievementMap.get(achievement.getCourse()).add(achievement);
+				} else {
+					ArrayList<Achievement> newAchievementList = new ArrayList<Achievement>();
+					newAchievementList.add(achievement);
+					achievementMap.put(achievement.getCourse(),newAchievementList);
+				}
 			}
 		}
-		return personalAchievementList;
+		achievementMap.put(null,noCourseAchievementList);
+		return achievementMap;
 	}
 	
 	public static Achievement getByID(String id){
