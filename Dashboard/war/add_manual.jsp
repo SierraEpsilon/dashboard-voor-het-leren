@@ -155,7 +155,7 @@ $(document).bind("pageinit",function(){
 	
 	</fieldset>
 	<label for='amount'>Hoeveelheid:</label>
-	<input type='number' name='amount'>
+	<input type='number' name='amount' placeholder='Getal'>
 	<%
 		String msg3 = (request.getParameter("msg3")==null) ? "" : request.getParameter("msg3");
 	%>
