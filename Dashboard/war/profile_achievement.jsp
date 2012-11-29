@@ -37,7 +37,7 @@
 		<%
 			for(Achievement achievement :AchievementRegistry.getCompletedAchievements(student)){
 				String name = achievement.getName();
-				out.println("<li><img class='ui-li-icon' src='/inc/icons/" + achievement.getIcon() + "' style='z-index:2;'>" + name + "</li>");
+				out.println("<li>" + name + "</li>");
 			}
 		%>
 		</ul>
