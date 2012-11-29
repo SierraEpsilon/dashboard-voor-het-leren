@@ -252,6 +252,10 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	public void addStudyMoment(StudyMoment moment) throws InvalidStudyMomentException {
 		if(!IsValidStudyMoment(moment))
 			throw new InvalidStudyMomentException();
+		if(getStudyMoments().isEmpty()){
+			getStudyMoments().add(moment);
+			return;
+		}
 		for(int i = getStudyMoments().size() - 1; i!=0; i--)
 			if(moment.getStart().after(getStudyMoments().get(i).getStart())){
 				getStudyMoments().add(i + 1, moment);
