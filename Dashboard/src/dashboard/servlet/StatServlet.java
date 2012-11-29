@@ -16,27 +16,11 @@ import dashboard.model.Course;
 import dashboard.model.Student;
 import dashboard.registry.StudentRegistry;
 
-public class statServlet extends HttpServlet {
+public class StatServlet extends HttpServlet {
 
 	private static final long serialVersionUID = -6566808443793850095L;
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-		HttpSession session = req.getSession();
-		PrintWriter writer = resp.getWriter();
-		if(session.getAttribute("student") != null)
-	        writer.println("UNAUTHORIZED");
-		else{
-			JSONArray root = new JSONArray();
-			try {
-				JSONObject obj = new JSONObject();
-				obj.put("name", "Studiepunten");
-				root.put(obj);
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			writer.println(root.toString());
-		}
-			
+		resp.sendRedirect("/stats.jsp");			
 	}
 }

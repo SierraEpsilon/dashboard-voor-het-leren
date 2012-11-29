@@ -30,8 +30,9 @@ public class AchievementRegistry {
 	private static ArrayList<StudiedInPeriod> getStudiedInPeriodAchievements() {
 		ArrayList<StudiedInPeriod> studiedInPeriodList = new ArrayList<StudiedInPeriod>();
 		
-		StudiedInPeriod sip1 = new StudiedInPeriod("STUDIED_IN_PERIOD_1", "Christmas student", "Studeer op kerstmis 2012", null, "noob.png", new Date(), new Date());
-		studiedInPeriodList.addAll(Arrays.asList(sip1));
+		StudiedInPeriod sip1 = new StudiedInPeriod("STUDIED_IN_PERIOD_1", "Christmas student", "Studeer op kerstmis 2012", null, "noob.png", new Date(1356390000000l), new Date(1356476400000l));
+		StudiedInPeriod sip2 = new StudiedInPeriod("STUDIED_IN_PERIOD_2", "Christmas student old", "Studeer op kerstmis 2011", null, "noob.png", new Date(1324767600000l), new Date(1324854000000l));
+		studiedInPeriodList.addAll(Arrays.asList(sip1,sip2));
 		
 		return studiedInPeriodList;
 	}

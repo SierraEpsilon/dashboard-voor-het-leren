@@ -50,7 +50,7 @@ public class TrackingServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");//get the current user
 		
-		if(req.getParameter("submit").equals("start") && student.getCurrentStudyMoment() == null){//if the student is not studying yet
+		if(req.getParameter("submit").equals("Start") && student.getCurrentStudyMoment() == null){//if the student is not studying yet
 			Course course = null;
 			try {
 				course = CourseRegistry.getCourse((String) req.getParameter("courseinput"));
@@ -63,7 +63,7 @@ public class TrackingServlet extends HttpServlet{
 			session.setAttribute("course", course);
 			resp.sendRedirect("/track.jsp?mode=stop");
 		} else {//if the student was already studying
-			if(req.getParameter("submit").equals("stop")){
+			if(req.getParameter("submit").equals("Stop")){
 				try {
 					student.endStudying(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));
 					session.setAttribute("startTracking", null);
@@ -81,7 +81,7 @@ public class TrackingServlet extends HttpServlet{
 					resp.sendRedirect("/error.jsp?msg=Overlap");
 					e.printStackTrace();
 				}
-			} else if(req.getParameter("submit").equals("cancel")){//cancel the study moment
+			} else if(req.getParameter("submit").equals("Cancel")){//cancel the study moment
 				try {
 					student.cancelCurrentStudyMoment();
 					session.setAttribute("startTracking", null);

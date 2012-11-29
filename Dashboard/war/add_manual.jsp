@@ -137,7 +137,7 @@ $(document).bind("pageinit",function(){
 	
 	Student student = (Student)session.getAttribute("student");
 	ArrayList<CourseContract> ccs = student.getCourses();
-	Iterator it = ccs.iterator();
+	Iterator<CourseContract> it = ccs.iterator();
 	while(it.hasNext()){
 		CourseContract courseC = (CourseContract)it.next();
 		String name = courseC.getCourse().getName();

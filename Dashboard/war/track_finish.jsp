@@ -60,8 +60,8 @@ $(document).bind("pageinit",function(){
 		String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
 	%>
 	<p id='msg' style='color:red;'><%=msg%></p>
-	<input type="submit" value='OPSLAAN'>
-	<input type='hidden' name='submit' value='stop'>
+	<input type="submit" value='Opslaan'>
+	<input type='hidden' name='submit' value='Stop'>
 	</form>
 </div><!-- /content -->
 </div><!-- /page -->

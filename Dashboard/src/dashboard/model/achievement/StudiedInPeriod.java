@@ -23,7 +23,7 @@ public class StudiedInPeriod extends Achievement {
 
 	public float getProgress(Student student) {
 		for(StudyMoment studyMoment: student.getStudyMoments()){
-			if(!(startDate.before(studyMoment.getStart()) || endDate.after(studyMoment.getEnd()))){
+			if(studyMoment.getStart().before(endDate) && studyMoment.getEnd().after(startDate)){
 				return 1;
 			}
 		}

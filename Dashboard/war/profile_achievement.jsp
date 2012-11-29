@@ -17,19 +17,20 @@
 <body>
 <div data-role="page">
 <div data-role="header" data-id='header' data-position="fixed">
-	<h1>Learnalyzer</h1>
-	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
-</div><!-- /header -->
 	<%
 		String std = (request.getParameter("std")==null) ? "" : request.getParameter("std");
 		Student student = StudentRegistry.getUserByUserName(std);
 	%>
+	<a href="/friends_friends.jsp" data-icon="back">Terug</a>
+	<h1>Learnalyzer</h1>
+	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 <div data-role="navbar">
 	<ul>
-		<li><a href="/profile_info.jsp?std=<%=std%>">info</a></li>
-		<li><a href="/profile_achievement.jsp?std=<%=std%>">achievements</a></li>
+		<li><a href="/profile_info.jsp?std=<%=std%>">Info</a></li>
+		<li><a href="/profile_achievement.jsp?std=<%=std%>">Achievements</a></li>
 	</ul>
 </div><!-- /navbar -->
+</div><!-- /header -->
 <div data-role="content">
 	<div>
 		<h3>Achievements</h3>
@@ -37,15 +38,12 @@
 		<%
 			for(Achievement achievement :AchievementRegistry.getCompletedAchievements(student)){
 				String name = achievement.getName();
-				out.println("<li>" + name + "</li>");
+				out.println("<li><img src='/inc/icons/" + achievement.getIcon() + "' class='ui-li-icon custom-css'>" + name + "</li>");
 			}
 		%>
 		</ul>
 	</div>
 </div><!-- /content -->
-<div data-role='footer' data-id="footer_settings" data-position="fixed">
-	<a href="/friends_friends.jsp" data-icon="back">back</a>
-</div>
 </div><!-- /page -->
 </body>
 </html>

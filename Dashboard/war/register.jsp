@@ -50,6 +50,7 @@ $(document).ready(function(){
 		}
 	});
 });
+$(document).tooltip();
 </script>
 <%
 String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
@@ -70,18 +71,18 @@ if(session.getAttribute("register.jsp")!=null){
 }
 %>
 <label for="firstname">Voornaam</label>
-<input type='text' name='firstname' value='<%=firstname%>'>
+<input type='text' name='firstname' value='<%=firstname%>' >
 <label for="lastname">Achternaam</label>
 <input type='text' name='lastname' value='<%=lastname%>'>
 <label for="username">Gebruikersnaam</label>
-<input type='text' name='username' value='<%=username%>'>
+<input type='text' name='username' value='<%=username%>' title='Een gebruikersnaam moet minstens 6 en maximaal 24 tekens lang zijn.'>
 <label for="mail">Email</label>
-<input type='text' name='mail' value='<%=mail%>'>
+<input type='text' name='mail' value='<%=mail%>' title='Geef een geldig e-mail adres in.'>
 <input type='hidden' name='password'>
 <label for="password1">Wachtwoord</label>
-<input type='password' name='password1'>
+<input type='password' name='password1' title='Een wachtwoord moet minstens 6 en maximaal 24 tekens lang zijn.'>
 <label for="password2">Herhaal wachtwoord</label>
-<input type='password' name='password2'>
+<input type='password' name='password2' title='Herhaal je wachtwoord.'>
 <input type='submit' name='submit' value='volgende'>
 </form>
 </div><!-- /content -->

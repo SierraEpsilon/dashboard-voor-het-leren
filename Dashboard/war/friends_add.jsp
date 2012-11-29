@@ -19,14 +19,14 @@
 	<h1>Learnalyzer</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 	<a href="/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
+	<div data-role="navbar">
+		<ul>
+			<li><a href="/friends_friends.jsp">Friends</a></li>
+			<li><a href="/friends_requests.jsp">Requests</a></li>
+			<li><a href="/friends_add.jsp">Add friend</a></li>
+		</ul>
+	</div><!-- /navbar -->
 </div><!-- /header -->
-<div data-role="navbar">
-	<ul>
-		<li><a href="/friends_friends.jsp">friends</a></li>
-		<li><a href="/friends_requests.jsp">requests</a></li>
-		<li><a href="/friends_add.jsp">add friend</a></li>
-	</ul>
-</div><!-- /navbar -->
 <div data-role="content">
 <form method='post' action='/friends'>
 	<ul data-role="listview" data-filter="true">

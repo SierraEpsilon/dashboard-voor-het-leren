@@ -33,7 +33,7 @@
  	</servlet-mapping>
  	<servlet>
         <servlet-name>stats</servlet-name>
-        <servlet-class>dashboard.servlet.statServlet</servlet-class>
+        <servlet-class>dashboard.servlet.StatServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>stats</servlet-name>

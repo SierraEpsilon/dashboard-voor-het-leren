@@ -36,13 +36,13 @@
 	String progBarJS2 = "";
 	int id = 1; 
 %>
-	<div class='list-edited' data-role='collapsible-set' data-inset='false'>
+	<div class='custom-css' data-role='collapsible-set' data-inset='false'>
 		
 		<%
 			HashMap<Course,ArrayList<Achievement>> achievementMap = (HashMap<Course,ArrayList<Achievement>>)session.getAttribute("achievementMap");
 			
-			out.println("<div class='list-edited' data-role='collapsible' data-iconpos='right'>");
-			out.println("<h3 class='list-edited'>Vakoverschrijdend</h3>");
+			out.println("<div data-role='collapsible'>");
+			out.println("<h3>Vakoverschrijdend</h3>");
 			out.println("<ul data-role='listview'>");
 			out.println(printAchievementList(achievementMap.get(null), student));
 			out.println("</ul></div>");
@@ -57,12 +57,8 @@
 			Iterator<Course> cit = courseList.iterator();
 			while(cit.hasNext()){ 
 				Course course = cit.next();
-				out.println("<div class='list-edited' data-role='collapsible' data-iconpos='right'>");
-				if(course==null){
-					out.println("<h3 class='list-edited'>Vakoverschrijdend</h3>");
-				} else {
-					out.println("<h3 class='list-edited'>" + course.getName() + "</h3>");
-				}
+				out.println("<div data-role='collapsible'>");
+				out.println("<h3>" + course.getName() + "</h3>");
 				out.println("<ul data-role='listview'>");
 				out.println(printAchievementList(achievementMap.get(course), student));
 				out.println("</ul></div>");
@@ -74,11 +70,16 @@
 				Iterator<Achievement> ait = achievementList.iterator();
 				while(ait.hasNext()){
 					Achievement achievement = ait.next();
-					output += ("<li id='progressbar" + id + "' data-icon='false'><a href='/achievement_detail.jsp?id="+ achievement.getId() + "'><img class='ui-li-icon' src='/inc/icons/" + achievement.getIcon() + "' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
+					String themeString = "";
+					output += ("<li id='progressbar" + id + "' data-icon='false'><a href='/achievement_detail.jsp?id="+ achievement.getId() + "'><img class='ui-li-icon custom-css' src='/inc/icons/" + achievement.getIcon() + "' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
 					progBarJS += ("$('#progressbar" + id + "').progressbar({ max: 100 });");
 					progBarJS += ("$('#progressbar" + id + "').progressbar({ value: " + Math.round(achievement.getProgress(student) * 100) + " });");
 					if(achievement.getProgress(student) >= 1){
 						progBarJS2 += ("$('#progressbar" + id + "').addClass('completed');");
+					}
+
+					if(achievement.getProgress(student) <= 0.005){
+						progBarJS2 += ("$('#progressbar" + id + "').addClass('unstarted');");
 					}
 					id++;
 				}
@@ -93,7 +94,7 @@
 	$("div.ui-progressbar-value").addClass("ui-link-inherit");
 	$("li.ui-progressbar").removeClass("ui-corner-all");
 	$("li.ui-progressbar").removeClass("completed");
-	$("li.ui-progressbar").addClass("list-edited");
+	$("li.ui-progressbar").addClass("custom-css");
 	$("div.ui-progressbar-value").each(function(){
 		$(this).click(function(){
 			$(this).parent().children("a")[0].click();

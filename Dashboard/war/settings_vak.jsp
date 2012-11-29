@@ -19,7 +19,6 @@
 	<h1>Learnalyzer</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 	<a href="/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
-</div><!-- /header -->
 <div data-role="navbar">
 	<ul>
 		<li><a href="/settings_info.jsp">Personal</a></li>
@@ -27,6 +26,7 @@
 		<li><a href="/settings_vak.jsp">Vakken</a></li>
 	</ul>
 </div><!-- /navbar -->
+</div><!-- /header -->
 <div data-role="content">
 <form method='post' action='/settings'>
 	<%
