@@ -34,7 +34,7 @@ $(document).bind("pageinit",function(){
 </div><!-- /header -->
 <div data-role="content">
 <form id='myCourseForm' action="/register" method="post">
-	<input type='submit' name='submit' value='registreren'>
+	<input type='submit' name='submit' value='Opslaan'>
 	<input type='hidden' name='courses'>
 </form>
 	<ul data-role='listview' style="margin-top: 5px">
