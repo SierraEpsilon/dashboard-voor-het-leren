@@ -18,7 +18,7 @@
 <div data-role="header" data-id='header' data-position="fixed">
 	<h1>Learnalyzer</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
-	<a href="/menu.jsp" data-role="button" data-icon="grid">Menu</a>
+	<a href="/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 </div><!-- /header -->
 <div data-role="content">
 <%
