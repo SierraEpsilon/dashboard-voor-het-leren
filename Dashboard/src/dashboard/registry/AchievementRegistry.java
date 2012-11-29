@@ -1,6 +1,8 @@
 package dashboard.registry;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -21,29 +23,39 @@ public class AchievementRegistry {
 	 * fills the achievement list with all possible achievements		
 	 */
 	private static void fillAchievementList(){
+		achievementList.addAll(getStudiedInPeriodAchievements());
 		achievementList.addAll(getTimeStudiedAchievements());
 	}
 	
+	private static ArrayList<StudiedInPeriod> getStudiedInPeriodAchievements() {
+		ArrayList<StudiedInPeriod> studiedInPeriodList = new ArrayList<StudiedInPeriod>();
+		
+		StudiedInPeriod sip1 = new StudiedInPeriod("STUDIED_IN_PERIOD_1", "Christmas student", "Studeer op kerstmis 2012", null, "noob.png", new Date(), new Date());
+		studiedInPeriodList.addAll(Arrays.asList(sip1));
+		
+		return studiedInPeriodList;
+	}
+
 	private static ArrayList<TimeStudied> getTimeStudiedAchievements(){
 		ArrayList<TimeStudied> timeStudiedList = new ArrayList<TimeStudied>();
 		
-		TimeStudied tst1 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "Studeer 30 minuten in totaal", null, 1800,"noob.png");
-		TimeStudied tst2 = new TimeStudied("TIME_STUDIED_TOTAL_2", "Studying novice", "Studeer 3 uur in totaal", null, 10800,"novice.png");
-		TimeStudied tst3 = new TimeStudied("TIME_STUDIED_TOTAL_3", "Studying apprentice", "Studeer 12 uur in totaal", null, 43200,"apprentice.png");
-		TimeStudied tst4 = new TimeStudied("TIME_STUDIED_TOTAL_4", "Studying expert", "Studeer 60 uur in totaal", null, 216000,"expert.png");
-		TimeStudied tst5 = new TimeStudied("TIME_STUDIED_TOTAL_5", "Studying pro", "Studeer 120 uur in totaal", null, 432000,"pro.png");
-		TimeStudied tst6 = new TimeStudied("TIME_STUDIED_TOTAL_6", "Studying zombie", "Studeer 600 uur in totaal", null, 2160000,"zombie.png");
+		TimeStudied tst1 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "Studeer 30 minuten in totaal", null, "noob.png",1800);
+		TimeStudied tst2 = new TimeStudied("TIME_STUDIED_TOTAL_2", "Studying novice", "Studeer 3 uur in totaal", null, "novice.png",10800);
+		TimeStudied tst3 = new TimeStudied("TIME_STUDIED_TOTAL_3", "Studying apprentice", "Studeer 12 uur in totaal", null, "apprentice.png",43200);
+		TimeStudied tst4 = new TimeStudied("TIME_STUDIED_TOTAL_4", "Studying expert", "Studeer 60 uur in totaal", null, "expert.png",216000);
+		TimeStudied tst5 = new TimeStudied("TIME_STUDIED_TOTAL_5", "Studying pro", "Studeer 120 uur in totaal", null, "pro.png",432000);
+		TimeStudied tst6 = new TimeStudied("TIME_STUDIED_TOTAL_6", "Studying zombie", "Studeer 600 uur in totaal", null, "zombie.png",2160000);
 		timeStudiedList.addAll(Arrays.asList(tst1,tst2,tst3,tst4,tst5,tst6));
 		
 		Iterator<Course> it = CourseRegistry.getAllCourses().iterator();
 		while(it.hasNext()){
 			Course course = it.next();
-			TimeStudied ts1 = new TimeStudied("TIME_STUDIED_" + course.name() + "_1", course.getName() + " noob", "Studeer 5 minuten voor " + course.getName(), course, 300,"noob.png");
-			TimeStudied ts2 = new TimeStudied("TIME_STUDIED_" + course.name() + "_2", course.getName() + " novice", "Studeer 30 minuten voor " + course.getName(), course, 1800,"novice.png");
-			TimeStudied ts3 = new TimeStudied("TIME_STUDIED_" + course.name() + "_3", course.getName() + " apprentice", "Studeer 2 uur voor " + course.getName(), course, 7200,"apprentice.png");
-			TimeStudied ts4 = new TimeStudied("TIME_STUDIED_" + course.name() + "_4", course.getName() + " expert", "Studeer 10 uur voor " + course.getName(), course, 36000,"expert.png");
-			TimeStudied ts5 = new TimeStudied("TIME_STUDIED_" + course.name() + "_5", course.getName() + " pro", "Studeer 20 uur voor " + course.getName(), course, 72000,"pro.png");
-			TimeStudied ts6 = new TimeStudied("TIME_STUDIED_" + course.name() + "_6", course.getName() + " zombie", "Studeer 100 uur voor " + course.getName(), course, 360000,"zombie.png");
+			TimeStudied ts1 = new TimeStudied("TIME_STUDIED_" + course.name() + "_1", course.getName() + " noob", "Studeer " + 2 * course.getCredit() + " minuten voor " + course.getName(), course, "noob.png",120 * course.getCredit());
+			TimeStudied ts2 = new TimeStudied("TIME_STUDIED_" + course.name() + "_2", course.getName() + " novice", "Studeer " + 10 * course.getCredit() + " minuten voor " + course.getName(), course, "novice.png",600 * course.getCredit());
+			TimeStudied ts3 = new TimeStudied("TIME_STUDIED_" + course.name() + "_3", course.getName() + " apprentice", "Studeer " + 1 * course.getCredit() + " uur voor " + course.getName(), course, "apprentice.png",3600 * course.getCredit());
+			TimeStudied ts4 = new TimeStudied("TIME_STUDIED_" + course.name() + "_4", course.getName() + " expert", "Studeer " + 4 * course.getCredit() + " uur voor " + course.getName(), course, "expert.png",14400 * course.getCredit());
+			TimeStudied ts5 = new TimeStudied("TIME_STUDIED_" + course.name() + "_5", course.getName() + " pro", "Studeer " + 10 * course.getCredit() + " uur voor " + course.getName(), course, "pro.png",36000 * course.getCredit());
+			TimeStudied ts6 = new TimeStudied("TIME_STUDIED_" + course.name() + "_6", course.getName() + " zombie", "Studeer " + 35 * course.getCredit() + " uur voor " + course.getName(), course, "zombie.png",126000 * course.getCredit());
 			timeStudiedList.addAll(Arrays.asList(ts1,ts2,ts3,ts4,ts5,ts6));
 		}
 		return timeStudiedList;

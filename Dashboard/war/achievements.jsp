@@ -14,6 +14,8 @@
 <%@page import="java.util.ArrayList" %>
 <%@page import="java.util.Iterator" %>
 <%@page import="java.util.HashMap" %>
+<%@page import="java.util.Collections" %>
+<%@page import="java.util.Comparator" %>
 <%@page import="dashboard.registry.AchievementRegistry" %>
 <%@page import="dashboard.model.achievement.*" %>
 <%@page import="dashboard.model.Student" %>
@@ -29,14 +31,30 @@
 </div><!-- /header -->
 <div data-role="content">
 <% Student student = (Student)session.getAttribute("student"); %>
+<%!
+	String progBarJS = "";
+	String progBarJS2 = "";
+	int id = 1; 
+%>
 	<div class='list-edited' data-role='collapsible-set' data-inset='false'>
 		
-		<% 
+		<%
 			HashMap<Course,ArrayList<Achievement>> achievementMap = (HashMap<Course,ArrayList<Achievement>>)session.getAttribute("achievementMap");
-			String progBarJS = "";
-			String progBarJS2 = "";
-			Iterator<Course> cit = achievementMap.keySet().iterator();
-			int id = 1;
+			
+			out.println("<div class='list-edited' data-role='collapsible' data-iconpos='right'>");
+			out.println("<h3 class='list-edited'>Vakoverschrijdend</h3>");
+			out.println("<ul data-role='listview'>");
+			out.println(printAchievementList(achievementMap.get(null), student));
+			out.println("</ul></div>");
+			
+			achievementMap.keySet().remove(null);
+			ArrayList<Course> courseList = new ArrayList<Course>(achievementMap.keySet());
+			Collections.sort(courseList, new Comparator<Course>(){
+				public int compare(Course c1, Course c2){
+					return c1.getName().compareTo(c2.getName());
+				}
+			});
+			Iterator<Course> cit = courseList.iterator();
 			while(cit.hasNext()){ 
 				Course course = cit.next();
 				out.println("<div class='list-edited' data-role='collapsible' data-iconpos='right'>");
@@ -46,10 +64,17 @@
 					out.println("<h3 class='list-edited'>" + course.getName() + "</h3>");
 				}
 				out.println("<ul data-role='listview'>");
-				Iterator<Achievement> ait = achievementMap.get(course).iterator();
+				out.println(printAchievementList(achievementMap.get(course), student));
+				out.println("</ul></div>");
+			}
+		%>
+		<%!	
+			private String printAchievementList(ArrayList<Achievement> achievementList, Student student){
+				String output = "";
+				Iterator<Achievement> ait = achievementList.iterator();
 				while(ait.hasNext()){
 					Achievement achievement = ait.next();
-					out.println("<li id='progressbar" + id + "' data-icon='false'><a href='/achievement_detail.jsp?id="+ achievement.getId() + "'><img class='ui-li-icon' src='/inc/icons/" + achievement.getIcon() + "' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
+					output += ("<li id='progressbar" + id + "' data-icon='false'><a href='/achievement_detail.jsp?id="+ achievement.getId() + "'><img class='ui-li-icon' src='/inc/icons/" + achievement.getIcon() + "' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
 					progBarJS += ("$('#progressbar" + id + "').progressbar({ max: 100 });");
 					progBarJS += ("$('#progressbar" + id + "').progressbar({ value: " + Math.round(achievement.getProgress(student) * 100) + " });");
 					if(achievement.getProgress(student) >= 1){
@@ -57,7 +82,7 @@
 					}
 					id++;
 				}
-				out.println("</ul></div>");
+				return output;
 			}
 		%>
 	</div>
