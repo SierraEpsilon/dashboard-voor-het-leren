@@ -78,6 +78,7 @@ public class ManualTrackingServlet extends HttpServlet{
 					session.setAttribute("student", student);
 					resp.sendRedirect("/add_manual.jsp?msg=no such course!");
 				}
+				
 			}
 			
 	}

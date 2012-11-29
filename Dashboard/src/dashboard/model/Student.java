@@ -256,12 +256,15 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			getStudyMoments().add(moment);
 			return;
 		}
-		for(int i = getStudyMoments().size() - 1; i!=0; i--)
+		for(int i = getStudyMoments().size() - 1; i!=-1; i--)
 			if(moment.getStart().after(getStudyMoments().get(i).getStart())){
 				getStudyMoments().add(i + 1, moment);
 				OwnOfy.ofy().put(this);
 				return;
 			}
+		getStudyMoments().add(0, moment);
+		OwnOfy.ofy().put(this);
+		return;
 	}
 	
 	
