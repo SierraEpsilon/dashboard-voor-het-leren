@@ -115,16 +115,16 @@ $(document).bind("pageinit",function(){
 	<b>Starttijd</b>
 	<p>
 	         <label for="startdate">Datum:</label>
-	         <input type="date" name="startdate" id="date" value="" />
+	         <input type="date" name="startdate" id="date" value="" placeholder="vb: 20/04/2012" />
 	         <label for="starttime">Tijd:</label>
-	         <input type="time" name="starttime" id="time" value="" />
+	         <input type="time" name="starttime" id="time" value="" placeholder="vb: 15:00"/>
 	<p>
 	<b>Eindtijd</b>
 	<p>
 	         <label for="enddate">Datum:</label>
-	         <input type="date" name="enddate" id="date" value="" />
+	         <input type="date" name="enddate" id="date" value="" placeholder="vb: 20/04/2012" />
 	         <label for="endtime">Tijd:</label>
-	         <input type="time" name="endtime" id="time" value="" />
+	         <input type="time" name="endtime" id="time" value="" placeholder="vb: 16:00"/>
 	         
  	<%
 		String msg2 = (request.getParameter("msg2")==null) ? "" : request.getParameter("msg2");
