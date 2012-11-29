@@ -74,6 +74,16 @@ public class AchievementRegistry {
 		return achievementMap;
 	}
 	
+	public static ArrayList<Achievement> getCompletedAchievements(Student student){
+		ArrayList<Achievement> completedAchievementList = new ArrayList<Achievement>();
+		for(Achievement achievement: achievementList){
+			if(achievement.getProgress(student)>=1){
+				completedAchievementList.add(achievement);
+			}
+		}
+		return completedAchievementList;
+	}
+	
 	public static Achievement getByID(String id){
 		Iterator<Achievement> it = achievementList.iterator();
 		while(it.hasNext()){
