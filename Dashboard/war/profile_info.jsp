@@ -50,7 +50,7 @@
 	</div>
 </div><!-- /content -->
 <div data-role='footer' data-id="footer_settings" data-position="fixed">
-	<from><input type="button" value="back" data-inline="true" data-icon="back" onClick="history.go(-1);return true;"></form>
+	<a href="/friends_friends.jsp" data-icon="back">back</a>
 </div>
 </div><!-- /page -->
 </body>

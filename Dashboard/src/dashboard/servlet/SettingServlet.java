@@ -54,7 +54,7 @@ public class SettingServlet extends HttpServlet {
 			String pass2 = req.getParameter("pass2");
 			String pass3 = req.getParameter("pass3");
 			if(pass1.equals("") || pass2.equals("") || pass3.equals(""))
-				resp.sendRedirect("/.jsp?msg=vul alle velden in!");
+				resp.sendRedirect("/settings_pass.jsp?msg=vul alle velden in!");
 			else if(student.isCorrectPassword(pass1) && (pass2.equals(pass3))){
 				try {
 					student.setPassword(pass2);
