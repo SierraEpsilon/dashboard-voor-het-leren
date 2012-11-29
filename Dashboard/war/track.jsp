@@ -18,6 +18,7 @@
 <div data-role="header" data-id='header' data-position="fixed">
 	<h1>Learnalyzer</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
+	<a href="/menu.jsp" data-role="button" data-icon="grid">Menu</a>
 </div><!-- /header -->
 <div data-role="content">
 <%
@@ -107,9 +108,6 @@ function updateLiveFeed(){
 }
 </script>
 </div><!-- /content -->
-<div data-role='footer' data-id="foo1" data-position="fixed">
-	<a href="/menu.jsp" data-role="button" data-icon="grid">Menu</a>
-</div>
 </div><!-- /page -->
 </body>
 </html>
