@@ -19,11 +19,17 @@
 	<h1>Learnalyzer</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 </div><!-- /header -->
-<div data-role="content">
 	<%
 		String std = (request.getParameter("std")==null) ? "" : request.getParameter("std");
 		Student student = StudentRegistry.getUserByUserName(std);
 	%>
+<div data-role="navbar">
+	<ul>
+		<li><a href="/profile_info.jsp?std=<%=std%>">info</a></li>
+		<li><a href="/profile_achievement.jsp?std=<%=std%>">achievements</a></li>
+	</ul>
+</div><!-- /navbar -->
+<div data-role="content">
 	<div>
 		<h3>Persoonlijke informatie</h3>
 		<h4>Voornaam:</h4>
