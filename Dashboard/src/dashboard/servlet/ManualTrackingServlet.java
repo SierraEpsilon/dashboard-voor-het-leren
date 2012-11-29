@@ -56,6 +56,7 @@ public class ManualTrackingServlet extends HttpServlet{
 				Course usedCourse = CourseRegistry.getCourse((String) req.getParameter("courseinput"));
 				String kindStudied = (String) req.getParameter("kind");
 				student.addStudyMoment(new StudyMoment(startD, endD, usedCourse, number, kindStudied));
+				session.setAttribute("student", student);
 				resp.sendRedirect("/add_manual.jsp?msg=Studiemoment correct toegevoegd");
 			} catch (InvalidEndDateException e) {
 				resp.sendRedirect("/add_manual.jsp?msg=You appear to be a time traveler?!");
