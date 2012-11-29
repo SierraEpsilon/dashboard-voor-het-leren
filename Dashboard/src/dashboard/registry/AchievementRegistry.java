@@ -28,11 +28,11 @@ public class AchievementRegistry {
 		ArrayList<TimeStudied> timeStudiedList = new ArrayList<TimeStudied>();
 		
 		TimeStudied tst1 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "Studeer 30 minuten in totaal", null, 1800,"noob.png");
-		TimeStudied tst2 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying novice", "Studeer 3 uur in totaal", null, 10800,"novice.png");
-		TimeStudied tst3 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying apprentice", "Studeer 12 uur in totaal", null, 43200,"apprentice.png");
-		TimeStudied tst4 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying expert", "Studeer 60 uur in totaal", null, 216000,"expert.png");
-		TimeStudied tst5 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying pro", "Studeer 120 uur in totaal", null, 432000,"pro.png");
-		TimeStudied tst6 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying zombie", "Studeer 600 uur in totaal", null, 2160000,"zombie.png");
+		TimeStudied tst2 = new TimeStudied("TIME_STUDIED_TOTAL_2", "Studying novice", "Studeer 3 uur in totaal", null, 10800,"novice.png");
+		TimeStudied tst3 = new TimeStudied("TIME_STUDIED_TOTAL_3", "Studying apprentice", "Studeer 12 uur in totaal", null, 43200,"apprentice.png");
+		TimeStudied tst4 = new TimeStudied("TIME_STUDIED_TOTAL_4", "Studying expert", "Studeer 60 uur in totaal", null, 216000,"expert.png");
+		TimeStudied tst5 = new TimeStudied("TIME_STUDIED_TOTAL_5", "Studying pro", "Studeer 120 uur in totaal", null, 432000,"pro.png");
+		TimeStudied tst6 = new TimeStudied("TIME_STUDIED_TOTAL_6", "Studying zombie", "Studeer 600 uur in totaal", null, 2160000,"zombie.png");
 		timeStudiedList.addAll(Arrays.asList(tst1,tst2,tst3,tst4,tst5,tst6));
 		
 		Iterator<Course> it = CourseRegistry.getAllCourses().iterator();
