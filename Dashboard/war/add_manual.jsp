@@ -97,12 +97,13 @@ $(document).bind("pageinit",function(){
 	});
 });
 </script>
-<div data-role="header" data-id='header' data-position="fixed">
-
+<div data-role="header" data-id='header' data-position='fixed'>
+	<a href="/menu.jsp" data-role="button" data-icon="grid">Menu</a>
 	<h1>Toevoegen van studiemoment</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 
 </div><!-- /header -->
+
 <div data-role="content">
 
 <form id="myFormm" method="post" action='/add_manual'>
@@ -160,19 +161,13 @@ $(document).bind("pageinit",function(){
 	%>
 	<p id='msg3' style='color:red;'><%=msg3%></p>
 
+
+		<a href="" 			data-role="button" data-icon="check" data-theme="b" id="opslaan" data-inline="true">Opslaan</a></li>
+		<a href="/menu.jsp" data-role="button" data-icon="delete" data-inline="true">Annuleren</a>
 </form>
  
- 
- 
 </div><!-- /content -->
-<div data-role='footer' data-id="foo1" data-position="fixed">
-	<div data-role="navbar"><ul>
 
-		<li><a href="" data-role="button" data-icon="check" id="opslaan" >Opslaan</a></li>
-		<li><a href="/menu.jsp" data-role="button" data-icon="delete">Annuleren</a></li>
-	</ul></div>
-
-</div>
 </div><!-- /page -->
 </body>
 </html>
