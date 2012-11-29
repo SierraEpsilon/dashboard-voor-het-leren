@@ -7,6 +7,7 @@ import com.googlecode.objectify.Objectify;
 import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 
+import dashboard.error.AlreadyRequestedException;
 import dashboard.error.EmailInUseException;
 import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidPasswordException;
@@ -210,7 +211,8 @@ public class StudentRegistry {
 		}
 	}
 	
-	public static void sendFriendRequest(Student requestor, String friendlyName){
+	public static void sendFriendRequest(Student requestor, String friendlyName) 
+			throws AlreadyRequestedException{
 		if(requestor.getFriendRequests().contains(friendlyName))
 			createFriends(requestor, friendlyName);
 		else{

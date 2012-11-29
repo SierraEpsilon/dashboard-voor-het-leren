@@ -14,6 +14,7 @@ import com.googlecode.objectify.annotation.*;
 import com.sun.org.apache.bcel.internal.generic.GETFIELD;
 
 import dashboard.error.AlreadyEndedException;
+import dashboard.error.AlreadyRequestedException;
 import dashboard.error.CourseAlreadyTakenException;
 import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEmailException;
@@ -43,8 +44,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	@Serialized private ArrayList<CourseContract> courses;
 	@Serialized private ArrayList<String> friendList;
 	@Serialized private ArrayList<String> friendRequests;
-	//@Serialized private ArrayList<String> friendRequestsByStudent;
-	//@Serialized private ArrayList<String> friendRequestsByOthers;
 	
 	/**
 	 * initiates a user
@@ -87,8 +86,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		setFirstName(firstName);
 		setLastName(lastName);
 		convertEmptyArrayLists();
-		//friendRequestsByStudent = new ArrayList<String>();
-		//friendRequestsByOthers = new ArrayList<String>();
 		OwnOfy.ofy().put(this);
 	}
 	
@@ -185,24 +182,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	public ArrayList<String> getFriendRequests() {
 		return friendRequests;
 	}
-	
-	/**
-	 * @return
-	 *  the requested friends of the student
-	 *  |	friendRequestsByStudent 
-	 */
-	/*public ArrayList<String> getFriendRequestsByStudent(){
-		return friendRequestsByStudent;
-	}*/
-	
-	/**
-	 * @return
-	 *  the others who requested the student
-	 *  |	friendRequestsByOthers 
-	 */
-	/*public ArrayList<String> getFriendRequestsByOthers(){
-		return friendRequestsByOthers;
-	}*/
 	
 	/**
 	 * @param firstName
@@ -317,49 +296,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		throw(new NoSuchCourseException());
 	}
 	
-	
-	/**
-	 * @param userName
-	 * the user name you want to request as a friend
-	 * @throws InvalidUserNameException
-	 */
-	/*public void requestFriend(String userName) throws InvalidUserNameException{
-		if(!StudentRegistry.isUserNameExisting(userName))
-			throw new InvalidUserNameException();
-		if(userName.equals(getUserName()))
-			throw new InvalidUserNameException();
-		friendRequestsByStudent.add(userName);
-	}*/
-	
-	/**
-	 * @param username
-	 * the user name who requested you as a friend
-	 */
-	/*public void requestedAsFriend(String username){
-		friendRequestsByOthers.add(userName);
-	}*/
-	
-	/**
-	 * @param userName
-	 * the user name you want to accept as a friend
-	 * @throws UnrequestedFriendException 
-	 */
-	/*public void acceptFriend(String userName) throws UnrequestedFriendException{
-		if(!friendRequestsByOthers.contains(userName))
-			throw new UnrequestedFriendException();
-		addFriend(userName);
-		friendRequestsByOthers.remove(userName);
-	}8/
-	
-	/**
-	 * @param userName
-	 * the user name who accepted you as a friend
-	 */
-	/*public void acceptedAsfriend(String userName){
-		addFriend(userName);
-		friendRequestsByStudent.remove(userName);
-	}*/
-	
 	public void removeRequest(String username){
 		if(getFriendRequests().contains(username))
 			getFriendRequests().remove(username);
@@ -370,7 +306,10 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * @param username
 	 * the user name who requested you as a friend
 	 */
-	public void requestedAsFriend(String userName){
+	public void requestedAsFriend(String userName) 
+			throws AlreadyRequestedException{
+		if(getFriendRequests().contains(userName))
+			throw new AlreadyRequestedException();
 		getFriendRequests().add(userName);
 		OwnOfy.ofy().put(this);
 	}

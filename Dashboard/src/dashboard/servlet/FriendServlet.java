@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dashboard.error.AlreadyRequestedException;
 import dashboard.model.Student;
 import dashboard.registry.StudentRegistry;
 import dashboard.util.OwnOfy;
@@ -38,9 +39,13 @@ public class FriendServlet extends HttpServlet {
 	private void requestFriend(String action, Student student,
 			HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String interestingPerson = action.replace("req_", "");
-		StudentRegistry.sendFriendRequest(student, interestingPerson);
-		req.getSession().setAttribute("student", student);
-		resp.sendRedirect("/friends_friends.jsp");
+		try {
+			StudentRegistry.sendFriendRequest(student, interestingPerson);
+			req.getSession().setAttribute("student", student);
+			resp.sendRedirect("/friends_friends.jsp");
+		} catch (AlreadyRequestedException e) {
+			resp.sendRedirect("/error.jsp?msg=already requested");
+		}
 	}
 
 	private void denyFriend(String action, Student student,
