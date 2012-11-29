@@ -28,7 +28,7 @@ public class RegistrationServlet extends HttpServlet {
 		String action = req.getParameter("submit");
 		if(action.equals("volgende"))
 			addStudent(req, resp);
-		else if(action.equals("registreren"))
+		else if(action.equals("Opslaan"))
 			addCourses(req, resp);
 		else if(action.equals("register2")){
 			HttpSession session = req.getSession();
