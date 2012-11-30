@@ -36,8 +36,10 @@
 		<h3>Vakken</h3>
 		<ul data-role="listview" style="margin: 5px">
 		<%
-			for(CourseContract course :student.getCourses() ){
-				String name = course.getCourse().getName();
+			ArrayList<Course> courseList = student.getCourseList();
+			Collections.sort(courseList, new CourseNameComparator());
+			for(Course course : courseList){
+				String name = course.getName();
 				out.println("<li data-inline='true'>" + name + "</li>");
 				out.println("<button  type='submit' data-inline='true' data-icon='delete' name='submit' value='remove_" + name + "'>remove</button>");
 			}

@@ -48,11 +48,12 @@ if(request.getParameter("mode")!=null && request.getParameter("mode").equals("st
 	out.println("Course: <select name='courseinput'>");
 	
 	Student student = (Student)session.getAttribute("student");
-	ArrayList<CourseContract> ccs = student.getCourses();
-	Iterator it = ccs.iterator();
+	ArrayList<Course> ccs = student.getCourseList();
+	Collections.sort(ccs, new CourseNameComparator());
+	Iterator<Course> it = ccs.iterator();
 	while(it.hasNext()){
-		CourseContract courseC = (CourseContract)it.next();
-		String name = courseC.getCourse().getName();
+		Course course = it.next();
+		String name = course.getName();
 		out.println("<option value='" + name + "'>" + name + "</option>");
 	}
 	out.println("</select>");
