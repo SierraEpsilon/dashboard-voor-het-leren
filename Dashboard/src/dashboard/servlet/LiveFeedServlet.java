@@ -25,21 +25,23 @@ public class LiveFeedServlet extends HttpServlet {
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student currentStudent = (Student)session.getAttribute("student");
-		Course course = currentStudent.getCurrentStudyMoment().getCourse();
-		
-		JSONObject obj=new JSONObject();
-		try {
-			obj.put("studyMates", StudentRegistry.getActiveUsersbyCourse(course).size());
-			obj.put("AllMates", StudentRegistry.getActiveUsers().size());
-			resp.setContentType("application/json");
-			PrintWriter out = resp.getWriter();
-			out.print(obj);
-			out.flush();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		if(currentStudent!=null){
+			Course course = currentStudent.getCurrentStudyMoment().getCourse();
+			
+			JSONObject obj=new JSONObject();
+			try {
+				if(course!=null)
+					obj.put("studyMates", StudentRegistry.getActiveUsersbyCourse(course).size());
+				obj.put("AllMates", StudentRegistry.getActiveUsers().size());
+				resp.setContentType("application/json");
+				PrintWriter out = resp.getWriter();
+				out.print(obj);
+				out.flush();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-		
 	}
 			
 
