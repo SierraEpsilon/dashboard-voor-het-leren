@@ -14,7 +14,7 @@
 <%@ page import="java.util.*" %>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="track_jsp">
 <div data-role="header" data-id='header' data-position="fixed">
 	<h1>Learnalyzer</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
@@ -38,8 +38,8 @@ if(request.getParameter("mode")!=null && request.getParameter("mode").equals("st
 	out.println("<form method='post' action='/track'>");
 	out.println("<input type='submit' name='submit' value='Cancel'>");
 	out.println("</form>");
-	out.println("<p id='timePast'>");
-	out.println("<p id='liveFeed'>");		
+	out.println("<div id='timePast'>timePast</div>");
+	out.println("<div id='liveFeed'>liveFeed</div>");		
 }else{
 	stop = 0;
 	startTime = "";
@@ -63,16 +63,20 @@ if(request.getParameter("mode")!=null && request.getParameter("mode").equals("st
 }
 %>
 <script>
-$(document).bind("pageinit",function(){
-	stop = <%= stop %>;
-	if(stop){
+stop = <%= stop %>;
+if(stop){
+	$("div#track_jsp").bind("pageshow",function(){
 		setTimePast();
-		setInterval("setTimePast()",1000);
+		window.intervs = new Object();
+		window.intervs.clock = setInterval("setTimePast()",1000);
 		updateLiveFeed();
-		setInterval("updateLiveFeed()",10000);
-	}
-	
-});
+		window.intervs.feed = setInterval("updateLiveFeed()",20000);
+	});
+	$("div#track_jsp").bind("pagehide",function(){
+			clearInterval(window.intervs.clock);
+			clearInterval(window.intervs.feed);
+	});
+}
 
 function setTimePast(){
 	str = "";
@@ -96,14 +100,14 @@ function setTimePast(){
 			str = hours + " uur " + min + " minuten";
 		}
 	}
-	$('#timePast').text(str);
+	$('div#timePast').text(str);
 }
 
 function updateLiveFeed(){
 	$.getJSON("/feed",function(json){
 		var str = "<table><tr><td>All students:</td><td>"+json.AllMates+"</td></tr>";
 		str += ("<tr><td>Course students:</td><td>"+json.studyMates+"</td></tr></table>");
-		$("#liveFeed").html(str);
+		$("div#liveFeed").html(str);
 	});
 }
 </script>
