@@ -46,7 +46,9 @@ $(document).bind("pageinit",function(){
 		out.println("<div data-role='collapsible'>"); 
 				out.println("<h3>" + branch + "</h3>"); 
 				out.println("<div data-role='controlgroup'>");
-				for(Course course :branches.get(branch).getCourses()){
+				ArrayList<Course> courseList = branches.get(branch).getCourses();
+				Collections.sort(courseList, new CourseNameComparator());
+				for(Course course :courseList){
 				out.println("<li><label><input type='checkbox' name='" + course + "' />" + course + "</label>");
 				}
 				out.println("</div></div>"); 

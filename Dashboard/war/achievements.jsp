@@ -15,11 +15,11 @@
 <%@page import="java.util.Iterator" %>
 <%@page import="java.util.HashMap" %>
 <%@page import="java.util.Collections" %>
-<%@page import="java.util.Comparator" %>
 <%@page import="dashboard.registry.AchievementRegistry" %>
 <%@page import="dashboard.model.achievement.*" %>
 <%@page import="dashboard.model.Student" %>
 <%@page import="dashboard.model.Course" %>
+<%@page import="dashboard.model.CourseNameComparator" %>
 </head>
 <body>
 <div data-role="page">
@@ -49,11 +49,7 @@
 			
 			achievementMap.keySet().remove(null);
 			ArrayList<Course> courseList = new ArrayList<Course>(achievementMap.keySet());
-			Collections.sort(courseList, new Comparator<Course>(){
-				public int compare(Course c1, Course c2){
-					return c1.getName().compareTo(c2.getName());
-				}
-			});
+			Collections.sort(courseList, new CourseNameComparator());
 			Iterator<Course> cit = courseList.iterator();
 			while(cit.hasNext()){ 
 				Course course = cit.next();

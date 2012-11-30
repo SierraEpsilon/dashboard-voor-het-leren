@@ -1,6 +1,7 @@
 package dashboard.model;
 
 import java.io.Serializable;
+import java.util.Comparator;
 
 public enum Course implements Serializable{
 		
