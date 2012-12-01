@@ -29,7 +29,7 @@ $(document).bind("pageinit",function(){
 <div data-role="content">
 
 	<ul data-role="listview">
-	<li><a href="/stats">Statistieken</a></li>
+	<li><a href="/stats_all.jsp">Statistieken</a></li>
 	<li><a href="/track">Tracken</a></li>
 	<li><a href="/achievements">Achievements</a></li>
 	<li><a href="/settings">Instellingen</a></li>

@@ -1,11 +1,6 @@
 // parameters
-var jsonURL = "test.json";
-var divId = "chart1";
-var catButton = "#catButton .ui-btn-text";
-var graphButton = "#graphButton .ui-btn-text";
-var graphDivID = "graphDiv";
-// type to functions
 graph = new Object();
+// type to functions
 graph.funcs = new Array();
 graph.funcs["pie"] = new Array("Pie","pie");
 graph.funcs["donut"] = new Array("Donut","donut");
@@ -13,16 +8,16 @@ graph.funcs["text"] = new Array("Text","text");
 graph.funcs["scatter"] = new Array("Scatter","scatter");
 // type handlers
 function scatter(data){
-	$("#"+graphDivID).html("");
-	$.jqplot("graphDiv", data);
+	$("#"+graph.graphDivID).html("");
+	$.jqplot(graph.graphDivID, data);
 }
 function text(data){
-	$("#"+graphDivID).html("");
-	$("#"+graphDivID).html(data);
+	$("#"+graph.graphDivID).html("");
+	$("#"+graph.graphDivID).html(data);
 }
 function pie(data){
-	$("#"+graphDivID).html("");
-	$.jqplot(graphDivID, data,
+	$("#"+graph.graphDivID).html("");
+	$.jqplot(graph.graphDivID, data,
 		{
 		  seriesDefaults: {
 			// Make this a pie chart.
@@ -39,7 +34,11 @@ function pie(data){
 }
 function table(data){}
 
-function getData(){
+function getData(jsonURL,catB,graphB,divD){
+	graph.catButton = catB;
+	graph.graphButton = graphB;
+	graph.graphDivID = divD;
+	$("#"+graph.graphDivID).html("Please wait, statistics are being fetched...");
 	$.getJSON(jsonURL,function(json){
 		//graph methods and properties
 		graph.count = 0;
@@ -83,12 +82,15 @@ function getData(){
 				return this.graphs[this.count];
 			};
 		}
-		$(catButton).text(graph.getCat().name);
-		var curGraph = window.graph.getCat().getGraph();
-		var type = curGraph.type;
-		$(graphButton).text(graph.funcs[type][0]);
-		eval(graph.funcs[type][1]+"(curGraph.data)");
+		drawGraph();
 	});
+}
+function drawGraph(){
+	$(graph.catButton).text(graph.getCat().name);
+	var curGraph = window.graph.getCat().getGraph();
+	var type = curGraph.type;
+	$(graph.graphButton).text(graph.funcs[type][0]);
+	eval(graph.funcs[type][1]+"(curGraph.data)");
 }
 
 function changeCat(){
@@ -98,20 +100,16 @@ function changeCat(){
 	type = oldCat.getGraph().type;
 	for(i=0;i<newCat.graphs.length;i++)
 		if(newCat.graphs[i].type==type) newCat.count=i;
-	$(catButton).text(newCat.name);
+	$(graph.catButton).text(newCat.name);
 	newGraph = newCat.getGraph();
 	var type = newGraph.type;
-	$(graphButton).text(graph.funcs[type][0]);
+	$(graph.graphButton).text(graph.funcs[type][0]);
 	eval(graph.funcs[type][1]+"(newGraph.data)");
 }
 
 function changeGraph(){
 	var nextGraph = window.graph.getCat().nextGraph();
 	var type = nextGraph.type;
-	$(graphButton).text(graph.funcs[type][0]);
+	$(graph.graphButton).text(graph.funcs[type][0]);
 	eval(graph.funcs[type][1]+"(nextGraph.data)");
 }
-
-$(document).ready(function(){
-	getData();
-});

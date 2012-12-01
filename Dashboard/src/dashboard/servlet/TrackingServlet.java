@@ -30,11 +30,11 @@ public class TrackingServlet extends HttpServlet{
 			if(student.getCurrentStudyMoment() == null){
 				session.setAttribute("startTracking", null);
 				session.setAttribute("course", null);
-				resp.sendRedirect("/track.jsp?mode=start");
+				resp.sendRedirect("/track_start.jsp");
 			} else {
 				session.setAttribute("startTracking", student.getCurrentStudyMoment().getStart());
 				session.setAttribute("course", student.getCurrentStudyMoment().getCourse());
-				resp.sendRedirect("/track.jsp?mode=stop");
+				resp.sendRedirect("/track_stop.jsp");
 			}
 		} else {
 			resp.sendRedirect("/login.jsp");
@@ -61,7 +61,7 @@ public class TrackingServlet extends HttpServlet{
 			student.setCurrentStudyMoment(new StudyMoment(start,course));//create a new study moment
 			session.setAttribute("startTracking", start);
 			session.setAttribute("course", course);
-			resp.sendRedirect("/track.jsp?mode=stop");
+			resp.sendRedirect("/track_stop.jsp");
 		} else {//if the student was already studying
 			if(req.getParameter("submit").equals("Stop")){
 				try {
