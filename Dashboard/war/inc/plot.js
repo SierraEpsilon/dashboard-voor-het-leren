@@ -34,7 +34,7 @@ function pie(data){
 }
 function table(data){}
 
-function getData(jsonURL,catB,graphB,divD){
+function getData(jsonURL,catB,graphB,divD,pageID){
 	graph.catButton = catB;
 	graph.graphButton = graphB;
 	graph.graphDivID = divD;
@@ -82,7 +82,10 @@ function getData(jsonURL,catB,graphB,divD){
 				return this.graphs[this.count];
 			};
 		}
-		drawGraph();
+		$("div#"+pageID).find("div[name='preLoadWrap']").slideUp(function(){
+			$("div#"+pageID).find("div[name='loadWrap']").slideDown();
+			drawGraph();
+		});
 	});
 }
 function drawGraph(){

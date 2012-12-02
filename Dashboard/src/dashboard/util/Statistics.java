@@ -89,13 +89,11 @@ public class Statistics {
 	 * 	a hashmap filled with the courses and the percentage of time
 	 *  put into those courses based on total time
 	 */
-	public static HashMap<String, Double> getPercents(ArrayList<StudyMoment> moments,ArrayList<CourseContract> courses){
-		long total = getTotalTime(moments);
-		HashMap<String, Double> result = new HashMap<String, Double>();
+	public static HashMap<String,Long> getCourseTimes(ArrayList<StudyMoment> moments,ArrayList<CourseContract> courses){
+		HashMap<String,Long> result = new HashMap<String,Long>();
 		for(CourseContract course: courses){
 			long part = getTime(course.getCourse(), moments);
-			double percent = part/total;
-			result.put(course.getCourse().getName(), percent);
+			result.put(course.getCourse().getName(), part);
 		}
 		return result;
 	}
