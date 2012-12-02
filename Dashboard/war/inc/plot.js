@@ -2,9 +2,9 @@
 graph = new Object();
 // type to functions
 graph.funcs = new Array();
-graph.funcs["pie"] = new Array("Pie","pie");
+graph.funcs["pie"] = new Array("Taart","pie");
 graph.funcs["donut"] = new Array("Donut","donut");
-graph.funcs["text"] = new Array("Text","text");
+graph.funcs["text"] = new Array("Tekst","text");
 graph.funcs["scatter"] = new Array("Scatter","scatter");
 // type handlers
 function scatter(data){
