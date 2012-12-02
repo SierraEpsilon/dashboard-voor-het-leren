@@ -26,9 +26,9 @@ public class AchievementServlet extends HttpServlet{
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
 		if(student==null){
-			resp.sendRedirect("/login.jsp");
+			resp.sendRedirect("/jsp/login/login.jsp");
 		}
 		session.setAttribute("achievementMap", AchievementRegistry.getAchievements(student));
-		resp.sendRedirect("/achievements.jsp");
+		resp.sendRedirect("list.jsp");
 	}
 }

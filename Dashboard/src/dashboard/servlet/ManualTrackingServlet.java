@@ -28,7 +28,7 @@ public class ManualTrackingServlet extends HttpServlet{
 		if(student == null)
 			resp.sendRedirect("/login");
 		else
-			resp.sendRedirect("/add_manual.jsp");
+			resp.sendRedirect("/jsp/add_manual/add_manual.jsp");
 	}
 		
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -54,7 +54,7 @@ public class ManualTrackingServlet extends HttpServlet{
 			
 			if(!endD.before(testDate)){
 				session.setAttribute("student", student);
-				resp.sendRedirect("/add_manual.jsp?msg=Je kan geen studiemoment in de toekomst toevoegen!");
+				resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Je kan geen studiemoment in de toekomst toevoegen!");
 			}
 			else{
 			
@@ -64,19 +64,19 @@ public class ManualTrackingServlet extends HttpServlet{
 					String kindStudied = (String) req.getParameter("kind");
 					student.addStudyMoment(new StudyMoment(startD, endD, usedCourse, number, kindStudied));
 					session.setAttribute("student", student);
-					resp.sendRedirect("/add_manual.jsp?msg=Studiemoment correct toegevoegd");
+					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Studiemoment correct toegevoegd");
 				} catch (InvalidEndDateException e) {
 					session.setAttribute("student", student);
-					resp.sendRedirect("/add_manual.jsp?msg=Ongeldige data. Controleer of de einddatum na de begindatum is.");
+					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Ongeldige data. Controleer of de einddatum na de begindatum is.");
 				} catch (InvalidAmountException e) {
 					session.setAttribute("student", student);
-					resp.sendRedirect("/add_manual.jsp?msg=You can't have studied that kind of pages!");
+					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=You can't have studied that kind of pages!");
 				} catch (InvalidStudyMomentException e) {
 					session.setAttribute("student", student);
-					resp.sendRedirect("/add_manual.jsp?msg=Je was op dit moment reeds aan het studeren!");
+					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Je was op dit moment reeds aan het studeren!");
 				} catch (NoSuchCourseException e1) {
 					session.setAttribute("student", student);
-					resp.sendRedirect("/add_manual.jsp?msg=no such course!");
+					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=no such course!");
 				}
 				
 			}

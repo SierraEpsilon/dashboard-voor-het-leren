@@ -34,7 +34,7 @@ public class RegistrationServlet extends HttpServlet {
 			HttpSession session = req.getSession();
 			Student student = (Student)session.getAttribute("student");
 			session.setAttribute("student_temp",student);
-			resp.sendRedirect("/register_settings.jsp");
+			resp.sendRedirect("/jsp/register/add_courses.jsp");
 		}
 	}
 
@@ -49,17 +49,17 @@ public class RegistrationServlet extends HttpServlet {
 		try{
 			StudentRegistry.addUser(firstName,lastName,username,email,password);//add the user to the list of existing users
 			session.setAttribute("student_temp",StudentRegistry.getUserByUserName(username));
-			resp.sendRedirect("/register_settings.jsp");
+			resp.sendRedirect("/jsp/register/add_courses.jsp");
 		} catch (UserNameInUseException e){
-			resp.sendRedirect("/register.jsp?msg=This username is already in use!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=This username is already in use!");
 		} catch (InvalidUserNameException e){
-			resp.sendRedirect("/register.jsp?msg=This username is not valid!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=This username is not valid!");
 		} catch (EmailInUseException e){
-			resp.sendRedirect("/register.jsp?msg=Email: " + email + " is already in use!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=Email: " + email + " is already in use!");
 		} catch (InvalidEmailException e){
-			resp.sendRedirect("/register.jsp?msg=This email is not valid!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=This email is not valid!");
 		} catch (InvalidPasswordException e){
-			resp.sendRedirect("/register.jsp?msg=This password is not valid!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=This password is not valid!");
 		}
 	}
 	

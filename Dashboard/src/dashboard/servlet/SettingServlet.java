@@ -24,7 +24,7 @@ public class SettingServlet extends HttpServlet {
 		if(student == null)
 			resp.sendRedirect("/login");
 		else
-			resp.sendRedirect("/settings_info.jsp");
+			resp.sendRedirect("/jsp/settings/userinfo.jsp");
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -35,33 +35,33 @@ public class SettingServlet extends HttpServlet {
 			String vak = action.replace("remove_","");
 			remove(vak,student,req,resp);
 			session.setAttribute("student",student);
-			resp.sendRedirect("/settings_vak.jsp");
+			resp.sendRedirect("/jsp/settings/courses.jsp");
 		} else if(action.equals("voeg")){
 			resp.sendRedirect("/add_course");
 		} else if(action.equals("namechange")){
 			String firstName = req.getParameter("firstname");
 			String lastName = req.getParameter("lastname");
 			if(firstName.equals("") || lastName.equals(""))
-				resp.sendRedirect("/settings_info.jsp?msg=vul alle velden in!");
+				resp.sendRedirect("/jsp/settings/userinfo.jsp?msg=Vul alle velden in!");
 			else{
 				student.setFirstName(firstName);
 				student.setLastName(lastName);
 				session.setAttribute("student",student);
-				resp.sendRedirect("/settings_message.jsp?msg=name");
+				resp.sendRedirect("/jsp/settings/message.jsp?msg=name");
 			}
 		} else if(action.equals("passchange")){
 			String pass1 = req.getParameter("pass1");
 			String pass2 = req.getParameter("pass2");
 			String pass3 = req.getParameter("pass3");
 			if(pass1.equals("") || pass2.equals("") || pass3.equals(""))
-				resp.sendRedirect("/settings_pass.jsp?msg=vul alle velden in!");
+				resp.sendRedirect("/jsp/settings/message.jsp?msg=Vul alle velden in!");
 			else if(student.isCorrectPassword(pass1) && (pass2.equals(pass3))){
 				try {
 					student.setPassword(pass2);
 					session.setAttribute("student",student);
-					resp.sendRedirect("/settings_message.jsp?msg=password");
+					resp.sendRedirect("/jsp/settings/message.jsp?msg=password");
 				} catch (InvalidPasswordException e) {
-					resp.sendRedirect("/settings_pass.jsp?msg=invalid password");;
+					resp.sendRedirect("/jsp/settings/password.jsp?msg=invalid password");;
 				}
 			} else {
 				resp.sendRedirect("/settings_pass.jsp?msg=wrong passwords");
@@ -74,7 +74,7 @@ public class SettingServlet extends HttpServlet {
 		try {
 			student.removeCourse(vak);
 		} catch (NoSuchCourseException e) {
-			resp.sendRedirect("/error.jsp?msg= tried to remove an unexisting course");
+			resp.sendRedirect("/jsp/error.jsp?msg=Tried to remove an unexisting course.");
 		}
 	}
 }

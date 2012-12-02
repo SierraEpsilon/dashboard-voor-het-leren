@@ -25,7 +25,7 @@ public class CourseAddServlet extends HttpServlet {
 		if(student == null)
 			resp.sendRedirect("/login");
 		else
-			resp.sendRedirect("/add_course.jsp");
+			resp.sendRedirect("/jsp/settings/add_course.jsp");
 	}
 	
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -37,11 +37,11 @@ public class CourseAddServlet extends HttpServlet {
 			course = new CourseContract(CourseRegistry.getCourse(action));
 			student.addCourse(course);
 			session.setAttribute("student",student);
-			resp.sendRedirect("/settings_vak.jsp");
+			resp.sendRedirect("/jsp/settings/courses.jsp");
 		} catch (NoSuchCourseException e) {
-			resp.sendRedirect("/error.jsp?msg=trying to add unexisting course");
+			resp.sendRedirect("/jsp/error.jsp?msg=Trying to add unexisting course.");
 		} catch (CourseAlreadyTakenException e) {
-			resp.sendRedirect("/error.jsp?msg=can't add courses twice");
+			resp.sendRedirect("/jsp/error.jsp?msg=Can't add courses twice.");
 		}
 	}
 			

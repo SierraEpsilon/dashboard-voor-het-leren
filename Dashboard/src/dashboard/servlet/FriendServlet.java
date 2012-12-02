@@ -15,11 +15,16 @@ import dashboard.util.OwnOfy;
 
 public class FriendServlet extends HttpServlet {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3831682825249278636L;
+
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
 		if(student != null)
-			resp.sendRedirect("/friends_friends.jsp");
+			resp.sendRedirect("/jsp/friends/list.jsp");
 		else
 			resp.sendRedirect("/login");
 	}
@@ -42,9 +47,9 @@ public class FriendServlet extends HttpServlet {
 		try {
 			StudentRegistry.sendFriendRequest(student, interestingPerson);
 			req.getSession().setAttribute("student", student);
-			resp.sendRedirect("/friends_friends.jsp");
+			resp.sendRedirect("/jsp/friends/list.jsp");
 		} catch (AlreadyRequestedException e) {
-			resp.sendRedirect("/error.jsp?msg=already requested");
+			resp.sendRedirect("/jsp/error.jsp?msg=already requested");
 		}
 	}
 
@@ -53,7 +58,7 @@ public class FriendServlet extends HttpServlet {
 		String stranger = action.replace("deny_", "");
 		student.removeRequest(stranger);
 		req.getSession().setAttribute("student", student);
-		resp.sendRedirect("/friends_friends.jsp");
+		resp.sendRedirect("/jsp/friends/list.jsp");
 	}
 
 	private void addFriend(String action, Student student,
@@ -61,6 +66,6 @@ public class FriendServlet extends HttpServlet {
 		String friend = action.replace("add_", "");
 		StudentRegistry.createFriends(student, friend);
 		req.getSession().setAttribute("student", student);
-		resp.sendRedirect("/friends_friends.jsp");
+		resp.sendRedirect("/jsp/friends/list.jsp");
 	}	
 }
