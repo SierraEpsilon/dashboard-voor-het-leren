@@ -6,6 +6,7 @@ graph.funcs["pie"] = new Array("Taart","pie");
 graph.funcs["donut"] = new Array("Donut","donut");
 graph.funcs["text"] = new Array("Tekst","text");
 graph.funcs["scatter"] = new Array("Scatter","scatter");
+graph.funcs["bar"] = new Array("Staaf","bar");
 // type handlers
 function scatter(data){
 	$("#"+graph.graphDivID).html("");
@@ -31,6 +32,34 @@ function pie(data){
 		  legend: { show:true, location: 'e' }
 		}
 	 );
+}
+function bar(data){
+	$("#"+graph.graphDivID).html("");
+	var values = data[0];
+    // Can specify a custom tick Array.
+    // Ticks should match up one for each y value (category) in the series.
+    var ticks = data[1];
+    var plot1 = $.jqplot(graph.graphDivID, [values], {
+        // The "seriesDefaults" option is an options object that will
+        // be applied to all series in the chart.
+        seriesDefaults:{
+            renderer:$.jqplot.BarRenderer,
+            rendererOptions: {fillToZero: true,barDirection:"horizontal"}
+        },
+        axes: {
+            // Use a category axis on the x axis and use our custom ticks.
+            yaxis: {
+                renderer: $.jqplot.CategoryAxisRenderer,
+                ticks: ticks
+            },
+            // Pad the y axis just a little so bars can get close to, but
+            // not touch, the grid boundaries.  1.2 is the default padding.
+            xaxis: {
+                pad: 1.05,
+                //tickOptions: {formatString: '%d%d%d'}
+            }
+        }
+    });
 }
 function table(data){}
 

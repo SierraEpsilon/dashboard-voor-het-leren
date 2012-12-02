@@ -11,6 +11,9 @@
 	<link rel="stylesheet" type="text/css" href="inc/jQPlot/jquery.jqplot.css" />
 	<script type="text/javascript" src="inc/jQPlot/plugins/jqplot.pieRenderer.min.js"></script>
 	<script type="text/javascript" src="inc/jQPlot/plugins/jqplot.donutRenderer.min.js"></script>
+	<script type="text/javascript" src="inc/jQPlot/plugins/jqplot.barRenderer.min.js"></script>
+	<script type="text/javascript" src="inc/jQPlot/plugins/jqplot.categoryAxisRenderer.min.js"></script>
+	<script type="text/javascript" src="inc/jQPlot/plugins/jqplot.pointLabels.min.js"></script>
 	<script src="inc/plot.js"></script>
 	<script>
 	$("div#stats_all_jsp").bind("pagebeforeshow",function(){

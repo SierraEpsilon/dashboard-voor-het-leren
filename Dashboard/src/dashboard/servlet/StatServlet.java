@@ -44,6 +44,19 @@ public class StatServlet extends HttpServlet {
 					verdtgraphs.put(verdtgraph1);
 					verdt.put("graphs",verdtgraphs);
 					root.put(verdt);
+					//week
+					JSONObject week = new JSONObject();
+					week.put("name", "Tijdsverdeling per week");
+					JSONArray weekgraphs = new JSONArray();
+					JSONObject weekgraph1 = new JSONObject();
+					weekgraph1.put("type","bar");
+					JSONArray arr = new JSONArray();
+					arr.put(new JSONArray("[[1],[2],[3]]"));
+					arr.put(new JSONArray("['Ma','Di','Wo']"));
+					weekgraph1.put("data", new JSONArray().put(arr));
+					weekgraphs.put(weekgraph1);
+					week.put("graphs",weekgraphs);
+					root.put(week);
 					//locatie
 					JSONObject loc = new JSONObject();
 					loc.put("name", "Locaties");
