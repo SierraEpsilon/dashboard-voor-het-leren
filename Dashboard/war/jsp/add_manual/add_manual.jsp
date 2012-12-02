@@ -132,20 +132,20 @@ $(document).bind("pageinit",function(){
 	<p id='msg2' style='color:red;'><%=msg2%></p>
  
  	<b>Vak</b>
+ 	
  	<%
- 	out.println("<select name='courseinput'>");
-	
-	Student student = (Student)session.getAttribute("student");
-	ArrayList<Course> courseList = student.getCourseList();
-	Collections.sort(courseList, new CourseNameComparator());
-	Iterator<Course> it = courseList.iterator();
-	while(it.hasNext()){
-		Course course = it.next();
-		String name = course.getName();
-		out.println("<option value='" + name + "'>" + name + "</option>");
+	String course = request.getParameter("course");
+	if(course==null){
+		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/add_manual/add_manual.jsp' data-role='button'>Kies een vak</a>");
+		out.println("<p><a class='ui-disabled' data-role='button'>Start</a>");
+	}else{
+		out.println("<form action='/track' method='post'>");
+		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/track/start.jsp' data-role='button'>"+course+"</a>");
+		out.println("<p><input type='hidden' name='courseinput' value='"+course+"'>");
+		out.println("<p><input type='submit' name='submit' value='Start'>");
+		out.println("</form>");
 	}
-	out.println("</select>");
-	%>
+%>
  	<fieldset data-role="controlgroup">
 
 	     	<input type="radio" name="kind" id="radio-choice-1" value="Theorie" checked="checked" />
