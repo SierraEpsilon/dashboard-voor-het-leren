@@ -24,11 +24,11 @@
 <%
 	String course = request.getParameter("course");
 	if(course==null){
-		out.println("<a href='course_select.jsp?returl=track_start.jsp' data-role='button'>Kies een vak</a>");
+		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/track/start.jsp' data-role='button'>Kies een vak</a>");
 		out.println("<p><a class='ui-disabled' data-role='button'>Start</a>");
 	}else{
 		out.println("<form action='/track' method='post'>");
-		out.println("<a href='course_select.jsp?returl=track_start.jsp' data-role='button'>"+course+"</a>");
+		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/track/start.jsp' data-role='button'>"+course+"</a>");
 		out.println("<p><input type='hidden' name='courseinput' value='"+course+"'>");
 		out.println("<p><input type='submit' name='submit' value='Start'>");
 		out.println("</form>");

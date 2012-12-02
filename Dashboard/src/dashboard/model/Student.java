@@ -1,17 +1,12 @@
 package dashboard.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Date;
 
-import java.util.*;
-
-import javax.persistence.Embedded;
 import javax.persistence.Id;
-import javax.persistence.Transient;
 
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyService;
-import com.googlecode.objectify.annotation.*;
-import com.sun.org.apache.bcel.internal.generic.GETFIELD;
+import com.googlecode.objectify.annotation.Serialized;
 
 import dashboard.error.AlreadyEndedException;
 import dashboard.error.AlreadyRequestedException;
@@ -22,12 +17,9 @@ import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.InvalidUserNameException;
-import dashboard.error.NotFriendException;
 import dashboard.error.NoSuchCourseException;
+import dashboard.error.NotFriendException;
 import dashboard.error.NotStudyingException;
-import dashboard.error.UnrequestedFriendException;
-import dashboard.registry.CourseRegistry;
-import dashboard.registry.StudentRegistry;
 import dashboard.util.OwnOfy;
 
 public class Student implements Comparable<Student>,Cloneable,Serializable {

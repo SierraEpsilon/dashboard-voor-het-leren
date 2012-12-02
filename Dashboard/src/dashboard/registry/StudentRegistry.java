@@ -3,8 +3,6 @@ package dashboard.registry;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyService;
 import com.googlecode.objectify.Query;
 
 import dashboard.error.AlreadyRequestedException;
@@ -13,9 +11,8 @@ import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.UserNameInUseException;
-import dashboard.model.Student;
-import dashboard.model.StudyMoment;
 import dashboard.model.Course;
+import dashboard.model.Student;
 import dashboard.util.OwnOfy;
 
 
@@ -135,8 +132,8 @@ public class StudentRegistry {
 	 * 
 	 */
 	
-	public static List<Student> getActiveUsers(){
-		List<Student> activeStudents = new ArrayList();
+	public static ArrayList<Student> getActiveUsers(){
+		ArrayList<Student> activeStudents = new ArrayList<Student>();
 		List<Student> allStudents = getUsers();
 		for(Student user: allStudents){
 			if(user.getCurrentStudyMoment() != null)

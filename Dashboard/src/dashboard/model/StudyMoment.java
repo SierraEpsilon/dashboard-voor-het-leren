@@ -1,14 +1,17 @@
 package dashboard.model;
-import java.util.*;
-
 import java.io.Serializable;
+import java.util.Date;
 
-import javax.persistence.Id;
-
-import dashboard.error.*;
+import dashboard.error.AlreadyEndedException;
+import dashboard.error.InvalidAmountException;
+import dashboard.error.InvalidEndDateException;
 
 public class StudyMoment implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -13565681668567850L;
 	private Date start;
 	private Date end;
 	private Course course;

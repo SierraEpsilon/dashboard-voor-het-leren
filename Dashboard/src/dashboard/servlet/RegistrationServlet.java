@@ -8,11 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dashboard.error.*;
-import dashboard.registry.CourseRegistry;
-import dashboard.registry.StudentRegistry;
+import dashboard.error.EmailInUseException;
+import dashboard.error.InvalidEmailException;
+import dashboard.error.InvalidPasswordException;
+import dashboard.error.InvalidUserNameException;
+import dashboard.error.NoSuchCourseException;
+import dashboard.error.UserNameInUseException;
 import dashboard.model.CourseContract;
 import dashboard.model.Student;
+import dashboard.registry.CourseRegistry;
+import dashboard.registry.StudentRegistry;
 
 public class RegistrationServlet extends HttpServlet {
 	

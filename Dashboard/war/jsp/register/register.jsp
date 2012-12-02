@@ -83,7 +83,7 @@ if(session.getAttribute("register.jsp")!=null){
 <input type='password' name='password1' title='Een wachtwoord moet minstens 6 en maximaal 24 tekens lang zijn.'>
 <label for="password2">Herhaal wachtwoord</label>
 <input type='password' name='password2' title='Herhaal je wachtwoord.'>
-<input type='submit' name='submit' value='volgende'>
+<input type='submit' name='submit' value='Volgende'>
 </form>
 </div><!-- /content -->
 </div><!-- /page -->

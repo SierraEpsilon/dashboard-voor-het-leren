@@ -56,7 +56,7 @@
 
 <div class="ui-grid-a">
 <div class="ui-block-a">
-<form action='finish.jsp' method='post'>
+<form action='/jsp/track/finish.jsp' method='post'>
 <input type='submit' value='Stop' data-icon='check'>
 </form>
 </div><div class="ui-block-b">

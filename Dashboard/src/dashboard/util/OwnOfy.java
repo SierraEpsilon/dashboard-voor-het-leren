@@ -1,9 +1,9 @@
 package dashboard.util;
 import com.googlecode.objectify.Key;
 import com.googlecode.objectify.Objectify;
-import com.googlecode.objectify.ObjectifyFactory;
 import com.googlecode.objectify.ObjectifyService;
-import dashboard.model.*;
+
+import dashboard.model.Student;
 
 public class OwnOfy {
 

@@ -1,18 +1,13 @@
 package dashboard.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dashboard.model.Course;
 import dashboard.model.Student;
-import dashboard.model.achievement.Achievement;
 import dashboard.registry.AchievementRegistry;
 
 public class AchievementServlet extends HttpServlet{
@@ -29,6 +24,6 @@ public class AchievementServlet extends HttpServlet{
 			resp.sendRedirect("/jsp/login/login.jsp");
 		}
 		session.setAttribute("achievementMap", AchievementRegistry.getAchievements(student));
-		resp.sendRedirect("list.jsp");
+		resp.sendRedirect("/jsp/achievement/list.jsp");
 	}
 }

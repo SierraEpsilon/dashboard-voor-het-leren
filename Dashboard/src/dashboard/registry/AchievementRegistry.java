@@ -1,14 +1,15 @@
 package dashboard.registry;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
 import dashboard.model.Course;
 import dashboard.model.Student;
-import dashboard.model.achievement.*;
+import dashboard.model.achievement.Achievement;
+import dashboard.model.achievement.StudiedInPeriod;
+import dashboard.model.achievement.TimeStudied;
 
 public class AchievementRegistry {
 

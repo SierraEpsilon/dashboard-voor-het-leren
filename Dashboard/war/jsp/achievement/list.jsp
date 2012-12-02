@@ -90,6 +90,7 @@
 	$("li.ui-progressbar").removeClass("ui-corner-all");
 	$("li.ui-progressbar").removeClass("completed");
 	$("li.ui-progressbar").addClass("custom-css");
+	$("li.ui-progressbar").addClass("list-edited");
 	$("div.ui-progressbar-value").each(function(){
 		$(this).click(function(){
 			$(this).parent().children("a")[0].click();

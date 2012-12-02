@@ -29,12 +29,12 @@ $(document).bind("pageinit",function(){
 <div data-role="content">
 
 	<ul data-role="listview">
-	<li><a href="/stats_all.jsp">Statistieken</a></li>
 	<li><a href="/track">Tracken</a></li>
-	<li><a href="/achievements">Achievements</a></li>
-	<li><a href="/settings">Instellingen</a></li>
 	<li><a href="/add_manual">Toevoegen van studiemoment</a></li>
 	<li><a href="/friends">Vrienden</a></li>
+	<li><a href="/stats">Statistieken</a></li>
+	<li><a href="/achievements">Achievements</a></li>
+	<li><a href="/settings">Instellingen</a></li>
 	
 </ul>
 	

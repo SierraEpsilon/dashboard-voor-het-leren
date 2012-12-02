@@ -1,18 +1,16 @@
 package dashboard.util;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 
-import org.apache.tools.ant.types.resources.comparators.Date;
-
-import dashboard.model.*;
+import dashboard.model.Course;
+import dashboard.model.CourseContract;
+import dashboard.model.Location;
+import dashboard.model.StudyMoment;
 
 public class Statistics {
 
-	private static Calendar calendar;
-	
-	static{
-		calendar = Calendar.getInstance();
-	}
 	/**
 	 * @param course
 	 * the course you ant to get the time from
@@ -54,9 +52,11 @@ public class Statistics {
 	 * 	an arrayList with the moments the student studied last week
 	 */
 	public static ArrayList<StudyMoment> getMomentsWeek(ArrayList<StudyMoment> moments) {
-		calendar.setTime(new java.util.Date());
-		calendar.setWeekDate(calendar.YEAR, calendar.WEEK_OF_YEAR, 1);
-		java.util.Date lastWeek = calendar.getTime();
+		Calendar.getInstance().setTime(new java.util.Date());
+		Calendar.getInstance();
+		Calendar.getInstance();
+		Calendar.getInstance().setWeekDate(Calendar.YEAR, Calendar.WEEK_OF_YEAR, 1);
+		java.util.Date lastWeek = Calendar.getInstance().getTime();
 		ArrayList<StudyMoment> weekMoments = new ArrayList<StudyMoment>();
 		for(StudyMoment moment : moments)
 			if(moment.getStart().after(lastWeek))

@@ -1,17 +1,14 @@
 package dashboard.servlet;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dashboard.error.*;
-import dashboard.registry.CourseRegistry;
-import dashboard.registry.StudentRegistry;
-import dashboard.model.CourseContract;
+import dashboard.error.InvalidPasswordException;
+import dashboard.error.NoSuchCourseException;
 import dashboard.model.Student;
 
 public class SettingServlet extends HttpServlet {
@@ -47,7 +44,7 @@ public class SettingServlet extends HttpServlet {
 				student.setFirstName(firstName);
 				student.setLastName(lastName);
 				session.setAttribute("student",student);
-				resp.sendRedirect("/jsp/settings/message.jsp?msg=name");
+				resp.sendRedirect("/jsp/settings/message.jsp?msg=Naam");
 			}
 		} else if(action.equals("passchange")){
 			String pass1 = req.getParameter("pass1");
@@ -59,12 +56,12 @@ public class SettingServlet extends HttpServlet {
 				try {
 					student.setPassword(pass2);
 					session.setAttribute("student",student);
-					resp.sendRedirect("/jsp/settings/message.jsp?msg=password");
+					resp.sendRedirect("/jsp/settings/message.jsp?msg=Password");
 				} catch (InvalidPasswordException e) {
-					resp.sendRedirect("/jsp/settings/password.jsp?msg=invalid password");;
+					resp.sendRedirect("/jsp/settings/password.jsp?msg=Invalid password.");;
 				}
 			} else {
-				resp.sendRedirect("/settings_pass.jsp?msg=wrong passwords");
+				resp.sendRedirect("/settings_pass.jsp?msg=Wrong passwords.");
 			}
 		}
 	}

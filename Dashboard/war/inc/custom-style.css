@@ -2,7 +2,7 @@
 	margin-top: -15px;
 }
 
-.ui-progressbar.custom-css{
+.ui-progressbar.list-edited{
 	height: initial;
 }
 
@@ -12,7 +12,7 @@
 	opacity: 0.5;
 }
 
-.ui-progressbar.custom-css .ui-progressbar-value{
+.ui-progressbar.list-edited .ui-progressbar-value{
 	border: 0;
 	top: 0;
 	bottom: 0;

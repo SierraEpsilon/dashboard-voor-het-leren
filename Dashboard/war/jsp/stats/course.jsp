@@ -34,7 +34,7 @@
 	<div data-role="navbar">
 		<ul>
 			<li><a href="all.jsp">Algemeen</a></li>
-			<li><a href="course_select.jsp?returl=stats_course.jsp" class="ui-btn-active ui-state-persist">Per vak</a></li>
+			<li><a href="/jsp/util/course_select.jsp?returl=/jsp/stats/stats_course.jsp" class="ui-btn-active ui-state-persist">Per vak</a></li>
 		</ul>
 	</div><!-- /navbar -->
 

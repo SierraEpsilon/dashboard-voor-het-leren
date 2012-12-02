@@ -14,9 +14,10 @@ import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.error.NotStudyingException;
-import dashboard.model.*;
+import dashboard.model.Course;
+import dashboard.model.Student;
+import dashboard.model.StudyMoment;
 import dashboard.registry.CourseRegistry;
-import dashboard.registry.StudentRegistry;
 
 public class TrackingServlet extends HttpServlet{
 
@@ -88,7 +89,7 @@ public class TrackingServlet extends HttpServlet{
 					session.setAttribute("course", null);
 					resp.sendRedirect("/track");
 				} catch (NotStudyingException e) {
-					resp.sendRedirect("/jsp/error.jsp?msg=Awkward, you where not studying!");
+					resp.sendRedirect("/jsp/error.jsp?msg=Awkward, you were not studying!");
 				}
 			} else {
 				resp.sendRedirect("/jsp/error.jsp");

@@ -2,7 +2,6 @@ package dashboard.servlet;
 
 import java.io.IOException;
 
-import javax.mail.Session;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +10,6 @@ import javax.servlet.http.HttpSession;
 import dashboard.error.AlreadyRequestedException;
 import dashboard.model.Student;
 import dashboard.registry.StudentRegistry;
-import dashboard.util.OwnOfy;
 
 public class FriendServlet extends HttpServlet {
 

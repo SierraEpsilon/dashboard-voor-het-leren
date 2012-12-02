@@ -20,7 +20,7 @@
 		%>
 		<h2>Instellingen aangepast!</h2>
 		<p style='color:red;'><%= msg%> is veranderd!</p>
-		<a href="userinfo.jsp" data-role="button" data-inline="true" data-icon="check">Ok</a>
+		<a href="/jsp/settings/userinfo.jsp" data-role="button" data-inline="true" data-icon="check">Ok</a>
 </div><!-- /content -->
 </div><!-- /dialog -->
 </body>

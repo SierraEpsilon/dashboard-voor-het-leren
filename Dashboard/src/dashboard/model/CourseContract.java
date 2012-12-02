@@ -4,6 +4,10 @@ import java.io.Serializable;
 
 public class CourseContract implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 5967842487754441840L;
 	private Course course;
 	
 	public CourseContract(Course course){

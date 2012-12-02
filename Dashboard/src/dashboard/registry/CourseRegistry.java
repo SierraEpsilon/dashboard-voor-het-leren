@@ -1,12 +1,11 @@
 package dashboard.registry;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import dashboard.error.NoSuchCourseException;
 import dashboard.model.Branch;
 import dashboard.model.Course;
-import dashboard.model.Course;
-import dashboard.model.Student;
 
 public class CourseRegistry {
 

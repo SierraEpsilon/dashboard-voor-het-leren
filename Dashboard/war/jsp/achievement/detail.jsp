@@ -33,6 +33,7 @@
 		Student student = (Student)session.getAttribute("student");
 		int percent = Math.round(achievement.getProgress(student) * 100);
 		String JSpbar = "$('#pbar').progressbar({value:" + percent + "});";
+		JSpbar += "$('#pbar').addClass('custom-css');";
 		if(percent >= 100){
 			JSpbar += "$('#pbar').addClass('completed');";
 		}

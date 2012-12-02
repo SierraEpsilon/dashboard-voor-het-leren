@@ -14,7 +14,9 @@ import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.NoSuchCourseException;
-import dashboard.model.*;
+import dashboard.model.Course;
+import dashboard.model.Student;
+import dashboard.model.StudyMoment;
 import dashboard.registry.CourseRegistry;
 
 
