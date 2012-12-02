@@ -97,4 +97,48 @@ public class Statistics {
 		}
 		return result;
 	}
+	
+	/**
+	 * @param moments
+	 * 	the moments of a student
+	 * @return
+	 * 	a hashmap filled with days and the corresponding relative amount studied
+	 */
+	public static HashMap<String,Long> getTimeByDay(ArrayList<StudyMoment> moments){
+		return null;
+	}
+	
+	/**
+	 * @param moments
+	 * 	the moments of a student
+	 * @return
+	 * 	a hashmap filled with months and the corresponding relative amount studied
+	 */
+	public static HashMap<String,Long> getTimeByMonth(ArrayList<StudyMoment> moments){
+		return null;
+	}
+	
+	/**
+	 * @param moments
+	 * 	the moments of a student
+	 * @return
+	 * 	a hashmap filled with locations and the corresponding relative amount studied
+	 */
+	public static HashMap<Location,Long> getTimeByLoc(ArrayList<StudyMoment> moments){
+		return null;
+	}
+	
+	/**
+	 * @param moments
+	 * 	the moments of a student
+	 * @param course
+	 * the course to search for
+	 * @return
+	 * 	an arraylist containing moments belonging to the course
+	 */
+	public static HashMap<String,Long> filterMomentsByCourse(ArrayList<StudyMoment> moments,Course course){
+		return null;
+	}
+	
+	
 }
