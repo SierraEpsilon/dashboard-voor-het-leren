@@ -23,12 +23,14 @@
 	<% String course = (request.getParameter("course")==null) ? "" : request.getParameter("course"); %>
 	$("div#stats_course_jsp").bind("pageshow",function(){
 		
-		getData("/jsp/stats/test.json","#statc_catButton  .ui-btn-text","#statc_graphButton  .ui-btn-text","statc_graphDiv","stats_course_jsp");
+		getData("/stats?course=<%=course%>","#statc_catButton  .ui-btn-text","#statc_graphButton  .ui-btn-text","statc_graphDiv","stats_course_jsp");
 	});
 	$(window).resize(function(){drawGraph();});
 	</script>
 <div data-role="header" data-id="header" data-position="fixed">
 	<h1>Statistieken</h1>
+	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
+	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 	<div data-role="navbar">
 		<ul>
 			<li><a href="/jsp/stats/all.jsp">Algemeen</a></li>
