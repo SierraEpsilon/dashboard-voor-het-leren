@@ -69,7 +69,7 @@ public class TrackingServlet extends HttpServlet{
 					student.endStudying(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));
 					session.setAttribute("startTracking", null);
 					session.setAttribute("course", null);
-					resp.sendRedirect("/track");//end the current studymoment
+					resp.sendRedirect("/jsp/track/end.jsp");//end the current studymoment
 				} catch (NumberFormatException e) {
 					resp.sendRedirect("/jsp/error.jsp?msg=That's no integer");
 				} catch (AlreadyEndedException e) {
