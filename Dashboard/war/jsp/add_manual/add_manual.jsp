@@ -137,13 +137,9 @@ $(document).bind("pageinit",function(){
 	String course = request.getParameter("course");
 	if(course==null){
 		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/add_manual/add_manual.jsp' data-role='button'>Kies een vak</a>");
-		out.println("<p><a class='ui-disabled' data-role='button'>Start</a>");
 	}else{
-		out.println("<form action='/track' method='post'>");
-		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/track/start.jsp' data-role='button'>"+course+"</a>");
-		out.println("<p><input type='hidden' name='courseinput' value='"+course+"'>");
-		out.println("<p><input type='submit' name='submit' value='Start'>");
-		out.println("</form>");
+
+		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/add_manual/add_manual.jsp' data-role='button'>"+course+"</a>");
 	}
 %>
  	<fieldset data-role="controlgroup">
