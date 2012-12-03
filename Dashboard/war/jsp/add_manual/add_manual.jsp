@@ -66,7 +66,7 @@ $("div#add_manual_jsp").bind("pageshow",function(){
 		cont = (startt=="") ? false : cont;
 		cont = (endd=="") ? false : cont;
 		cont = (endt=="") ? false : cont;
-		cont = (courseinput=="") ? false : cont;
+		cont = (courseinput==null) ? false : cont;
 		cont = (amount=="") ? false : cont;
 		if(!cont){
 			$("#msg").text("Vul alle velden in!");
@@ -133,7 +133,10 @@ $("div#add_manual_jsp").bind("pageshow",function(){
  
  	<b>Vak</b>
  	<%
-	 	out.println("<select name='courseinput'>");
+	 	out.println("<select name='courseinput' data-native-menu='false' >");
+	 	
+	 		out.println("<option value='placeholder' data-placeholder='true'>Selecteer een vak: </option>");
+	 	
 			Student student = (Student)session.getAttribute("student");
 			ArrayList<CourseContract> ccs = student.getCourses();
 			Iterator it = ccs.iterator();
