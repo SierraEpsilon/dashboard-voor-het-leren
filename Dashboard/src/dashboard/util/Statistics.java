@@ -147,20 +147,28 @@ public class Statistics {
 	 * @return
 	 * 	a hashmap filled with days and the corresponding relative amount studied
 	 */
-	public static HashMap<String,Long> getTimeByDayInWeek(ArrayList<StudyMoment> moments){
-		HashMap<String, Long> results = new HashMap<String, Long>();
-		String dateString = "geen";
+	public static long[] getTimeByDayInWeek(ArrayList<StudyMoment> moments){
+		long[] results = new long[7];
 		for(StudyMoment moment : moments){
-			String newDateString = moment.getStart().toString().substring(0,3);
-			long time = moment.getTime();
-			if(dateString.equals(newDateString)){
-				time += results.get(newDateString);
-				results.remove(newDateString);
-			}
-			results.put(newDateString, time);		
-		}
-		return results;
+			String dayString = moment.getStart().toString().substring(0,3);
+			if(dayString.equals("Mon"))
+				results[0] += moment.getTime();
+			else if(dayString.equals("Tue"))
+				results[1] += moment.getTime();
+			else if(dayString.equals("Wed"))
+				results[2] += moment.getTime();
+			else if(dayString.equals("Thu"))
+				results[3] += moment.getTime();
+			else if(dayString.equals("Fri"))
+				results[4] += moment.getTime();
+			else if(dayString.equals("Sat"))
+				results[5] += moment.getTime();
+			else if(dayString.equals("Sun"))
+				results[6] += moment.getTime();
+		}	
+			return results;
 	}
+
 	
 	/**
 	 * @param moments
