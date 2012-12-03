@@ -1,15 +1,22 @@
 package dashboard.registry;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 
+import org.jdom2.Document;
+import org.jdom2.Element;
+import org.jdom2.JDOMException;
+import org.jdom2.input.SAXBuilder;
+
 import dashboard.model.Course;
 import dashboard.model.Student;
-import dashboard.model.achievement.Achievement;
-import dashboard.model.achievement.StudiedInPeriod;
-import dashboard.model.achievement.TimeStudied;
+import dashboard.model.achievement.*;
+import dashboard.util.CalendarToDateConverter;
 
 public class AchievementRegistry {
 
@@ -17,38 +24,76 @@ public class AchievementRegistry {
 	
 	static{
 		achievementList = new ArrayList<Achievement>();
-		fillAchievementList();
+		try {
+			fillAchievementList();
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	/**
 	 * fills the achievement list with all possible achievements		
+	 * @throws IOException 
+	 * @throws JDOMException 
 	 */
-	private static void fillAchievementList(){
-		achievementList.addAll(getStudiedInPeriodAchievements());
+	private static void fillAchievementList() throws JDOMException, IOException{
 		achievementList.addAll(getTimeStudiedAchievements());
+		File f = new File("/WEB-INF/achievements.xml");
+		Document doc = new SAXBuilder().build(f);
+		Element root = doc.getRootElement();
+		for(Element ae: root.getChildren("achievement")){
+			String id = ae.getChildText("id");
+			String name = ae.getChildText("name");
+			String desc = ae.getChildText("desc");
+			Course course = CourseRegistry.getCourseByID(ae.getChildText("Course"));
+			String icon = ae.getChildText("icon");
+			switch(ae.getAttributeValue("type")){
+			case "TimeStudied": 
+				float seconds = Float.parseFloat(ae.getChildText("seconds"));
+				achievementList.add(new TimeStudied(id,name,desc,course,icon,seconds));
+				break;
+			case "StudiedInPeriod":
+				Date startDate = readDate(ae, "start");
+				Date endDate = readDate(ae, "end");
+				achievementList.add(new StudiedInPeriod(id,name,desc,course,icon,startDate,endDate));
+				break;
+			case "RepeatingStudiedInPeriod":
+				Date startDate2 = readDate(ae,"start");
+				Date endDate2 = readDate(ae, "end");
+				long repeatingTime = getRepeatingTime(ae.getChildText("repeating"));
+				achievementList.add(new RepeatingStudiedInPeriod(id,name,desc,course,icon,startDate2,endDate2,repeatingTime));
+				break;
+			default:
+				break;
+			}
+		}
 	}
 	
-	private static ArrayList<StudiedInPeriod> getStudiedInPeriodAchievements() {
-		ArrayList<StudiedInPeriod> studiedInPeriodList = new ArrayList<StudiedInPeriod>();
-		
-		StudiedInPeriod sip1 = new StudiedInPeriod("STUDIED_IN_PERIOD_1", "Christmas student", "Studeer op kerstmis 2012", null, "noob.png", new Date(1356390000000l), new Date(1356476400000l));
-		StudiedInPeriod sip2 = new StudiedInPeriod("STUDIED_IN_PERIOD_2", "Christmas student old", "Studeer op kerstmis 2011", null, "noob.png", new Date(1324767600000l), new Date(1324854000000l));
-		studiedInPeriodList.addAll(Arrays.asList(sip1,sip2));
-		
-		return studiedInPeriodList;
+	private static Date readDate(Element ae, String prefix){
+		return CalendarToDateConverter.getDate(Integer.parseInt(ae.getChildText(prefix + "year")),
+				Integer.parseInt(ae.getChildText(prefix + "month")),Integer.parseInt(ae.getChildText(prefix + "day")),
+				Integer.parseInt(prefix + "hour"),Integer.parseInt(prefix + "minute"),Integer.parseInt(prefix + "second"));
+	}
+	
+	private static long getRepeatingTime(String s){
+		switch(s){
+		case "daily":
+			return 86400000l;
+		case "weekly":
+			return 604800000l;
+		case "monthly":
+			return 26298000000l;
+		case "yearly":
+			return 315576000000l;
+		default:
+			return 0;
+		}
 	}
 
 	private static ArrayList<TimeStudied> getTimeStudiedAchievements(){
 		ArrayList<TimeStudied> timeStudiedList = new ArrayList<TimeStudied>();
-		
-		TimeStudied tst1 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "Studeer 30 minuten in totaal", null, "noob.png",1800);
-		TimeStudied tst2 = new TimeStudied("TIME_STUDIED_TOTAL_2", "Studying novice", "Studeer 3 uur in totaal", null, "novice.png",10800);
-		TimeStudied tst3 = new TimeStudied("TIME_STUDIED_TOTAL_3", "Studying apprentice", "Studeer 12 uur in totaal", null, "apprentice.png",43200);
-		TimeStudied tst4 = new TimeStudied("TIME_STUDIED_TOTAL_4", "Studying expert", "Studeer 60 uur in totaal", null, "expert.png",216000);
-		TimeStudied tst5 = new TimeStudied("TIME_STUDIED_TOTAL_5", "Studying pro", "Studeer 120 uur in totaal", null, "pro.png",432000);
-		TimeStudied tst6 = new TimeStudied("TIME_STUDIED_TOTAL_6", "Studying zombie", "Studeer 600 uur in totaal", null, "zombie.png",2160000);
-		timeStudiedList.addAll(Arrays.asList(tst1,tst2,tst3,tst4,tst5,tst6));
-		
 		Iterator<Course> it = CourseRegistry.getAllCourses().iterator();
 		while(it.hasNext()){
 			Course course = it.next();

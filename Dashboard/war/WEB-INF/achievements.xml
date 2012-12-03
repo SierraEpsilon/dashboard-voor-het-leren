@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<achievements>
+    <achievement type="TimeStudied">
+        <id>TIME_STUDIED_TOTAL_1</id>
+        <name>Studying noob</name>
+        <desc>Studeer 30 minuten in totaal.</desc>
+        <course></course>
+        <icon>noob.png</icon>
+        <seconds>1800</seconds>
+    </achievement>
+</achievements>
+
+TimeStudied tst1 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "Studeer 30 minuten in totaal", null, "noob.png",1800);
+		TimeStudied tst2 = new TimeStudied("TIME_STUDIED_TOTAL_2", "Studying novice", "Studeer 3 uur in totaal", null, "novice.png",10800);
+		TimeStudied tst3 = new TimeStudied("TIME_STUDIED_TOTAL_3", "Studying apprentice", "Studeer 12 uur in totaal", null, "apprentice.png",43200);
+		TimeStudied tst4 = new TimeStudied("TIME_STUDIED_TOTAL_4", "Studying expert", "Studeer 60 uur in totaal", null, "expert.png",216000);
+		TimeStudied tst5 = new TimeStudied("TIME_STUDIED_TOTAL_5", "Studying pro", "Studeer 120 uur in totaal", null, "pro.png",432000);
+		TimeStudied tst6 = new TimeStudied("TIME_STUDIED_TOTAL_6", "Studying zombie", "Studeer 600 uur in totaal", null, "zombie.png",2160000);

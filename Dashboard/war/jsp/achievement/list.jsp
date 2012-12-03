@@ -18,7 +18,7 @@
 <%@page import="dashboard.model.achievement.*" %>
 <%@page import="dashboard.model.Student" %>
 <%@page import="dashboard.model.Course" %>
-<%@page import="dashboard.model.CourseNameComparator" %>
+<%@page import="dashboard.util.CourseNameComparator" %>
 </head>
 <body>
 <div data-role="page">

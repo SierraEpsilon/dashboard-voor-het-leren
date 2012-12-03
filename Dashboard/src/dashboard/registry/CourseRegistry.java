@@ -64,4 +64,13 @@ public class CourseRegistry {
 	public static ArrayList<Course> getAllCourses(){
 		return courses;
 	}
+	
+	public static Course getCourseByID(String courseID){
+		for(Course course: courses){
+			if(course.name().equals(courseID)){
+				return course;
+			}
+		}
+		return null;
+	}
 }
