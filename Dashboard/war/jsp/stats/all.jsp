@@ -27,6 +27,8 @@
 	</script>
 <div data-role="header" data-id="header" data-position="fixed">
 	<h1>Statistieken</h1>
+	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
+	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 	<div data-role="navbar">
 		<ul>
 			<li><a href="/jsp/stats/all.jsp" class="ui-btn-active ui-state-persist">Algemeen</a></li>
@@ -41,14 +43,9 @@
 		<a  id='stata_catButton' onclick='changeCat()' data-role="button">Loading</a> 
 		<a  id='stata_graphButton' onclick='changeGraph()' data-role="button">Loading</a>
 		<div id='stata_graphDiv' style="width:100%;">
-		<img src="http://www.prelovac.com/vladimir/wp-content/uploads/2008/03/example.jpg" />
 		</div>
 </div>
 </div><!-- /content -->
-<div data-role='footer' data-id="foo1" data-position="fixed">
-<a href="/menu.jsp" data-role="button" data-icon="grid">Menu</a>
-</div>
-
 </div><!-- /page -->
 </body>
 </html>
