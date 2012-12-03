@@ -29,54 +29,59 @@ public class StatServlet extends HttpServlet {
 			resp.sendRedirect("/login.jsp?msg=Beveiligde pagina");
 		}else{
 			String reqCourse = req.getParameter("course");
-			JSONArray root = new JSONArray();
-			try {
-				if(reqCourse==null){
-				//general
-					//verdeling tijd
-					HashMap<String,Long> map = Statistics.getCourseTimes(student.getStudyMoments(),student.getCourses());
-					JSONObject verdt = new JSONObject();
-					verdt.put("name", "Verdeling tijd");
-					JSONArray verdtgraphs = new JSONArray();
-					JSONObject verdtgraph1 = new JSONObject();
-					verdtgraph1.put("type","pie");
-					verdtgraph1.put("data", new JSONArray().put(hashToArray(map)));
-					verdtgraphs.put(verdtgraph1);
-					verdt.put("graphs",verdtgraphs);
-					root.put(verdt);
-					//week
-					JSONObject week = new JSONObject();
-					week.put("name", "Tijdsverdeling per week");
-					JSONArray weekgraphs = new JSONArray();
-					JSONObject weekgraph1 = new JSONObject();
-					weekgraph1.put("type","bar");
-					JSONArray arr = new JSONArray();
-					arr.put(new JSONArray("[[1],[2],[3]]"));
-					arr.put(new JSONArray("['Ma','Di','Wo']"));
-					weekgraph1.put("data", new JSONArray().put(arr));
-					weekgraphs.put(weekgraph1);
-					week.put("graphs",weekgraphs);
-					root.put(week);
-					//locatie
-					JSONObject loc = new JSONObject();
-					loc.put("name", "Locaties");
-					JSONArray locgraphs = new JSONArray();
-					JSONObject locgraph1 = new JSONObject();
-					locgraph1.put("type","text");
-					locgraph1.put("data", "test");
-					locgraphs.put(locgraph1);
-					loc.put("graphs",locgraphs);
-					root.put(loc);
-				}else{
-				//course
-					
+			String gen = req.getParameter("gen");
+			if(gen==null&&reqCourse==null){
+				resp.sendRedirect("/jsp/stats/all.jsp");
+			}else{
+				JSONArray root = new JSONArray();
+				try {
+					if(reqCourse==null){
+					//general
+						//verdeling tijd
+						HashMap<String,Long> map = Statistics.getCourseTimes(student.getStudyMoments(),student.getCourses());
+						JSONObject verdt = new JSONObject();
+						verdt.put("name", "Verdeling tijd");
+						JSONArray verdtgraphs = new JSONArray();
+						JSONObject verdtgraph1 = new JSONObject();
+						verdtgraph1.put("type","pie");
+						verdtgraph1.put("data", new JSONArray().put(hashToArray(map)));
+						verdtgraphs.put(verdtgraph1);
+						verdt.put("graphs",verdtgraphs);
+						root.put(verdt);
+						//week
+						JSONObject week = new JSONObject();
+						week.put("name", "Tijdsverdeling per week");
+						JSONArray weekgraphs = new JSONArray();
+						JSONObject weekgraph1 = new JSONObject();
+						weekgraph1.put("type","bar");
+						JSONArray arr = new JSONArray();
+						arr.put(new JSONArray("[[1],[2],[3]]"));
+						arr.put(new JSONArray("['Ma','Di','Wo']"));
+						weekgraph1.put("data", new JSONArray().put(arr));
+						weekgraphs.put(weekgraph1);
+						week.put("graphs",weekgraphs);
+						root.put(week);
+						//locatie
+						JSONObject loc = new JSONObject();
+						loc.put("name", "Locaties");
+						JSONArray locgraphs = new JSONArray();
+						JSONObject locgraph1 = new JSONObject();
+						locgraph1.put("type","text");
+						locgraph1.put("data", "test");
+						locgraphs.put(locgraph1);
+						loc.put("graphs",locgraphs);
+						root.put(loc);
+					}else{
+					//course
+						
+					}
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				PrintWriter writer = resp.getWriter();        
+		        writer.println(root.toString());
 			}
-			PrintWriter writer = resp.getWriter();        
-	        writer.println(root.toString());
 		}
 	}
 	public JSONArray hashToArray(Map mp){
