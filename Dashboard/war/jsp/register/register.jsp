@@ -20,6 +20,7 @@
 <div data-role="content">
 <script>
 $(document).ready(function(){
+
 	$("input[name='username']").change(function(){
 		var un =  $("input[name='username']").val();
 		if(un.length > 5){
