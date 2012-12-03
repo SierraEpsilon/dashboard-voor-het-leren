@@ -20,6 +20,34 @@
 <div data-role="content">
 <script>
 $(document).ready(function(){
+	$("input[name='username']").change(function(){
+		var un =  $("input[name='username']").val();
+		if(un.length > 5){
+			$("#msg2").text("");
+		}else{
+			$("#msg2").text("De gebruikersnaam moet minimaal 6 en maximaal 24 tekens bevatten.");
+		}
+	});
+	
+	$("input[name='password1']").change(function(){
+		var pw1 =  $("input[name='password1']").val();
+		if(pw1.length > 5){
+			$("#msg3").text("");
+		}else{
+			$("#msg3").text("Het paswoord moet minimaal 6 en maximaal 24 tekens bevatten.");
+		}
+	});
+	
+	$("input[name='password2']").change(function(){
+		var pw1 =  $("input[name='password1']").val();
+		var pw2 = $("input[name='password2']").val();
+		if(pw1==pw2){
+			$("#msg3").text("");
+		}else{
+			$("#msg3").text("Beide paswoorden zijn niet aan elkaar gelijk.");
+		}
+	});
+	
 	$("#myForm").submit(function(){
 		var pass1 = $("#myForm>input[name='password1']").val();
 		var pass2 = $("#myForm>input[name='password2']").val();
@@ -75,15 +103,28 @@ if(session.getAttribute("register.jsp")!=null){
 <label for="lastname">Achternaam</label>
 <input type='text' name='lastname' value='<%=lastname%>'>
 <label for="username">Gebruikersnaam</label>
-<input type='text' name='username' value='<%=username%>' title='Een gebruikersnaam moet minstens 6 en maximaal 24 tekens lang zijn.'>
+<input type='text' name='username' value='<%=username%>' placeholder='Minstens 6 en maximaal 24 tekens lang'>
+<%
+String msg2 = (request.getParameter("msg2")==null) ? "" : request.getParameter("msg2");
+%>
+<p id='msg2' style='color:red;'><%=msg2%></p>
 <label for="mail">Email</label>
-<input type='text' name='mail' value='<%=mail%>' title='Geef een geldig e-mail adres in.'>
+<input type='text' name='mail' value='<%=mail%>' >
 <input type='hidden' name='password'>
 <label for="password1">Wachtwoord</label>
-<input type='password' name='password1' title='Een wachtwoord moet minstens 6 en maximaal 24 tekens lang zijn.'>
+<input type='password' name='password1' placeholder='Minstens 6 en maximaal 24 tekens lang'>
 <label for="password2">Herhaal wachtwoord</label>
-<input type='password' name='password2' title='Herhaal je wachtwoord.'>
+<input type='password' name='password2' >
+
+<%
+String msg3 = (request.getParameter("msg3")==null) ? "" : request.getParameter("msg3");
+%>
+<p id='msg3' style='color:red;'><%=msg3%></p>
+
 <input type='submit' name='submit' value='Volgende'>
+
+
+
 </form>
 </div><!-- /content -->
 </div><!-- /page -->

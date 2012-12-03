@@ -78,7 +78,7 @@ public class ManualTrackingServlet extends HttpServlet{
 					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Je was op dit moment reeds aan het studeren!");
 				} catch (NoSuchCourseException e1) {
 					session.setAttribute("student", student);
-					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=no such course!");
+					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Dit vak bestaat niet!");
 				}
 				
 			}
