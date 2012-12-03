@@ -145,6 +145,27 @@ public class Statistics {
 	 * @param moments
 	 * 	the moments of a student
 	 * @return
+	 * 	a hashmap filled with days and the corresponding relative amount studied
+	 */
+	public static HashMap<String,Long> getTimeByDayInWeek(ArrayList<StudyMoment> moments){
+		HashMap<String, Long> results = new HashMap<String, Long>();
+		String dateString = "geen";
+		for(StudyMoment moment : moments){
+			String newDateString = moment.getStart().toString().substring(0,3);
+			long time = moment.getTime();
+			if(dateString.equals(newDateString)){
+				time += results.get(newDateString);
+				results.remove(newDateString);
+			}
+			results.put(newDateString, time);		
+		}
+		return results;
+	}
+	
+	/**
+	 * @param moments
+	 * 	the moments of a student
+	 * @return
 	 * 	a hashmap filled with months and the corresponding relative amount studied
 	 */
 	public static HashMap<String,Long> getTimeByMonth(ArrayList<StudyMoment> moments){
