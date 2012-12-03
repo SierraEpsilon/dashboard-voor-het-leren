@@ -17,7 +17,7 @@
 <script src="http://jquerymobile.com/demos/1.0a4.1/experiments/ui-datepicker/jquery.ui.datepicker.mobile.js"></script>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="add_manual_jsp">
 <script>
   //reset type=date inputs to text
   $( document ).bind( "mobileinit", function(){
@@ -26,7 +26,7 @@
 </script>	
 
 <script>
-$(document).bind("pageinit",function(){
+$("div#add_manual_jsp").bind("pageshow",function(){
 	$("input[name='startdate']").change(function(){
 		var start = $("input[name='startdate']").val();
 		if($("input[name='enddate']").val() == ''){
@@ -132,16 +132,18 @@ $(document).bind("pageinit",function(){
 	<p id='msg2' style='color:red;'><%=msg2%></p>
  
  	<b>Vak</b>
- 	
  	<%
-	String course = request.getParameter("course");
-	if(course==null){
-		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/add_manual/add_manual.jsp' data-role='button'>Kies een vak</a>");
-	}else{
-
-		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/add_manual/add_manual.jsp' data-role='button'>"+course+"</a>");
-	}
-%>
+	 	out.println("<select name='courseinput'>");
+			Student student = (Student)session.getAttribute("student");
+			ArrayList<CourseContract> ccs = student.getCourses();
+			Iterator it = ccs.iterator();
+			while(it.hasNext()){
+				CourseContract courseC = (CourseContract)it.next();
+				String name = courseC.getCourse().getName();
+				out.println("<option value='" + name + "'>" + name + "</option>");
+				}
+		out.println("</select>");
+	%>
  	<fieldset data-role="controlgroup">
 
 	     	<input type="radio" name="kind" id="radio-choice-1" value="Theorie" checked="checked" />
@@ -159,7 +161,7 @@ $(document).bind("pageinit",function(){
 	<p id='msg3' style='color:red;'><%=msg3%></p>
 
 
-		<a href="" 			data-role="button" data-icon="check" data-theme="b" id="opslaan" data-inline="true">Opslaan</a></li>
+		<a href="" 	data-role="button" data-icon="check" data-theme="b" id="opslaan" data-inline="true">Opslaan</a></li>
 		<a href="/jsp/menu.jsp" data-role="button" data-icon="delete" data-inline="true">Annuleren</a>
 </form>
  
