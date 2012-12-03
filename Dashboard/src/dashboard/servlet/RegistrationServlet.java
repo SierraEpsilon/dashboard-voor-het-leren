@@ -31,7 +31,7 @@ public class RegistrationServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		String action = req.getParameter("submit");
-		if(action.equals("volgende"))
+		if(action.equals("Volgende"))
 			addStudent(req, resp);
 		else if(action.equals("Opslaan"))
 			addCourses(req, resp);
