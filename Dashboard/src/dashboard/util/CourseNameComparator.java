@@ -1,6 +1,8 @@
-package dashboard.model;
+package dashboard.util;
 
 import java.util.Comparator;
+
+import dashboard.model.Course;
 
 
 /**

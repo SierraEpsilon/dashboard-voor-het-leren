@@ -1,12 +1,14 @@
 package dashboard.registry;
-import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+
+import javax.servlet.ServletContext;
 
 import org.jdom2.Document;
 import org.jdom2.Element;
@@ -21,16 +23,10 @@ import dashboard.util.CalendarToDateConverter;
 public class AchievementRegistry {
 
 	private static ArrayList<Achievement> achievementList;
+	private static boolean started;
 	
 	static{
 		achievementList = new ArrayList<Achievement>();
-		try {
-			fillAchievementList();
-		} catch (JDOMException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	/**
@@ -38,10 +34,10 @@ public class AchievementRegistry {
 	 * @throws IOException 
 	 * @throws JDOMException 
 	 */
-	private static void fillAchievementList() throws JDOMException, IOException{
+	private static void fillAchievementList(ServletContext context) throws JDOMException, IOException{
 		achievementList.addAll(getTimeStudiedAchievements());
-		File f = new File("/WEB-INF/achievements.xml");
-		Document doc = new SAXBuilder().build(f);
+		InputStream is = context.getResourceAsStream("/WEB-INF/achievements.xml");
+		Document doc = new SAXBuilder().build(is);
 		Element root = doc.getRootElement();
 		for(Element ae: root.getChildren("achievement")){
 			String id = ae.getChildText("id");
@@ -49,45 +45,43 @@ public class AchievementRegistry {
 			String desc = ae.getChildText("desc");
 			Course course = CourseRegistry.getCourseByID(ae.getChildText("Course"));
 			String icon = ae.getChildText("icon");
-			switch(ae.getAttributeValue("type")){
-			case "TimeStudied": 
+			String type = ae.getAttributeValue("type");
+			if(type.equals("TimeStudied")){ 
 				float seconds = Float.parseFloat(ae.getChildText("seconds"));
 				achievementList.add(new TimeStudied(id,name,desc,course,icon,seconds));
-				break;
-			case "StudiedInPeriod":
+			} else if(type.equals("StudiedInPeriod")){
 				Date startDate = readDate(ae, "start");
 				Date endDate = readDate(ae, "end");
 				achievementList.add(new StudiedInPeriod(id,name,desc,course,icon,startDate,endDate));
-				break;
-			case "RepeatingStudiedInPeriod":
+			} else if(type.equals("RepeatingStudiedInPeriod")){
 				Date startDate2 = readDate(ae,"start");
 				Date endDate2 = readDate(ae, "end");
 				long repeatingTime = getRepeatingTime(ae.getChildText("repeating"));
 				achievementList.add(new RepeatingStudiedInPeriod(id,name,desc,course,icon,startDate2,endDate2,repeatingTime));
-				break;
-			default:
+			} else {
 				break;
 			}
 		}
 	}
 	
 	private static Date readDate(Element ae, String prefix){
-		return CalendarToDateConverter.getDate(Integer.parseInt(ae.getChildText(prefix + "year")),
-				Integer.parseInt(ae.getChildText(prefix + "month")),Integer.parseInt(ae.getChildText(prefix + "day")),
-				Integer.parseInt(prefix + "hour"),Integer.parseInt(prefix + "minute"),Integer.parseInt(prefix + "second"));
+		Element top = ae.getChild(prefix);
+		return CalendarToDateConverter.getDate(Integer.parseInt(top.getChildText("year")),
+				Integer.parseInt(top.getChildText("month")),Integer.parseInt(top.getChildText("day")),
+				Integer.parseInt(top.getChildText("hour")),Integer.parseInt(top.getChildText("minute")),
+				Integer.parseInt(top.getChildText("second")));
 	}
 	
 	private static long getRepeatingTime(String s){
-		switch(s){
-		case "daily":
+		if(s.equals("daily")){
 			return 86400000l;
-		case "weekly":
+		} else if(s.equals("weekly")){
 			return 604800000l;
-		case "monthly":
+		} else if(s.equals("monthly")){
 			return 26298000000l;
-		case "yearly":
+		} else if(s.equals("yearly")){
 			return 315576000000l;
-		default:
+		} else {
 			return 0;
 		}
 	}
@@ -152,5 +146,20 @@ public class AchievementRegistry {
 			}
 		}
 		return null;
+	}
+
+	public static void init(ServletContext servletContext) {
+		started = true;
+		try {
+			fillAchievementList(servletContext);
+		} catch (JDOMException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static boolean started(){
+		return started;
 	}
 }

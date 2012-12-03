@@ -11,6 +11,7 @@
 <%@include file="/WEB-INF/inc/head.jsp"%>
 <%@ page import="dashboard.model.*" %>
 <%@ page import="dashboard.registry.*" %>
+<%@ page import="dashboard.util.CourseNameComparator" %>
 <%@ page import="java.util.*" %>
 </head>
 <body>

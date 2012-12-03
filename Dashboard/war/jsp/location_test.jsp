@@ -8,8 +8,8 @@
 
 <html>
 <head>
-<%@include file="inc/head.jsp"%>
-<%@include file="inc/redirect.jsp"%>
+<%@include file="/WEB-INF/inc/head.jsp"%>
+<%@include file="/WEB-INF/inc/redirect.jsp"%>
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
 </head>
 <body>

@@ -11,6 +11,7 @@
 <%@include file="/WEB-INF/inc/head.jsp"%>
 <%@include file="/WEB-INF/inc/redirect.jsp"%>
 <%@ page import="dashboard.model.*" %>
+<%@ page import="dashboard.util.CourseNameComparator" %>
 <%@ page import="java.util.*" %>
 </head>
 <body>

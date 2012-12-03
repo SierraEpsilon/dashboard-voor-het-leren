@@ -1,18 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <achievements>
+ 	<achievement type="TimeStudied">
+       	<id>TIME_STUDIED_TOTAL_1</id>
+       	<name>Studying noob</name>
+       	<desc>Studeer 30 minuten in totaal.</desc>
+       	<course></course>
+       	<icon>noob.png</icon>
+       	<seconds>1800</seconds>
+   	</achievement>
     <achievement type="TimeStudied">
-        <id>TIME_STUDIED_TOTAL_1</id>
-        <name>Studying noob</name>
-        <desc>Studeer 30 minuten in totaal.</desc>
+        <id>TIME_STUDIED_TOTAL_2</id>
+        <name>Studying novice</name>
+        <desc>Studeer 3 uur in totaal.</desc>
         <course></course>
-        <icon>noob.png</icon>
-        <seconds>1800</seconds>
+        <icon>novice.png</icon>
+        <seconds>10800</seconds>
+    </achievement>
+    <achievement type="TimeStudied">
+        <id>TIME_STUDIED_TOTAL_3</id>
+        <name>Studying apprentice</name>
+        <desc>Studeer 12 uur in totaal.</desc>
+        <course></course>
+        <icon>apprentice.png</icon>
+        <seconds>43200</seconds>
+    </achievement>
+    <achievement type="TimeStudied">
+        <id>TIME_STUDIED_TOTAL_4</id>
+        <name>Studying expert</name>
+        <desc>Studeer 60 uur in totaal.</desc>
+        <course></course>
+        <icon>expert.png</icon>
+        <seconds>216000</seconds>
+    </achievement>
+    <achievement type="TimeStudied">
+        <id>TIME_STUDIED_TOTAL_5</id>
+        <name>Studying pro</name>
+        <desc>Studeer 120 uur in totaal.</desc>
+        <course></course>
+        <icon>pro.png</icon>
+        <seconds>432000</seconds>
+    </achievement>
+    <achievement type="TimeStudied">
+        <id>TIME_STUDIED_TOTAL_6</id>
+        <name>Studying zombie</name>
+        <desc>Studeer 600 uur in totaal.</desc>
+        <course></course>
+        <icon>zombie.png</icon>
+        <seconds>2160000</seconds>
+    </achievement>
+    <achievement type="StudiedInPeriod">
+        <id>STUDIED_IN_PERIOD_1</id>
+        <name>Launch Day Student</name>
+        <desc>Studeer op de launch day van de app.</desc>
+        <course></course>
+        <icon>kerst.png</icon>
+        <start>
+            <year>2012</year>
+            <month>12</month>
+            <day>25</day>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+        </start>
+        <end>
+            <year>2012</year>
+            <month>12</month>
+            <day>25</day>
+            <hour>24</hour>
+            <minute>0</minute>
+            <second>0</second>
+        </end>
+    </achievement>
+    <achievement type="RepeatingStudiedInPeriod">
+        <id>REPEATING_STUDIED_IN_PERIOD_1</id>
+        <name>Christmas Student</name>
+        <desc>Studeer op Kerstmis.</desc>
+        <course></course>
+        <icon>kerst.png</icon>
+        <start>
+            <year>2012</year>
+            <month>12</month>
+            <day>25</day>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+        </start>
+        <end>
+            <year>2012</year>
+            <month>12</month>
+            <day>25</day>
+            <hour>24</hour>
+            <minute>0</minute>
+            <second>0</second>
+        </end>
+        <repeating>yearly</repeating>
     </achievement>
 </achievements>
-
-TimeStudied tst1 = new TimeStudied("TIME_STUDIED_TOTAL_1", "Studying noob", "Studeer 30 minuten in totaal", null, "noob.png",1800);
-		TimeStudied tst2 = new TimeStudied("TIME_STUDIED_TOTAL_2", "Studying novice", "Studeer 3 uur in totaal", null, "novice.png",10800);
-		TimeStudied tst3 = new TimeStudied("TIME_STUDIED_TOTAL_3", "Studying apprentice", "Studeer 12 uur in totaal", null, "apprentice.png",43200);
-		TimeStudied tst4 = new TimeStudied("TIME_STUDIED_TOTAL_4", "Studying expert", "Studeer 60 uur in totaal", null, "expert.png",216000);
-		TimeStudied tst5 = new TimeStudied("TIME_STUDIED_TOTAL_5", "Studying pro", "Studeer 120 uur in totaal", null, "pro.png",432000);
-		TimeStudied tst6 = new TimeStudied("TIME_STUDIED_TOTAL_6", "Studying zombie", "Studeer 600 uur in totaal", null, "zombie.png",2160000);

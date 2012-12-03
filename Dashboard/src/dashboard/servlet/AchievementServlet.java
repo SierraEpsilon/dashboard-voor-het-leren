@@ -19,6 +19,9 @@ public class AchievementServlet extends HttpServlet{
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		HttpSession session = req.getSession();
+		if(!AchievementRegistry.started()){
+			AchievementRegistry.init(session.getServletContext());
+		}
 		Student student = (Student)session.getAttribute("student");
 		if(student==null){
 			resp.sendRedirect("/jsp/login/login.jsp");
