@@ -8,7 +8,7 @@
 <div data-role="page" id="stats_all_jsp">
 	<!--[if lt IE 9]><script language="javascript" type="text/javascript" src="/inc/jQPlot/excanvas.js"></script><![endif]-->
 	<script language="javascript" type="text/javascript" src="/inc/jQPlot/jquery.jqplot.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="inc/jQPlot/jquery.jqplot.css" />
+	<link rel="stylesheet" type="text/css" href="/inc/jQPlot/jquery.jqplot.css" />
 	<script type="text/javascript" src="/inc/jQPlot/plugins/jqplot.pieRenderer.min.js"></script>
 	<script type="text/javascript" src="/inc/jQPlot/plugins/jqplot.donutRenderer.min.js"></script>
 	<script type="text/javascript" src="/inc/jQPlot/plugins/jqplot.barRenderer.min.js"></script>
