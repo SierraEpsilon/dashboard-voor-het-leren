@@ -22,8 +22,8 @@
 $(document).ready(function(){
 
 	$("input[name='username']").change(function(){
-		var un =  $("input[name='username']").val();
-		if(un.length > 5){
+		var given =  $("input[name='username']").val();
+		if(given.length > 5){
 			$("#msg2").text("");
 		}else{
 			$("#msg2").text("De gebruikersnaam moet minimaal 6 en maximaal 24 tekens bevatten.");
@@ -74,6 +74,7 @@ $(document).ready(function(){
 			$("#msg").text("Geef een geldig emailadres");
 			return false;
 		}else{
+			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
 			$("input[name='password']").attr("value",pass1);
 			return true;
 		}
