@@ -27,6 +27,7 @@
 		<ul>
 			<li><a href="info.jsp?std=<%=std%>">Info</a></li>
 			<li><a href="achievements.jsp?std=<%=std%>">Achievements</a></li>
+			<li><a href="courses.jsp?std=<%=std%>">Vakken</a></li>
 		</ul>
 	</div><!-- /navbar -->
 </div><!-- /header -->

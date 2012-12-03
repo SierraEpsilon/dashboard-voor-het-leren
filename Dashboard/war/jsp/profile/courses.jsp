@@ -6,6 +6,7 @@
 <!-- with a "Standards Mode" doctype is supported, -->
 <!-- but may lead to some differences in layout.   -->
 
+<%@page import="dashboard.util.Statistics"%>
 <%@page import="dashboard.model.achievement.Achievement"%>
 <html>
 <head>
@@ -22,7 +23,7 @@
 		Student student = StudentRegistry.getUserByUserName(std);
 	%>
 	<a href="/jsp/friends/list.jsp" data-icon="back">Terug</a>
-	<h1>Learnalyzer</h1>
+	<h1>Tracking Happy</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 <div data-role="navbar">
 	<ul>
@@ -37,13 +38,35 @@
 		<h3>Achievements</h3>
 		<ul data-role="listview" style="margin: 5px">
 		<%
-			for(Achievement achievement :AchievementRegistry.getCompletedAchievements(student)){
-				String name = achievement.getName();
-				out.println("<li><img src='/inc/icons/" + achievement.getIcon() + "' class='ui-li-icon custom-css'>" + name + "</li>");
+			ArrayList<StudyMoment> moments = student.getStudyMoments();
+			HashMap<String,Long> times = Statistics.getCourseTimes(moments, student.getCourses());
+			int i = 1;
+			String JS = "";
+			for(CourseContract course : student.getCourses()){
+				String name = course.getCourse().getName();
+				long time = (times.get(name));
+				int lvl = course.getLevel(time);
+				long next = course.getTimeNeededNext(time);
+				long untilNext = course.getTimeUntilNext(time);
+				out.println("<h3>" + name + "</h3>");
+				out.println("<li id='progressbar" + i + "'></li>");
+				JS += ("$('#progressbar" + i + "').progressbar({max: " + untilNext + "});");
+				JS += ("$('#progressbar" + i + "').progressbar({value: " + next + "});");
+				i++;
 			}
 		%>
 		</ul>
 	</div>
+	<script>
+		<%=JS%>
+		$("div.ui-progressbar-value").removeClass("ui-corner-left");
+		$("div.ui-progressbar-value").removeClass("ui-corner-right");
+		$("div.ui-progressbar-value").addClass("ui-link-inherit");
+		$("li.ui-progressbar").removeClass("ui-corner-all");
+		$("li.ui-progressbar").removeClass("completed");
+		$("li.ui-progressbar").addClass("custom-css");
+		$("li.ui-progressbar").addClass("list-edited");
+	</script>
 </div><!-- /content -->
 </div><!-- /page -->
 </body>
