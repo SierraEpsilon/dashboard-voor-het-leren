@@ -59,14 +59,14 @@ $("div#add_manual_jsp").bind("pageshow",function(){
 		var startt = $("input[name='starttime']").val();
 		var endd = $("input[name='enddate']").val();
 		var endt = $("input[name='endtime']").val();
-		var courseinput = $("input[name='courseinput']").val();
+		var courseinput = $("select[name='courseinput']").val();
 		var amount = $("input[name='amount']").val();
 		var cont = true;
 		cont = (startd=="") ? false : cont;
 		cont = (startt=="") ? false : cont;
 		cont = (endd=="") ? false : cont;
 		cont = (endt=="") ? false : cont;
-		cont = (courseinput==null) ? false : cont;
+		cont = (courseinput=="placeholder") ? false : cont;
 		cont = (amount=="") ? false : cont;
 		if(!cont){
 			$("#msg").text("Vul alle velden in!");
@@ -115,14 +115,14 @@ $("div#add_manual_jsp").bind("pageshow",function(){
 	<b>Starttijd</b>
 	<p>
 	         <label for="startdate">Datum:</label>
-	         <input type="date" name="startdate" id="date" value="" placeholder="vb: 20/04/2012" />
+	         <input type="date" name="startdate" id="date" value="" placeholder="vb: 2012-04-20" />
 	         <label for="starttime">Tijd:</label>
 	         <input type="time" name="starttime" id="time" value="" placeholder="vb: 15:00"/>
 	<p>
 	<b>Eindtijd</b>
 	<p>
 	         <label for="enddate">Datum:</label>
-	         <input type="date" name="enddate" id="date" value="" placeholder="vb: 20/04/2012" />
+	         <input type="date" name="enddate" id="date" value="" placeholder="vb: 2012-04-20" />
 	         <label for="endtime">Tijd:</label>
 	         <input type="time" name="endtime" id="time" value="" placeholder="vb: 16:00"/>
 	         
