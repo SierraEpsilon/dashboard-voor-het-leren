@@ -20,13 +20,14 @@
 <div data-role="page" id="add_manual_jsp">
 <script>
   //reset type=date inputs to text
-  $( document ).bind( "mobileinit", function(){
+$("div#add_manual_jsp").bind( "mobileinit", function(){
     
   });	
 </script>	
 
 <script>
-$("div#add_manual_jsp").bind("pageshow",function(){
+$('#add_manual_jsp').bind("pageinit",function(){
+alert("test");
 	$("input[name='startdate']").change(function(){
 		var start = $("input[name='startdate']").val();
 		if($("input[name='enddate']").val() == ''){
