@@ -21,9 +21,9 @@
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 	<div data-role="navbar">
 		<ul>
-			<li><a href="/jsp/friends/list.jsp">Friends</a></li>
-			<li><a href="/jsp/friends/requests.jsp">Requests</a></li>
-			<li><a href="/jsp/friends/add.jsp">Add friend</a></li>
+			<li><a href="/jsp/friends/list.jsp">Vrienden</a></li>
+			<li><a href="/jsp/friends/requests.jsp">Vriendschapsverzoeken</a></li>
+			<li><a href="/jsp/friends/add.jsp">Voeg vrienden toe</a></li>
 		</ul>
 	</div><!-- /navbar -->
 </div><!-- /header -->

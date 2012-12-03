@@ -21,9 +21,9 @@
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 	<div data-role="navbar">
 		<ul>
-			<li><a href="/jsp/friends/list.jsp">Friends</a></li>
-			<li><a href="/jsp/friends/requests.jsp">Requests</a></li>
-			<li><a href="/jsp/friends/add.jsp">Add friend</a></li>
+			<li><a href="/jsp/friends/list.jsp">Vrienden</a></li>
+			<li><a href="/jsp/friends/requests.jsp">Vriendschapsverzoeken</a></li>
+			<li><a href="/jsp/friends/add.jsp">Voeg vrienden toe</a></li>
 		</ul>
 	</div><!-- /navbar -->
 </div><!-- /header -->
@@ -33,13 +33,13 @@
 		Student student = (Student)session.getAttribute("student");
 	%>
 	<div>
-		<h3>Requests</h3>
+		<h3>Vriendschapsverzoeken</h3>
 		<ul data-role="listview" style="margin: 5px">
 		<%
 			for(String stranger :student.getFriendRequests() ){
 				out.println("<li>" + stranger + "</li>");
-				out.println("<button type='submit' data-inline='true' data-icon='check' name='submit' value='add_" + stranger + "'>accept</button>");
-				out.println("<button type='submit' data-inline='true' data-icon='delete' name='submit' value='deny_" + stranger + "'>ignore</button>");
+				out.println("<button type='submit' data-inline='true' data-icon='check' name='submit' value='add_" + stranger + "'>Accepteer</button>");
+				out.println("<button type='submit' data-inline='true' data-icon='delete' name='submit' value='deny_" + stranger + "'>Negeer</button>");
 			}
 		%>
 		</ul>
