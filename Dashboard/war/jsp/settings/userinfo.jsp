@@ -21,8 +21,8 @@
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 <div data-role="navbar">
 	<ul>
-		<li><a href="/jsp/settings/userinfo.jsp">Personal</a></li>
-		<li><a href="/jsp/settings/password.jsp">Password</a></li>
+		<li><a href="/jsp/settings/userinfo.jsp">Persoonlijke Informatie</a></li>
+		<li><a href="/jsp/settings/password.jsp">Paswoord</a></li>
 		<li><a href="/jsp/settings/courses.jsp">Vakken</a></li>
 	</ul>
 </div><!-- /navbar -->

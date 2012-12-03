@@ -12,14 +12,14 @@
 <%@ page import="java.util.*" %>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="register_jsp">
 <div data-role="header" data-id='header' data-position="fixed">
 		<h1>Register</h1>
 		<a href="/jsp/login/login.jsp" data-icon="back">Terug</a>
 </div><!-- /header -->
 <div data-role="content">
 <script>
-$(document).ready(function(){
+$("div#register_jsp").bind("pageshow",function(){
 
 	$("input[name='username']").change(function(){
 		var given =  $("input[name='username']").val();
