@@ -16,8 +16,8 @@ abstract class Combined extends Achievement {
 	private static final long serialVersionUID = 2654412861135898693L;
 	ArrayList<Achievement> achievementList;
 	
-	public Combined(String id, String name, String desc, Course course, String icon, ArrayList<Achievement> achievementList) {
-		super(id, name, desc, course, icon);
+	public Combined(String id, String name, String desc, Course course, String icon, boolean visible, ArrayList<Achievement> achievementList) {
+		super(id, name, desc, course, icon, visible);
 		this.achievementList = achievementList;
 	}
 	

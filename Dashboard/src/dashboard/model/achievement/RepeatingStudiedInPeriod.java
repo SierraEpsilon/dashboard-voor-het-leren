@@ -23,12 +23,13 @@ public class RepeatingStudiedInPeriod extends Achievement {
 	 * @param desc
 	 * @param course
 	 * @param icon
+	 * @param visible
 	 * @param startDate
 	 * @param endDate
 	 * @param repeatingTime the number of milliseconds between the start of 2 periods
 	 */
-	public RepeatingStudiedInPeriod(String id, String name, String desc, Course course, String icon, Date startDate, Date endDate, long repeatingTime) {
-		super(id, name, desc, course, icon);
+	public RepeatingStudiedInPeriod(String id, String name, String desc, Course course, String icon, boolean visible, Date startDate, Date endDate, long repeatingTime) {
+		super(id, name, desc, course, icon, visible);
 		this.startDate = startDate;
 		this.endDate = endDate;
 		this.repeatingTime = repeatingTime;

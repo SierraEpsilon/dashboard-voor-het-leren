@@ -15,8 +15,8 @@ public class StudiedInPeriod extends Achievement {
 	private Date startDate;
 	private Date endDate;
 
-	public StudiedInPeriod(String id, String name, String desc, Course course, String icon, Date startDate, Date endDate) {
-		super(id, name, desc, course, icon);
+	public StudiedInPeriod(String id, String name, String desc, Course course, String icon, boolean visible, Date startDate, Date endDate) {
+		super(id, name, desc, course, icon, visible);
 		this.startDate = startDate;
 		this.endDate = endDate;
 	}

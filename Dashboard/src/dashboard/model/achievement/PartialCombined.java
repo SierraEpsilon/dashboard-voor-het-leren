@@ -13,8 +13,8 @@ public class PartialCombined extends Combined {
 	private static final long serialVersionUID = -2727336172027210942L;
 	private int amountRequired;
 
-	public PartialCombined(String id, String name, String desc, Course course, String icon, ArrayList<Achievement> achievementList, int amountRequired) {
-		super(id, name, desc, course, icon, achievementList);
+	public PartialCombined(String id, String name, String desc, Course course, String icon, boolean visible, ArrayList<Achievement> achievementList, int amountRequired) {
+		super(id, name, desc, course, icon, visible, achievementList);
 		this.amountRequired = amountRequired;
 	}
 

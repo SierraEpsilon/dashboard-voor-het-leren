@@ -11,18 +11,20 @@ public abstract class Achievement implements Serializable {
 	 * 
 	 */
 	private static final long serialVersionUID = -4773912395822659711L;
-	String id;
-	String name;
-	String desc;
-	Course course;
-	String icon;
+	protected String id;
+	protected String name;
+	protected String desc;
+	protected Course course;
+	protected String icon;
+	protected boolean visible;
 	
-	protected Achievement(String id, String name, String desc, Course course, String icon){
+	protected Achievement(String id, String name, String desc, Course course, String icon, boolean visible){
 		this.id = id;
 		this.name = name;
 		this.desc = desc;
 		this.course = course;
 		this.icon = icon;
+		this.visible = visible;
 	}
 	
 	public String getId() {

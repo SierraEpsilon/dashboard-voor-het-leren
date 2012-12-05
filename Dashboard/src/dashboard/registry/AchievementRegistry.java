@@ -15,6 +15,7 @@ import org.jdom2.Element;
 import org.jdom2.JDOMException;
 import org.jdom2.input.SAXBuilder;
 
+import dashboard.error.NoSuchAchievementException;
 import dashboard.model.Course;
 import dashboard.model.Student;
 import dashboard.model.achievement.*;
@@ -40,26 +41,56 @@ public class AchievementRegistry {
 		Document doc = new SAXBuilder().build(is);
 		Element root = doc.getRootElement();
 		for(Element ae: root.getChildren("achievement")){
+			achievementList.add(getAchievementFromElement(ae));
+		}
+	}
+	
+	private static Achievement getAchievementFromElement(Element ae){
+		try{
+			return getByID(ae.getChildText("id"));
+		} catch(NoSuchAchievementException e){
 			String id = ae.getChildText("id");
 			String name = ae.getChildText("name");
 			String desc = ae.getChildText("desc");
 			Course course = CourseRegistry.getCourseByID(ae.getChildText("Course"));
 			String icon = ae.getChildText("icon");
+			boolean visible = ae.getChildText("visible").equals("true");
 			String type = ae.getAttributeValue("type");
 			if(type.equals("TimeStudied")){ 
 				float seconds = Float.parseFloat(ae.getChildText("seconds"));
-				achievementList.add(new TimeStudied(id,name,desc,course,icon,seconds));
+				return new TimeStudied(id,name,desc,course,icon,visible,seconds);
 			} else if(type.equals("StudiedInPeriod")){
 				Date startDate = readDate(ae, "start");
 				Date endDate = readDate(ae, "end");
-				achievementList.add(new StudiedInPeriod(id,name,desc,course,icon,startDate,endDate));
+				return new StudiedInPeriod(id,name,desc,course,icon,visible,startDate,endDate);
 			} else if(type.equals("RepeatingStudiedInPeriod")){
 				Date startDate2 = readDate(ae,"start");
 				Date endDate2 = readDate(ae, "end");
 				long repeatingTime = getRepeatingTime(ae.getChildText("repeating"));
-				achievementList.add(new RepeatingStudiedInPeriod(id,name,desc,course,icon,startDate2,endDate2,repeatingTime));
+				return new RepeatingStudiedInPeriod(id,name,desc,course,icon,visible,startDate2,endDate2,repeatingTime);
+			} else if(type.equals("FullCombined")){
+				ArrayList<Achievement> cAchievementList = new ArrayList<Achievement>();
+				for(Element c: ae.getChildren("subachievement")){
+					try {
+						cAchievementList.add(getByID(c.getText()));
+					} catch (NoSuchAchievementException e1) {
+						e1.printStackTrace();
+					}
+				}
+				return new FullCombined(id,name,desc,course,icon,visible,cAchievementList);
+			} else if(type.equals("PartialCombined")){
+				ArrayList<Achievement> cAchievementList = new ArrayList<Achievement>();
+				for(Element c: ae.getChildren("subachievement")){
+					try{
+						cAchievementList.add(getByID(c.getText()));
+					} catch (NoSuchAchievementException e1){
+						e1.printStackTrace();
+					}
+				}
+				int amount = Integer.parseInt(ae.getChildText("amount"));
+				return new PartialCombined(id,name,desc,course,icon,visible,cAchievementList,amount);
 			} else {
-				break;
+				return null;
 			}
 		}
 	}
@@ -91,12 +122,12 @@ public class AchievementRegistry {
 		Iterator<Course> it = CourseRegistry.getAllCourses().iterator();
 		while(it.hasNext()){
 			Course course = it.next();
-			TimeStudied ts1 = new TimeStudied("TIME_STUDIED_" + course.name() + "_1", course.getName() + " noob", "Studeer " + 2 * course.getCredit() + " minuten voor " + course.getName(), course, "noob.png",120 * course.getCredit());
-			TimeStudied ts2 = new TimeStudied("TIME_STUDIED_" + course.name() + "_2", course.getName() + " novice", "Studeer " + 10 * course.getCredit() + " minuten voor " + course.getName(), course, "novice.png",600 * course.getCredit());
-			TimeStudied ts3 = new TimeStudied("TIME_STUDIED_" + course.name() + "_3", course.getName() + " apprentice", "Studeer " + 1 * course.getCredit() + " uur voor " + course.getName(), course, "apprentice.png",3600 * course.getCredit());
-			TimeStudied ts4 = new TimeStudied("TIME_STUDIED_" + course.name() + "_4", course.getName() + " expert", "Studeer " + 4 * course.getCredit() + " uur voor " + course.getName(), course, "expert.png",14400 * course.getCredit());
-			TimeStudied ts5 = new TimeStudied("TIME_STUDIED_" + course.name() + "_5", course.getName() + " pro", "Studeer " + 10 * course.getCredit() + " uur voor " + course.getName(), course, "pro.png",36000 * course.getCredit());
-			TimeStudied ts6 = new TimeStudied("TIME_STUDIED_" + course.name() + "_6", course.getName() + " zombie", "Studeer " + 35 * course.getCredit() + " uur voor " + course.getName(), course, "zombie.png",126000 * course.getCredit());
+			TimeStudied ts1 = new TimeStudied("TIME_STUDIED_" + course.name() + "_1", course.getName() + " noob", "Studeer " + 2 * course.getCredit() + " minuten voor " + course.getName(), course, "noob.png", true,120 * course.getCredit());
+			TimeStudied ts2 = new TimeStudied("TIME_STUDIED_" + course.name() + "_2", course.getName() + " novice", "Studeer " + 10 * course.getCredit() + " minuten voor " + course.getName(), course, "novice.png", true,600 * course.getCredit());
+			TimeStudied ts3 = new TimeStudied("TIME_STUDIED_" + course.name() + "_3", course.getName() + " apprentice", "Studeer " + 1 * course.getCredit() + " uur voor " + course.getName(), course, "apprentice.png", true,3600 * course.getCredit());
+			TimeStudied ts4 = new TimeStudied("TIME_STUDIED_" + course.name() + "_4", course.getName() + " expert", "Studeer " + 4 * course.getCredit() + " uur voor " + course.getName(), course, "expert.png", true,14400 * course.getCredit());
+			TimeStudied ts5 = new TimeStudied("TIME_STUDIED_" + course.name() + "_5", course.getName() + " pro", "Studeer " + 10 * course.getCredit() + " uur voor " + course.getName(), course, "pro.png", true,36000 * course.getCredit());
+			TimeStudied ts6 = new TimeStudied("TIME_STUDIED_" + course.name() + "_6", course.getName() + " zombie", "Studeer " + 35 * course.getCredit() + " uur voor " + course.getName(), course, "zombie.png", true,126000 * course.getCredit());
 			timeStudiedList.addAll(Arrays.asList(ts1,ts2,ts3,ts4,ts5,ts6));
 		}
 		return timeStudiedList;
@@ -137,7 +168,7 @@ public class AchievementRegistry {
 		return completedAchievementList;
 	}
 	
-	public static Achievement getByID(String id){
+	public static Achievement getByID(String id) throws NoSuchAchievementException{
 		Iterator<Achievement> it = achievementList.iterator();
 		while(it.hasNext()){
 			Achievement achievement = it.next();
@@ -145,7 +176,7 @@ public class AchievementRegistry {
 				return achievement;
 			}
 		}
-		return null;
+		throw new NoSuchAchievementException();
 	}
 
 	public static void init(ServletContext servletContext) {
