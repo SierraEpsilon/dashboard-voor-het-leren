@@ -337,7 +337,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	public int getRequestNumbers(){
-		return getFriendList().size();
+		return getFriendRequests().size();
 	}
 	
 	/**
