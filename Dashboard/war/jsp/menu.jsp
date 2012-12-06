@@ -33,6 +33,7 @@ $(document).bind("pageinit",function(){
 		Student student = (Student)session.getAttribute("student");
 		String username = student.getUserName();
 		String friendAdd = "";
+		int numberOfRequests = student.getRequestNumbers();
 		if(student.getRequestNumbers() != 0){
 			friendAdd = "(n.v.:" + student.getRequestNumbers() + ")";
 		}
@@ -40,7 +41,8 @@ $(document).bind("pageinit",function(){
 	<ul data-role="listview">
 		<li><a href="/track">Tracken</a></li>
 		<li><a href="/add_manual">Toevoegen van studiemoment</a></li>
-		<li><a href="/friends">Vrienden <%=friendAdd%></a></li>
+		<li><a href="/friends">Vrienden </a> <span class='ui-li-count' name='courseStudents'><%=numberOfRequests%></spa
+		n> </li>
 		<li><a href="/stats">Statistieken</a></li>
 		<li><a href="/achievements">Achievements</a></li>
 		<li><a href="/settings">Instellingen</a></li>
