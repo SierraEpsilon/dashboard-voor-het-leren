@@ -35,7 +35,7 @@
 </div><!-- /header -->
 <div data-role="content">
 	<div>
-		<h3>Achievements</h3>
+		<h3>Vakken</h3>
 		<ul data-role="listview" style="margin: 5px">
 		<%
 			ArrayList<StudyMoment> moments = student.getStudyMoments();
@@ -47,11 +47,11 @@
 				long time = (times.get(name));
 				int lvl = course.getLevel(time);
 				long next = course.getTimeNeededNext(time);
-				long untilNext = course.getTimeUntilNext(time);
-				out.println("<h3>" + name + "</h3>");
+				long untilNext = next - course.getTimeUntilNext(time);
+				out.println("<h3>" + name + " (" + lvl + ")</h3>");
 				out.println("<li id='progressbar" + i + "'></li>");
-				JS += ("$('#progressbar" + i + "').progressbar({max: " + untilNext + "});");
-				JS += ("$('#progressbar" + i + "').progressbar({value: " + next + "});");
+				JS += ("$('#progressbar" + i + "').progressbar({max: " + next + "});");
+				JS += ("$('#progressbar" + i + "').progressbar({value: " + untilNext + "});");
 				i++;
 			}
 		%>
