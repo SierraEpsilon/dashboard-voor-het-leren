@@ -29,11 +29,13 @@ public class CourseContract implements Serializable{
 	
 	public long getNeededExp(int lvl){
 		int time = 0;
-		int nextTime = 100;
+		int nextTime = 300;
 		for(int i = 1; i < lvl; i++){
 			time += nextTime;
-			if(nextTime < 500)
-				nextTime = nextTime + 100/nextTime;
+			if(nextTime < 3600)
+				nextTime = nextTime + 100000/nextTime;
+			else
+				nextTime = 3600;
 		}
 		return time;
 	}
