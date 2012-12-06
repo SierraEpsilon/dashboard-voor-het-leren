@@ -24,6 +24,7 @@
 <%
 	String startTime = "0";
 	String courseName = "";
+	String location = "Geen locatie opgegeven";
 	Date startDate = (Date)session.getAttribute("startTracking");
 	Course course = (Course)session.getAttribute("course");
 	if(course==null){
@@ -31,6 +32,8 @@
 	}else{
 		courseName = course.getName();
 		startTime = startDate.toString();
+		if(session.getAttribute("adres")!=null)
+			location = session.getAttribute("adres");
 	}
 %>
 	<fieldset data-role='fieldcontain'>
@@ -39,6 +42,7 @@
 			<h1>Algemeen</h1>
 			<ul data-role='listview'>
 				<li><%= courseName %></li>
+				<li><%= location %></li>
 			</ul>
 		</div><div data-role='collapsible' data-collapsed='false' data-theme='c' data-content-theme='c'>
 			<h1>Timer</h1>
