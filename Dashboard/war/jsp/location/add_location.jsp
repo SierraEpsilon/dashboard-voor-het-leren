@@ -10,13 +10,17 @@
 <head>
 <%@include file="/WEB-INF/inc/head.jsp"%>
 <%@include file="/WEB-INF/inc/redirect.jsp"%>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?
+
+libraries=places&sensor=true"></script>
 </head>
 <body>
 <div data-role="page">
 <script>
 $(document).bind("pageinit",function(){
 
+	$("#saveButton").hide();
+	
 	$("input[name='number']").change(function(){
 		var given = $("input[name='number']").val();
 		if(given<1){
@@ -33,12 +37,12 @@ $(document).bind("pageinit",function(){
 		}else{$("#msg3").text("");
 		}
 	});
-	$("#opslaan").click(function(){
+	$("#searchButton").click(function(){
 		var name = $("input[name='name']").val();
 		var street = $("input[name='street']").val();
 		var number = $("input[name='number']").val();
 		var zip = $("input[name='zip']").val();
-		var city = $("select[name='city']").val();
+		var city = $("input[name='city']").val();
 		var cont = true;
 		cont = (name=="") ? false : cont;
 		cont = (street=="") ? false : cont;
@@ -57,21 +61,29 @@ $(document).bind("pageinit",function(){
 			$("input[name='amount']").val('');
 		}
 		else {
-			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
-			obj = number + " " + street + ", " + zip + " " + city + ", Belgium";
-			alert("obj " + obj);
+			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");$("#msg4").text("");$("#msg5").text("");
+			obj = number + " " + street + ", " + zip + " " + city;
 			req = {address: obj};
 			geocoder = new google.maps.Geocoder();
 			geocoder.geocode(req,handleGoogleResp);
+			buttonFinishedState();
 		}
 	});
 	
 	function handleGoogleResp(res,stat){
-		alert(stat);
-		$("#msg").text(res[0].formatted_address);
+		if(stat=="OK"){
+			$("#msg4").text("Dit adres werd gevonden:");
+			$("#msg5").text(res[0].formatted_address);
+			$("#saveButton").show();
+		}
+		else{
+			$("#msg4").text("Er werd geen locatie gevonden.");
+		}
 	};
 	
-	
+	function buttonFinishedState(){
+		$("#searchButton .ui-btn-text").html("Opnieuw zoeken");
+	};
 });
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
@@ -107,10 +119,20 @@ $(document).bind("pageinit",function(){
 	<p id='msg3' style='color:red;'><%=msg3%></p>
  	<label for="city">Gemeente:</label>
  	<input type="text" name="city" id="city" value="" placeholder="Heverlee" />
- 	
- 	<a href="" 	data-role="button" data-icon="check" data-theme="b" id="opslaan" data-inline="true">Opslaan</a></li>
+ 	<%
+		String msg4 = (request.getParameter("msg4")==null) ? "" : request.getParameter("msg4");
+	%>
+	<p id='msg4'><%=msg%></p>
+	<%
+		String msg5 = (request.getParameter("msg5")==null) ? "" : request.getParameter("msg5");
+	%>
+	<p id='msg5'><%=msg5%></p>
+ 	<a href="" 	data-role="button" data-icon="check" data-theme="b" id="searchButton" data-inline="true">Zoeken</a></li>
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="delete" data-inline="true">Annuleren</a>
+	<p>
+	<a href="" 	data-role="button" data-icon="check" data-theme="b" id="saveButton" data-inline="true">Opslaan</a></li>
 </form>
+
 	
 </div><!-- /content -->
 </div><!-- /page -->
