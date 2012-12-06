@@ -91,6 +91,9 @@ public class AchievementRegistry {
 				}
 				int amount = Integer.parseInt(ae.getChildText("amount"));
 				return new PartialCombined(id,name,desc,course,icon,visible,cAchievementList,amount);
+			} else if(type.equals("Omni")){
+				int amount = Integer.parseInt(ae.getChildText("amount"));
+				return new Omni(id,name,desc,course,icon,visible,amount);
 			} else {
 				return null;
 			}
