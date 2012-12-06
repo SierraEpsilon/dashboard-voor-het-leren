@@ -50,7 +50,7 @@ public class FriendServlet extends HttpServlet {
 			req.getSession().setAttribute("student", student);
 			resp.sendRedirect("/jsp/friends/list.jsp");
 		} catch (AlreadyRequestedException e) {
-			resp.sendRedirect("/jsp/error.jsp?msg=already requested");
+			resp.sendRedirect("/jsp/error.jsp?msg=Vriendschapsverzoek werd reeds verzonden.");
 		}
 	}
 	
@@ -62,7 +62,7 @@ public class FriendServlet extends HttpServlet {
 			req.getSession().setAttribute("student", student);
 			resp.sendRedirect("/jsp/friends/list.jsp");
 		} catch (NotFriendException e) {
-			resp.sendRedirect("/jsp/error.jsp?msg=not a friend");
+			resp.sendRedirect("/jsp/error.jsp?msg=Dit was geen vriend.");
 		}
 	}
 
