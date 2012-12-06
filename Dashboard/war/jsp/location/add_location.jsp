@@ -59,15 +59,16 @@ $(document).bind("pageinit",function(){
 		else {
 			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
 			obj = street + " " + number + " " + zip + " " + city;
-			req = {adress: obj};
+			req = {address: obj};
 			geocoder = new google.maps.Geocoder();
 			geocoder.geocode(req,handleGoogleResp);
 		}
 	});
 	
 	function handleGoogleResp(res,stat){
-	}
-}
+		alert(stat);
+		$("#msg").text(res[0].formatted_address);
+	};
 	
 	
 });
