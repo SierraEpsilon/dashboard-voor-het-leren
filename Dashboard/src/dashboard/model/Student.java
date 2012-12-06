@@ -310,6 +310,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		if(!isAFriend(userName))
 			throw new NotFriendException();
 		friendList.remove(userName);
+		OwnOfy.ofy().put(this);
 	}
 
 	/**
