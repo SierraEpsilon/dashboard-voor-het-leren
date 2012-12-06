@@ -58,13 +58,13 @@ public class CourseContract implements Serializable{
 	 * 	the level
 	 */
 	public int getLevel(long time){
-		int nextLevel = 100;
+		int nextLevel = 300;
 		int level = 0;
 		while(time >= 0){
 			time -= nextLevel;
 			level++;
-			if(nextLevel < 500)
-				nextLevel = nextLevel + 100/nextLevel;
+			if(nextLevel < 3600)
+				nextLevel = nextLevel + 10000/nextLevel;
 		}
 		return level;
 	}
