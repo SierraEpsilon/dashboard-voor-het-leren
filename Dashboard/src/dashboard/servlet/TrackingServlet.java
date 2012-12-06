@@ -18,6 +18,7 @@ import dashboard.model.Course;
 import dashboard.model.Location;
 import dashboard.model.Student;
 import dashboard.model.StudyMoment;
+import dashboard.registry.AchievementRegistry;
 import dashboard.registry.CourseRegistry;
 
 public class TrackingServlet extends HttpServlet{
@@ -81,6 +82,7 @@ public class TrackingServlet extends HttpServlet{
 			if(req.getParameter("submit").equals("Stop")){
 				try {
 					student.endStudying(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));
+					session.setAttribute("changedAchievements", AchievementRegistry.getChangedAchievements(student));
 					session.setAttribute("startTracking", null);
 					session.setAttribute("course", null);
 					resp.sendRedirect("/jsp/track/end.jsp");//end the current studymoment

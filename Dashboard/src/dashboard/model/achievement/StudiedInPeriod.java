@@ -1,5 +1,6 @@
 package dashboard.model.achievement;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import dashboard.model.Course;
@@ -22,7 +23,12 @@ public class StudiedInPeriod extends Achievement {
 	}
 
 	public float getProgress(Student student) {
-		for(StudyMoment studyMoment: student.getStudyMoments()){
+		return getProgress(student.getStudyMoments());
+	}
+
+	@Override
+	public float getProgress(ArrayList<StudyMoment> studyMoments) {
+		for(StudyMoment studyMoment: studyMoments){
 			if(studyMoment.getStart().before(endDate) && studyMoment.getEnd().after(startDate)){
 				return 1;
 			}

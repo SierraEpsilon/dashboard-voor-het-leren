@@ -4,6 +4,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -18,6 +19,7 @@ import org.jdom2.input.SAXBuilder;
 import dashboard.error.NoSuchAchievementException;
 import dashboard.model.Course;
 import dashboard.model.Student;
+import dashboard.model.StudyMoment;
 import dashboard.model.achievement.*;
 import dashboard.util.CalendarToDateConverter;
 
@@ -66,8 +68,8 @@ public class AchievementRegistry {
 			} else if(type.equals("RepeatingStudiedInPeriod")){
 				Date startDate2 = readDate(ae,"start");
 				Date endDate2 = readDate(ae, "end");
-				long repeatingTime = getRepeatingTime(ae.getChildText("repeating"));
-				return new RepeatingStudiedInPeriod(id,name,desc,course,icon,visible,startDate2,endDate2,repeatingTime);
+				int repeatingType = getRepeatingTime(ae.getChildText("repeating"));
+				return new RepeatingStudiedInPeriod(id,name,desc,course,icon,visible,startDate2,endDate2,repeatingType);
 			} else if(type.equals("FullCombined")){
 				ArrayList<Achievement> cAchievementList = new ArrayList<Achievement>();
 				for(Element c: ae.getChildren("subachievement")){
@@ -103,15 +105,15 @@ public class AchievementRegistry {
 				Integer.parseInt(top.getChildText("second")));
 	}
 	
-	private static long getRepeatingTime(String s){
+	private static int getRepeatingTime(String s){
 		if(s.equals("daily")){
-			return 86400000l;
+			return Calendar.DAY_OF_YEAR;
 		} else if(s.equals("weekly")){
-			return 604800000l;
+			return Calendar.WEEK_OF_YEAR;
 		} else if(s.equals("monthly")){
-			return 26298000000l;
+			return Calendar.MONTH;
 		} else if(s.equals("yearly")){
-			return 315576000000l;
+			return Calendar.YEAR;
 		} else {
 			return 0;
 		}
@@ -192,5 +194,20 @@ public class AchievementRegistry {
 	
 	public static boolean started(){
 		return started;
+	}
+	
+	public static ArrayList<Achievement> getChangedAchievements(Student student){
+		ArrayList<Achievement> changedAchievements = new ArrayList<Achievement>();
+		ArrayList<StudyMoment> newList = student.getStudyMoments();
+		ArrayList<StudyMoment> oldList = new ArrayList<StudyMoment>();
+		oldList.addAll(newList.subList(0, newList.size() - 1));
+		for(Achievement achievement: achievementList){
+			if(student.getCourseList().contains(achievement.getCourse())){
+				if(achievement.getProgress(oldList)!=achievement.getProgress(newList)){
+					changedAchievements.add(achievement);
+				}
+			}
+		}
+		return changedAchievements;
 	}
 }

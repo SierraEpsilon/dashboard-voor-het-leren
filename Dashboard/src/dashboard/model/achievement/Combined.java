@@ -6,6 +6,7 @@ import java.util.List;
 
 import dashboard.model.Course;
 import dashboard.model.Student;
+import dashboard.model.StudyMoment;
 import dashboard.util.AchievementProgressComparator;
 
 abstract class Combined extends Achievement {
@@ -24,9 +25,17 @@ abstract class Combined extends Achievement {
 	public float getCombinedProgress(Student student, List<Achievement> achievementList){
 		float progress = 0;
 		for(Achievement achievement: achievementList){
-			if(student.getCourseList().contains(achievement.getCourse())){
+			if(achievement.getCourse() == null || student.getCourseList().contains(achievement.getCourse())){
 				progress += achievement.getProgress(student)/achievementList.size();
 			}
+		}
+		return progress;
+	}
+	
+	public float getCombinedProgress(ArrayList<StudyMoment> studyMoments, List<Achievement> achievementList){
+		float progress = 0;
+		for(Achievement achievement: achievementList){
+			progress += achievement.getProgress(studyMoments)/achievementList.size();
 		}
 		return progress;
 	}
@@ -38,6 +47,12 @@ abstract class Combined extends Achievement {
 	public ArrayList<Achievement> getSortedAchievementList(Student student){
 		ArrayList<Achievement> sortedAchievementList = new ArrayList<Achievement>(achievementList);
 		Collections.sort(sortedAchievementList, new AchievementProgressComparator(student));
+		return sortedAchievementList;
+	}
+	
+	public ArrayList<Achievement> getSortedAchievementList(ArrayList<StudyMoment> studyMoments){
+		ArrayList<Achievement> sortedAchievementList = new ArrayList<Achievement>(achievementList);
+		Collections.sort(sortedAchievementList, new AchievementProgressComparator(studyMoments));
 		return sortedAchievementList;
 	}
 }
