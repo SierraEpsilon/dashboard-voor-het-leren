@@ -15,6 +15,7 @@ import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.error.NotStudyingException;
 import dashboard.model.Course;
+import dashboard.model.Location;
 import dashboard.model.Student;
 import dashboard.model.StudyMoment;
 import dashboard.registry.CourseRegistry;
@@ -31,10 +32,14 @@ public class TrackingServlet extends HttpServlet{
 			if(student.getCurrentStudyMoment() == null){
 				session.setAttribute("startTracking", null);
 				session.setAttribute("course", null);
+				session.setAttribute("adres", null);
 				resp.sendRedirect("/jsp/track/start.jsp");
 			} else {
 				session.setAttribute("startTracking", student.getCurrentStudyMoment().getStart());
 				session.setAttribute("course", student.getCurrentStudyMoment().getCourse());
+				Location loc = student.getCurrentStudyMoment().getLocation();
+				if(loc!=null)
+					session.setAttribute("adres", loc.getName());
 				resp.sendRedirect("/jsp/track/stop.jsp");
 			}
 		} else {
@@ -59,7 +64,16 @@ public class TrackingServlet extends HttpServlet{
 				e.printStackTrace();
 			}
 			Date start = new Date();
-			student.setCurrentStudyMoment(new StudyMoment(start,course));//create a new study moment
+			if(req.getParameter("longitude")!=null){
+				double longitude = Double.parseDouble(req.getParameter("longitude"));
+				double latitude = Double.parseDouble(req.getParameter("latitude"));
+				String adres = req.getParameter("adres");
+				Location loc = new Location(longitude,latitude,adres);
+				student.setCurrentStudyMoment(new StudyMoment(start,course,loc));//create a new study moment with location
+				session.setAttribute("adres", adres);
+			}else{
+				student.setCurrentStudyMoment(new StudyMoment(start,course));
+			}
 			session.setAttribute("startTracking", start);
 			session.setAttribute("course", course);
 			resp.sendRedirect("/jsp/track/stop.jsp");

@@ -1,7 +1,10 @@
 package dashboard.model;
 
-public class Location {
+import java.io.Serializable;
 
+public class Location implements Serializable{
+
+	private static final long serialVersionUID = 54213451;
 	private double longitude;
 	private double lattitude;
 	private String name;
