@@ -149,4 +149,31 @@
         <subachievement>TIME_STUDIED_TOTAL_6</subachievement>
         <amount>1</amount>
     </achievement>
+    <achievement type="Omni">
+        <id>OMNI_1</id>
+        <name>Twijfelaar</name>
+        <desc>Je hebt 2 vakken op een dag gestudeerd.</desc>
+        <course></course>
+        <icon>omni.png</icon>
+        <visible>true</visible>
+        <amount>2</amount>
+    </achievement>
+    <achievement type="Omni">
+        <id>OMNI_2</id>
+        <name>Omni student</name>
+        <desc>Je hebt 3 vakken op een dag gestudeerd.</desc>
+        <course></course>
+        <icon>omni.png</icon>
+        <visible>true</visible>
+        <amount>3</amount>
+    </achievement>
+    <achievement type="Omni">
+        <id>OMNI_3</id>
+        <name>Twijfelaar</name>
+        <desc>Je hebt 5 vakken op een dag gestudeerd.</desc>
+        <course></course>
+        <icon>autism.png</icon>
+        <visible>true</visible>
+        <amount>5</amount>
+    </achievement>
 </achievements>
