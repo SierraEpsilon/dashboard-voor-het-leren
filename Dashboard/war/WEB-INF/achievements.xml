@@ -6,6 +6,7 @@
        	<desc>Studeer 30 minuten in totaal.</desc>
        	<course></course>
        	<icon>noob.png</icon>
+       	<visible>true</visible>
        	<seconds>1800</seconds>
    	</achievement>
     <achievement type="TimeStudied">
@@ -14,6 +15,7 @@
         <desc>Studeer 3 uur in totaal.</desc>
         <course></course>
         <icon>novice.png</icon>
+       	<visible>true</visible>
         <seconds>10800</seconds>
     </achievement>
     <achievement type="TimeStudied">
@@ -22,6 +24,7 @@
         <desc>Studeer 12 uur in totaal.</desc>
         <course></course>
         <icon>apprentice.png</icon>
+       	<visible>true</visible>
         <seconds>43200</seconds>
     </achievement>
     <achievement type="TimeStudied">
@@ -30,6 +33,7 @@
         <desc>Studeer 60 uur in totaal.</desc>
         <course></course>
         <icon>expert.png</icon>
+       	<visible>true</visible>
         <seconds>216000</seconds>
     </achievement>
     <achievement type="TimeStudied">
@@ -38,6 +42,7 @@
         <desc>Studeer 120 uur in totaal.</desc>
         <course></course>
         <icon>pro.png</icon>
+       	<visible>true</visible>
         <seconds>432000</seconds>
     </achievement>
     <achievement type="TimeStudied">
@@ -46,6 +51,7 @@
         <desc>Studeer 600 uur in totaal.</desc>
         <course></course>
         <icon>zombie.png</icon>
+       	<visible>true</visible>
         <seconds>2160000</seconds>
     </achievement>
     <achievement type="StudiedInPeriod">
@@ -54,6 +60,7 @@
         <desc>Studeer op de launch day van de app.</desc>
         <course></course>
         <icon>kerst.png</icon>
+       	<visible>true</visible>
         <start>
             <year>2012</year>
             <month>12</month>
@@ -77,6 +84,7 @@
         <desc>Studeer op Kerstmis.</desc>
         <course></course>
         <icon>kerst.png</icon>
+       	<visible>true</visible>
         <start>
             <year>2012</year>
             <month>12</month>
