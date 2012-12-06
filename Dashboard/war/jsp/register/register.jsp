@@ -35,7 +35,7 @@ $("div#register_jsp").bind("pageshow",function(){
 		if(pw1.length > 5){
 			$("#msg3").text("");
 		}else{
-			$("#msg3").text("Het paswoord moet minimaal 6 en maximaal 24 tekens bevatten.");
+			$("#msg3").text("Het wachtwoord moet minimaal 6 en maximaal 24 tekens bevatten.");
 		}
 	});
 	
@@ -45,7 +45,7 @@ $("div#register_jsp").bind("pageshow",function(){
 		if(pw1==pw2){
 			$("#msg3").text("");
 		}else{
-			$("#msg3").text("Beide paswoorden zijn niet aan elkaar gelijk.");
+			$("#msg3").text("De opgegeven wachtwoorden zijn niet aan elkaar gelijk.");
 		}
 	});
 	

@@ -56,15 +56,15 @@ public class RegistrationServlet extends HttpServlet {
 			session.setAttribute("student_temp",StudentRegistry.getUserByUserName(username));
 			resp.sendRedirect("/jsp/register/add_courses.jsp");
 		} catch (UserNameInUseException e){
-			resp.sendRedirect("/jsp/register/register.jsp?msg=This username is already in use!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=De gebruikersnaam " + username + " is reeds in gebruik!");
 		} catch (InvalidUserNameException e){
-			resp.sendRedirect("/jsp/register/register.jsp?msg=This username is not valid!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=De gebruikersnaam " + username + " is ongeldig!");
 		} catch (EmailInUseException e){
-			resp.sendRedirect("/jsp/register/register.jsp?msg=Email: " + email + " is already in use!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=Email: " + email + " is reeds in gebruik!");
 		} catch (InvalidEmailException e){
-			resp.sendRedirect("/jsp/register/register.jsp?msg=This email is not valid!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=Email: " + email + " is ongeldig!");
 		} catch (InvalidPasswordException e){
-			resp.sendRedirect("/jsp/register/register.jsp?msg=This password is not valid!");
+			resp.sendRedirect("/jsp/register/register.jsp?msg=Het opgegeven wachtwoord is ongeldig!");
 		}
 	}
 	
