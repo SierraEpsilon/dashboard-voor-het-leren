@@ -19,6 +19,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import dashboard.error.NoSuchCourseException;
 import dashboard.model.*;
 import dashboard.registry.CourseRegistry;
+import dashboard.util.RegistryInitializer;
 import dashboard.util.Statistics;
 
 public class StatServlet extends HttpServlet {
@@ -27,6 +28,9 @@ public class StatServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
+		}
 		Student student = (Student)session.getAttribute("student");
 		if(student==null){
 			resp.sendRedirect("/jsp/login/login.jsp?msg=Beveiligde pagina");

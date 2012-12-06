@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.model.Student;
+import dashboard.util.RegistryInitializer;
 
 public class SettingServlet extends HttpServlet {
 
@@ -17,6 +18,9 @@ public class SettingServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
+		}
 		Student student = (Student)session.getAttribute("student");
 		if(student == null)
 			resp.sendRedirect("/login");

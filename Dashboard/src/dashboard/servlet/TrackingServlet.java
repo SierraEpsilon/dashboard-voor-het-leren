@@ -20,6 +20,7 @@ import dashboard.model.Student;
 import dashboard.model.StudyMoment;
 import dashboard.registry.AchievementRegistry;
 import dashboard.registry.CourseRegistry;
+import dashboard.util.RegistryInitializer;
 
 public class TrackingServlet extends HttpServlet{
 
@@ -27,6 +28,9 @@ public class TrackingServlet extends HttpServlet{
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
+		}
 		Student student = (Student)session.getAttribute("student");
 		
 		if(student!=null){
@@ -55,6 +59,9 @@ public class TrackingServlet extends HttpServlet{
 	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
+		}
 		Student student = (Student)session.getAttribute("student");//get the current user
 		
 		if(req.getParameter("submit").equals("Start") && student.getCurrentStudyMoment() == null){//if the student is not studying yet

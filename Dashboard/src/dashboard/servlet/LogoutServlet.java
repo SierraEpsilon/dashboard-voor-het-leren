@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import dashboard.util.RegistryInitializer;
+
 public class LogoutServlet extends HttpServlet{
 
 	private static final long serialVersionUID = -3978136481562961650L;
@@ -19,6 +21,9 @@ public class LogoutServlet extends HttpServlet{
 	 */
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		HttpSession session = req.getSession();
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
+		}
 		session.setAttribute("student",null);
 		session.setAttribute("startTracking",null);
 		session.setAttribute("course", null);

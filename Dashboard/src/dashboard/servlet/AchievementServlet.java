@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import dashboard.model.Student;
 import dashboard.registry.AchievementRegistry;
+import dashboard.util.RegistryInitializer;
 
 public class AchievementServlet extends HttpServlet{
 	
@@ -19,8 +20,8 @@ public class AchievementServlet extends HttpServlet{
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException{
 		HttpSession session = req.getSession();
-		if(!AchievementRegistry.started()){
-			AchievementRegistry.init(session.getServletContext());
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
 		}
 		Student student = (Student)session.getAttribute("student");
 		if(student==null){

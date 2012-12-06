@@ -11,6 +11,7 @@ import dashboard.error.AlreadyRequestedException;
 import dashboard.error.NotFriendException;
 import dashboard.model.Student;
 import dashboard.registry.StudentRegistry;
+import dashboard.util.RegistryInitializer;
 
 public class FriendServlet extends HttpServlet {
 
@@ -21,6 +22,9 @@ public class FriendServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
+		}
 		Student student = (Student)session.getAttribute("student");
 		if(student != null)
 			resp.sendRedirect("/jsp/friends/list.jsp");

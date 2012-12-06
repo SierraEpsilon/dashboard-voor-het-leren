@@ -15,6 +15,7 @@ import com.google.appengine.labs.repackaged.org.json.JSONObject;
 import dashboard.model.Course;
 import dashboard.model.Student;
 import dashboard.registry.StudentRegistry;
+import dashboard.util.RegistryInitializer;
 
 
 public class LiveFeedServlet extends HttpServlet {
@@ -24,6 +25,9 @@ public class LiveFeedServlet extends HttpServlet {
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
+		}
 		Student currentStudent = (Student)session.getAttribute("student");
 		if(currentStudent!=null){
 			Course course = currentStudent.getCurrentStudyMoment().getCourse();

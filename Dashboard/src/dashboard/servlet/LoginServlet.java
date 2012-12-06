@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import dashboard.model.Student;
 import dashboard.registry.StudentRegistry;
+import dashboard.util.RegistryInitializer;
 
 public class LoginServlet extends HttpServlet {
 
@@ -21,9 +22,12 @@ public class LoginServlet extends HttpServlet {
 	 * @throws IOException
 	 */
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+		HttpSession session = req.getSession();
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
+		}
 		String username = req.getParameter("username");
 		String password = req.getParameter("password");
-		HttpSession session = req.getSession();
 		if(StudentRegistry.isValidlogIn(username, password)){//check whether username and password are correct
 			Student user = StudentRegistry.getUserByUserName(username);
 			if(user==null){

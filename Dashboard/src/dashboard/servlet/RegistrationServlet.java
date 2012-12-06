@@ -18,11 +18,19 @@ import dashboard.model.CourseContract;
 import dashboard.model.Student;
 import dashboard.registry.CourseRegistry;
 import dashboard.registry.StudentRegistry;
+import dashboard.util.RegistryInitializer;
 
 public class RegistrationServlet extends HttpServlet {
 	
 	private static final long serialVersionUID = -5081331444892620046L;
 
+	public void doGet(HttpServletRequest req, HttpServletResponse resp){
+		HttpSession session = req.getSession();
+		if(!RegistryInitializer.initialized()){
+			RegistryInitializer.initialize(session.getServletContext());
+		}
+	}
+	
 	/**
 	 * Called when a user is trying to register
 	 * @param req
