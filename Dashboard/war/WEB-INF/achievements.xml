@@ -169,7 +169,7 @@
     </achievement>
     <achievement type="Omni">
         <id>OMNI_3</id>
-        <name>Twijfelaar</name>
+        <name>Bazinga!</name>
         <desc>Je hebt 5 vakken op een dag gestudeerd.</desc>
         <course></course>
         <icon>autism.png</icon>
