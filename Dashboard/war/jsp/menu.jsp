@@ -33,10 +33,10 @@ $(document).bind("pageinit",function(){
 		Student student = (Student)session.getAttribute("student");
 		String username = student.getUserName();
 		String friendAdd = "";
-		int numberOfRequests = student.getRequestNumbers();
+		String numberOfRequests = Integer.toString(student.getRequestNumbers());
 		String opt = "";
-		if(numberOfRequests != 0){
-			opt = "<span class='ui-li-count' name='courseStudents'>"numberOfRequests"</span>";
+		if(!numberOfRequests.equals("0")){
+			opt = "<span class='ui-li-count' name='courseStudents'>"+numberOfRequests+"</span>";
 		}
 	%>
 	<ul data-role="listview">
