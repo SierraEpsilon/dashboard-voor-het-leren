@@ -21,8 +21,8 @@
 		String std = (request.getParameter("std")==null) ? "" : request.getParameter("std");
 		Student student = StudentRegistry.getUserByUserName(std);
 	%>
-	<a href="/jsp/friends/list.jsp" data-icon="back">Terug</a>
-	<h1>Learnalyzer</h1>
+	<a href="info.jsp?std=<%=std%>" data-icon="back">Terug</a>
+	<h1><%=student.getFirstName() + " " + student.getLastName()%></h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 <div data-role="navbar">
 	<ul>
