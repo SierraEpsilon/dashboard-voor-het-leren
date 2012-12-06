@@ -64,7 +64,9 @@ public class CourseContract implements Serializable{
 			time -= nextLevel;
 			level++;
 			if(nextLevel < 3600)
-				nextLevel = nextLevel + 10000/nextLevel;
+				nextLevel = nextLevel + 100000/nextLevel;
+			else
+				nextLevel = 3600;
 		}
 		return level;
 	}
