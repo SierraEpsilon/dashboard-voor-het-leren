@@ -10,6 +10,8 @@
 <head>
 <%@include file="/WEB-INF/inc/head.jsp"%>
 <%@include file="/WEB-INF/inc/redirect.jsp"%>
+<%@ page import="dashboard.model.*" %>
+<%@ page import="dashboard.registry.*" %>
 </head>
 <body>
 <div data-role="page">
@@ -27,17 +29,23 @@ $(document).bind("pageinit",function(){
 
 </div><!-- /header -->
 <div data-role="content">
-
+	<%
+		Student student = (Student)session.getAttribute("student");
+		String username = student.getUserName();
+		String friendAdd = "";
+		if(student.getRequestNumbers() != 0){
+			friendAdd = "(n.v.:" + student.getRequestNumbers() + ")";
+		}
+	%>
 	<ul data-role="listview">
-	<li><a href="/track">Tracken</a></li>
-	<li><a href="/add_manual">Toevoegen van studiemoment</a></li>
-	<li><a href="/friends">Vrienden</a></li>
-	<li><a href="/stats">Statistieken</a></li>
-	<li><a href="/achievements">Achievements</a></li>
-	<li><a href="/settings">Instellingen</a></li>
-	
-</ul>
-	
+		<li><a href="/track">Tracken</a></li>
+		<li><a href="/add_manual">Toevoegen van studiemoment</a></li>
+		<li><a href="/friends">Vrienden <%=friendAdd%></a></li>
+		<li><a href="/stats">Statistieken</a></li>
+		<li><a href="/achievements">Achievements</a></li>
+		<li><a href="/settings">Instellingen</a></li>
+		<li><a href="/jsp/profile/info.jsp?std=<%=username%>">Profielpagina</a></li>
+	</ul>
 	
 </div><!-- /content -->
 </div><!-- /page -->
