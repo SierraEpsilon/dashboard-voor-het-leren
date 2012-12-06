@@ -148,7 +148,7 @@ $('#add_manual_jsp').bind("pageinit",function(){
 				}
 		out.println("</select>");
 	%>
- 	<fieldset data-role="controlgroup">
+	<p> 	<fieldset data-role="controlgroup">
 
 	     	<input type="radio" name="kind" id="radio-choice-1" value="Theorie" checked="checked" />
 	     	<label for="radio-choice-1">Theorie</label>
