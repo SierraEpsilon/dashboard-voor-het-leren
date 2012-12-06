@@ -33,7 +33,7 @@
 		courseName = course.getName();
 		startTime = startDate.toString();
 		if(session.getAttribute("adres")!=null)
-			location = session.getAttribute("adres");
+			location = (String)session.getAttribute("adres");
 	}
 %>
 	<fieldset data-role='fieldcontain'>
