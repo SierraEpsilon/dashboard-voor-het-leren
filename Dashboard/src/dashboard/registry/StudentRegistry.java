@@ -10,6 +10,7 @@ import dashboard.error.EmailInUseException;
 import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
+import dashboard.error.NotFriendException;
 import dashboard.error.UserNameInUseException;
 import dashboard.model.Course;
 import dashboard.model.Student;
@@ -224,6 +225,14 @@ public class StudentRegistry {
 			acceptor.addFriend(requestor);
 			acceptor.removeRequest(requestor);
 			reqUser.addFriend(acceptor.getUserName());
+		}
+	}
+	
+	public static void unFriend(Student rejector,String enemy) throws NotFriendException{
+		if(rejector.getFriendList().contains(enemy)){
+			Student enemyUser = getUserByUserName(enemy);
+			rejector.removeFriend(enemy);
+			enemyUser.removeFriend(rejector.getUserName());
 		}
 	}
 }

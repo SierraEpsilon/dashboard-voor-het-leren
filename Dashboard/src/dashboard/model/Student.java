@@ -302,6 +302,16 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
+	 * @param userName
+	 * 
+	 */
+	public void removeFriend(String userName) throws NotFriendException{
+		if(!isAFriend(userName))
+			throw new NotFriendException();
+		friendList.remove(userName);
+	}
+
+	/**
 	 * @param username
 	 * the user name who requested you as a friend
 	 */
@@ -324,14 +334,8 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		OwnOfy.ofy().put(this);
 	}
 	
-	/**
-	 * @param userName
-	 * 
-	 */
-	public void removeFriend(String userName) throws NotFriendException{
-		if(!isAFriend(userName))
-			throw new NotFriendException();
-		friendList.remove(userName);
+	public int getRequestNumbers(){
+		return getFriendList().size();
 	}
 	
 	/**
