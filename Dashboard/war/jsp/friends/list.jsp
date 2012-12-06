@@ -37,7 +37,7 @@
 		<h3>Vrienden</h3>
 		<ul data-role="listview" style="margin: 5px">
 		<%
-			for(String friend :student.getFriendList() ){
+			for(String friend : student.getFriendList() ){
 				out.println("<li><a href='/jsp/profile/info.jsp?std="+ friend +"'>"+ friend + "</a></li>");
 			}
 		%>
