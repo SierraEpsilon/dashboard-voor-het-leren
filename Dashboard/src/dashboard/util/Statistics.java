@@ -5,10 +5,8 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.HashMap;
 
-import dashboard.model.Course;
-import dashboard.model.CourseContract;
-import dashboard.model.Location;
-import dashboard.model.StudyMoment;
+import dashboard.model.*;
+import dashboard.registry.StudentRegistry;
 
 public class Statistics {
 
@@ -219,5 +217,54 @@ public class Statistics {
 		return results;
 	}
 	
+	public static long[][] getPeopleStatsCourse(int sections, Course course){
+		long[][] timeMatrix = new long[2][sections];
+		ArrayList<Long> times = new ArrayList<Long>();
+		long maxTime = 0;
+		for(Student student : StudentRegistry.getUsers()){
+			long time = getTime(course, student.getStudyMoments());
+			times.add(time);
+			if(time > maxTime)
+				maxTime = time;
+		}
+		for(int i=0; i < sections; i++){
+			timeMatrix[0][i] = ((i+1)*maxTime)/sections;
+			timeMatrix[1][i] = 0;
+		}
+		for(long time : times){
+			for(int i=0; i < sections; i++){
+				if(time <= timeMatrix[0][i]){
+					timeMatrix[1][i]++;
+					break;
+				}
+			}
+		}
+		return timeMatrix;
+	}
+	
+	public static long[][] getPeopleStats(int sections){
+		long[][] timeMatrix = new long[2][sections];
+		ArrayList<Long> times = new ArrayList<Long>();
+		long maxTime = 0;
+		for(Student student : StudentRegistry.getUsers()){
+			long time = getTotalTime(student.getStudyMoments());
+			times.add(time);
+			if(time > maxTime)
+				maxTime = time;
+		}
+		for(int i=0; i < sections; i++){
+			timeMatrix[0][i] = ((i+1)*maxTime)/sections;
+			timeMatrix[1][i] = 0;
+		}
+		for(long time : times){
+			for(int i=0; i < sections; i++){
+				if(time <= timeMatrix[0][i]){
+					timeMatrix[1][i]++;
+					break;
+				}
+			}
+		}
+		return timeMatrix;
+	}
 	
 }
