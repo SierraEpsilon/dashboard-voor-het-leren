@@ -58,7 +58,8 @@ $(document).bind("pageinit",function(){
 		}
 		else {
 			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
-			obj = street + " " + number + " " + zip + " " + city;
+			obj = number + " " + street + ", " + zip + " " + city + ", Belgium";
+			alert("obj " + obj);
 			req = {address: obj};
 			geocoder = new google.maps.Geocoder();
 			geocoder.geocode(req,handleGoogleResp);
