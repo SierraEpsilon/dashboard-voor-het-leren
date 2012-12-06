@@ -58,10 +58,16 @@ $(document).bind("pageinit",function(){
 		}
 		else {
 			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
-			$("#LocationForm").submit();
+			obj = street + " " + number + " " + zip + " " + city;
+			req = {adress: obj};
+			geocoder = new google.maps.Geocoder();
+			geocoder.geocode(req,handleGoogleResp);
 		}
-		
 	});
+	
+	function handleGoogleResp(res,stat){
+	}
+}
 	
 	
 });
