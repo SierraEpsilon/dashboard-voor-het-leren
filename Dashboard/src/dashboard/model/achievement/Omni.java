@@ -32,14 +32,13 @@ public class Omni extends Achievement {
 	@Override
 	public float getProgress(ArrayList<StudyMoment> studyMoments) {
 		for(StudyMoment moment : studyMoments){
-			int momentsGood = 0;
 			HashSet<Course> courses = new HashSet<Course>();
-			Date afterDate = new Date(moment.getStart().getTime() + 24*60*60*1000);
+			Date afterDate = new Date(moment.getStart().getTime() + (24*60*60*1000));
 			for(StudyMoment moment2: studyMoments){
 				if(moment2.getStart().before(afterDate)){
 					if(!courses.contains(moment2.getCourse())){
 						courses.add(moment2.getCourse());
-						if(momentsGood == getAmount())
+						if(courses.size() == getAmount())
 							return 1;
 					}
 				}
