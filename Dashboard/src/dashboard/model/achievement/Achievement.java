@@ -1,9 +1,11 @@
 package dashboard.model.achievement;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import dashboard.model.Course;
 import dashboard.model.Student;
+import dashboard.model.StudyMoment;
 
 public abstract class Achievement implements Serializable {
 	
@@ -52,4 +54,5 @@ public abstract class Achievement implements Serializable {
 	 * @return
 	 */
 	abstract public float getProgress(Student student);
+	abstract public float getProgress(ArrayList<StudyMoment> studyMoments);
 }

@@ -62,7 +62,7 @@
         <icon>kerst.png</icon>
        	<visible>true</visible>
         <start>
-            <year>2012</year>
+            <year>2010</year>
             <month>12</month>
             <day>25</day>
             <hour>0</hour>
@@ -70,12 +70,12 @@
             <second>0</second>
         </start>
         <end>
-            <year>2012</year>
+            <year>2010</year>
             <month>12</month>
-            <day>25</day>
-            <hour>24</hour>
+            <day>26</day>
+            <hour>0</hour>
             <minute>0</minute>
-            <second>0</second>
+            <second>1</second>
         </end>
     </achievement>
     <achievement type="RepeatingStudiedInPeriod">
@@ -96,11 +96,32 @@
         <end>
             <year>2012</year>
             <month>12</month>
-            <day>25</day>
-            <hour>24</hour>
+            <day>26</day>
+            <hour>0</hour>
             <minute>0</minute>
-            <second>0</second>
+            <second>1</second>
         </end>
         <repeating>yearly</repeating>
+    </achievement>
+    <achievement type="FullCombined">
+        <id>FULL_COMBINED_1</id>
+        <name>Klaar voor de examens</name>
+        <desc>Studeer op kerstmis en heb in totaal meer dan 600 uur gestudeerd.</desc>
+        <course></course>
+        <icon>kerst.png</icon>
+        <visible>true</visible>
+        <subachievement>REPEATING_STUDIED_IN_PERIOD_1</subachievement>
+        <subachievement>TIME_STUDIED_TOTAL_6</subachievement>
+    </achievement>
+    <achievement type="PartialCombined">
+        <id>PARTIAL_COMBINED_1</id>
+        <name>Half klaar</name>
+        <desc>Oftewel op kerstmis gestudeerd oftewel meer dan 600 uur gestudeerd.</desc>
+        <course></course>
+        <icon>kerst.png</icon>
+        <visible>true</visible>
+        <subachievement>REPEATING_STUDIED_IN_PERIOD_1</subachievement>
+        <subachievement>TIME_STUDIED_TOTAL_6</subachievement>
+        <amount>1</amount>
     </achievement>
 </achievements>

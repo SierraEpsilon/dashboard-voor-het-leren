@@ -116,14 +116,13 @@ public class StudentRegistry {
 	 * | 
 	 */
 	public static List<Student> getActiveUsersbyCourse(Course course){
-		/*List<Student> studyMates = new ArrayList();
+		List<Student> studyMates = new ArrayList();
 		for(Student user: getActiveUsers()){
 			if(user.getCurrentStudyMoment().getCourse().equals(course)){
 				studyMates.add(user);
 			}
-		}*/
-		Query<Student> querry = OwnOfy.ofy().query(Student.class).filter("currentStudyMoment.course.name = ", course.getName());
-		return querry.list();
+		}
+		return studyMates;
 	}
 	
 	/**

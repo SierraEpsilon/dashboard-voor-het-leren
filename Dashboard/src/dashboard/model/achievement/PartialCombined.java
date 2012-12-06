@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import dashboard.model.Course;
 import dashboard.model.Student;
+import dashboard.model.StudyMoment;
 
 public class PartialCombined extends Combined {
 
@@ -20,6 +21,11 @@ public class PartialCombined extends Combined {
 
 	@Override
 	public float getProgress(Student student) {
-		return super.getCombinedProgress(student, super.getSortedAchievementList(student).subList(0, amountRequired - 1));
+		return super.getCombinedProgress(student, super.getSortedAchievementList(student).subList(0, amountRequired));
+	}
+
+	@Override
+	public float getProgress(ArrayList<StudyMoment> studyMoments) {
+		return super.getCombinedProgress(studyMoments, super.getSortedAchievementList(studyMoments).subList(0, amountRequired));
 	}
 }

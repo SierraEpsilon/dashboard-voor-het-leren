@@ -1,7 +1,10 @@
 package dashboard.model.achievement;
 
+import java.util.ArrayList;
+
 import dashboard.model.Course;
 import dashboard.model.Student;
+import dashboard.model.StudyMoment;
 import dashboard.util.Statistics;
 
 public class TimeStudied extends Achievement {
@@ -18,11 +21,15 @@ public class TimeStudied extends Achievement {
 	}
 	
 	public float getProgress(Student student) {
+		return getProgress(student.getStudyMoments());
+	}
+	
+	public float getProgress(ArrayList<StudyMoment> studyMoments) {
 		float progress = 0;
 		if(course == null){
-			progress = Statistics.getTotalTime(student.getStudyMoments())/seconds;
+			progress = Statistics.getTotalTime(studyMoments)/seconds;
 		} else {
-			progress = Statistics.getTime(course, student.getStudyMoments())/seconds;
+			progress = Statistics.getTime(course, studyMoments)/seconds;
 		}
 		if(progress>1){
 			progress = 1;

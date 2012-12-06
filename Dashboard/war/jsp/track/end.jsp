@@ -12,6 +12,8 @@
 <%@include file="/WEB-INF/inc/redirect.jsp"%>
 <%@ page import="dashboard.model.*" %>
 <%@ page import="dashboard.registry.*" %>
+<%@ page import="dashboard.model.achievement.Achievement" %>
+<%@ page import="dashboard.util.AchievementProgressComparator" %>
 <%@ page import="java.util.*" %>
 </head>
 <body>
@@ -40,7 +42,51 @@
 				out.println("<h4>Aantal gemaakte oefeningen:</h4>");
 		%>
 		<p><%=moment.getAmount()%></p>
+		<h3>Achievements met vooruitgang:</h3>
+		<ul data-role="listview">
+			<%
+				ArrayList<Achievement> changedAchievements = (ArrayList<Achievement>)session.getAttribute("changedAchievements");
+				Collections.sort(changedAchievements, new AchievementProgressComparator(student));
+				String output = "";
+				int id = 1;
+				String progBarJS2 = "";
+				String progBarJS = "";
+				Iterator<Achievement> ait = changedAchievements.iterator();
+				while(ait.hasNext()){
+					Achievement achievement = ait.next();
+					String themeString = "";
+					output += ("<li id='progressbar" + id + "' data-icon='false'><a href='/jsp/achievement/detail.jsp?id="+ achievement.getId() + "'><img class='ui-li-icon custom-css' src='/inc/icons/" + achievement.getIcon() + "' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
+					progBarJS += ("$('#progressbar" + id + "').progressbar({ max: 100 });");
+					progBarJS += ("$('#progressbar" + id + "').progressbar({ value: " + Math.round(achievement.getProgress(student) * 100) + " });");
+					if(achievement.getProgress(student) >= 1){
+						progBarJS2 += ("$('#progressbar" + id + "').addClass('completed');");
+					}
+
+					if(achievement.getProgress(student) <= 0.005){
+						progBarJS2 += ("$('#progressbar" + id + "').addClass('unstarted');");
+					}
+					id++;
+				}
+				out.println(output);
+			%>
+		</ul>
 	</div>
+	<script>
+	<%=progBarJS%>
+	$("div.ui-progressbar-value").removeClass("ui-corner-left");
+	$("div.ui-progressbar-value").removeClass("ui-corner-right");
+	$("div.ui-progressbar-value").addClass("ui-link-inherit");
+	$("li.ui-progressbar").removeClass("ui-corner-all");
+	$("li.ui-progressbar").removeClass("completed");
+	$("li.ui-progressbar").addClass("custom-css");
+	$("li.ui-progressbar").addClass("list-edited");
+	$("div.ui-progressbar-value").each(function(){
+		$(this).click(function(){
+			$(this).parent().children("a")[0].click();
+		})
+	});
+	<%=progBarJS2%>
+	</script>
 </div><!-- /content -->
 </div><!-- /page -->
 </body>
