@@ -24,6 +24,7 @@
 			<li><a href="/jsp/friends/list.jsp">Vrienden</a></li>
 			<li><a href="/jsp/friends/requests.jsp">Vriendschapsverzoeken</a></li>
 			<li><a href="/jsp/friends/add.jsp">Voeg vrienden toe</a></li>
+			<li><a href="/jsp/friends/remove.jsp">Verwijder</a></li>
 		</ul>
 	</div><!-- /navbar -->
 </div><!-- /header -->

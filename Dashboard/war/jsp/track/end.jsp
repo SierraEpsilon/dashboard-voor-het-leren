@@ -28,7 +28,7 @@
 </div><!-- /header -->
 <div data-role="content">
 	<div>
-		<h3>Eind Rapportering</h3>
+		<h3>Eind Raportering</h3>
 		<h4>Tijd:</h4>
 		<p><%=moment.getTime()%> seconden</p>
 		<h4>Vak:</h4>
