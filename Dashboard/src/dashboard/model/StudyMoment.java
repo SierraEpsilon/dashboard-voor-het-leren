@@ -17,6 +17,7 @@ public class StudyMoment implements Serializable{
 	private Course course;
 	private int amount;
 	private String kind;
+	private Location location;
 	
 	/**
 	 * @param start
@@ -31,6 +32,24 @@ public class StudyMoment implements Serializable{
 	public StudyMoment(Date start, Course course){
 		this.start = start;
 		this.course = course;
+	}
+	
+	/**
+	 * @param start
+	 * 	the start of the studymoment
+	 * @param course
+	 * 	the course of the studymoment
+	 * @param
+	 * the location of the studymoment
+	 * @post	the start was initialized
+	 * 	|	new.getStart() = start
+	 * @post	the course was initialized
+	 * 	| new.getCourse() = course
+	 */
+	public StudyMoment(Date start, Course course,Location location){
+		this.start = start;
+		this.course = course;
+		this.location = location;
 	}
 	
 	public StudyMoment(){
@@ -86,6 +105,13 @@ public class StudyMoment implements Serializable{
 	}
 	/**
 	 * @return
+	 * the location
+	 */
+	public Location getLocation() {
+		return location;
+	}
+	/**
+	 * @return
 	 * the course
 	 *  | course
 	 */
@@ -131,6 +157,15 @@ public class StudyMoment implements Serializable{
 		this.amount = amount;
 	}
 	
+	/**	 
+	 * @param location
+	 * the location
+	 * @post	the location has been changed
+	 * 	|	new.getLocation() = amount 
+	 */
+	public void setLocation(Location location){
+		this.location = location;
+	}
 	/**	 
 	 * @param kind
 	 * the kind of studymoment
