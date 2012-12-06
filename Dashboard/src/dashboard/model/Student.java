@@ -246,6 +246,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			throw new InvalidStudyMomentException();
 		if(getStudyMoments().isEmpty()){
 			getStudyMoments().add(moment);
+			OwnOfy.ofy().put(this);
 			return;
 		}
 		for(int i = getStudyMoments().size() - 1; i!=-1; i--)
