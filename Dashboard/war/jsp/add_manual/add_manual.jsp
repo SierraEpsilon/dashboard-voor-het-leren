@@ -83,6 +83,7 @@ $('#add_manual_jsp').bind("pageinit",function(){
 		}
 		else if(endd < startd){
 			$("#msg2").text("De eindtijd moet na de begintijd vallen!");
+			$("input[name='enddate']").val('');
 			$("input[name='endtime']").val('');
 		}
 		else if (amount < 1){
