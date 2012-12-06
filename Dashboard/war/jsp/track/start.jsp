@@ -12,12 +12,13 @@
 <%@include file="/WEB-INF/inc/redirect.jsp"%>
 <%@ page import="dashboard.model.*" %>
 <%@ page import="java.util.*" %>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
 </head>
 <body>
 <div data-role="page" id="track_start_jsp">
 <script>
 var canceled = 0;
+var location;
+var locRetr = 0;
 $("div#track_start_jsp").bind("pageshow",function(){
 	getLoc();	
 });
@@ -26,6 +27,9 @@ function getLoc(){
 }
 function handleNavResp(pos){
 	if(!canceled){
+		location.latitude = pos.coords.latitude;
+		location.longitude = pos.coords.longitude;
+		location.accuracy = pos.coords.accuracy;
 		obj = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
 		req = {latLng: obj};
 		geocoder = new google.maps.Geocoder();
@@ -34,6 +38,8 @@ function handleNavResp(pos){
 }
 function handleGoogleResp(res,stat){
 	if(!canceled){
+		location.adrString = res[0].formatted_address;
+		locRetr = 1;
 		buttonFinishedState(res[0].formatted_address);
 	}
 }
@@ -43,6 +49,7 @@ function buttonFinishedState(adres){
 }
 function buttonCancelState(){
 	canceled = 1;
+	locRetr = 0;
 	$("#locBut .ui-btn-text").html("Voeg je locatie toe");
 	$("#locBut").buttonMarkup({icon: "plus"});
 	$("#locBut").unbind("click");
@@ -55,6 +62,15 @@ function buttonLoadState(){
 	$("#locBut").unbind("click");
 	$("#locBut").click(buttonCancelState);
 	getLoc();
+}
+function submitForm(){
+	if(!canceled&&locRetr){
+		$("form[name='startForm']").append("<input type='hidden' name='accuracy' value='"+location.accuracy+"'>");
+		$("form[name='startForm']").append("<input type='hidden' name='longitude' value='"+location.longitude+"'>");
+		$("form[name='startForm']").append("<input type='hidden' name='latitude' value='"+location.latitude+"'>");
+		$("form[name='startForm']").append("<input type='hidden' name='adres' value='"+location.adrString+"'>");
+	}
+	return false;
 }
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
@@ -69,11 +85,11 @@ function buttonLoadState(){
 		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/track/start.jsp' data-role='button'>Kies een vak</a>");
 		out.println("<p><a class='ui-disabled' data-role='button'>Start</a>");
 	}else{
-		out.println("<form action='/track' method='post'>");
+		out.println("<form name='startForm' action='/track' method='post'>");
 		out.println("<a href='/jsp/util/course_select.jsp?returl=/jsp/track/start.jsp' data-role='button'>"+course+"</a>");
 		out.println("<p><input type='hidden' name='courseinput' value='"+course+"'>");
 		out.println("<a id='locBut' data-role='button' data-icon='delete'>Je locatie wordt bepaald...</a>");
-		out.println("<p><input type='submit' name='submit' value='Start'>");
+		out.println("<p><input type='submit' onclick='submitForm()' name='submit' value='Start'>");
 		out.println("</form>");
 	}
 %>
