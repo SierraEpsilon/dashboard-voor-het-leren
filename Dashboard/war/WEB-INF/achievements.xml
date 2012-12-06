@@ -103,6 +103,31 @@
         </end>
         <repeating>yearly</repeating>
     </achievement>
+    <achievement type="RepeatingStudiedInPeriod">
+        <id>REPEATING_STUDIED_IN_PERIOD_2</id>
+        <name>Night owl</name>
+        <desc>Studeer 's nachts.</desc>
+        <course></course>
+        <icon>kerst.png</icon>
+        <visible>true</visible>
+        <start>
+            <year>2012</year>
+            <month>01</month>
+            <day>01</day>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+        </start>
+        <end>
+            <year>2012</year>
+            <month>01</month>
+            <day>01</day>
+            <hour>6</hour>
+            <minute>0</minute>
+            <second>0</second>
+        </end>
+        <repeating>daily</repeating>
+    </achievement>
     <achievement type="FullCombined">
         <id>FULL_COMBINED_1</id>
         <name>Klaar voor de examens</name>
