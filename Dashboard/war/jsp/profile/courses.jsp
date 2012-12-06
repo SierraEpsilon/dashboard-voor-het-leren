@@ -48,7 +48,7 @@
 				int lvl = course.getLevel(time);
 				long next = course.getTimeNeededNext(time);
 				long untilNext = next - course.getTimeUntilNext(time);
-				out.println("<h3>" + name + " (" + lvl + ")</h3>");
+				out.println("<h3>lvl:" + lvl + " " + name + "</h3>");
 				out.println("<li id='progressbar" + i + "'></li>");
 				JS += ("$('#progressbar" + i + "').progressbar({max: " + next + "});");
 				JS += ("$('#progressbar" + i + "').progressbar({value: " + untilNext + "});");
