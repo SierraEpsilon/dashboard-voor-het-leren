@@ -1,4 +1,4 @@
-!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <!-- The HTML 4.01 Transitional DOCTYPE declaration-->
 <!-- above set at the top of the file will set     -->
 <!-- the browser's rendering engine into           -->
@@ -29,22 +29,16 @@
 	</div><!-- /navbar -->
 </div><!-- /header -->
 <div data-role="content">
-<form method='post' action='/friends'>
 	<%
-		Student student = (Student)session.getAttribute("student");
+		Student currentStudent = (Student)session.getAttribute("student");
 	%>
-	<div>
-		<h3>Vriendschapsverzoeken</h3>
-		<ul data-role="listview" style="margin: 5px">
-		<%
-			for(String stranger :student.getFriendRequests() ){
-				out.println("<li>" + stranger + "</li>");
-				out.println("<button type='submit' data-inline='true' data-icon='check' name='submit' value='add_" + stranger + "'>Accepteer</button>");
-				out.println("<button type='submit' data-inline='true' data-icon='delete' name='submit' value='deny_" + stranger + "'>Negeer</button>");
-			}
-		%>
-		</ul>
-	</div>
+<form method='post' action='/friends'>
+	<ul data-role="listview" data-filter="true">
+	<%
+		for(String possibleEnemy: currentStudent.getFriendList())
+			out.println("<li><button type='submit' name='submit' value='rem_" + possibleEnemy + "'>" + possibleEnemy + "</button></li>");
+	%>
+	</ul>
 </form>
 </div><!-- /content -->
 </div><!-- /page -->
