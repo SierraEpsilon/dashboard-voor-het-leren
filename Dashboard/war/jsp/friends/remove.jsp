@@ -31,6 +31,7 @@
 <div data-role="content">
 	<%
 		Student currentStudent = (Student)session.getAttribute("student");
+		currentStudent = StudentRegistry.getUserByUserName(currentStudent.getUserName());
 	%>
 <form method='post' action='/friends'>
 	<ul data-role="listview" data-filter="true">

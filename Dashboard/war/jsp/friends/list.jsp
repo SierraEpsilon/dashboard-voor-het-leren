@@ -32,6 +32,7 @@
 <form method='post' action='/friends'>
 	<%
 		Student student = (Student)session.getAttribute("student");
+		student = StudentRegistry.getUserByUserName(student.getUserName());
 	%>
 	<div>
 		<h3>Vrienden</h3>

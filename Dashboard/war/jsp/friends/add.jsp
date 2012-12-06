@@ -33,6 +33,7 @@
 	<ul data-role="listview" data-filter="true">
 	<%
 		Student currentStudent = (Student)session.getAttribute("student");
+		currentStudent = StudentRegistry.getUserByUserName(currentStudent.getUserName());
 		for(Student student: StudentRegistry.getUsers()){
 			boolean already = false;
 			if(student.getFriendRequests() != null)
