@@ -58,10 +58,10 @@ public class SettingServlet extends HttpServlet {
 					session.setAttribute("student",student);
 					resp.sendRedirect("/jsp/settings/message.jsp?msg=Password");
 				} catch (InvalidPasswordException e) {
-					resp.sendRedirect("/jsp/settings/password.jsp?msg=Invalid password.");;
+					resp.sendRedirect("/jsp/settings/password.jsp?msg=Ongeldig wachtwoord.");;
 				}
 			} else {
-				resp.sendRedirect("/jsp/settings/password.jsp?msg=Wrong passwords.");
+				resp.sendRedirect("/jsp/settings/password.jsp?msg=Foute wachtwoorden.");
 			}
 		}
 	}
@@ -71,7 +71,7 @@ public class SettingServlet extends HttpServlet {
 		try {
 			student.removeCourse(vak);
 		} catch (NoSuchCourseException e) {
-			resp.sendRedirect("/jsp/error.jsp?msg=Tried to remove an unexisting course.");
+			resp.sendRedirect("/jsp/error.jsp?msg=Dit vak bestond niet.");
 		}
 	}
 }

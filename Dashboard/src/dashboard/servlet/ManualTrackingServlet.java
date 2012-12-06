@@ -66,13 +66,13 @@ public class ManualTrackingServlet extends HttpServlet{
 					String kindStudied = (String) req.getParameter("kind");
 					student.addStudyMoment(new StudyMoment(startD, endD, usedCourse, number, kindStudied));
 					session.setAttribute("student", student);
-					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Studiemoment correct toegevoegd");
+					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Het studiemoment werd correct toegevoegd.");
 				} catch (InvalidEndDateException e) {
 					session.setAttribute("student", student);
 					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Ongeldige data. Controleer of de einddatum na de begindatum is.");
 				} catch (InvalidAmountException e) {
 					session.setAttribute("student", student);
-					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=You can't have studied that kind of pages!");
+					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Ongeldig aantal!");
 				} catch (InvalidStudyMomentException e) {
 					session.setAttribute("student", student);
 					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Je was op dit moment reeds aan het studeren!");
