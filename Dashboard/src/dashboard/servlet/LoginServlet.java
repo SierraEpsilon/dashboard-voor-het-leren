@@ -26,6 +26,9 @@ public class LoginServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		if(StudentRegistry.isValidlogIn(username, password)){//check whether username and password are correct
 			Student user = StudentRegistry.getUserByUserName(username);
+			if(user==null){
+				user = StudentRegistry.getUserByMail(username);
+			}
 			session.setAttribute("student", user);//set the current student to the one who is trying to log in
 			if(user.getCourses().isEmpty()){
 				session.setAttribute("student_temp", user);
