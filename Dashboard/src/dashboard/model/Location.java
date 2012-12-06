@@ -6,17 +6,17 @@ public class Location implements Serializable{
 
 	private static final long serialVersionUID = 54213451;
 	private double longitude;
-	private double lattitude;
+	private double latitude;
 	private String name;
 	
-	public Location(double longitude,double lattitude,String name){
+	public Location(double longitude,double latitude,String name){
 		this.longitude = longitude;
-		this.lattitude = lattitude;
+		this.latitude = latitude;
 		this.name = name;
 	}
 	
-	public double getLattitude() {
-		return lattitude;
+	public double getLatitude() {
+		return latitude;
 	}
 	
 	public double getLongitude() {
@@ -29,7 +29,7 @@ public class Location implements Serializable{
 	
 	public boolean withinRadius(Location other,double radius){
 		double disLo= Math.abs(getLongitude() - other.getLongitude());
-		double disLa= Math.abs(getLattitude() - other.getLattitude());
+		double disLa= Math.abs(getLatitude() - other.getLatitude());
 		return (Math.sqrt(disLo*disLo + disLa*disLa) <= radius);
 	}
 }

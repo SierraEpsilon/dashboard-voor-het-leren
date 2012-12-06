@@ -33,6 +33,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String password;
 	@Serialized private StudyMoment currentStudyMoment;
 	@Serialized private ArrayList<StudyMoment> studyMoments;
+	@Serialized private ArrayList<Location> starredLocations;
 	@Serialized private ArrayList<CourseContract> courses;
 	@Serialized private ArrayList<String> friendList;
 	@Serialized private ArrayList<String> friendRequests;
@@ -159,6 +160,15 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	
 	/**
 	 * @return
+	 * 	the starred locations of the student
+	 * 	|	starredLocations
+	 */
+	public ArrayList<Location> getStarredLocations() {
+		return starredLocations;
+	}
+	
+	/**
+	 * @return
 	 *  the friend list of the student
 	 *  | 	friendList
 	 */
@@ -276,6 +286,18 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			}
 		}
 		getCourses().add(course);
+		OwnOfy.ofy().put(this);
+	}
+	
+	/**
+	  * @param location
+	 * 	the starred location you want to add
+	 * @post
+	 * 	the location was added to the student's starred locations
+	 * 	|	new.starredLocations.contains(location)
+	 */
+	public void addStarredLocation(Location location){
+		this.starredLocations.add(location);
 		OwnOfy.ofy().put(this);
 	}
 	

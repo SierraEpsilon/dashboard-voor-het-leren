@@ -15,10 +15,10 @@ import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.model.Course;
+import dashboard.model.Location;
 import dashboard.model.Student;
 import dashboard.model.StudyMoment;
 import dashboard.registry.CourseRegistry;
-import dashboard.util.RegistryInitializer;
 
 
 public class LocationAddServlet extends HttpServlet{
@@ -27,9 +27,6 @@ public class LocationAddServlet extends HttpServlet{
 
 	public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
-		if(!RegistryInitializer.initialized()){
-			RegistryInitializer.initialize(session.getServletContext());
-		}
 		Student student = (Student)session.getAttribute("student");
 		if(student == null)
 			resp.sendRedirect("/login");
@@ -40,16 +37,9 @@ public class LocationAddServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
-		
-			String name = (String) req.getParameter("name");
-			String street = (String) req.getParameter("street");
-			int number = (Integer) Integer.parseInt(req.getParameter("number")); 
-			int zip = (Integer) Integer.parseInt(req.getParameter("zip"));
-			String city = (String) req.getParameter("city");
-
-			
-				
-			
-			
+		String name = (String) req.getParameter("name");
+		double longitude = Double.parseDouble(req.getParameter("latitude"));
+		double latitude = Double.parseDouble(req.getParameter("longitutde"));
+		student.addStarredLocation(new Location(longitude,latitude,name));	
 	}
 }
