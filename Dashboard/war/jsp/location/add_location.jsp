@@ -18,15 +18,14 @@ libraries=places&sensor=true"></script>
 <div data-role="page">
 <script>
 $(document).bind("pageinit",function(){
-
 	$("#saveButton").hide();
-	
 	$("input[name='number']").change(function(){
 		var given = $("input[name='number']").val();
 		if(given<1){
 			$("#msg2").text("Geef een geldig nummer op");
 			$("input[name='number']").val('');
-		}else{$("#msg2").text("");
+		}else{
+			$("#msg2").text("");
 		}
 	});
 	$("input[name='zip']").change(function(){
@@ -34,7 +33,8 @@ $(document).bind("pageinit",function(){
 		if(given<1000){
 			$("#msg3").text("Geef een geldige postcode op");
 			$("input[name='zip']").val('');
-		}else{$("#msg3").text("");
+		}else{
+			$("#msg3").text("");
 		}
 	});
 	$("#searchButton").click(function(){
@@ -69,22 +69,27 @@ $(document).bind("pageinit",function(){
 			buttonFinishedState();
 		}
 	});
-	
 	function handleGoogleResp(res,stat){
 		if(stat=="OK"){
-			$("#msg4").text("Dit adres werd gevonden:");
-			$("#msg5").text(res[0].formatted_address);
-			$("#saveButton").show();
-		}
-		else{
-			$("#msg4").text("Er werd geen locatie gevonden.");
-		}
+				$("#msg4").text("Dit adres werd gevonden:");
+				$("#msg5").text(res[0].formatted_address);
+				$("input[name='namesend']").val($("input[name='name']").val());
+				$("input[name='longitude']").val(res[0].geometry.location.lat());
+				$("input[name='latitude']").val(res[0].geometry.location.lng());
+				$("#saveButton").show();
+			}
+			else{
+				$("#msg4").text("Er werd geen locatie gevonden.");
+			}
 	};
-	
 	function buttonFinishedState(){
 		$("#searchButton .ui-btn-text").html("Opnieuw zoeken");
 	};
+	$("#saveButton").click(function(){
+			$("#LocationForm").submit();
+	});
 });
+
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
 
@@ -94,9 +99,6 @@ $(document).bind("pageinit",function(){
 
 </div><!-- /header -->
 <div data-role="content">
-
-<form id="LocationForm" method="post" action='/location'>
-
 	<%
 		String msg = (request.getParameter("msg")==null) ? "" : request.getParameter("msg");
 	%>
@@ -130,10 +132,13 @@ $(document).bind("pageinit",function(){
  	<a href="" 	data-role="button" data-icon="check" data-theme="b" id="searchButton" data-inline="true">Zoeken</a></li>
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="delete" data-inline="true">Annuleren</a>
 	<p>
+<form id="LocationForm" method="post" action='/add_location'>
 	<a href="" 	data-role="button" data-icon="check" data-theme="b" id="saveButton" data-inline="true">Opslaan</a></li>
-</form>
+	<input type="text" name="longitude" id="longitude" value="" data-inline="true" style="visibility:hidden"/>
+ 	<input type="text" name="latitude" id="latitude" value="" data-inline="true" style="visibility:hidden"/>
+ 	<input type="text" name="namesend" id="namesend" value="" data-inline="true" style="visibility:hidden"/>
 
-	
+</form>
 </div><!-- /content -->
 </div><!-- /page -->
 </body>

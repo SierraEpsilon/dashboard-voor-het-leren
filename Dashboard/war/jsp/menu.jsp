@@ -47,6 +47,7 @@ $(document).bind("pageinit",function(){
 		<li><a href="/achievements">Achievements</a></li>
 		<li><a href="/settings">Instellingen</a></li>
 		<li><a href="/jsp/profile/info.jsp?std=<%=username%>">Profielpagina</a></li>
+		<li><a href="/add_location">Locatie toevoegen</a></li>
 	</ul>
 	
 </div><!-- /content -->

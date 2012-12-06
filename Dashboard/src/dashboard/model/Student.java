@@ -163,7 +163,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	the starred locations of the student
 	 * 	|	starredLocations
 	 */
-	public ArrayList<Location> getStarredLocations() {
+	public ArrayList<Location> getStarredLocations(){
 		return starredLocations;
 	}
 	
@@ -297,7 +297,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	|	new.starredLocations.contains(location)
 	 */
 	public void addStarredLocation(Location location){
-		this.starredLocations.add(location);
+		getStarredLocations().add(location);
 		OwnOfy.ofy().put(this);
 	}
 	
@@ -539,6 +539,8 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			friendList = new ArrayList<String>();
 		if(friendRequests == null)
 			friendRequests = new ArrayList<String>();
+		if(starredLocations == null)
+			starredLocations = new ArrayList<Location>();
 	}
 	
 	public long getTotalTimeStudied(){

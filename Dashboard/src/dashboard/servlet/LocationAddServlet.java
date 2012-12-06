@@ -37,9 +37,11 @@ public class LocationAddServlet extends HttpServlet{
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
-		String name = (String) req.getParameter("name");
-		double longitude = Double.parseDouble(req.getParameter("latitude"));
-		double latitude = Double.parseDouble(req.getParameter("longitutde"));
+		String name = (String) req.getParameter("namesend");
+		double longitude = Double.parseDouble(req.getParameter("longitude"));
+		double latitude = Double.parseDouble(req.getParameter("latitude"));
 		student.addStarredLocation(new Location(longitude,latitude,name));	
+		session.setAttribute("student", student);
+		resp.sendRedirect("/jsp/location/add_location.jsp?msg=Locatie werd correct toegevoegd.");
 	}
 }
