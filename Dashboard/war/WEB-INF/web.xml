@@ -102,4 +102,10 @@
   		<servlet-name>SystemServiceServlet</servlet-name>
   		<url-pattern>/_ah/spi/*</url-pattern>
  	</servlet-mapping>
+ 	<servlet>
+ 		<servlet-name>add_location</servlet-name>
+ 		<servlet-class>dashboard.servlet.LocationAddServlet</servlet-class></servlet>
+ 	<servlet-mapping>
+ 		<servlet-name>add_location</servlet-name>
+ 		<url-pattern>/add_location</url-pattern></servlet-mapping>
 </web-app>
