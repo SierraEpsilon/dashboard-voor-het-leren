@@ -21,6 +21,12 @@
 	Student student = (Student)session.getAttribute("student");
 	ArrayList<StudyMoment> moments = student.getStudyMoments();
 	StudyMoment moment = moments.get(moments.size() -1);
+	CourseContract courseContract = null;
+	for(CourseContract c: student.getCourses()){
+		if(c.getCourse().equals(moment.getCourse())){
+			courseContract = c;
+		}
+	}
 %>
 <div data-role="page">
 <div data-role="header" data-id='header' data-position='fixed'>
@@ -42,6 +48,14 @@
 				out.println("<h4>Aantal gemaakte oefeningen:</h4>");
 		%>
 		<p><%=moment.getAmount()%></p>
+		<h3>Gestegen in level:</h3>
+		<p>Level <%=courseContract.getLevel(student.getTotalTimeStudied()) %></p>
+		<div id="levelbar"></div>
+		<%
+			String levelbarJS = "$('#levelbar').progressbar({max:" + courseContract.getTimeUntilNext(student.getTotalTimeStudied()) + "});";
+			levelbarJS += "$('#levelbar').progressbar({value:" + courseContract.getTimeUntilNext(student.getTotalTimeStudied() - courseContract.getTimeNeededNext(student.getTotalTimeStudied())) + "});";
+		%>
+			
 		<h3>Achievements met vooruitgang:</h3>
 		<ul data-role="listview">
 			<%
@@ -61,7 +75,6 @@
 					if(achievement.getProgress(student) >= 1){
 						progBarJS2 += ("$('#progressbar" + id + "').addClass('completed');");
 					}
-
 					if(achievement.getProgress(student) <= 0.005){
 						progBarJS2 += ("$('#progressbar" + id + "').addClass('unstarted');");
 					}
@@ -72,6 +85,7 @@
 		</ul>
 	</div>
 	<script>
+	<%=levelbarJS%>
 	<%=progBarJS%>
 	$("div.ui-progressbar-value").removeClass("ui-corner-left");
 	$("div.ui-progressbar-value").removeClass("ui-corner-right");

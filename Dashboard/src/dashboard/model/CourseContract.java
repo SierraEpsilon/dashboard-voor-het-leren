@@ -46,6 +46,8 @@ public class CourseContract implements Serializable{
 		return timeNext - time;
 	}
 	
+	
+	
 	public long getTimeNeededNext(long time){
 		int lvl = getLevel(time);
 		long timeNext = getNeededExp(lvl + 1);

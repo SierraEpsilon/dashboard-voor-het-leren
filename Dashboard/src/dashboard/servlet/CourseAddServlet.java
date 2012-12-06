@@ -40,9 +40,9 @@ public class CourseAddServlet extends HttpServlet {
 			session.setAttribute("student",student);
 			resp.sendRedirect("/jsp/settings/courses.jsp");
 		} catch (NoSuchCourseException e) {
-			resp.sendRedirect("/jsp/error.jsp?msg=Onbestaand vak.");
+			resp.sendRedirect("/jsp/util/error.jsp?msg=Onbestaand vak.");
 		} catch (CourseAlreadyTakenException e) {
-			resp.sendRedirect("/jsp/error.jsp?msg=Dit vak werd reeds toegevoegd.");
+			resp.sendRedirect("/jsp/util/error.jsp?msg=Dit vak werd reeds toegevoegd.");
 		}
 	}
 			
