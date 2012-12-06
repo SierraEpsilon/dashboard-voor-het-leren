@@ -2,6 +2,7 @@ package dashboard.servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,7 +16,9 @@ import com.google.appengine.labs.repackaged.org.json.JSONArray;
 import com.google.appengine.labs.repackaged.org.json.JSONException;
 import com.google.appengine.labs.repackaged.org.json.JSONObject;
 
-import dashboard.model.Student;
+import dashboard.error.NoSuchCourseException;
+import dashboard.model.*;
+import dashboard.registry.CourseRegistry;
 import dashboard.util.Statistics;
 
 public class StatServlet extends HttpServlet {
@@ -26,7 +29,7 @@ public class StatServlet extends HttpServlet {
 		HttpSession session = req.getSession();
 		Student student = (Student)session.getAttribute("student");
 		if(student==null){
-			resp.sendRedirect("/login.jsp?msg=Beveiligde pagina");
+			resp.sendRedirect("/jsp/login/login.jsp?msg=Beveiligde pagina");
 		}else{
 			String reqCourse = req.getParameter("course");
 			String gen = req.getParameter("gen");
@@ -37,43 +40,55 @@ public class StatServlet extends HttpServlet {
 				try {
 					if(reqCourse==null){
 					//general
+						ArrayList<StudyMoment> moments = student.getStudyMoments();
 						//verdeling tijd
-						HashMap<String,Long> map = Statistics.getCourseTimes(student.getStudyMoments(),student.getCourses());
+						HashMap<String,Long> map = Statistics.getCourseTimes(moments,student.getCourses());
 						JSONObject verdt = new JSONObject();
-						verdt.put("name", "Verdeling tijd");
-						JSONArray verdtgraphs = new JSONArray();
-						JSONObject verdtgraph1 = new JSONObject();
-						verdtgraph1.put("type","pie");
-						verdtgraph1.put("data", new JSONArray().put(hashToArray(map)));
-						verdtgraphs.put(verdtgraph1);
-						verdt.put("graphs",verdtgraphs);
-						root.put(verdt);
+						root.put(createCat("Verdeling tijd","pie",new JSONArray().put(hashToArray(map))));
 						//week
-						JSONObject week = new JSONObject();
-						week.put("name", "Tijdsverdeling per week");
-						JSONArray weekgraphs = new JSONArray();
-						JSONObject weekgraph1 = new JSONObject();
-						weekgraph1.put("type","bar");
-						JSONArray arr = new JSONArray();
-						arr.put(new JSONArray("[[1],[2],[3]]"));
-						arr.put(new JSONArray("['Ma','Di','Wo']"));
-						weekgraph1.put("data", new JSONArray().put(arr));
-						weekgraphs.put(weekgraph1);
-						week.put("graphs",weekgraphs);
-						root.put(week);
-						//locatie
-						JSONObject loc = new JSONObject();
-						loc.put("name", "Locaties");
-						JSONArray locgraphs = new JSONArray();
-						JSONObject locgraph1 = new JSONObject();
-						locgraph1.put("type","text");
-						locgraph1.put("data", "test");
-						locgraphs.put(locgraph1);
-						loc.put("graphs",locgraphs);
-						root.put(loc);
+						JSONArray weekEff = new JSONArray(makeRelInPerc(Statistics.getTimeByDayInWeek(moments)));
+						String[] labels = new String[7];
+						labels[0] = "Ma";
+						labels[1] = "Din";
+						labels[2] = "Wo";
+						labels[3] = "Do";
+						labels[4] = "Vr";
+						labels[5] = "Zat";
+						labels[6] = "Zon";
+						JSONArray labelArr = new JSONArray(labels);
+						JSONArray dataArr = new JSONArray();
+						dataArr.put(weekEff);
+						dataArr.put(labelArr);
+						root.put(createCat("Verdeling inspanningen over de week","bar",dataArr));
 					}else{
 					//course
-						
+						try{
+							Course course = CourseRegistry.getCourse(reqCourse);
+							ArrayList<StudyMoment> moments = Statistics.filterMomentsByCourse(student.getStudyMoments(), course);
+							if(moments.size()==0){
+								//write error
+								root.put(createCat("Geen gegevens","text","Nog geen studiemomenten voor dit vak."));
+							}else{
+								//week
+								JSONArray weekEff = new JSONArray(makeRelInPerc(Statistics.getTimeByDayInWeek(moments)));
+								String[] labels = new String[7];
+								labels[0] = "Ma";
+								labels[1] = "Din";
+								labels[2] = "Wo";
+								labels[3] = "Do";
+								labels[4] = "Vr";
+								labels[5] = "Zat";
+								labels[6] = "Zon";
+								JSONArray labelArr = new JSONArray(labels);
+								JSONArray dataArr = new JSONArray();
+								dataArr.put(weekEff);
+								dataArr.put(labelArr);
+								root.put(createCat("Verdeling inspanningen over de week","bar",dataArr));
+							}
+						}catch(NoSuchCourseException e){
+							PrintWriter writer = resp.getWriter();        
+					        writer.println("Course not found.");
+						}
 					}
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
@@ -84,7 +99,20 @@ public class StatServlet extends HttpServlet {
 			}
 		}
 	}
-	public JSONArray hashToArray(Map mp){
+	private JSONObject createCat(String name,String type,Object data) throws JSONException{
+		JSONObject catRoot = new JSONObject();
+		catRoot.put("name", name);
+		JSONArray graphs = new JSONArray();
+		JSONObject graph = new JSONObject();
+		graph.put("type",type);
+		graph.put("data",data);
+		graphs.put(graph);
+		catRoot.put("graphs", graphs);
+		return catRoot;
+		
+	
+	}
+	private JSONArray hashToArray(Map mp){
 		JSONArray ret = new JSONArray();
 		Iterator it = mp.entrySet().iterator();
 	    while (it.hasNext()) {
@@ -96,6 +124,18 @@ public class StatServlet extends HttpServlet {
 	        it.remove(); // avoids a ConcurrentModificationException
 	    }
 	    return ret;
+		
+	}
+	private long[] makeRelInPerc(long[] input){
+		long total = 0;
+		long[] ret = new long[input.length];
+		for(int i=0;i<input.length;i++)
+			total += input[i];
+		for(int j=0;j<input.length;j++){
+			long test = input[j]*100/total;
+			ret[j] = input[j]*100/total;
+		}
+		return ret;
 		
 	}
 }
