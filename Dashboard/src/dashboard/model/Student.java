@@ -518,5 +518,13 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		if(friendRequests == null)
 			friendRequests = new ArrayList<String>();
 	}
+	
+	public long getTotalTimeStudied(){
+		long time = 0;
+		for(StudyMoment s: studyMoments){
+			time += s.getTime();
+		}
+		return time;
+	}
 
 }
