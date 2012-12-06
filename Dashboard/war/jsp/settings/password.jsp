@@ -22,7 +22,7 @@
 <div data-role="navbar">
 	<ul>
 		<li><a href="/jsp/settings/userinfo.jsp">Persoonlijke Informatie</a></li>
-		<li><a href="/jsp/settings/password.jsp">Paswoord</a></li>
+		<li><a href="/jsp/settings/password.jsp">Wachtwoord</a></li>
 		<li><a href="/jsp/settings/courses.jsp">Vakken</a></li>
 	</ul>
 </div><!-- /navbar -->
@@ -35,14 +35,14 @@
 	<p id='msg' style='color:red;'><%=msg%></p>
 <form id="settings2" method='post' action='/settings'>
 	<div style="margin-top: 50px">
-		<h3>Paswoord</h3>
-		<label for="name">Oud paswoord:</label>
+		<h3>Wachtwoord</h3>
+		<label for="name">Huidig wachtwoord:</label>
 		<input type="password" name="pass1" value=""/>
-		<label for="name">Nieuw paswoord:</label>
+		<label for="name">Nieuw wachtwoord:</label>
 		<input type="password" name="pass2" value=""/>
-		<label for="name">Herhaal nieuw paswoord:</label>
+		<label for="name">Herhaal nieuw wachtwoord:</label>
 		<input type="password" name="pass3" value=""/>
-		<button type="submit" name="submit" value="passchange">Verander paswoord</button>
+		<button type="submit" name="submit" value="passchange">Verander Wachtwoord</button>
 	</div>
 </form>
 </div><!-- /content -->

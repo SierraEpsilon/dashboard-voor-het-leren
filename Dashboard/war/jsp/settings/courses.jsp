@@ -23,7 +23,7 @@
 <div data-role="navbar">
 	<ul>
 		<li><a href="/jsp/settings/userinfo.jsp">Persoonlijke Informatie</a></li>
-		<li><a href="/jsp/settings/password.jsp">Paswoord</a></li>
+		<li><a href="/jsp/settings/password.jsp">Wachtwoord</a></li>
 		<li><a href="/jsp/settings/courses.jsp">Vakken</a></li>
 	</ul>
 </div><!-- /navbar -->
