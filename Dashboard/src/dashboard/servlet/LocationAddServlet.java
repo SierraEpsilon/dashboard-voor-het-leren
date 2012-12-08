@@ -40,7 +40,8 @@ public class LocationAddServlet extends HttpServlet{
 		String name = (String) req.getParameter("namesend");
 		double longitude = Double.parseDouble(req.getParameter("longitude"));
 		double latitude = Double.parseDouble(req.getParameter("latitude"));
-		student.addStarredLocation(new Location(longitude,latitude,name));	
+		//assume Google has accuracy of 0 meter
+		student.addStarredLocation(new Location(longitude,latitude,name,0));	
 		session.setAttribute("student", student);
 		resp.sendRedirect("/jsp/location/add_location.jsp?msg=Locatie werd correct toegevoegd.");
 	}

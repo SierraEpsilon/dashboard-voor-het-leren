@@ -503,6 +503,19 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
+	 * match a location with a starred location
+	 * @return
+	 * the starred location if a match was found
+	 * @return
+	 * null if no match was found
+	 */
+	public Location matchStarredLocation(Location location) {
+		
+		return null;
+		
+	}
+	
+	/**
 	 * clones the user
 	 * @return
 	 * a User with the same information as this user

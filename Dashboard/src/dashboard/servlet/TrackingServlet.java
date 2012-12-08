@@ -75,8 +75,9 @@ public class TrackingServlet extends HttpServlet{
 			if(req.getParameter("longitude")!=null){
 				double longitude = Double.parseDouble(req.getParameter("longitude"));
 				double latitude = Double.parseDouble(req.getParameter("latitude"));
+				int accuracy = Integer.parseInt(req.getParameter("accuracy"));
 				String adres = req.getParameter("adres");
-				Location loc = new Location(longitude,latitude,adres);
+				Location loc = new Location(longitude,latitude,adres,accuracy);
 				student.setCurrentStudyMoment(new StudyMoment(start,course,loc));//create a new study moment with location
 				session.setAttribute("adres", adres);
 			}else{
