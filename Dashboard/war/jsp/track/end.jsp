@@ -38,7 +38,29 @@
 	<div>
 		<h3>Eind Raportering</h3>
 		<h4>Tijd:</h4>
-		<p><%=moment.getTime()%> seconden</p>
+		<%
+			String name = "";
+			String timeString = "";
+			long time = moment.getTime();
+			long sec = (time%60);
+				if(time<60){
+					name = (time==1) ? " seconde" : " seconden";
+					timeString = sec + " " + name;
+				}
+				else{
+					time = ((time-sec)/60);
+					long min = (time%60);
+						if(time<60){
+							name = (time==1) ? " minuut" : " minuten";
+							timeString = min + " " + name;
+						}else{
+							time = ((time-min)/60);
+							long hours = time;
+							timeString = hours + " uur " + min + " minuten";
+						}
+				}
+		%>
+		<p><%=timeString%></p>
 		<h4>Vak:</h4>
 		<p><%=moment.getCourse().getName()%></p>
 		<%
