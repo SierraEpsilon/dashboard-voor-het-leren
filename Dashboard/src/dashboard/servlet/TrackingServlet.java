@@ -83,6 +83,9 @@ public class TrackingServlet extends HttpServlet{
 			}else{
 				student.setCurrentStudyMoment(new StudyMoment(start,course));
 			}
+			if(req.getParameter("alias")!=null){
+				session.setAttribute("alias", req.getParameter("alias"));
+			}
 			session.setAttribute("startTracking", start);
 			session.setAttribute("course", course);
 			resp.sendRedirect("/jsp/track/stop.jsp");

@@ -24,23 +24,21 @@ public class Location implements Serializable{
 	public double getLongitude() {
 		return longitude;
 	}
+
+	public double getAccuracy() {
+		return accuracy;
+	}
 	
 	public String getName() {
 		return name;
 	}
 	
 	public boolean withinRadius(Location other,double radius){
-		double distance = distanceTo(other);
+		double distance = distance(other);
 		return (distance<=radius);
 	}
 	
-	public boolean withinSoftRadius(Location other,double radius){
-		double distance = distanceTo(other);
-		//allow extra distance due to accuracy
-		return (distance<=(radius+accuracy));
-	}
-	
-	public double distanceTo(Location other){
+	public double distance(Location other){
 		double theta = Math.toRadians(other.getLongitude()-this.longitude);
 		double phi = Math.toRadians(other.getLatitude()-this.latitude);
 		double earthRadius = 6371000;
@@ -48,5 +46,15 @@ public class Location implements Serializable{
 		//distance = R*sqrt(tan²(theta)*cos²(phi)+sin²(phi))
 		double distance = earthRadius*Math.sqrt(Math.pow(Math.tan(theta)*Math.cos(phi),2)+Math.pow(Math.sin(phi),2));
 		return distance;
+	}
+	
+	public double distanceWorstCase(Location other){
+		double theta = Math.toRadians(other.getLongitude()-this.longitude);
+		double phi = Math.toRadians(other.getLatitude()-this.latitude);
+		double earthRadius = 6371000;
+		//formula distance between spheric coordinates with same radius
+		//distance = R*sqrt(tan²(theta)*cos²(phi)+sin²(phi))
+		double distance = earthRadius*Math.sqrt(Math.pow(Math.tan(theta)*Math.cos(phi),2)+Math.pow(Math.sin(phi),2));
+		return distance+this.accuracy+other.getAccuracy();
 	}
 }

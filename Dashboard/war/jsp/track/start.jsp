@@ -16,17 +16,17 @@
 <body>
 <div data-role="page" id="track_start_jsp">
 <script>
-var canceled = 0;
+var cancelled = 0;
 var location;
 var locRetr = 0;
 $("div#track_start_jsp").bind("pageshow",function(){
-	getLoc();	
+	buttonLoadState();	
 });
 function getLoc(){
 	navigator.geolocation.getCurrentPosition(handleNavResp);
 }
 function handleNavResp(pos){
-	if(!canceled){
+	if(!cancelled){
 		location.latitude = pos.coords.latitude;
 		location.longitude = pos.coords.longitude;
 		location.accuracy = pos.coords.accuracy;
@@ -34,21 +34,40 @@ function handleNavResp(pos){
 		req = {latLng: obj};
 		geocoder = new google.maps.Geocoder();
 		geocoder.geocode(req,handleGoogleResp);
+		getAlias(location);
 	}
+}
+function getAlias(loc){
+	var param = "?lat="+loc.latitude+"&long="+loc.longitude+"&acc="+loc.accuracy;
+	var url = "/match"+param;
+	$.getJSON(url,function(json){
+		if(json.status=="OK"){
+			location.alias = json.result;
+			buttonFinishedState();
+		}
+	});
 }
 function handleGoogleResp(res,stat){
-	if(!canceled){
+	if(!cancelled){
 		location.adrString = res[0].formatted_address;
 		locRetr = 1;
-		buttonFinishedState(res[0].formatted_address);
+		buttonFinishedState();
 	}
 }
-function buttonFinishedState(adres){
-	$("#locBut .ui-btn-text").html(adres);
-	$("#locBut").click(buttonCancelState);
+function buttonFinishedState(){
+	if(!cancelled){
+		buttonText = "";
+		if(location.alias&&!locRetr)
+			buttonText = location.alias;
+		else if(location.alias)
+			buttonText = location.alias + ": ";
+		if(locRetr)
+			buttonText += location.adrString;
+		$("#locBut .ui-btn-text").html(buttonText);
+	}
 }
 function buttonCancelState(){
-	canceled = 1;
+	cancelled = 1;
 	locRetr = 0;
 	$("#locBut .ui-btn-text").html("Voeg je locatie toe");
 	$("#locBut").buttonMarkup({icon: "plus"});
@@ -56,7 +75,7 @@ function buttonCancelState(){
 	$("#locBut").click(buttonLoadState);
 }
 function buttonLoadState(){
-	canceled = 0;
+	cancelled = 0;
 	$("#locBut .ui-btn-text").html("Je locatie wordt bepaald...");
 	$("#locBut").buttonMarkup({icon: "delete"});
 	$("#locBut").unbind("click");
@@ -64,11 +83,13 @@ function buttonLoadState(){
 	getLoc();
 }
 function submitForm(){
-	if(!canceled&&locRetr){
+	if(!cancelled&&locRetr){
 		$("form[name='startForm']").append("<input type='hidden' name='accuracy' value='"+location.accuracy+"'>");
 		$("form[name='startForm']").append("<input type='hidden' name='longitude' value='"+location.longitude+"'>");
 		$("form[name='startForm']").append("<input type='hidden' name='latitude' value='"+location.latitude+"'>");
 		$("form[name='startForm']").append("<input type='hidden' name='adres' value='"+location.adrString+"'>");
+		if(location.alias)
+			$("form[name='startForm']").append("<input type='hidden' name='alias' value='"+location.alias+"'>");
 	}
 	return false;
 }

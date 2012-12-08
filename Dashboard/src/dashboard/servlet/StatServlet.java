@@ -35,6 +35,7 @@ public class StatServlet extends HttpServlet {
 		if(student==null){
 			resp.sendRedirect("/jsp/login/login.jsp?msg=Beveiligde pagina");
 		}else{
+			resp.setContentType("application/json");
 			String reqCourse = req.getParameter("course");
 			String gen = req.getParameter("gen");
 			if(gen==null&&reqCourse==null){

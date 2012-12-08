@@ -87,6 +87,14 @@
         <servlet-name>feed</servlet-name>
         <url-pattern>/feed</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>matchLocation</servlet-name>
+        <servlet-class>dashboard.servlet.MatchLocationServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>matchLocation</servlet-name>
+        <url-pattern>/match</url-pattern>
+    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>login</welcome-file>
     </welcome-file-list>

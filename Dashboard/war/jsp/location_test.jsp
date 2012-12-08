@@ -24,7 +24,7 @@ function getLoc(){
 function show_map(pos){
 	obj = new google.maps.LatLng(pos.coords.latitude,pos.coords.longitude);
 	req = {latLng: obj};
-	alert(pos.coords.accuracy);
+	alert("?lat="+pos.coords.latitude+"&long="+pos.coords.longitude+"&acc="+pos.coords.accuracy);
 	geocoder = new google.maps.Geocoder();
 	geocoder.geocode(req,handleResp);
 }
