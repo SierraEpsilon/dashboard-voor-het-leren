@@ -94,7 +94,8 @@ public class Statistics {
 		HashMap<String,Long> result = new HashMap<String,Long>();
 		for(CourseContract course: courses){
 			long part = getTime(course.getCourse(), moments);
-			result.put(course.getCourse().getName(), part);
+			if(part!=0)
+				result.put(course.getCourse().getName(), part);
 		}
 		return result;
 	}
