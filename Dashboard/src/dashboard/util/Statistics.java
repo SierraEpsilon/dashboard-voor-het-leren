@@ -225,16 +225,6 @@ public class Statistics {
 	/**
 	 * @param moments
 	 * 	the moments of a student
-	 * @return
-	 * 	a hashmap filled with locations and the corresponding relative amount studied
-	 */
-	public static HashMap<Location,Long> getTimeByLoc(ArrayList<StudyMoment> moments){
-		return null;
-	}
-	
-	/**
-	 * @param moments
-	 * 	the moments of a student
 	 * @param course
 	 * the course to search for
 	 * @return
