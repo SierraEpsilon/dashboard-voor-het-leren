@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 
 import dashboard.model.*;
 import dashboard.registry.StudentRegistry;
@@ -53,7 +52,7 @@ public class Statistics {
 	 */
 	public static ArrayList<StudyMoment> getMomentsWeek(ArrayList<StudyMoment> moments) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.setWeekDate(Calendar.YEAR, Calendar.WEEK_OF_YEAR, 1);
+		calendar.setWeekDate(Calendar.YEAR, Calendar.WEEK_OF_YEAR, Calendar.MONDAY);
 		Date lastWeek = calendar.getTime();
 		ArrayList<StudyMoment> weekMoments = new ArrayList<StudyMoment>();
 		for(StudyMoment moment : moments)
@@ -67,7 +66,7 @@ public class Statistics {
 	 * @param moments
 	 * 	the moments you want to use to get the time from
 	 * @return
-	 * 	an arrayList with the moments the student studied last month
+	 * 	an arrayList with the moments the student studied last week
 	 */
 	public static ArrayList<StudyMoment> getMomentsMonth(ArrayList<StudyMoment> moments) {
 		Calendar calendar = Calendar.getInstance();
@@ -94,8 +93,7 @@ public class Statistics {
 		HashMap<String,Long> result = new HashMap<String,Long>();
 		for(CourseContract course: courses){
 			long part = getTime(course.getCourse(), moments);
-			if(part!=0)
-				result.put(course.getCourse().getName(), part);
+			result.put(course.getCourse().getName(), part);
 		}
 		return result;
 	}
@@ -198,28 +196,8 @@ public class Statistics {
 	 * @return
 	 * 	a hashmap filled with locations and the corresponding relative amount studied
 	 */
-	public static HashMap<String,Long> getTimeByLoc(ArrayList<StudyMoment> moments,Student student){
-		HashMap<String,Long> ret = new HashMap<String,Long>();
-		Iterator<StudyMoment> it = moments.iterator();
-		while(it.hasNext()){
-			StudyMoment moment = it.next();
-			Integer amount = moment.getAmount();
-			String name;
-			if(moment.getLocation()==null)
-				name = "Geen data";
-			else{
-				Location match = student.matchStarredLocation(moment.getLocation(), 1000);
-				if(match==null)
-					name = "Overige";
-				else
-					name = match.getName();
-			}
-			if(ret.containsKey(name))
-				ret.put(name, amount+ret.get(name));
-			else
-				ret.put(name, amount.longValue());			
-		}
-		return ret;
+	public static HashMap<Location,Long> getTimeByLoc(ArrayList<StudyMoment> moments){
+		return null;
 	}
 	
 	/**
@@ -288,24 +266,5 @@ public class Statistics {
 		}
 		return timeMatrix;
 	}
-	public HashMap<String,Long> getLocationsByAlias(Student student,ArrayList<StudyMoment> moments){
-		HashMap<String,Long> ret = new HashMap<String,Long>();
-		for(int i=0;i<moments.size();i++){
-			StudyMoment moment = moments.get(i);
-			Integer amount = moment.getAmount();
-			Location loc = moment.getLocation();
-			Location match = student.matchStarredLocation(loc, 1000);
-			String name;
-			if(match!=null)
-				name = match.getName();
-			else
-				name = "Overige";
-			if(ret.containsKey(name)){
-				long old = ret.get(name);
-				ret.put(name, old+amount);
-			}else
-				ret.put(name, amount.longValue());
-		}
-		return null;
-	}
+	
 }
