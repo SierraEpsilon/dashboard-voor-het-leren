@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import dashboard.model.*;
 import dashboard.registry.StudentRegistry;
@@ -137,6 +138,36 @@ public class Statistics {
 			results.put(newDateString, time);		
 		}
 		return results;
+	}
+	
+	/**
+	 * @param moments
+	 * 	the moments of a student
+	 * @return
+	 * 	a hashmap filled with locations and the corresponding relative amount studied
+	 */
+	public static HashMap<String,Long> getTimeByLoc(ArrayList<StudyMoment> moments,Student student){
+		HashMap<String,Long> ret = new HashMap<String,Long>();
+		Iterator<StudyMoment> it = moments.iterator();
+		while(it.hasNext()){
+			StudyMoment moment = it.next();
+			Integer amount = moment.getAmount();
+			String name;
+			if(moment.getLocation()==null)
+				name = "Geen data";
+			else{
+				Location match = student.matchStarredLocation(moment.getLocation(), 1000);
+				if(match==null)
+					name = "Overige";
+				else
+					name = match.getName();
+			}
+			if(ret.containsKey(name))
+				ret.put(name, amount+ret.get(name));
+			else
+				ret.put(name, amount.longValue());			
+		}
+		return ret;
 	}
 	
 	/**
