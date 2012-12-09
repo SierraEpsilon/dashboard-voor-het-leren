@@ -179,6 +179,15 @@ public class StatServlet extends HttpServlet {
 								options.put("xlabel","Procentuele inspanning");
 								desc = "Vergelijking van hoeveel er relatief op elke dag gestudeerd werd";
 								root.put(createCat("Verdeling inspanningen over de week","bar",desc,options,verd));
+								//credit progress
+								desc = "Vergelijking van hoeveel er relatief op elke dag gestudeerd werd";
+								options = new JSONObject();
+								verd = new LinkedHashMap<String,JSONArray>();
+								desc = "Een normstudent moet per studiepunt 25 à 30 uren studeren. ";
+								desc +="Hier zie je je vooruitgang in vergelijking tot het ideaal van 28 uren per studiepunt.";
+								verd.put("Individueel", new JSONArray().put(Statistics.creditProgress(course, student)));
+								verd.put("Gemiddeld", new JSONArray().put(Statistics.averageCreditProgress(course)));
+								root.put(createCat("Vooruitgang studiepunten","prog",desc,options,verd));
 							}
 						}catch(NoSuchCourseException e){
 							PrintWriter writer = resp.getWriter();        

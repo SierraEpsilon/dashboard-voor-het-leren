@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 
 import dashboard.model.*;
 import dashboard.registry.StudentRegistry;
@@ -237,6 +238,51 @@ public class Statistics {
 				results.add(moment);
 		}
 		return results;
+	}
+	
+	/**
+	 * @param course
+	 * 	a course of the student
+	 * @param student
+	 * the student
+	 * @return
+	 * 	the progress in credits, assuming a credit requires 28 hours of work
+	 */
+	public static double creditProgress(Course course,Student student){
+		double done = getTime(course,student.getStudyMoments());
+		double exp = course.getCredit()*28*60*60;
+		double div = done/exp;
+		if(done<exp)
+			return div;
+		else
+			return 1;
+	}
+	
+	/**
+	 * @param course
+	 * 	a course
+	 * @return
+	 * 	the average progress in credits, assuming a credit requires 28 hours of work
+	 */
+	public static double averageCreditProgress(Course course){
+		List<Student> allStudents = StudentRegistry.getUsers();
+		double all = 0;
+		long total = 0;
+		for(Student student: allStudents){
+			ArrayList<CourseContract> contracts = student.getCourses();
+			for(CourseContract contract : contracts){
+				if(contract.getCourse().equals(course)){
+					all += creditProgress(course,student);
+					total++;
+					break;
+				}
+			}
+		}
+		double div = all/total;
+		if(total==0)
+			return  0;
+		else
+			return div;
 	}
 	
 	public static long[][] getPeopleStatsCourse(int sections, Course course){
