@@ -1,24 +1,15 @@
 package dashboard.servlet;
 
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import dashboard.error.InvalidAmountException;
-import dashboard.error.InvalidEndDateException;
-import dashboard.error.InvalidStudyMomentException;
-import dashboard.error.NoSuchCourseException;
-import dashboard.model.Course;
+import dashboard.error.NameAlreadyInUseException;
 import dashboard.model.Location;
 import dashboard.model.Student;
-import dashboard.model.StudyMoment;
-import dashboard.registry.CourseRegistry;
 
 
 public class LocationAddServlet extends HttpServlet{
@@ -31,7 +22,7 @@ public class LocationAddServlet extends HttpServlet{
 		if(student == null)
 			resp.sendRedirect("/login");
 		else
-			resp.sendRedirect("/jsp/location/add_location.jsp");
+			resp.sendRedirect("/jsp/location/add_location.jsp?std="+ student.getUserName());
 	}
 		
 	public void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
@@ -41,8 +32,14 @@ public class LocationAddServlet extends HttpServlet{
 		double longitude = Double.parseDouble(req.getParameter("longitude"));
 		double latitude = Double.parseDouble(req.getParameter("latitude"));
 		//assume Google has accuracy of 0 meter
-		student.addStarredLocation(new Location(longitude,latitude,name,0));	
-		session.setAttribute("student", student);
-		resp.sendRedirect("/jsp/location/add_location.jsp?msg=Locatie werd correct toegevoegd.");
+		try{
+			student.addStarredLocation(new Location(longitude,latitude,name,0));
+			session.setAttribute("student", student);
+			resp.sendRedirect("/jsp/location/add_location.jsp?std="+ student.getUserName() + "&&msg=Locatie werd correct toegevoegd.");
+		}
+		catch (NameAlreadyInUseException e){
+			session.setAttribute("student", student);
+			resp.sendRedirect("/jsp/location/add_location.jsp?std="+ student.getUserName() + "&&msg=De locatie '" + name + "' bestaat al!");
+		}
 	}
 }
