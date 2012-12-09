@@ -50,8 +50,8 @@ public class StatServlet extends HttpServlet {
 						//tijdsverdeling over courses
 						LinkedHashMap<String,JSONArray> time = new LinkedHashMap<String,JSONArray>();
 						ArrayList<StudyMoment> moments = student.getStudyMoments();
-						//time.put("Laatste Week", hashToArray(Statistics.getCourseTimes(Statistics.getMomentsWeek(moments),student.getCourses())));
-						//time.put("Laatste Maand", hashToArray(Statistics.getCourseTimes(Statistics.getMomentsMonth(moments),student.getCourses())));
+						time.put("Laatste Week", hashToArray(Statistics.getCourseTimes(Statistics.getMomentsWeek(moments),student.getCourses())));
+						time.put("Laatste Maand", hashToArray(Statistics.getCourseTimes(Statistics.getMomentsMonth(moments),student.getCourses())));
 						time.put("Alles", hashToArray(Statistics.getCourseTimes(moments,student.getCourses())));
 						String name = "Tijdsverdeling over vakken";
 						String type = "pie";
@@ -60,8 +60,8 @@ public class StatServlet extends HttpServlet {
 						root.put(createCat(name,type,desc,options,time));
 						//tijdsverdeling over locaties
 						LinkedHashMap<String,JSONArray> locs = new LinkedHashMap<String,JSONArray>();
-						//locs.put("Laatste Week", hashToArray(Statistics.getTimeByLoc(Statistics.getMomentsWeek(moments),student)));
-						//locs.put("Laatste Maand", hashToArray(Statistics.getTimeByLoc(Statistics.getMomentsMonth(moments),student)));
+						locs.put("Laatste Week", hashToArray(Statistics.getTimeByLoc(Statistics.getMomentsWeek(moments),student)));
+						locs.put("Laatste Maand", hashToArray(Statistics.getTimeByLoc(Statistics.getMomentsMonth(moments),student)));
 						locs.put("Alles", hashToArray(Statistics.getTimeByLoc(moments,student)));
 						name = "Tijdsverdeling over locaties";
 						type = "pie";
@@ -118,8 +118,20 @@ public class StatServlet extends HttpServlet {
 							ArrayList<StudyMoment> moments = Statistics.filterMomentsByCourse(student.getStudyMoments(), course);
 							if(moments.size()==0){
 								//write error
-								root.put(createCat("Geen gegevens","text","Nog geen studiemomenten voor dit vak."));
+								LinkedHashMap<String,JSONArray> noData = new LinkedHashMap<String,JSONArray>();
+								noData.put("...", new JSONArray().put("Nog geen studiemomenten voor dit vak"));
+								root.put(createCat("Geen gegevens","text","Nog geen studiemomenten voor dit vak",null,noData));
 							}else{
+								//tijdsverdeling over locaties
+								LinkedHashMap<String,JSONArray> locs = new LinkedHashMap<String,JSONArray>();
+								locs.put("Laatste Week", hashToArray(Statistics.getTimeByLoc(Statistics.getMomentsWeek(moments),student)));
+								locs.put("Laatste Maand", hashToArray(Statistics.getTimeByLoc(Statistics.getMomentsMonth(moments),student)));
+								locs.put("Alles", hashToArray(Statistics.getTimeByLoc(moments,student)));
+								String name = "Tijdsverdeling over locaties";
+								String type = "pie";
+								String desc = "De verdeling van de tijd in de gegeven periode over verschillende locaties";
+								JSONObject options = new JSONObject();
+								root.put(createCat(name,type,desc,options,locs));
 								//week
 								JSONArray weekEff = new JSONArray(makeRelInPerc(Statistics.getTimeByDayInWeek(moments)));
 								String[] labels = new String[7];
@@ -134,7 +146,12 @@ public class StatServlet extends HttpServlet {
 								JSONArray dataArr = new JSONArray();
 								dataArr.put(weekEff);
 								dataArr.put(labelArr);
-								root.put(createCat("Verdeling inspanningen over de week","bar",dataArr));
+								LinkedHashMap<String,JSONArray> verd = new LinkedHashMap<String,JSONArray>();
+								verd.put("", dataArr);
+								options = new JSONObject();
+								options.put("xlabel","Procentuele inspanning");
+								desc = "Vergelijking van hoeveel er relatief op elke dag gestudeerd werd";
+								root.put(createCat("Verdeling inspanningen over de week","bar",desc,options,verd));
 							}
 						}catch(NoSuchCourseException e){
 							PrintWriter writer = resp.getWriter();        

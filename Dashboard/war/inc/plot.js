@@ -14,10 +14,14 @@ function scatter(data,options){
 }
 function text(data,options){
 	$("#"+graph.graphDivID).html("");
-	$("#"+graph.graphDivID).html(data);
+	$("#"+graph.graphDivID).html(data[0]);
 }
 function pie(data,options){
 	$("#"+graph.graphDivID).html("");
+	if(data.length==0){
+		$("#"+graph.graphDivID).html("Geen data");
+		return;
+	}
 	$.jqplot(graph.graphDivID, [data],
 		{
 		  seriesDefaults: {
@@ -39,6 +43,10 @@ function bar(data,options){
     // Can specify a custom tick Array.
     // Ticks should match up one for each y value (category) in the series.
     var ticks = data[1];
+    if(!options.xlabel)
+    	options.xlabel = "";
+    if(!options.ylabel)
+    	options.ylabel = "";
     var plot1 = $.jqplot(graph.graphDivID, [values], {
         // The "seriesDefaults" option is an options object that will
         // be applied to all series in the chart.
@@ -57,6 +65,7 @@ function bar(data,options){
             // not touch, the grid boundaries.  1.2 is the default padding.
             xaxis: {
                 pad: 1.05,
+                label: options.xlabel
                 //tickOptions: {formatString: '%d%d%d'}
             }
         }
@@ -106,7 +115,10 @@ function drawGraph(){
 	var curData = window.graph.getCat().getData();
 	var curCat = window.graph.getCat();
 	var type = curCat.type;
-	$(graph.graphButton).text(curData.name);
+	if(curData.name=="")
+		$(graph.graphButton).parent().parent().hide();
+	else
+		$(graph.graphButton).text(curData.name).parent().parent().show();
 	eval(graph.funcs[type][1]+"(curData.data,curCat.options)");
 }
 

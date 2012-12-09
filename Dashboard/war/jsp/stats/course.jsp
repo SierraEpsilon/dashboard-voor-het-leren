@@ -23,7 +23,7 @@
 	<% String course = (request.getParameter("course")==null) ? "" : request.getParameter("course"); %>
 	$("div#stats_course_jsp").bind("pageshow",function(){
 		
-		getData("/stats?course=<%=course%>","#statc_catButton  .ui-btn-text","#statc_graphButton  .ui-btn-text","statc_graphDiv","stats_course_jsp");
+		getData("/stats?course=<%=course%>","#statc_catButton  .ui-btn-text","#statc_graphButton  .ui-btn-text","statc_graphDiv","stats_course_jsp","statc_desc");
 	});
 	$(window).resize(function(){drawGraph();});
 	</script>
@@ -45,6 +45,10 @@
 		<a  id='statc_catButton' onclick='changeCat()' data-role="button">Loading</a> 
 		<a  id='statc_graphButton' onclick='changeGraph()' data-role="button">Loading</a>
 		<div id='statc_graphDiv'></div>
+		<div data-role="collapsible" data-content-theme="c">
+	   		<h3>Uitleg</h3>
+	   		<p id='statc_desc'></p>
+		</div>
 </div>
 </div><!-- /content -->
 <div data-role='footer' data-id="foo1" data-position="fixed">
