@@ -57,7 +57,7 @@ public class Statistics {
 		Date lastWeek = calendar.getTime();
 		ArrayList<StudyMoment> weekMoments = new ArrayList<StudyMoment>();
 		for(StudyMoment moment : moments)
-			if(moment.getStart().getTime()-lastWeek.getTime() <= 10080000 &&
+			if(moment.getStart().getTime()-lastWeek.getTime() <= 302400000 &&
 			moment.getStart().after(lastWeek))
 				weekMoments.add(moment);
 		return weekMoments;
