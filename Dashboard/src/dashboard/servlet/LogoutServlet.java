@@ -27,6 +27,7 @@ public class LogoutServlet extends HttpServlet{
 		session.setAttribute("student",null);
 		session.setAttribute("startTracking",null);
 		session.setAttribute("course", null);
+		session.setAttribute("alias", null);
 		resp.sendRedirect("/jsp/login/login.jsp");
 	}
 }

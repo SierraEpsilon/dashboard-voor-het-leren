@@ -56,19 +56,8 @@ public class MatchLocationServlet extends HttpServlet{
 			else if(invalid){
 	        	root.put("status", "ILLEGAL PARAMETERS");
 			}else{
-				ArrayList<Location> locs = student.getStarredLocations();
 				Location testLoc = new Location(lat,lang,null,acc);
-				double distance = 1000;
-				Location bestMatch = null;
-				Iterator<Location> it = locs.iterator();
-				while(it.hasNext()){
-					Location loc = it.next();
-					double dist = loc.distanceWorstCase(testLoc);
-					if(dist<distance){
-						distance = dist;
-						bestMatch = loc;
-					}	
-				}
+				Location bestMatch = student.matchStarredLocation(testLoc, 1000);
 				if(bestMatch==null){
 					writer.println("{status:\"NONE FOUND\"}");
 				}else{

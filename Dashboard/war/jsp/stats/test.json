@@ -1,18 +1,12 @@
 [
 {
-	"name":"Studievooruitgang",
-	"graphs":[
-		{"type":"pie","data":[[
+	name:"Studievooruitgang",
+	type:"pie"
+	data:[
+		{name:"overal","data":[[
 			["Theorie",35],
 			["Examen",35],
 			["Oefeningen",65]
-		]]},
-		{"type":"scatter","data":[[4,6,8,2,5]]}
-	]
-},{
-	"name":"Tijdsverdeling per week",
-	"graphs":[
-		{"type":"bar","data":[[4,6,8,7,5,4,8],["Ma","Di","Wo","Do","Vr","Za","Zo"]]}
-	]
+		]]}]
 }
 ]

@@ -38,13 +38,18 @@ public class TrackingServlet extends HttpServlet{
 				session.setAttribute("startTracking", null);
 				session.setAttribute("course", null);
 				session.setAttribute("adres", null);
+				session.setAttribute("alias", null);
 				resp.sendRedirect("/jsp/track/start.jsp");
 			} else {
 				session.setAttribute("startTracking", student.getCurrentStudyMoment().getStart());
 				session.setAttribute("course", student.getCurrentStudyMoment().getCourse());
 				Location loc = student.getCurrentStudyMoment().getLocation();
-				if(loc!=null)
+				if(loc!=null){
 					session.setAttribute("adres", loc.getName());
+					String alias = student.matchStarredLocation(loc,1000).getName();
+					if(alias!=null)
+						session.setAttribute("alias", alias);
+				}	
 				resp.sendRedirect("/jsp/track/stop.jsp");
 			}
 		} else {

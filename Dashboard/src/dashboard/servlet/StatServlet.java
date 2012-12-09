@@ -5,7 +5,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -45,6 +47,49 @@ public class StatServlet extends HttpServlet {
 				try {
 					if(reqCourse==null){
 					//general
+						//tijdsverdeling over courses
+						LinkedHashMap<String,JSONArray> time = new LinkedHashMap<String,JSONArray>();
+						ArrayList<StudyMoment> moments = student.getStudyMoments();
+						//time.put("Laatste Week", hashToArray(Statistics.getCourseTimes(Statistics.getMomentsWeek(moments),student.getCourses())));
+						//time.put("Laatste Maand", hashToArray(Statistics.getCourseTimes(Statistics.getMomentsMonth(moments),student.getCourses())));
+						time.put("Alles", hashToArray(Statistics.getCourseTimes(moments,student.getCourses())));
+						String name = "Tijdsverdeling over vakken";
+						String type = "pie";
+						String desc = "De verdeling van de tijd in de gegeven periode over verschillende vakken";
+						JSONObject options = new JSONObject();
+						root.put(createCat(name,type,desc,options,time));
+						//tijdsverdeling over locaties
+						LinkedHashMap<String,JSONArray> locs = new LinkedHashMap<String,JSONArray>();
+						//locs.put("Laatste Week", hashToArray(Statistics.getTimeByLoc(Statistics.getMomentsWeek(moments),student)));
+						//locs.put("Laatste Maand", hashToArray(Statistics.getTimeByLoc(Statistics.getMomentsMonth(moments),student)));
+						locs.put("Alles", hashToArray(Statistics.getTimeByLoc(moments,student)));
+						name = "Tijdsverdeling over locaties";
+						type = "pie";
+						desc = "De verdeling van de tijd in de gegeven periode over verschillende locaties";
+						options = new JSONObject();
+						root.put(createCat(name,type,desc,options,locs));
+						/*
+						JSONObject cat = new JSONObject();
+						cat.put("name", "test");
+						cat.put("type", "pie");
+						JSONObject options = new JSONObject();
+						options.put("ylabel", "test");
+						cat.put("options", options);
+						cat.put("desc", "Uitleg komt hier");
+						JSONArray datas = new JSONArray();
+						JSONObject data1 = new JSONObject();
+						JSONObject data2 = new JSONObject();
+						data1.put("name", "Laatste week");
+						data2.put("name", "Laatste maand");
+						ArrayList<StudyMoment> moments = student.getStudyMoments();
+						HashMap<String,Long> map = Statistics.getCourseTimes(moments,student.getCourses());
+						JSONArray temp = new JSONArray().put(hashToArray(map));
+						data1.put("data", temp);
+						data2.put("data", temp);
+						datas.put(data1);
+						datas.put(data2);
+						cat.put("data", datas);
+						root.put(cat);
 						ArrayList<StudyMoment> moments = student.getStudyMoments();
 						//verdeling tijd
 						HashMap<String,Long> map = Statistics.getCourseTimes(moments,student.getCourses());
@@ -65,6 +110,7 @@ public class StatServlet extends HttpServlet {
 						dataArr.put(weekEff);
 						dataArr.put(labelArr);
 						root.put(createCat("Verdeling inspanningen over de week","bar",dataArr));
+						*/
 					}else{
 					//course
 						try{
@@ -114,8 +160,25 @@ public class StatServlet extends HttpServlet {
 		graphs.put(graph);
 		catRoot.put("graphs", graphs);
 		return catRoot;
-		
-	
+	}
+	private JSONObject createCat(String name,String type,String desc,JSONObject options,LinkedHashMap<String,JSONArray> data) throws JSONException{
+		JSONObject catRoot = new JSONObject();
+		catRoot.put("name", name);
+		catRoot.put("desc", desc);
+		catRoot.put("type", type);
+		catRoot.put("options", options);
+		JSONArray dataArr = new JSONArray();
+		Set<String> names = data.keySet();
+		Iterator<String> it = names.iterator();
+		while(it.hasNext()){
+			String keyName = it.next();
+			JSONObject temp = new JSONObject();
+			temp.put("name", keyName);
+			temp.put("data",data.get(keyName));
+			dataArr.put(temp);			
+		}
+		catRoot.put("data",dataArr);
+		return catRoot;
 	}
 	private JSONArray hashToArray(Map mp){
 		JSONArray ret = new JSONArray();

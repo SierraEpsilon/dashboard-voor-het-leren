@@ -21,7 +21,7 @@
 		$("div#stats_all_jsp").find("div[name='loadWrap']").hide();
 	});
 	$("div#stats_all_jsp").bind("pageshow",function(){
-		getData("/stats?gen=true","#stata_catButton  .ui-btn-text","#stata_graphButton  .ui-btn-text","stata_graphDiv","stats_all_jsp");
+		getData("/stats?gen=true","#stata_catButton  .ui-btn-text","#stata_graphButton  .ui-btn-text","stata_graphDiv","stats_all_jsp","stata_desc");
 	});
 	$(window).resize(function(){drawGraph();});
 	</script>
@@ -42,7 +42,10 @@
 <div data-role='fieldcontain' name='loadWrap'>
 		<a  id='stata_catButton' onclick='changeCat()' data-role="button">Loading</a> 
 		<a  id='stata_graphButton' onclick='changeGraph()' data-role="button">Loading</a>
-		<div id='stata_graphDiv' style="width:100%;">
+		<div id='stata_graphDiv' style="width:100%;"></div>
+		<div data-role="collapsible" data-content-theme="c">
+	   		<h3>Uitleg</h3>
+	   		<p id='stata_desc'></p>
 		</div>
 </div>
 </div><!-- /content -->

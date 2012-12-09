@@ -3,6 +3,7 @@ package dashboard.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 
 import javax.persistence.Id;
 
@@ -509,9 +510,19 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * @return
 	 * null if no match was found
 	 */
-	public Location matchStarredLocation(Location location) {
-		
-		return null;
+	public  Location matchStarredLocation(Location location,double radius) {
+		Iterator<Location> it = starredLocations.iterator();
+		Location bestMatch = null;
+		double distance = radius;
+		while(it.hasNext()){
+			Location loc = it.next();
+			double dist = loc.distanceWorstCase(location);
+			if(dist<distance){
+				distance = dist;
+				bestMatch = loc;
+			}	
+		}
+		return bestMatch;
 		
 	}
 	
