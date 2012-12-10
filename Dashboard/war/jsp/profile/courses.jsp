@@ -22,6 +22,7 @@
 	<%
 		String std = (request.getParameter("std")==null) ? "" : request.getParameter("std");
 		Student student = StudentRegistry.getUserByUserName(std);
+		Student currentStudent = (Student)session.getAttribute("student");
 		if(student.getUserName().equals(currentStudent.getUserName()))
 			out.println("<a href='/jsp/menu.jsp' data-icon='back'>Terug</a>");
 		else
