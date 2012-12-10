@@ -116,4 +116,12 @@
  	<servlet-mapping>
  		<servlet-name>add_location</servlet-name>
  		<url-pattern>/add_location</url-pattern></servlet-mapping>
+ 	<servlet>
+        <servlet-name>moments</servlet-name>
+        <servlet-class>dashboard.servlet.MomentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>moments</servlet-name>
+        <url-pattern>/moments</url-pattern>
+    </servlet-mapping>
 </web-app>

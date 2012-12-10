@@ -30,11 +30,12 @@
 %>
 <div data-role="page">
 <div data-role="header" data-id='header' data-position='fixed'>
-	<a href="/jsp/moments/list.jsp" data-role="button" data-icon="grid">Back</a>
+	<a href="/jsp/moments/list.jsp" data-role="button" data-icon="grid">Terug</a>
 	<h1>Momentinformatie</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 </div><!-- /header -->
 <div data-role="content">
+	<form method='post' action='/moments'>
 	<div>
 		<h3>Rapportering</h3>
 		<h4>Tijd:</h4>
@@ -70,8 +71,10 @@
 				out.println("<h4>Aantal gemaakte oefeningen:</h4>");
 		%>
 		<p><%=moment.getAmount()%></p>
+		<%name = moment.getStart().toString(); %>
 		<button  type='submit' data-inline='true' data-icon='delete' name='submit' value='remove_<%=name%>'>Verwijder</button>
 	</div>
+	</form>
 </div><!-- /content -->
 </div><!-- /page -->
 </body>
