@@ -13,8 +13,8 @@ public class RegistryInitializer {
 	}
 	
 	public static void initialize(ServletContext context){
-		AchievementRegistry.init(context);
 		initialized = true;
+		AchievementRegistry.init(context);
 	}
 	
 	public static boolean initialized(){
