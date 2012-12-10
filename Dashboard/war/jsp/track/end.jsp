@@ -6,6 +6,7 @@
 <!-- with a "Standards Mode" doctype is supported, -->
 <!-- but may lead to some differences in layout.   -->
 
+<%@page import="dashboard.util.Statistics"%>
 <html>
 <head>
 <%@include file="/WEB-INF/inc/head.jsp"%>
@@ -70,12 +71,15 @@
 				out.println("<h4>Aantal gemaakte oefeningen:</h4>");
 		%>
 		<p><%=moment.getAmount()%></p>
-		<h3>Gestegen in level:</h3>
-		<p>Level <%=courseContract.getLevel(student.getTotalTimeStudied()) %></p>
+		<h3>U bent nu level:</h3>
+		<%
+			long lvlTime = Statistics.getTime(moment.getCourse(), student.getStudyMoments());
+		%>
+		<p>Level <%=courseContract.getLevel(lvlTime) %></p>
 		<div id="levelbar"></div>
 		<%
-			String levelbarJS = "$('#levelbar').progressbar({max:" + courseContract.getTimeUntilNext(student.getTotalTimeStudied()) + "});";
-			levelbarJS += "$('#levelbar').progressbar({value:" + courseContract.getTimeUntilNext(student.getTotalTimeStudied() - courseContract.getTimeNeededNext(student.getTotalTimeStudied())) + "});";
+			String levelbarJS = "$('#levelbar').progressbar({max:" + courseContract.getTimeNeededNext(lvlTime) + "});";
+			levelbarJS += "$('#levelbar').progressbar({value:" + (courseContract.getTimeNeededNext(lvlTime) - courseContract.getTimeUntilNext(lvlTime)) + "});";
 		%>
 			
 		<h3>Achievements met vooruitgang:</h3>
