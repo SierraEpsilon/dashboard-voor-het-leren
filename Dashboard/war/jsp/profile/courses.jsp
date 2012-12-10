@@ -11,6 +11,7 @@
 <html>
 <head>
 <%@include file="/WEB-INF/inc/head.jsp"%>
+<%@include file="/WEB-INF/inc/redirect.jsp"%>
 <%@ page import="dashboard.model.*" %>
 <%@ page import="dashboard.registry.*" %>
 <%@ page import="java.util.*" %>
