@@ -32,7 +32,11 @@ $("div#register_jsp").bind("pageshow",function(){
 	
 	$("input[name='password1']").change(function(){
 		var pw1 =  $("input[name='password1']").val();
-		if(pw1.length > 5){
+		var pw2 =  $("input[name='password2']").val();
+		if(pw1==pw2){
+			$("#msg4").text("");
+		}
+		if(pw1.length > 5){		
 			$("#msg3").text("");
 		}else{
 			$("#msg3").text("Het wachtwoord moet minimaal 6 en maximaal 24 tekens bevatten.");
@@ -43,9 +47,9 @@ $("div#register_jsp").bind("pageshow",function(){
 		var pw1 =  $("input[name='password1']").val();
 		var pw2 = $("input[name='password2']").val();
 		if(pw1==pw2){
-			$("#msg3").text("");
+			$("#msg4").text("");
 		}else{
-			$("#msg3").text("De opgegeven wachtwoorden zijn niet aan elkaar gelijk.");
+			$("#msg4").text("De opgegeven wachtwoorden zijn niet aan elkaar gelijk.");
 		}
 	});
 	
@@ -74,7 +78,7 @@ $("div#register_jsp").bind("pageshow",function(){
 			$("#msg").text("Geef een geldig emailadres");
 			return false;
 		}else{
-			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
+			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");$("#msg4").text("");
 			$("input[name='password']").attr("value",pass1);
 			return true;
 		}
@@ -115,13 +119,17 @@ String msg2 = (request.getParameter("msg2")==null) ? "" : request.getParameter("
 <input type='hidden' name='password'>
 <label for="password1">Wachtwoord</label>
 <input type='password' name='password1' placeholder='Minstens 6 en maximaal 24 tekens lang'>
-<label for="password2">Herhaal wachtwoord</label>
-<input type='password' name='password2' >
-
 <%
 String msg3 = (request.getParameter("msg3")==null) ? "" : request.getParameter("msg3");
 %>
 <p id='msg3' style='color:red;'><%=msg3%></p>
+<label for="password2">Herhaal wachtwoord</label>
+<input type='password' name='password2' >
+
+<%
+String msg4 = (request.getParameter("msg4")==null) ? "" : request.getParameter("msg4");
+%>
+<p id='msg4' style='color:red;'><%=msg4%></p>
 
 <input type='submit' name='submit' value='Volgende'>
 
