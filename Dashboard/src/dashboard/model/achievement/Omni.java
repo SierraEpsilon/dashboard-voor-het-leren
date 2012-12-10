@@ -7,6 +7,8 @@ import dashboard.model.Student;
 import dashboard.model.StudyMoment;
 import dashboard.util.Statistics;
 
+import static java.util.Calendar.*;
+
 public class Omni extends Achievement {
 	
 	final int amount;
@@ -33,12 +35,15 @@ public class Omni extends Achievement {
 	public float getProgress(ArrayList<StudyMoment> studyMoments) {
 		for(StudyMoment moment : studyMoments){
 			HashSet<Course> courses = new HashSet<Course>();
-			Date afterDate = new Date(moment.getStart().getTime() + (24*60*60*1000));
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(moment.getEnd());
+			calendar.add(DAY_OF_YEAR, 1);
+			Date afterDate = new Date(calendar.getTimeInMillis());
 			for(StudyMoment moment2: studyMoments){
-				if(moment2.getStart().before(afterDate) && moment2.getStart().after(moment.getStart())){
+				if(moment2.getStart().before(afterDate) && moment2.getEnd().after(moment.getStart())){
 					if(!courses.contains(moment2.getCourse())){
 						courses.add(moment2.getCourse());
-						if(courses.size() == getAmount())
+						if(courses.size() >= getAmount())
 							return 1;
 					}
 				}
