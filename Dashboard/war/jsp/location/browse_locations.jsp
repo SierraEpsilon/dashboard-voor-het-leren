@@ -38,7 +38,7 @@
 		<%
 			ArrayList<Location> locations = student.getStarredLocations();
 			for(Location location : locations){
-				out.println("<li>" + location.getAlias() + "</li>");
+				out.println("<li>" + location.getAlias() + " : " + location.getAdres() + "</li>");
 			}
 		%>
 		</ul>

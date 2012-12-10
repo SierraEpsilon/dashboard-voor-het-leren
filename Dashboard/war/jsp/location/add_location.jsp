@@ -74,7 +74,7 @@ $(document).bind("pageinit",function(){
 		if(stat=="OK"){
 				$("#msg4").text("Dit adres werd gevonden:");
 				$("#msg5").text(res[0].formatted_address);
-				$("#adres").text(res[0].formatted_address);
+				$("#adres").val(res[0].formatted_address);
 				$("input[name='namesend']").val($("input[name='name']").val());
 				$("input[name='longitude']").val(res[0].geometry.location.lng());
 				$("input[name='latitude']").val(res[0].geometry.location.lat());
