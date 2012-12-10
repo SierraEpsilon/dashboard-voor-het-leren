@@ -35,15 +35,13 @@ public class Omni extends Achievement {
 			HashSet<Course> courses = new HashSet<Course>();
 			Date afterDate = new Date(moment.getStart().getTime() + (24*60*60*1000));
 			for(StudyMoment moment2: studyMoments){
-				if(moment2.getStart().before(afterDate)){
+				if(moment2.getStart().before(afterDate) && moment2.getStart().after(moment.getStart())){
 					if(!courses.contains(moment2.getCourse())){
 						courses.add(moment2.getCourse());
 						if(courses.size() == getAmount())
 							return 1;
 					}
 				}
-				else
-					break;
 			}
 		}
 		return 0;
