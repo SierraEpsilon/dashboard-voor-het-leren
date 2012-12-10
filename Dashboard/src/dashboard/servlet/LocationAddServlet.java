@@ -46,7 +46,7 @@ public class LocationAddServlet extends HttpServlet{
 		try{
 		student.addStarredLocation(new Location(longitude,latitude,0,adres,name));	
 		session.setAttribute("student", student);
-		resp.sendRedirect("/jsp/location/add_location.jsp?std=" + student.getUserName() + "&&msg=Locatie werd correct toegevoegd.");
+		resp.sendRedirect("/jsp/location/browse_locations.jsp");
 		}
 		catch(NameAlreadyInUseException e){
 		resp.sendRedirect("/jsp/location/add_location.jsp?std=" + student.getUserName() + "&&msg=De naam '" + name + "' wordt reeds gebruikt!");

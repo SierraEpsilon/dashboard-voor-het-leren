@@ -18,16 +18,15 @@
 <div data-role="page">
 <div data-role="header" data-id='header' data-position="fixed">
 	<%
-		String std = (request.getParameter("std")==null) ? "" : request.getParameter("std");
-		Student student = StudentRegistry.getUserByUserName(std);
+		Student student = (Student)session.getAttribute("student");
 	%>
 	<h1>Locatie</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 	<div data-role="navbar">
 		<ul>
-			<li><a href="/jsp/location/add_location.jsp?std=<%=std%>">Locatie toevoegen</a></li>
-			<li><a href="/jsp/location/browse_locations.jsp?std=<%=std%>">Bestaande locaties</a></li>
+			<li><a href="/jsp/location/add_location.jsp">Locatie toevoegen</a></li>
+			<li><a href="/jsp/location/browse_locations.jsp">Bestaande locaties</a></li>
 		</ul>
 	</div><!-- /navbar -->
 </div><!-- /header -->

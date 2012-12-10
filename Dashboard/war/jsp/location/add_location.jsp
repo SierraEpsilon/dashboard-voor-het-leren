@@ -16,34 +16,35 @@
 <script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
 </head>
 <body>
-<div data-role="page">
+<div data-role="page" id="add_location_jsp">
 <script>
-$(document).bind("pageinit",function(){
+$("div#add_location_jsp").bind("pageshow",function(){
+	alert("init,nr save:"+$("#saveButton").size());
 	$("#saveButton").hide();
-	$("input[name='number']").change(function(){
-		var given = $("input[name='number']").val();
+	$("#number").change(function(){
+		var given = $("#number").val();
 		if(given<1){
 			$("#msg2").text("Geef een geldig nummer op");
-			$("input[name='number']").val('');
+			$("#number").val('');
 		}else{
 			$("#msg2").text("");
 		}
 	});
-	$("input[name='zip']").change(function(){
-		var given = $("input[name='zip']").val();
+	$("#zip").change(function(){
+		var given = $("#zip").val();
 		if(given<1000){
 			$("#msg3").text("Geef een geldige postcode op");
-			$("input[name='zip']").val('');
+			$("#zip").val('');
 		}else{
 			$("#msg3").text("");
 		}
 	});
 	$("#searchButton").click(function(){
 		var name = $("input[name='name']").val();
-		var street = $("input[name='street']").val();
-		var number = $("input[name='number']").val();
-		var zip = $("input[name='zip']").val();
-		var city = $("input[name='city']").val();
+		var street = $("#street").val();
+		var number = $("#number").val();
+		var zip = $("#zip").val();
+		var city = $("#city").val();
 		var cont = true;
 		cont = (name=="") ? false : cont;
 		cont = (street=="") ? false : cont;
@@ -55,11 +56,11 @@ $(document).bind("pageinit",function(){
 		}
 		else if (number < 1){
 			$("#msg2").text("Geef een geldig nummer op!");
-			$("input[name='amount']").val('');
+			$("#amount").val('');
 		}
 		else if (zip < 1000){
 			$("#msg3").text("Geef een geldige postcode op!");
-			$("input[name='amount']").val('');
+			$("#amount").val('');
 		}
 		else {
 			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");$("#msg4").text("");$("#msg5").text("");
@@ -75,9 +76,9 @@ $(document).bind("pageinit",function(){
 				$("#msg4").text("Dit adres werd gevonden:");
 				$("#msg5").text(res[0].formatted_address);
 				$("#adres").val(res[0].formatted_address);
-				$("input[name='namesend']").val($("input[name='name']").val());
-				$("input[name='longitude']").val(res[0].geometry.location.lng());
-				$("input[name='latitude']").val(res[0].geometry.location.lat());
+				$("#namesend").val($("#name").val());
+				$("#longitude").val(res[0].geometry.location.lng());
+				$("#latitude").val(res[0].geometry.location.lat());
 				$("#saveButton").show();
 			}
 			else{
@@ -143,7 +144,8 @@ $(document).bind("pageinit",function(){
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="delete" data-inline="true">Annuleren</a>
 	<p>
 <form id="LocationForm" method="post" action='/add_location'>
-	<a href="" 	data-role="button" data-icon="check" data-theme="b" id="saveButton" data-inline="true">Opslaan</a></li>
+	<a href="" 	data-role="button" data-icon="check" data-theme="b" id="saveButton" onclick='
+		$("#saveButton").hide();' data-inline="true">Opslaan</a></li>
 	<input type="text" name="longitude" id="longitude" value="" data-inline="true" style="visibility:hidden"/>
  	<input type="text" name="latitude" id="latitude" value="" data-inline="true" style="visibility:hidden"/>
  	<input type="text" name="namesend" id="namesend" value="" data-inline="true" style="visibility:hidden"/>
