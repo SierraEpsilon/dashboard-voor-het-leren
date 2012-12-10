@@ -8,12 +8,14 @@ public class Location implements Serializable{
 	private double longitude;
 	private double latitude;
 	private int accuracy;
-	private String name;
+	private String adres;
+	private String alias;
 	
-	public Location(double longitude,double latitude,String name,int accuracy){
+	public Location(double longitude,double latitude,int accuracy,String adres,String alias){
 		this.longitude = longitude;
 		this.latitude = latitude;
-		this.name = name;
+		this.adres = adres;
+		this.alias = alias;
 		this.accuracy = accuracy;
 	}
 	
@@ -29,8 +31,12 @@ public class Location implements Serializable{
 		return accuracy;
 	}
 	
-	public String getName() {
-		return name;
+	public String getAlias() {
+		return alias;
+	}
+	
+	public String getAdres() {
+		return adres;
 	}
 	
 	public boolean withinRadius(Location other,double radius){
