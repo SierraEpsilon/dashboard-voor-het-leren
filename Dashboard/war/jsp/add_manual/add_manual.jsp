@@ -27,40 +27,40 @@ $("div#add_manual_jsp").bind( "mobileinit", function(){
 
 <script>
 $('#add_manual_jsp').bind("pageinit",function(){
-	$("input[name='startdate']").change(function(){
-		var start = $("input[name='startdate']").val();
-		if($("input[name='enddate']").val() == ''){
-		$("input[name='enddate']").val(start);}
-		if($("input[name='enddate']").val() < start){
-		$("input[name='enddate']").val(start);}
+	$("#startdate").change(function(){
+		var start = $("#startdate").val();
+		if($("#enddate").val() == ''){
+		$("#enddate").val(start);}
+		if($("#enddate").val() < start){
+		$("#enddate").val(start);}
 	});
 	
-	$("input[name='amount']").change(function(){
-		var given = $("input[name='amount']").val();
+	$("#amount").change(function(){
+		var given = $("#amount").val();
 		if(given<1){
 			$("#msg3").text("Geef een geldig getal op");
-			$("input[name='amount']").val('');
+			$("#amount").val('');
 		}else{$("#msg3").text("");
 		}
 	});
 	
-	$("input[name='enddate']").change(function(){
-		var start =  $("input[name='startdate']").val();
-		var end = $("input[name='enddate']").val();
+	$("#enddate").change(function(){
+		var start =  $("#startdate").val();
+		var end = $("#enddate").val();
 		if(end<start){
 			$("#msg2").text("De eindtijd moet na de begintijd vallen!");
-			$("input[name='enddate']").val(start);
+			$("#enddate").val(start);
 		}else{$("#msg2").text("");
 		}
 	});
 	
 	$("#opslaan").click(function(){
-		var startd = $("input[name='startdate']").val();
-		var startt = $("input[name='starttime']").val();
-		var endd = $("input[name='enddate']").val();
-		var endt = $("input[name='endtime']").val();
+		var startd = $("#startdate").val();
+		var startt = $("#starttime").val();
+		var endd = $("#enddate").val();
+		var endt = $("#endtime").val();
 		var courseinput = $("select[name='courseinput']").val();
-		var amount = $("input[name='amount']").val();
+		var amount = $("#amount").val();
 		var cont = true;
 		cont = (startd=="") ? false : cont;
 		cont = (startt=="") ? false : cont;
@@ -74,7 +74,7 @@ $('#add_manual_jsp').bind("pageinit",function(){
 		else if(startd == endd){
 			if(!(startt<endt)){
 				$("#msg2").text("De eindtijd moet na de begintijd vallen!");
-				$("input[name='endtime']").val('');
+				$("#endtime").val('');
 			}
 			else {
 			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
@@ -83,12 +83,12 @@ $('#add_manual_jsp').bind("pageinit",function(){
 		}
 		else if(endd < startd){
 			$("#msg2").text("De eindtijd moet na de begintijd vallen!");
-			$("input[name='enddate']").val('');
-			$("input[name='endtime']").val('');
+			$("#enddate").val('');
+			$("#endtime").val('');
 		}
 		else if (amount < 1){
 			$("#msg3").text("Geef een geldig getal op!");
-			$("input[name='amount']").val('');
+			$("#amount").val('');
 		}
 		else {
 			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");
@@ -116,16 +116,16 @@ $('#add_manual_jsp').bind("pageinit",function(){
 	<b>Starttijd</b>
 	<p>
 	         <label for="startdate">Datum:</label>
-	         <input type="date" name="startdate" id="date" value="" placeholder="vb: 2012-04-20" />
+	         <input type="date" name="startdate" id="startdate" value="" placeholder="vb: 2012-04-20" />
 	         <label for="starttime">Tijd:</label>
-	         <input type="time" name="starttime" id="time" value="" placeholder="vb: 15:00"/>
+	         <input type="time" name="starttime" id="starttime" value="" placeholder="vb: 15:00"/>
 	<p>
 	<b>Eindtijd</b>
 	<p>
 	         <label for="enddate">Datum:</label>
-	         <input type="date" name="enddate" id="date" value="" placeholder="vb: 2012-04-20" />
+	         <input type="date" name="enddate" id="enddate" value="" placeholder="vb: 2012-04-20" />
 	         <label for="endtime">Tijd:</label>
-	         <input type="time" name="endtime" id="time" value="" placeholder="vb: 16:00"/>
+	         <input type="time" name="endtime" id="endtime" value="" placeholder="vb: 16:00"/>
 	         
  	<%
 		String msg2 = (request.getParameter("msg2")==null) ? "" : request.getParameter("msg2");
@@ -158,7 +158,7 @@ $('#add_manual_jsp').bind("pageinit",function(){
 	
 	</fieldset>
 	<label for='amount'>Hoeveelheid:</label>
-	<input type='number' name='amount' placeholder='Getal'>
+	<input type='number' name='amount' id='amount' placeholder='Getal'>
 	<%
 		String msg3 = (request.getParameter("msg3")==null) ? "" : request.getParameter("msg3");
 	%>

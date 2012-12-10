@@ -21,8 +21,8 @@
 <script>
 $("div#register_jsp").bind("pageshow",function(){
 
-	$("input[name='username']").change(function(){
-		var given =  $("input[name='username']").val();
+	$("#username").change(function(){
+		var given =  $("#username").val();
 		if(given.length > 5){
 			$("#msg2").text("");
 		}else{
@@ -30,9 +30,9 @@ $("div#register_jsp").bind("pageshow",function(){
 		}
 	});
 	
-	$("input[name='password1']").change(function(){
-		var pw1 =  $("input[name='password1']").val();
-		var pw2 =  $("input[name='password2']").val();
+	$("#password1").change(function(){
+		var pw1 =  $("#password1").val();
+		var pw2 =  $("#password2").val();
 		if(pw1==pw2){
 			$("#msg4").text("");
 		}
@@ -43,9 +43,9 @@ $("div#register_jsp").bind("pageshow",function(){
 		}
 	});
 	
-	$("input[name='password2']").change(function(){
-		var pw1 =  $("input[name='password1']").val();
-		var pw2 = $("input[name='password2']").val();
+	$("#password2").change(function(){
+		var pw1 =  $("#password1").val();
+		var pw2 = $("#password2").val();
 		if(pw1==pw2){
 			$("#msg4").text("");
 		}else{
@@ -79,7 +79,7 @@ $("div#register_jsp").bind("pageshow",function(){
 			return false;
 		}else{
 			$("#msg").text("");$("#msg2").text("");$("#msg3").text("");$("#msg4").text("");
-			$("input[name='password']").attr("value",pass1);
+			$("#password1").attr("value",pass1);
 			return true;
 		}
 	});
@@ -105,26 +105,26 @@ if(session.getAttribute("register.jsp")!=null){
 }
 %>
 <label for="firstname">Voornaam</label>
-<input type='text' name='firstname' value='<%=firstname%>' >
+<input type='text' id='firstname' name='firstname' value='<%=firstname%>' >
 <label for="lastname">Achternaam</label>
-<input type='text' name='lastname' value='<%=lastname%>'>
+<input type='text' id='lastname' name='lastname' value='<%=lastname%>'>
 <label for="username">Gebruikersnaam</label>
-<input type='text' name='username' value='<%=username%>' placeholder='Minstens 6 en maximaal 24 tekens lang'>
+<input type='text' id='username' name='username' value='<%=username%>' placeholder='Minstens 6 en maximaal 24 tekens lang'>
 <%
 String msg2 = (request.getParameter("msg2")==null) ? "" : request.getParameter("msg2");
 %>
 <p id='msg2' style='color:red;'><%=msg2%></p>
 <label for="mail">Email</label>
-<input type='text' name='mail' value='<%=mail%>' >
+<input type='text' id='mail' name='mail' value='<%=mail%>' >
 <input type='hidden' name='password'>
 <label for="password1">Wachtwoord</label>
-<input type='password' name='password1' placeholder='Minstens 6 en maximaal 24 tekens lang'>
+<input type='password' id='password1' name='password1' placeholder='Minstens 6 en maximaal 24 tekens lang'>
 <%
 String msg3 = (request.getParameter("msg3")==null) ? "" : request.getParameter("msg3");
 %>
 <p id='msg3' style='color:red;'><%=msg3%></p>
 <label for="password2">Herhaal wachtwoord</label>
-<input type='password' name='password2' >
+<input type='password' id='password2' name='password2' >
 
 <%
 String msg4 = (request.getParameter("msg4")==null) ? "" : request.getParameter("msg4");
