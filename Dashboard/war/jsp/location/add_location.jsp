@@ -74,6 +74,7 @@ $(document).bind("pageinit",function(){
 		if(stat=="OK"){
 				$("#msg4").text("Dit adres werd gevonden:");
 				$("#msg5").text(res[0].formatted_address);
+				$("#adres").text(res[0].formatted_address);
 				$("input[name='namesend']").val($("input[name='name']").val());
 				$("input[name='longitude']").val(res[0].geometry.location.lng());
 				$("input[name='latitude']").val(res[0].geometry.location.lat());
@@ -97,7 +98,7 @@ $(document).bind("pageinit",function(){
 		String std = (request.getParameter("std")==null) ? "" : request.getParameter("std");
 		Student student = StudentRegistry.getUserByUserName(std);
 	%>
-	<h1>Locatie toevoegen</h1>
+	<h1>Locatie</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 	<div data-role="navbar">
@@ -146,6 +147,7 @@ $(document).bind("pageinit",function(){
 	<input type="text" name="longitude" id="longitude" value="" data-inline="true" style="visibility:hidden"/>
  	<input type="text" name="latitude" id="latitude" value="" data-inline="true" style="visibility:hidden"/>
  	<input type="text" name="namesend" id="namesend" value="" data-inline="true" style="visibility:hidden"/>
+ 	<input type="text" name="adres" id="adres" value="" data-inline="true" style="visibility:hidden"/>
 
 </form>
 </div><!-- /content -->
