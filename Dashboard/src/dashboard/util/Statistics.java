@@ -167,7 +167,7 @@ public class Statistics {
 				if(match==null)
 					name = "Overige";
 				else
-					name = match.getName();
+					name = match.getAlias();
 			}
 			if(ret.containsKey(name))
 				ret.put(name, amount+ret.get(name));
