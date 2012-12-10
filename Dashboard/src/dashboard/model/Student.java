@@ -18,6 +18,7 @@ import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.InvalidUserNameException;
+import dashboard.error.NameAlreadyInUseException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.error.NotFriendException;
 import dashboard.error.NotStudyingException;
@@ -297,7 +298,13 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * 	the location was added to the student's starred locations
 	 * 	|	new.starredLocations.contains(location)
 	 */
-	public void addStarredLocation(Location location){
+	public void addStarredLocation(Location location) throws NameAlreadyInUseException{
+		String name = location.getAlias();
+		for(Location existing : getStarredLocations()){
+			if(name.equals(existing.getAlias())){
+				throw(new NameAlreadyInUseException());
+			}
+		}
 		getStarredLocations().add(location);
 		OwnOfy.ofy().put(this);
 	}
