@@ -436,10 +436,12 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void addStarredLocation(Location location) throws NameAlreadyInUseException{
 		String name = location.getAlias();
-	for(Location existing : getStarredLocations()){
-	 	 if(name.equals(existing.getAlias())){
+		for(Location existing : getStarredLocations()){
+			if(name.equals(existing.getAlias())){
 	 		 throw(new NameAlreadyInUseException());}
 		}
+		getStarredLocations().add(location);
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**
