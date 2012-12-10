@@ -54,11 +54,16 @@ public class Statistics {
 	 */
 	public static ArrayList<StudyMoment> getMomentsWeek(ArrayList<StudyMoment> moments) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.setWeekDate(Calendar.YEAR, Calendar.WEEK_OF_YEAR, Calendar.MONDAY);
+		calendar.set(Calendar.HOUR_OF_DAY,0);
+		calendar.set(Calendar.MINUTE,0);
+		calendar.set(Calendar.SECOND,0);
+		calendar.set(Calendar.MILLISECOND,0);
+		calendar.set(Calendar.DAY_OF_WEEK,calendar.MONDAY);
 		Date lastWeek = calendar.getTime();
+		Date nextWeek = new Date(lastWeek.getTime() + 604800000);
 		ArrayList<StudyMoment> weekMoments = new ArrayList<StudyMoment>();
 		for(StudyMoment moment : moments)
-			if(moment.getStart().getTime()-lastWeek.getTime() <= 302400000 &&
+			if(moment.getStart().before(nextWeek) &&
 			moment.getStart().after(lastWeek))
 				weekMoments.add(moment);
 		return weekMoments;
