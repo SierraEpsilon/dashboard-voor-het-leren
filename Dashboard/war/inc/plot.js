@@ -3,9 +3,8 @@ graph = new Object();
 // type to functions
 graph.funcs = new Array();
 graph.funcs["pie"] = new Array("Taart","pie");
-graph.funcs["donut"] = new Array("Donut","donut");
 graph.funcs["text"] = new Array("Tekst","text");
-graph.funcs["scatter"] = new Array("Scatter","scatter");
+graph.funcs["prog"] = new Array("Progress","prog");
 graph.funcs["bar"] = new Array("Staaf","bar");
 // type handlers
 function scatter(data,options){
@@ -71,7 +70,12 @@ function bar(data,options){
         }
     });
 }
-function table(data,options){}
+function prog(data,options){
+	pValue = data[0]*100;
+	$("#"+graph.graphDivID).html("<p id='progBar'></p>");
+	$("#progBar").progressbar({ max: 100});
+	$("#progBar").progressbar({ value: pValue});
+}
 
 function getData(jsonURL,catB,graphB,divD,pageID,descB){
 	graph.catButton = catB;

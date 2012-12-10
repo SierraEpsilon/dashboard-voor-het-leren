@@ -10,9 +10,10 @@
 <head>
 <%@include file="/WEB-INF/inc/head.jsp"%>
 <%@include file="/WEB-INF/inc/redirect.jsp"%>
-<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?
-
-libraries=places&sensor=true"></script>
+<%@ page import="dashboard.model.*" %>
+<%@ page import="dashboard.registry.*" %>
+<%@ page import="java.util.*" %>
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=true"></script>
 </head>
 <body>
 <div data-role="page">
@@ -92,11 +93,19 @@ $(document).bind("pageinit",function(){
 
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
-
+	<%
+		String std = (request.getParameter("std")==null) ? "" : request.getParameter("std");
+		Student student = StudentRegistry.getUserByUserName(std);
+	%>
 	<h1>Locatie toevoegen</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
-
+	<div data-role="navbar">
+		<ul>
+			<li><a href="/jsp/location/add_location.jsp?std=<%=std%>">Locatie toevoegen</a></li>
+			<li><a href="/jsp/location/browse_locations.jsp?std=<%=std%>">Bestaande locaties</a></li>
+		</ul>
+	</div><!-- /navbar -->
 </div><!-- /header -->
 <div data-role="content">
 	<%
@@ -124,7 +133,7 @@ $(document).bind("pageinit",function(){
  	<%
 		String msg4 = (request.getParameter("msg4")==null) ? "" : request.getParameter("msg4");
 	%>
-	<p id='msg4'><%=msg%></p>
+	<p id='msg4'><%=msg4%></p>
 	<%
 		String msg5 = (request.getParameter("msg5")==null) ? "" : request.getParameter("msg5");
 	%>
