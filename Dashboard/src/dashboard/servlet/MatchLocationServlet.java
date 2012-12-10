@@ -56,13 +56,13 @@ public class MatchLocationServlet extends HttpServlet{
 			else if(invalid){
 	        	root.put("status", "ILLEGAL PARAMETERS");
 			}else{
-				Location testLoc = new Location(lat,lang,null,acc);
+				Location testLoc = new Location(lat,lang,acc,null,null);
 				Location bestMatch = student.matchStarredLocation(testLoc, 1000);
 				if(bestMatch==null){
 					writer.println("{status:\"NONE FOUND\"}");
 				}else{
 		        	root.put("status", "OK");
-		        	root.put("result", bestMatch.getName());
+		        	root.put("result", bestMatch.getAlias());
 				}
 			}
 		}catch(JSONException e){}

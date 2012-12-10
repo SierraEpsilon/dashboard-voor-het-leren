@@ -45,10 +45,10 @@ public class TrackingServlet extends HttpServlet{
 				session.setAttribute("course", student.getCurrentStudyMoment().getCourse());
 				Location loc = student.getCurrentStudyMoment().getLocation();
 				if(loc!=null){
-					session.setAttribute("adres", loc.getName());
+					session.setAttribute("adres", loc.getAdres());
 					Location matchedLocation = student.matchStarredLocation(loc, 1000);
 					if(matchedLocation!=null)
-						session.setAttribute("alias", matchedLocation.getName());
+						session.setAttribute("alias", matchedLocation.getAlias());
 				}	
 				resp.sendRedirect("/jsp/track/stop.jsp");
 			}
@@ -82,7 +82,7 @@ public class TrackingServlet extends HttpServlet{
 				double latitude = Double.parseDouble(req.getParameter("latitude"));
 				int accuracy = Integer.parseInt(req.getParameter("accuracy"));
 				String adres = req.getParameter("adres");
-				Location loc = new Location(longitude,latitude,adres,accuracy);
+				Location loc = new Location(longitude,latitude,accuracy,adres,null);
 				student.setCurrentStudyMoment(new StudyMoment(start,course,loc));//create a new study moment with location
 				session.setAttribute("adres", adres);
 			}else{
