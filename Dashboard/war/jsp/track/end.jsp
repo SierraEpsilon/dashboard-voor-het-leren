@@ -6,6 +6,7 @@
 <!-- with a "Standards Mode" doctype is supported, -->
 <!-- but may lead to some differences in layout.   -->
 
+<%@page import="dashboard.util.Statistics"%>
 <html>
 <head>
 <%@include file="/WEB-INF/inc/head.jsp"%>
@@ -71,11 +72,14 @@
 		%>
 		<p><%=moment.getAmount()%></p>
 		<h3>Gestegen in level:</h3>
-		<p>Level <%=courseContract.getLevel(student.getTotalTimeStudied()) %></p>
+		<%
+			long time = Statistics.getTime(moment.getCourse(), student.getStudyMoments());
+		%>
+		<p>Level <%=courseContract.getLevel(time) %></p>
 		<div id="levelbar"></div>
 		<%
-			String levelbarJS = "$('#levelbar').progressbar({max:" + courseContract.getTimeUntilNext(student.getTotalTimeStudied()) + "});";
-			levelbarJS += "$('#levelbar').progressbar({value:" + courseContract.getTimeUntilNext(student.getTotalTimeStudied() - courseContract.getTimeNeededNext(student.getTotalTimeStudied())) + "});";
+			String levelbarJS = "$('#levelbar').progressbar({max:" + courseContract.getTimeUntilNext(time) + "});";
+			levelbarJS += "$('#levelbar').progressbar({value:" + courseContract.getTimeUntilNext(time - courseContract.getTimeNeededNext(time)) + "});";
 		%>
 			
 		<h3>Achievements met vooruitgang:</h3>
