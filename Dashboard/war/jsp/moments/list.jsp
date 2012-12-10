@@ -29,7 +29,7 @@
 <div data-role="content">
 	<div>
 		<h3>Studiemomenten</h3>
-		<ul data-role="listview" style="margin: 5px">
+		<ul data-role="listview" data-filter="true"  style="margin: 5px">
 		<%
 			ArrayList<StudyMoment> moments = student.getStudyMoments();
 			for(StudyMoment moment : moments){
