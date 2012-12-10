@@ -56,9 +56,9 @@ public class StatServlet extends HttpServlet {
 						}else{
 							//tijdsverdeling over courses
 							LinkedHashMap<String,JSONArray> time = new LinkedHashMap<String,JSONArray>();
-							time.put("Laatste Week", hashToArray(Statistics.getCourseTimes(Statistics.getMomentsWeek(moments),student.getCourses())));
-							time.put("Laatste Maand", hashToArray(Statistics.getCourseTimes(Statistics.getMomentsMonth(moments),student.getCourses())));
-							time.put("Alles", hashToArray(Statistics.getCourseTimes(moments,student.getCourses())));
+							time.put("Laatste Week", hashToArray(hashTrimZero(Statistics.getCourseTimes(Statistics.getMomentsWeek(moments),student.getCourses()))));
+							time.put("Laatste Maand", hashToArray(hashTrimZero(Statistics.getCourseTimes(Statistics.getMomentsMonth(moments),student.getCourses()))));
+							time.put("Alles", hashToArray(hashTrimZero(Statistics.getCourseTimes(moments,student.getCourses()))));
 							String name = "Tijdsverdeling over vakken";
 							String type = "pie";
 							String desc = "De verdeling van de tijd in de gegeven periode over verschillende vakken";
@@ -258,5 +258,18 @@ public class StatServlet extends HttpServlet {
 		}
 		return ret;
 		
+	}
+	
+	private HashMap<String,Long> hashTrimZero(HashMap<String,Long> hash){
+		HashMap<String,Long> ret = new HashMap<String,Long>();
+		Set<String> names = hash.keySet();
+		Iterator<String> it = names.iterator();
+		while(it.hasNext()){
+			String key = it.next();
+			Long value = hash.get(key);
+			if(value!=0)
+				ret.put(key, value);
+		}
+		return ret;
 	}
 }
