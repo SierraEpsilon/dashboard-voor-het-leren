@@ -39,11 +39,11 @@ public class MatchLocationServlet extends HttpServlet{
 		PrintWriter writer = resp.getWriter();
 		boolean invalid = false;
 		double lat = 0;
-		double lang = 0;
+		double lng = 0;
 		int acc = 0;
 		try{
 			lat = Double.parseDouble(req.getParameter("lat"));
-			lang = Double.parseDouble(req.getParameter("long"));
+			lng = Double.parseDouble(req.getParameter("long"));
 			acc = Integer.parseInt(req.getParameter("acc"));
 		}catch(NumberFormatException e){
 			invalid = true;
@@ -56,7 +56,7 @@ public class MatchLocationServlet extends HttpServlet{
 			else if(invalid){
 	        	root.put("status", "ILLEGAL PARAMETERS");
 			}else{
-				Location testLoc = new Location(lat,lang,acc,null,null);
+				Location testLoc = new Location(lng,lat,acc,null,null);
 				Location bestMatch = student.matchStarredLocation(testLoc, 1000);
 				if(bestMatch==null){
 					writer.println("{status:\"NONE FOUND\"}");
