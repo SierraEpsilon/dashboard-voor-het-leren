@@ -354,6 +354,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 
 	public void removeMoment(String momentString){
 		getStudyMoments().remove(getMoment(momentString));
+		OwnOfy.ofy().put(this);
 	}
 	
 	/**
