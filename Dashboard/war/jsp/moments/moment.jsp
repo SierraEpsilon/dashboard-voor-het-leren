@@ -30,7 +30,7 @@
 %>
 <div data-role="page">
 <div data-role="header" data-id='header' data-position='fixed'>
-	<a href="/jsp/moments/list.jsp" data-role="button" data-icon="grid">Back</a>
+	<a href="/jsp/moments/list.jsp" data-role="button" data-icon="grid">Terug</a>
 	<h1>Momentinformatie</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 </div><!-- /header -->
