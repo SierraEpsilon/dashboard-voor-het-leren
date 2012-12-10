@@ -20,8 +20,12 @@
 	<%
 		String std = (request.getParameter("std")==null) ? "" : request.getParameter("std");
 		Student student = StudentRegistry.getUserByUserName(std);
+		Student currentStudent = (Student)session.getAttribute("student");
+		if(student.getUserName().equals(currentStudent.getUserName()))
+			out.println("<a href='/jsp/menu.jsp' data-icon='back'>Terug</a>");
+		else
+			out.println("<a href='/jsp/friends/list.jsp' data-icon='back'>Terug</a>");
 	%>
-	<a href="/jsp/menu.jsp" data-icon="back">Terug</a>
 	<h1><%=student.getFirstName() + " " + student.getLastName()%></h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 	<div data-role="navbar">
