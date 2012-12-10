@@ -77,14 +77,23 @@ public class Statistics {
 	 */
 	public static ArrayList<StudyMoment> getMomentsMonth(ArrayList<StudyMoment> moments) {
 		Calendar calendar = Calendar.getInstance();
-		calendar.set(Calendar.WEEK_OF_MONTH, 1);
+		calendar.set(Calendar.HOUR_OF_DAY,0);
+		calendar.set(Calendar.MINUTE,0);
+		calendar.set(Calendar.SECOND,0);
+		calendar.set(Calendar.MILLISECOND,0);
+		calendar.set(Calendar.DAY_OF_MONTH,1);
 		Date lastMonth = calendar.getTime();
-		ArrayList<StudyMoment> weekMoments = new ArrayList<StudyMoment>();
+		if(calendar.get(Calendar.MONTH) == Calendar.DECEMBER)
+			calendar.set(Calendar.MONTH, Calendar.JANUARY);
+		else
+			calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+		Date nextMonth = calendar.getTime();
+		ArrayList<StudyMoment> monthMoments = new ArrayList<StudyMoment>();
 		for(StudyMoment moment : moments)
-			if(moment.getStart().getTime()-lastMonth.getTime() <= 302400000 &&
+			if(moment.getStart().before(nextMonth) &&
 			moment.getStart().after(lastMonth))
-				weekMoments.add(moment);
-		return weekMoments;
+				monthMoments.add(moment);
+		return monthMoments;
 	}
 	
 	/**
