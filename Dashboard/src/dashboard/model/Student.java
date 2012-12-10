@@ -34,12 +34,14 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String mail;
 	private String password;
 	@Serialized private StudyMoment currentStudyMoment;
+	@Serialized private ArrayList<String> friendList;
+	@Serialized private ArrayList<String> friendRequests;
 	@Serialized private ArrayList<StudyMoment> studyMoments;
 	@Serialized private ArrayList<Location> starredLocations;
 	@Serialized private ArrayList<CourseContract> courses;
-	@Serialized private ArrayList<String> friendList;
-	@Serialized private ArrayList<String> friendRequests;
-	
+	public Student(){
+	}
+
 	/**
 	 * initiates a user
 	 * @param 	firstName
@@ -84,9 +86,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		OwnOfy.ofy().put(this);
 	}
 	
-	public Student(){
-	}
-	
 	/**
 	 * @return	
 	 *	the first name of the student
@@ -97,6 +96,17 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
+	 * @param firstName
+	 * the new first name of the user
+	 * @post	the first name was changed
+	 * 	|	new.getFirstName() = firstName
+	 */
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+		OwnOfy.ofy().put(this);
+	}
+
+	/**
 	 * @return	
 	 *	the last name of the student
 	 * 	|	last name
@@ -105,6 +115,17 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		return lastName;
 	}
 	
+
+	/**
+	 * @param lastName
+	 * the new last name of the user
+	 * @post	the last name was changed
+	 * 	|	new.getLastName() = lastName
+	 */
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+		OwnOfy.ofy().put(this);
+	}
 
 	/**
 	 * @return	
@@ -134,82 +155,6 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	}
 	
 	/**
-	 * @return
-	 * 	the current study moment 
-	 * 	|	currentStudyMoment
-	 */
-	public StudyMoment getCurrentStudyMoment() {
-		return currentStudyMoment;
-	}
-	
-	/**
-	 * @return
-	 * 	the studymoments of this student
-	 * 	|	studyMoments
-	 */
-	public ArrayList<StudyMoment> getStudyMoments() {
-		return studyMoments;
-	}
-	
-	/**
-	 * @return
-	 * 	the courses of the student
-	 * 	|	courses
-	 */
-	public ArrayList<CourseContract> getCourses() {
-		return courses;
-	}
-	
-	/**
-	 * @return
-	 * 	the starred locations of the student
-	 * 	|	starredLocations
-	 */
-	public ArrayList<Location> getStarredLocations(){
-		return starredLocations;
-	}
-	
-	/**
-	 * @return
-	 *  the friend list of the student
-	 *  | 	friendList
-	 */
-	public ArrayList<String> getFriendList(){
-		return friendList;
-	}
-	
-	/**
-	 * @return
-	 *  the requested friends of the student
-	 *  |	friendRequests
-	 */
-	public ArrayList<String> getFriendRequests() {
-		return friendRequests;
-	}
-	
-	/**
-	 * @param firstName
-	 * the new first name of the user
-	 * @post	the first name was changed
-	 * 	|	new.getFirstName() = firstName
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-		OwnOfy.ofy().put(this);
-	}
-	
-	/**
-	 * @param lastName
-	 * the new last name of the user
-	 * @post	the last name was changed
-	 * 	|	new.getLastName() = lastName
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-		OwnOfy.ofy().put(this);
-	}
-	
-	/**
 	 * @param password
 	 * 	the new password of the user
 	 * @throws InvalidPasswordException 
@@ -222,6 +167,26 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		this.password = password;
 		OwnOfy.ofy().put(this);
 	}
+
+	/**
+	 * @param 	password
+	 * 	the password that has to be checked
+	 * @return
+	 * 	true if the password matches this user's password
+	 * 	|	(getPassword().equals(password))
+	 */
+	public boolean isCorrectPassword(String password){
+		return (getPassword().equals(password));
+	}
+
+	/**
+	 * @return
+	 * 	the current study moment 
+	 * 	|	currentStudyMoment
+	 */
+	public StudyMoment getCurrentStudyMoment() {
+		return currentStudyMoment;
+	}
 	
 	/**
 	 * @param currentStudyMoment
@@ -233,16 +198,49 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		this.currentStudyMoment = currentStudyMoment;
 		OwnOfy.ofy().put(this);
 	}
-	
+
 	/**
-	 * @param courses
-	 * @post
-	 * 	the courses have been changed
-	 * 	|	new.getCourses() = courses
+	 * @param amount
+	 * 	the amount he studied
+	 * @param kind
+	 * 	what kind of studying he did
+	 * @throws AlreadyEndedException
+	 * @throws InvalidAmountException
+	 * @throws InvalidStudyMomentException 
+	 * @effect
+	 * 	|	StudyMoment moment = getCurrentStudyMoment()
+	 * 	|	addStuddyMoment(moment)
+	 * @effect
+	 * 	|	StudyMoment moment = getCurrentStudyMoment()
+	 * 	|	setCurrentStudyMoment(null)
 	 */
-	public void setCourses(ArrayList<CourseContract> courses) {
-		this.courses = courses;
-		OwnOfy.ofy().put(this);
+	public void endStudying(Date endDate, int amount, String kind) 
+			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException, InvalidStudyMomentException{
+		StudyMoment moment = getCurrentStudyMoment();
+		moment.endMoment(endDate, amount, kind);
+		addStudyMoment(moment);
+		setCurrentStudyMoment(null);
+	}
+
+	/**
+	 * @throws NotStudyingException 
+	 * 	|	getCurrentStudyMoment() == null
+	 * @effect
+	 * 	|	setCurrentStudyMoment(null)
+	 */
+	public void cancelCurrentStudyMoment() throws NotStudyingException{
+		if(getCurrentStudyMoment() == null)
+			throw new NotStudyingException();
+		setCurrentStudyMoment(null);
+	}
+
+	/**
+	 * @return
+	 * 	the studymoments of this student
+	 * 	|	studyMoments
+	 */
+	public ArrayList<StudyMoment> getStudyMoments() {
+		return studyMoments;
 	}
 	
 	/**
@@ -271,8 +269,47 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		OwnOfy.ofy().put(this);
 		return;
 	}
+
+	public long getTotalTimeStudied(){
+		long time = 0;
+		for(StudyMoment s: studyMoments){
+			time += s.getTime();
+		}
+		return time;
+	}
+
+	/**
+	 * @return
+	 * 	the courses of the student
+	 * 	|	courses
+	 */
+	public ArrayList<CourseContract> getCourses() {
+		return courses;
+	}
 	
-	
+	/**
+	 * Returns a list of the courses the student is taking, NOT THE COURSECONTRACTS!!!!
+	 * @return
+	 */
+	public ArrayList<Course> getCourseList(){
+		ArrayList<Course> courseList = new ArrayList<Course>();
+		for(CourseContract courseContract: courses){
+			courseList.add(courseContract.getCourse());
+		}
+		return courseList;
+	}
+
+	/**
+	 * @param courses
+	 * @post
+	 * 	the courses have been changed
+	 * 	|	new.getCourses() = courses
+	 */
+	public void setCourses(ArrayList<CourseContract> courses) {
+		this.courses = courses;
+		OwnOfy.ofy().put(this);
+	}
+
 	/**
 	  * @param course
 	 * 	the course you want to add
@@ -290,25 +327,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		getCourses().add(course);
 		OwnOfy.ofy().put(this);
 	}
-	
-	/**
-	  * @param location
-	 * 	the starred location you want to add
-	 * @post
-	 * 	the location was added to the student's starred locations
-	 * 	|	new.starredLocations.contains(location)
-	 */
-	public void addStarredLocation(Location location) throws NameAlreadyInUseException{
-		String name = location.getAlias();
-		for(Location existing : getStarredLocations()){
-			if(name.equals(existing.getAlias())){
-				throw(new NameAlreadyInUseException());
-			}
-		}
-		getStarredLocations().add(location);
-		OwnOfy.ofy().put(this);
-	}
-	
+
 	/**
 	 * @param	courseName
 	 * 	the name of the course you want to remove
@@ -325,34 +344,14 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		}
 		throw(new NoSuchCourseException());
 	}
-	
-	public void removeRequest(String username){
-		if(getFriendRequests().contains(username))
-			getFriendRequests().remove(username);
-		OwnOfy.ofy().put(this);
-	}
-	
-	/**
-	 * @param userName
-	 * 
-	 */
-	public void removeFriend(String userName) throws NotFriendException{
-		if(!isAFriend(userName))
-			throw new NotFriendException();
-		friendList.remove(userName);
-		OwnOfy.ofy().put(this);
-	}
 
 	/**
-	 * @param username
-	 * the user name who requested you as a friend
+	 * @return
+	 *  the friend list of the student
+	 *  | 	friendList
 	 */
-	public void requestedAsFriend(String userName) 
-			throws AlreadyRequestedException{
-		if(getFriendRequests().contains(userName))
-			throw new AlreadyRequestedException();
-		getFriendRequests().add(userName);
-		OwnOfy.ofy().put(this);
+	public ArrayList<String> getFriendList(){
+		return friendList;
 	}
 	
 	/**
@@ -365,61 +364,18 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		getFriendList().add(userName);
 		OwnOfy.ofy().put(this);
 	}
-	
-	public int getRequestNumbers(){
-		return getFriendRequests().size();
-	}
-	
+
 	/**
-	 * checks the validity of the username
 	 * @param userName
-	 * 	the username that has to be checked
-	 * @return
-	 * 	true, if it is a valid username
-	 * 	|	(userName.length() > 5) && (userName.length() < 25) &&
-	 *	|	(userName.matches("^[a-zA-Z_0-9]+$"))
+	 * 
 	 */
-	private boolean isValidUserName(String userName){
-		return 	(userName.length() > 5) && (userName.length() < 25) &&
-				(userName.matches("^[a-zA-Z_0-9]+$"));
+	public void removeFriend(String userName) throws NotFriendException{
+		if(!isAFriend(userName))
+			throw new NotFriendException();
+		friendList.remove(userName);
+		OwnOfy.ofy().put(this);
 	}
-	
-	/**
-	 * checks the validity of the mail address
-	 * @param 	mail
-	 * 	the mail address that has to be checked
-	 * @return
-	 * 	true, if it is a valid mail address
-	 * 	|	(mail.contains("@"))
-	 */
-	private boolean isValidMail(String mail) {
-		return	(mail.contains("@"));
-	}
-	
-	/**
-	 * checks the validity of the password
-	 * @param	password
-	 * 	the password that has to be checked
-	 * @return
-	 * 	true, if the password is valid
-	 * 	|	(password.length() > 5) && (password.length() < 25)
-	 */
-	private boolean isValidPassword(String password){
-		return 	(password.length() > 5) && (password.length() < 25);
-	}
-	
-	
-	/**
-	 * @param 	password
-	 * 	the password that has to be checked
-	 * @return
-	 * 	true if the password matches this user's password
-	 * 	|	(getPassword().equals(password))
-	 */
-	public boolean isCorrectPassword(String password){
-		return (getPassword().equals(password));
-	}
-	
+
 	/**
 	 * @param userName
 	 * the user name that has to be checked
@@ -430,84 +386,60 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	public boolean isAFriend(String userName){
 		return friendList.contains(userName);
 	}
+
+	/**
+	 * @return
+	 *  the requested friends of the student
+	 *  |	friendRequests
+	 */
+	public ArrayList<String> getFriendRequests() {
+		return friendRequests;
+	}
 	
 	/**
-	 * @param moment
-	 * the moment that has to be checked
-	 * @return
-	 * true if the studymoment is valid
-	 *  |	!moment.overlaps(studyMoments)
+	 * @param username
+	 * the user name who requested you as a friend
 	 */
-	private boolean IsValidStudyMoment(StudyMoment moment) {
-		boolean isValidMoment = true;
-		for(int i = 0; i < studyMoments.size(); i++){
-			StudyMoment momentToCheck = studyMoments.get(i);
-			Date a = momentToCheck.getStart();
-			Date b = momentToCheck.getEnd();
-			Date c = moment.getStart();
-			Date d = moment.getEnd();
-			if(c.after(a) && c.before(b))
-				isValidMoment = false;			
-			if(d.after(a) && d.before(b))
-				isValidMoment = false;
-			if(a.after(c) && a.before(d))
-				isValidMoment = false;
-		}
-			return isValidMoment;
+	public void requestedAsFriend(String userName) 
+			throws AlreadyRequestedException{
+		if(getFriendRequests().contains(userName))
+			throw new AlreadyRequestedException();
+		getFriendRequests().add(userName);
+		OwnOfy.ofy().put(this);
 	}
 
-	
-	/**
-	 * @throws NotStudyingException 
-	 * 	|	getCurrentStudyMoment() == null
-	 * @effect
-	 * 	|	setCurrentStudyMoment(null)
-	 */
-	public void cancelCurrentStudyMoment() throws NotStudyingException{
-		if(getCurrentStudyMoment() == null)
-			throw new NotStudyingException();
-		setCurrentStudyMoment(null);
+	public void removeRequest(String username){
+		if(getFriendRequests().contains(username))
+			getFriendRequests().remove(username);
+		OwnOfy.ofy().put(this);
 	}
-	
-	/**
-	 * @param amount
-	 * 	the amount he studied
-	 * @param kind
-	 * 	what kind of studying he did
-	 * @throws AlreadyEndedException
-	 * @throws InvalidAmountException
-	 * @throws InvalidStudyMomentException 
-	 * @effect
-	 * 	|	StudyMoment moment = getCurrentStudyMoment()
-	 * 	|	addStuddyMoment(moment)
-	 * @effect
-	 * 	|	StudyMoment moment = getCurrentStudyMoment()
-	 * 	|	setCurrentStudyMoment(null)
-	 */
-	public void endStudying(Date endDate, int amount, String kind) 
-			throws AlreadyEndedException, InvalidAmountException,InvalidEndDateException, InvalidStudyMomentException{
-		StudyMoment moment = getCurrentStudyMoment();
-		moment.endMoment(endDate, amount, kind);
-		addStudyMoment(moment);
-		setCurrentStudyMoment(null);
+
+	public int getRequestNumbers(){
+		return getFriendRequests().size();
 	}
-	
+
 	/**
-	 * compares user with other user
 	 * @return
-	 * 0 if the usernames of both users match
-	 * 	|	if(other.getUserName().equals(getUserName()))
-	 *	|		return 0
-	 * @return
-	 * -1 if the usernames of both users match
-	 * 	|	if(!other.getUserName().equals(getUserName()))
-	 *	|		return -1
+	 * 	the starred locations of the student
+	 * 	|	starredLocations
 	 */
-	public int compareTo(Student other) {
-		if(other.getUserName().equals(getUserName()))
-			return 0;
-		else
-			return -1;
+	public ArrayList<Location> getStarredLocations(){
+		return starredLocations;
+	}
+
+	/**
+	  * @param location
+	 * 	the starred location you want to add
+	 * @post
+	 * 	the location was added to the student's starred locations
+	 * 	|	new.starredLocations.contains(location)
+	 */
+	public void addStarredLocation(Location location) throws NameAlreadyInUseException{
+		String name = location.getAlias();
+	for(Location existing : getStarredLocations()){
+	 	 if(name.equals(existing.getAlias())){
+	 		 throw(new NameAlreadyInUseException());}
+		}
 	}
 	
 	/**
@@ -532,35 +464,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		return bestMatch;
 		
 	}
-	
-	/**
-	 * clones the user
-	 * @return
-	 * a User with the same information as this user
-	 * 	|	clonedUser = new User(getName(),getUserName())
-	 */
-	protected Object clone() throws CloneNotSupportedException {
-		Student clonedUser = null;
-		try {
-			clonedUser = new Student(getFirstName(),getLastName(),getUserName(),getMail(),getPassword());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return clonedUser;
-	}
-	
-	/**
-	 * Returns a list of the courses the student is taking, NOT THE COURSECONTRACTS!!!!
-	 * @return
-	 */
-	public ArrayList<Course> getCourseList(){
-		ArrayList<Course> courseList = new ArrayList<Course>();
-		for(CourseContract courseContract: courses){
-			courseList.add(courseContract.getCourse());
-		}
-		return courseList;
-	}
-	
+
 	public void convertEmptyArrayLists(){
 		if(studyMoments == null)
 			studyMoments = new ArrayList<StudyMoment>();
@@ -573,13 +477,86 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		if(starredLocations == null)
 			starredLocations = new ArrayList<Location>();
 	}
+
+	/**
+	 * compares user with other user
+	 * @return
+	 * 0 if the usernames of both users match
+	 * 	|	if(other.getUserName().equals(getUserName()))
+	 *	|		return 0
+	 * @return
+	 * -1 if the usernames of both users match
+	 * 	|	if(!other.getUserName().equals(getUserName()))
+	 *	|		return -1
+	 */
+	public int compareTo(Student other) {
+		if(other.getUserName().equals(getUserName()))
+			return 0;
+		else
+			return -1;
+	}
 	
-	public long getTotalTimeStudied(){
-		long time = 0;
-		for(StudyMoment s: studyMoments){
-			time += s.getTime();
+	/**
+	 * checks the validity of the username
+	 * @param userName
+	 * 	the username that has to be checked
+	 * @return
+	 * 	true, if it is a valid username
+	 * 	|	(userName.length() > 5) && (userName.length() < 25) &&
+	 *	|	(userName.matches("^[a-zA-Z_0-9]+$"))
+	 */
+	private boolean isValidUserName(String userName){
+		return 	(userName.length() > 5) && (userName.length() < 25) &&
+				(userName.matches("^[a-zA-Z_0-9]+$"));
+	}
+
+	/**
+	 * checks the validity of the mail address
+	 * @param 	mail
+	 * 	the mail address that has to be checked
+	 * @return
+	 * 	true, if it is a valid mail address
+	 * 	|	(mail.contains("@"))
+	 */
+	private boolean isValidMail(String mail) {
+		return	(mail.contains("@"));
+	}
+
+	/**
+	 * checks the validity of the password
+	 * @param	password
+	 * 	the password that has to be checked
+	 * @return
+	 * 	true, if the password is valid
+	 * 	|	(password.length() > 5) && (password.length() < 25)
+	 */
+	private boolean isValidPassword(String password){
+		return 	(password.length() > 5) && (password.length() < 25);
+	}
+
+	/**
+	 * @param moment
+	 * the moment that has to be checked
+	 * @return
+	 * true if the studymoment is valid
+	 *  |	!moment.overlaps(studyMoments)
+	 */
+	private boolean IsValidStudyMoment(StudyMoment moment) {
+		boolean isValidMoment = true;
+		for(int i = 0; i < studyMoments.size(); i++){
+			StudyMoment momentToCheck = studyMoments.get(i);
+			Date a = momentToCheck.getStart();
+			Date b = momentToCheck.getEnd();
+			Date c = moment.getStart();
+			Date d = moment.getEnd();
+			if(c.after(a) && c.before(b))
+				isValidMoment = false;			
+			if(d.after(a) && d.before(b))
+				isValidMoment = false;
+			if(a.after(c) && a.before(d))
+				isValidMoment = false;
 		}
-		return time;
+			return isValidMoment;
 	}
 
 }

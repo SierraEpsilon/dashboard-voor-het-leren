@@ -83,10 +83,7 @@ public class Statistics {
 		calendar.set(Calendar.MILLISECOND,0);
 		calendar.set(Calendar.DAY_OF_MONTH,1);
 		Date lastMonth = calendar.getTime();
-		if(calendar.get(Calendar.MONTH) == Calendar.DECEMBER)
-			calendar.set(Calendar.MONTH, Calendar.JANUARY);
-		else
-			calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1);
+		calendar.add(calendar.MONTH,1);
 		Date nextMonth = calendar.getTime();
 		ArrayList<StudyMoment> monthMoments = new ArrayList<StudyMoment>();
 		for(StudyMoment moment : moments)
