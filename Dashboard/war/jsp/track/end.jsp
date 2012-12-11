@@ -74,7 +74,7 @@
 		<%
 			if(moment.getLocation()!= null){
 				out.println("<h4>Locatie:</h4>");
-				out.println("<p>" + moment.getLocation().getAlias() + ":</p>");
+				out.println("<p>" + moment.getLocation().getAdres() + "</p>");
 			}
 		%>
 		<h3>U bent nu level:</h3>
@@ -101,7 +101,7 @@
 				while(ait.hasNext()){
 					Achievement achievement = ait.next();
 					String themeString = "";
-					output += ("<li id='progressbar" + id + "' data-icon='false'><a href='/jsp/achievement/detail.jsp?id="+ achievement.getId() + "'><img class='ui-li-icon custom-css' src='/inc/icons/" + achievement.getIcon() + "' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
+					output += ("<li id='progressbar" + id + "' data-icon='false'><img class='ui-li-icon custom-css' src='/inc/icons/" + achievement.getIcon() + "' style='z-index:2;'><div class='textinachievement'>" + achievement.getName() + "</div></a></li>");
 					progBarJS += ("$('#progressbar" + id + "').progressbar({ max: 100 });");
 					progBarJS += ("$('#progressbar" + id + "').progressbar({ value: " + Math.round(achievement.getProgress(student) * 100) + " });");
 					if(achievement.getProgress(student) >= 1){
@@ -115,6 +115,7 @@
 				out.println(output);
 			%>
 		</ul>
+		v<a href="/achievements" data-role="button" data-icon="star">Ga naar Achievements</a>
 	</div>
 	<script>
 	<%=levelbarJS%>

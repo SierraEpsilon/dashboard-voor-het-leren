@@ -208,8 +208,7 @@ public class Achievement implements Serializable {
 		if(needLocations){
 			ArrayList<Location> locations = new ArrayList<Location>();
 			for(StudyMoment moment: moments)
-				if(moment.getLocation() != null);
-				else if(!locations.contains(moment.getLocation()))
+				if(!locations.contains(moment.getLocation()))
 					locations.add(moment.getLocation());
 			int numberOfLocations = locations.size();
 			progress += checkLocationsProgress(numberOfLocations);
