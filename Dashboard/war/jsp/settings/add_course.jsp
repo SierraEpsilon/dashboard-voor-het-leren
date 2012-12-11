@@ -19,6 +19,7 @@
 <div data-role="header" data-id='header' data-position="fixed">
 	<h1>Learnalyzer</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
+	<a href="/jsp/settings/courses.jsp" data-role="button" data-icon="back" class="ui-btn-left">Terug</a>
 </div><!-- /header -->
 <div data-role="content">
 <form method='post' action='/add_course'>
