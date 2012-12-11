@@ -29,14 +29,10 @@ public class ComboAchievement extends Achievement {
 	}
 
 	public float getProgress(Student student) {
-		return getProgress(student.getStudyMoments());
-	}
-
-	public float getProgress(ArrayList<StudyMoment> studyMoments) {
 		float progress = 0;
 		int got = 0;
 		for (Achievement achievement : getAchievementList()) {
-			float achievementProgress = achievement.getProgress(studyMoments);
+			float achievementProgress = achievement.getProgress(student);
 			if (achievementProgress == 1) {
 				got++;
 				if (got == getNeeded())
