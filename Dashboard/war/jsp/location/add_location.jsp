@@ -19,7 +19,6 @@
 <div data-role="page" id="add_location_jsp">
 <script>
 $("div#add_location_jsp").bind("pageshow",function(){
-	$("#saveButton").hide();
 	$("#number").change(function(){
 		var given = $("#number").val();
 		if(given<1){
@@ -76,7 +75,6 @@ $("div#add_location_jsp").bind("pageshow",function(){
 				$("#longitude").val(res[0].geometry.location.lng());
 				$("#latitude").val(res[0].geometry.location.lat());
 				var url = "/jsp/location/save_location.jsp?naam=" + $("#name").val() + "&&adres=" + res[0].formatted_address + "&&lon=" + res[0].geometry.location.lng() + "&&lat=" + res[0].geometry.location.lat() + "&&straat=" + $("#street").val() + "&&num=" + $("#number").val() + "&&zip=" + $("#zip").val() + "&&city=" + $("#city").val();
-				alert(url);
 				window.location.href = url;
 			}
 			else{
