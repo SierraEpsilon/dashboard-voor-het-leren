@@ -51,7 +51,7 @@ public class StatServlet extends HttpServlet {
 						if(moments.size()==0){
 							//write error
 							LinkedHashMap<String,JSONArray> noData = new LinkedHashMap<String,JSONArray>();
-							noData.put("...", new JSONArray().put("Nog geen studiemomenten"));
+							noData.put("", new JSONArray().put("Nog geen studiemomenten"));
 							root.put(createCat("Geen gegevens","text","Nog geen studiemomenten",null,noData));
 						}else{
 							//tijdsverdeling over courses
@@ -94,6 +94,26 @@ public class StatServlet extends HttpServlet {
 							options.put("xlabel","Procentuele inspanning");
 							desc = "Vergelijking van hoeveel er relatief op elke dag gestudeerd werd";
 							root.put(createCat("Verdeling inspanningen over de week","bar",desc,options,verd));
+							//verdeling medestudenten
+							long[][] data = Statistics.getPeopleStats(5);
+							long prev = 0;
+							JSONArray labelsV = new JSONArray();
+							JSONArray valuesV = new JSONArray();
+							for(int i=0;i<data[0].length;i++){
+								labelsV.put(prev+" - "+data[0][i]);
+								valuesV.put(data[1][i]);
+								prev = data[0][i];
+							}
+							verd = new LinkedHashMap<String,JSONArray>();
+							dataArr = new JSONArray();
+							dataArr.put(valuesV);
+							dataArr.put(labelsV);
+							verd.put("", dataArr);
+							options = new JSONObject();
+							options.put("xlabel","Aantal studenten");
+							desc = "Vergelijking van de inspanningen van alle studenten in seconden";
+							root.put(createCat("Vergelijking medestudenten","bar",desc,options,verd));
+							
 							/*
 							JSONObject cat = new JSONObject();
 							cat.put("name", "test");
@@ -188,6 +208,26 @@ public class StatServlet extends HttpServlet {
 								verd.put("Individueel", new JSONArray().put(Statistics.creditProgress(course, student)));
 								verd.put("Gemiddeld", new JSONArray().put(Statistics.averageCreditProgress(course)));
 								root.put(createCat("Vooruitgang studiepunten","prog",desc,options,verd));
+								//verdeling medestudenten
+								long[][] data = Statistics.getPeopleStatsCourse(5,course);
+								long prev = 0;
+								JSONArray labelsV = new JSONArray();
+								JSONArray valuesV = new JSONArray();
+								for(int i=0;i<data[0].length;i++){
+									labelsV.put(prev+" - "+data[0][i]);
+									valuesV.put(data[1][i]);
+									prev = data[0][i];
+								}
+								verd = new LinkedHashMap<String,JSONArray>();
+								dataArr = new JSONArray();
+								dataArr.put(valuesV);
+								dataArr.put(labelsV);
+								verd.put("", dataArr);
+								options = new JSONObject();
+								options.put("xlabel","Aantal studenten");
+								desc = "Vergelijking van de inspanningen van alle studenten in seconden";
+								root.put(createCat("Vergelijking medestudenten","bar",desc,options,verd));
+								
 							}
 						}catch(NoSuchCourseException e){
 							PrintWriter writer = resp.getWriter();        

@@ -1,8 +1,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
 <html>
 <head>
-<%@include file="/inc/head.jsp"%>
-<%@include file="/inc/redirect.jsp"%>
+<%@include file="/WEB-INF/inc/head.jsp"%>
+<%@include file="/WEB-INF/inc/redirect.jsp"%>
 </head>
 <body>
 <div data-role="page" id="stats_course_jsp">

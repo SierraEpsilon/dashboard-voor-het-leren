@@ -25,10 +25,13 @@ public class Statistics {
 	 */
 	public static long getTime(Course course, ArrayList<StudyMoment> moments){
 		long time = 0;
-		for(StudyMoment moment : moments)
-			if(moment.getCourse().equals(course))
-				time += moment.getTime();
+		if(moments!=null){
+			for(StudyMoment moment : moments)
+				if(moment.getCourse().equals(course))
+					time += moment.getTime();
+		}
 		return time;
+			
 	}
 
 	/**
@@ -41,8 +44,10 @@ public class Statistics {
 	 */
 	public static long getTotalTime(ArrayList<StudyMoment> moments) {
 		long time = 0;
-		for(StudyMoment moment : moments)
-			time += moment.getTime();
+		if(moments!=null){
+			for(StudyMoment moment : moments)
+				time += moment.getTime();
+		}
 		return time;
 	}
 	
@@ -304,11 +309,13 @@ public class Statistics {
 		long total = 0;
 		for(Student student: allStudents){
 			ArrayList<CourseContract> contracts = student.getCourses();
-			for(CourseContract contract : contracts){
-				if(contract.getCourse().equals(course)){
-					all += creditProgress(course,student);
-					total++;
-					break;
+			if(contracts!=null){
+				for(CourseContract contract : contracts){
+					if(contract.getCourse().equals(course)){
+						all += creditProgress(course,student);
+						total++;
+						break;
+					}
 				}
 			}
 		}
