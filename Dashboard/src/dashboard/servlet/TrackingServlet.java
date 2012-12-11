@@ -97,7 +97,7 @@ public class TrackingServlet extends HttpServlet{
 		} else {//if the student was already studying
 			if(req.getParameter("submit").equals("Stop")){
 				try {
-					Student oldStudent = (Student) student.clone();
+					Student oldStudent = (Student)student.clone();
 					student.endStudying(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));
 					session.setAttribute("changedAchievements", AchievementRegistry.getChangedAchievements(student, oldStudent));
 					session.setAttribute("startTracking", null);

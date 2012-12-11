@@ -115,7 +115,7 @@
 				out.println(output);
 			%>
 		</ul>
-		v<a href="/achievements" data-role="button" data-icon="star">Ga naar Achievements</a>
+		<a href="/achievements" data-role="button" data-icon="star">Ga naar Achievements</a>
 	</div>
 	<script>
 	<%=levelbarJS%>

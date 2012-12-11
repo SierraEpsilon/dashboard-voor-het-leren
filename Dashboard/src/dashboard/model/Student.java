@@ -521,7 +521,8 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		clone.setStudyMoments(getStudyMoments());
+		clone.setStudyMoments((ArrayList<StudyMoment>) getStudyMoments().clone());
+		clone.setCurrentStudyMoment(getCurrentStudyMoment());
 		return clone;
 	}
 	
