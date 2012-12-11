@@ -449,7 +449,7 @@
    	</achievement>
    	<achievement>
        	<id>EXERCISE_1</id>
-       	<name>Praktisch Getraint</name>
+       	<name>Praktisch Getraind</name>
        	<desc>maak 100 oefeningen.</desc>
        	<course></course>
        	<icon>exercise.png</icon>
@@ -467,7 +467,7 @@
    	</achievement>
    	<achievement>
        	<id>THEORY_1</id>
-       	<name>Theoretisch Getraint</name>
+       	<name>Theoretisch Getraind</name>
        	<desc>lees 1000 pagina's.</desc>
        	<course></course>
        	<icon>theory.png</icon>
@@ -485,7 +485,7 @@
    	</achievement>
    	<achievement>
        	<id>READY_1</id>
-       	<name>Getraint voor alles</name>
+       	<name>Getraind voor alles</name>
        	<desc>lees 1500 pagina's en maak 150 oefeningen.</desc>
        	<course></course>
        	<icon>trained.png</icon>
