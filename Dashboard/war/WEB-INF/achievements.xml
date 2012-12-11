@@ -143,7 +143,7 @@
        	<needExercices>false</needExercices>
     </achievement>
     <achievement>
-        <id>REPEATING_STUDIED_IN_PERIOD_1</id>
+        <id>HOLLYDAY_1</id>
         <name>Christmas Student</name>
         <desc>Studeer op Kerstmis.</desc>
         <course></course>
@@ -176,6 +176,89 @@
         <needLocations>false</needLocations>
         <needPages>false</needPages>
        	<needExercices>false</needExercices>
+    </achievement>
+    <achievement>
+    <id>HOLLYDAY_2</id>
+        <name>Scary Student</name>
+        <desc>Studeer op Halloween.</desc>
+        <course></course>
+        <icon>halloween.png</icon>
+       	<visible>true</visible>
+        <combo>false</combo>
+       	<needTime>false</needTime>
+       	<needNumber>true</needNumber>
+       	<number>1</number>
+       	<needPeriod>true</needPeriod>
+       	<start>
+            <year>2010</year>
+            <month>10</month>
+            <day>31</day>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+        </start>
+        <end>
+            <year>2010</year>
+            <month>11</month>
+            <day>1</day>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>1</second>
+        </end>
+       	<needExpiration>false</needExpiration>
+       	<needRepeating>true</needRepeating>
+       	<reccuring>yearly</reccuring>
+       	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
+    </achievement>
+    <achievement>
+    	<id>HOLLYDAY_3</id>
+        <name>Funny Student</name>
+        <desc>Studeer op 1 april.</desc>
+        <course></course>
+        <icon>easter.png</icon>
+       	<visible>true</visible>
+        <combo>false</combo>
+       	<needTime>false</needTime>
+       	<needNumber>true</needNumber>
+       	<number>1</number>
+       	<needPeriod>true</needPeriod>
+       	<start>
+            <year>2010</year>
+            <month>4</month>
+            <day>1</day>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>0</second>
+        </start>
+        <end>
+            <year>2010</year>
+            <month>4</month>
+            <day>2</day>
+            <hour>0</hour>
+            <minute>0</minute>
+            <second>1</second>
+        </end>
+       	<needExpiration>false</needExpiration>
+       	<needRepeating>true</needRepeating>
+       	<reccuring>yearly</reccuring>
+       	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
+    </achievement>
+    <achievement>
+        <id>HOLLYDAY_COMBO_1</id>
+        <name>Feestende student</name>
+        <desc>Je studeerde al eens tijdens een feestdag.</desc>
+        <course></course>
+        <icon>hollyday.png</icon>
+        <visible>true</visible>
+        <combo>true</combo>
+        <needed>1</needed>
+        <subachievement>HOLLYDAY_1</subachievement>
+        <subachievement>HOLLYDAY_2</subachievement>
+        <subachievement>HOLLYDAY_3</subachievement>
     </achievement>
     <achievement>
         <id>REPEATING_STUDIED_IN_PERIOD_2</id>
