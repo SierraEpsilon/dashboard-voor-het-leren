@@ -26,10 +26,10 @@ public class TimeStudied extends Achievement {
 	
 	public float getProgress(ArrayList<StudyMoment> studyMoments) {
 		float progress = 0;
-		if(course == null){
+		if(getCourse() == null){
 			progress = Statistics.getTotalTime(studyMoments)/seconds;
 		} else {
-			progress = Statistics.getTime(course, studyMoments)/seconds;
+			progress = Statistics.getTime(getCourse(), studyMoments)/seconds;
 		}
 		if(progress>1){
 			progress = 1;
