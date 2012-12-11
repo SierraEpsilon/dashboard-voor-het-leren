@@ -57,7 +57,7 @@ public class RegistrationServlet extends HttpServlet {
 		String email = req.getParameter("mail");
 		String firstName = req.getParameter("firstname");
 		String lastName = req.getParameter("lastname");
-		String password = req.getParameter("password");
+		String password = req.getParameter("password1");
 		HttpSession session = req.getSession();
 		try{
 			StudentRegistry.addUser(firstName,lastName,username,email,password);//add the user to the list of existing users
