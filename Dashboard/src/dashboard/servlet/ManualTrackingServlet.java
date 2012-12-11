@@ -70,7 +70,7 @@ public class ManualTrackingServlet extends HttpServlet{
 					String kindStudied = (String) req.getParameter("kind");
 					student.addStudyMoment(new StudyMoment(startD, endD, usedCourse, number, kindStudied));
 					session.setAttribute("student", student);
-					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Het studiemoment werd correct toegevoegd.");
+					resp.sendRedirect("/jsp/moments/list.jsp");
 				} catch (InvalidEndDateException e) {
 					session.setAttribute("student", student);
 					resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Ongeldige data. Controleer of de einddatum na de begindatum is.");

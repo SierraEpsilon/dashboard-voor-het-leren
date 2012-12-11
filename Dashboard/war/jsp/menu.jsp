@@ -42,13 +42,13 @@ $(document).bind("pageinit",function(){
 	<ul data-role="listview">
 		<li><a href="/track">Tracken</a></li>
 		<li><a href="/add_manual">Toevoegen van studiemoment</a></li>
-		<li><a href="/friends">Vrienden  </a> <%=opt%> </li>
 		<li><a href="/stats">Statistieken</a></li>
 		<li><a href="/achievements">Achievements</a></li>
-		<li><a href="/settings">Instellingen</a></li>
 		<li><a href="/jsp/profile/info.jsp?std=<%=username%>">Profielpagina</a></li>
+		<li><a href="/friends">Vrienden  </a> <%=opt%> </li>
 		<li><a href="/jsp/moments/list.jsp">Studiemomenten</a></li>
-		<li><a href="/add_location">Locatie toevoegen</a></li>
+		<li><a href="/add_location">Locaties</a></li>
+		<li><a href="/settings">Instellingen</a></li>
 	</ul>
 	
 </div><!-- /content -->
