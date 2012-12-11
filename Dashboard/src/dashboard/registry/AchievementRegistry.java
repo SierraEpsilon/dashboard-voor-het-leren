@@ -85,6 +85,10 @@ public class AchievementRegistry {
 				achievement.addRepeatingRequirement(ae.getChildText("reccuring"));
 			if(ae.getChildText("needLocations").equals("true"))
 				achievement.addLocationRequirement(Integer.valueOf(ae.getChildText("numberOfLocations")));
+			if(ae.getChildText("needPages").equals("true"))
+				achievement.addPagesRequirement(Integer.valueOf(ae.getChildText("numberOfPages")));
+			if(ae.getChildText("needExercices").equals("true"))
+				achievement.addExercicesRequirement(Integer.valueOf(ae.getChildText("numberOfExercices")));
 			return achievement;
 		}
 	}

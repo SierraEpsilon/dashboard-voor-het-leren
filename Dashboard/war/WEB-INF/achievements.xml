@@ -15,6 +15,8 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
        	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
    	</achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_2</id>
@@ -31,6 +33,8 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
        	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_3</id>
@@ -47,6 +51,8 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
        	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_4</id>
@@ -63,6 +69,8 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
        	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_5</id>
@@ -79,6 +87,8 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
        	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_6</id>
@@ -95,6 +105,8 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
        	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>STUDIED_IN_PERIOD_1</id>
@@ -127,6 +139,8 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
        	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>REPEATING_STUDIED_IN_PERIOD_1</id>
@@ -160,6 +174,8 @@
        	<needRepeating>true</needRepeating>
         <reccuring>yearly</reccuring>
         <needLocations>false</needLocations>
+        <needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>REPEATING_STUDIED_IN_PERIOD_2</id>
@@ -193,6 +209,8 @@
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
         <needLocations>false</needLocations>
+        <needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>FULL_COMBINED_1</id>
@@ -250,6 +268,8 @@
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
         <needLocations>false</needLocations>
+        <needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>OMNI_2</id>
@@ -283,6 +303,8 @@
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
         <needLocations>false</needLocations>
+        <needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>OMNI_3</id>
@@ -316,6 +338,8 @@
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
         <needLocations>false</needLocations>
+        <needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>BLOK_1</id>
@@ -349,6 +373,8 @@
        	<needRepeating>true</needRepeating>
         <reccuring>yearly</reccuring>
         <needLocations>false</needLocations>
+        <needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>BLOK_2</id>
@@ -382,6 +408,8 @@
        	<needRepeating>true</needRepeating>
         <reccuring>yearly</reccuring>
         <needLocations>false</needLocations>
+        <needPages>false</needPages>
+       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
        	<id>LOCATION_1</id>
@@ -398,6 +426,8 @@
        	<needRepeating>false</needRepeating>
        	<needLocations>true</needLocations>
        	<numberOfLocations>3</numberOfLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
    	</achievement>
    	<achievement>
        	<id>LOCATION_2</id>
@@ -414,5 +444,62 @@
        	<needRepeating>false</needRepeating>
        	<needLocations>true</needLocations>
        	<numberOfLocations>5</numberOfLocations>
+       	<needPages>false</needPages>
+       	<needExercices>false</needExercices>
+   	</achievement>
+   	<achievement>
+       	<id>EXERCISE_1</id>
+       	<name>Praktisch Getraint</name>
+       	<desc>maak 100 oefeningen.</desc>
+       	<course></course>
+       	<icon>exercise.png</icon>
+       	<visible>true</visible>
+       	<combo>false</combo>
+       	<needTime>false</needTime>
+       	<needNumber>false</needNumber>
+       	<needPeriod>false</needPeriod>
+       	<needExpiration>false</needExpiration>
+       	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
+       	<needPages>false</needPages>
+       	<needExercices>true</needExercices>
+       	<numberOfExercices>100</numberOfExercices>
+   	</achievement>
+   	<achievement>
+       	<id>THEORY_1</id>
+       	<name>Theoretisch Getraint</name>
+       	<desc>lees 1000 pagina's.</desc>
+       	<course></course>
+       	<icon>theory.png</icon>
+       	<visible>true</visible>
+       	<combo>false</combo>
+       	<needTime>false</needTime>
+       	<needNumber>false</needNumber>
+       	<needPeriod>false</needPeriod>
+       	<needExpiration>false</needExpiration>
+       	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
+       	<needPages>true</needPages>
+       	<numberOfPages>1000</numberOfPages>
+       	<needExercices>false</needExercices>
+   	</achievement>
+   	<achievement>
+       	<id>READY_1</id>
+       	<name>Getraint voor alles</name>
+       	<desc>lees 1500 pagina's en maak 150 oefeningen.</desc>
+       	<course></course>
+       	<icon>trained.png</icon>
+       	<visible>true</visible>
+       	<combo>false</combo>
+       	<needTime>false</needTime>
+       	<needNumber>false</needNumber>
+       	<needPeriod>false</needPeriod>
+       	<needExpiration>false</needExpiration>
+       	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
+       	<needPages>true</needPages>
+       	<numberOfPages>1500</numberOfPages>
+       	<needExercices>true</needExercices>
+       	<numberOfExercices>150</numberOfExercices>
    	</achievement>
 </achievements>

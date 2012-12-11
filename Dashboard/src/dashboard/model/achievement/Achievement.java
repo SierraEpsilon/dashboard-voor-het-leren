@@ -73,6 +73,10 @@ public class Achievement implements Serializable {
 	private Repeat repeat;
 	private boolean needLocations;
 	private int numberOfLocations;
+	private boolean needPages;
+	private int numberOfPages;
+	private boolean needExercises;
+	private int numberOfExercises;
 	
 	
 	public Achievement(String id, String name, String desc, Course course, String icon, boolean visible){
@@ -109,6 +113,16 @@ public class Achievement implements Serializable {
 	public void addLocationRequirement(int numberOfLocations){
 		needLocations = true;
 		this.numberOfLocations = numberOfLocations;
+	}
+	
+	public void addPagesRequirement(int numberOfPages){
+		needPages = true;
+		this.numberOfPages = numberOfPages;
+	}
+	
+	public void addExercicesRequirement(int numberOfexercices){
+		needExercises = true;
+		this.numberOfExercises = numberOfexercices;
 	}
 	
 	public void addRepeatingRequirement(String sortRepeat){
@@ -165,6 +179,14 @@ public class Achievement implements Serializable {
 		return numberOfLocations;
 	}
 	
+	public int getNumberOfPages() {
+		return numberOfPages;
+	}
+	
+	public int getNumberOfExercises() {
+		return numberOfExercises;
+	}
+	
 	public float checkTimeProgress(long seconds){
 		float progress = 0;
 		float x = getTime();
@@ -191,6 +213,24 @@ public class Achievement implements Serializable {
 			progress = 1;
 		return progress;
 	}
+	
+	public float checkExercicesProgress(int numberOfExercices){
+		float progress = 0;
+		float x = getNumberOfExercises();
+		progress = numberOfExercices/x;
+		if(progress > 1)
+			progress = 1;
+		return progress;
+	}
+	
+	public float checkPagesProgress(int numberOfPages){
+		float progress = 0;
+		float x = getNumberOfPages();
+		progress = numberOfPages/x;
+		if(progress > 1)
+			progress = 1;
+		return progress;
+	}
 
 	private float checkProgress(ArrayList<StudyMoment> moments,Student student) {
 		float progress = 0;
@@ -203,6 +243,16 @@ public class Achievement implements Serializable {
 		if(needNumber){
 			int number = moments.size();
 			progress += checkNumberProgress(number);
+			parameters++;
+		}
+		if(needExercises){
+			int number = Statistics.getTotalExcercices(moments);
+			progress += checkExercicesProgress(number);
+			parameters++;
+		}
+		if(needPages){
+			int number = Statistics.getTotalPages(moments);
+			progress += checkPagesProgress(number);
 			parameters++;
 		}
 		if(needLocations){
