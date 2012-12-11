@@ -2,6 +2,7 @@ package dashboard.registry;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,8 +20,9 @@ import dashboard.error.NoSuchAchievementException;
 import dashboard.model.Course;
 import dashboard.model.Student;
 import dashboard.model.StudyMoment;
-import dashboard.model.achievement.Achievement;
-import dashboard.model.achievement.ComboAchievement;
+import dashboard.model.NewAchievement;
+import dashboard.model.NewCombined;
+import dashboard.model.achievement.*;
 import dashboard.util.CalendarToDateConverter;
 
 public class AchievementRegistry {
@@ -57,9 +59,30 @@ public class AchievementRegistry {
 			Course course = CourseRegistry.getCourseByID(ae.getChildText("Course"));
 			String icon = ae.getChildText("icon");
 			boolean visible = ae.getChildText("visible").equals("true");
-			Achievement achievement = new Achievement(id, name, desc, course, icon, visible);
-			if(ae.getChildText("combo").equals("true")){
-				int needed = Integer.valueOf(ae.getChildText("needed"));
+			String type = ae.getAttributeValue("type");
+			if(type.equals("TimeStudied")){ 
+				float seconds = Float.parseFloat(ae.getChildText("seconds"));
+				return new TimeStudied(id,name,desc,course,icon,visible,seconds);
+			} else if(type.equals("StudiedInPeriod")){
+				Date startDate = readDate(ae, "start");
+				Date endDate = readDate(ae, "end");
+				return new StudiedInPeriod(id,name,desc,course,icon,visible,startDate,endDate);
+			} else if(type.equals("RepeatingStudiedInPeriod")){
+				Date startDate2 = readDate(ae,"start");
+				Date endDate2 = readDate(ae, "end");
+				int repeatingType = getRepeatingTime(ae.getChildText("repeating"));
+				return new RepeatingStudiedInPeriod(id,name,desc,course,icon,visible,startDate2,endDate2,repeatingType);
+			} else if(type.equals("FullCombined")){
+				ArrayList<Achievement> cAchievementList = new ArrayList<Achievement>();
+				for(Element c: ae.getChildren("subachievement")){
+					try {
+						cAchievementList.add(getByID(c.getText()));
+					} catch (NoSuchAchievementException e1) {
+						e1.printStackTrace();
+					}
+				}
+				return new FullCombined(id,name,desc,course,icon,visible,cAchievementList);
+			} else if(type.equals("PartialCombined")){
 				ArrayList<Achievement> cAchievementList = new ArrayList<Achievement>();
 				for(Element c: ae.getChildren("subachievement")){
 					try{
@@ -68,7 +91,39 @@ public class AchievementRegistry {
 						e1.printStackTrace();
 					}
 				}
-				return new ComboAchievement(id,name,desc,course,icon,visible,cAchievementList,needed);
+				int amount = Integer.parseInt(ae.getChildText("amount"));
+				return new PartialCombined(id,name,desc,course,icon,visible,cAchievementList,amount);
+			} else if(type.equals("Omni")){
+				int amount = Integer.parseInt(ae.getChildText("amount"));
+				return new Omni(id,name,desc,course,icon,visible,amount);
+			} else {
+				return null;
+			}
+		}
+	}
+	
+	private static NewAchievement newGetAchievementFromElement(Element ae){
+		try{
+			return getByID(ae.getChildText("id"));
+		} catch(NoSuchAchievementException e){
+			String id = ae.getChildText("id");
+			String name = ae.getChildText("name");
+			String desc = ae.getChildText("desc");
+			Course course = CourseRegistry.getCourseByID(ae.getChildText("Course"));
+			String icon = ae.getChildText("icon");
+			boolean visible = ae.getChildText("visible").equals("true");
+			NewAchievement achievement = new NewAchievement(id, name, desc, course, icon, visible);
+			if(ae.getChildText("combo").equals("true")){
+				int needed = Integer.valueOf(ae.getChildText("needed"));
+				ArrayList<NewAchievement> cAchievementList = new ArrayList<NewAchievement>();
+				for(Element c: ae.getChildren("subachievement")){
+					try{
+						cAchievementList.add(getByID(c.getText()));
+					} catch (NoSuchAchievementException e1){
+						e1.printStackTrace();
+					}
+				}
+				return new NewCombined(id,name,desc,course,icon,visible,cAchievementList,needed);
 			}
 			if(ae.getChildText("needTime").equals("true"))
 				achievement.addTimeRequirement(Long.valueOf(ae.getChildText("time")));
@@ -109,23 +164,17 @@ public class AchievementRegistry {
 		}
 	}
 
-	private static ArrayList<Achievement> getTimeStudiedAchievements(){
-		ArrayList<Achievement> timeStudiedList = new ArrayList<Achievement>();
+	private static ArrayList<TimeStudied> getTimeStudiedAchievements(){
+		ArrayList<TimeStudied> timeStudiedList = new ArrayList<TimeStudied>();
 		Iterator<Course> it = CourseRegistry.getAllCourses().iterator();
 		while(it.hasNext()){
 			Course course = it.next();
-			Achievement ts1 = new Achievement("TIME_STUDIED_" + course.name() + "_1", course.getName() + " noob", "Studeer " + 2 * course.getCredit() + " minuten voor " + course.getName(), course, "noob.png", true);
-			ts1.addTimeRequirement(120 * course.getCredit());
-			Achievement ts2 = new Achievement("TIME_STUDIED_" + course.name() + "_2", course.getName() + " novice", "Studeer " + 10 * course.getCredit() + " minuten voor " + course.getName(), course, "novice.png",true);
-			ts2.addTimeRequirement(600 * course.getCredit());
-			Achievement ts3 = new Achievement("TIME_STUDIED_" + course.name() + "_3", course.getName() + " apprentice", "Studeer " + 1 * course.getCredit() + " uur voor " + course.getName(), course, "apprentice.png", true);
-			ts3.addTimeRequirement(3600 * course.getCredit());
-			Achievement ts4 = new Achievement("TIME_STUDIED_" + course.name() + "_4", course.getName() + " expert", "Studeer " + 4 * course.getCredit() + " uur voor " + course.getName(), course, "expert.png", true);
-			ts4.addTimeRequirement(14400 * course.getCredit());
-			Achievement ts5 = new Achievement("TIME_STUDIED_" + course.name() + "_5", course.getName() + " pro", "Studeer " + 10 * course.getCredit() + " uur voor " + course.getName(), course, "pro.png", true);
-			ts5.addTimeRequirement(36000 * course.getCredit());
-			Achievement ts6 = new Achievement("TIME_STUDIED_" + course.name() + "_6", course.getName() + " zombie", "Studeer " + 35 * course.getCredit() + " uur voor " + course.getName(), course, "zombie.png", true);
-			ts6.addTimeRequirement(126000 * course.getCredit());
+			TimeStudied ts1 = new TimeStudied("TIME_STUDIED_" + course.name() + "_1", course.getName() + " noob", "Studeer " + 2 * course.getCredit() + " minuten voor " + course.getName(), course, "noob.png", true,120 * course.getCredit());
+			TimeStudied ts2 = new TimeStudied("TIME_STUDIED_" + course.name() + "_2", course.getName() + " novice", "Studeer " + 10 * course.getCredit() + " minuten voor " + course.getName(), course, "novice.png", true,600 * course.getCredit());
+			TimeStudied ts3 = new TimeStudied("TIME_STUDIED_" + course.name() + "_3", course.getName() + " apprentice", "Studeer " + 1 * course.getCredit() + " uur voor " + course.getName(), course, "apprentice.png", true,3600 * course.getCredit());
+			TimeStudied ts4 = new TimeStudied("TIME_STUDIED_" + course.name() + "_4", course.getName() + " expert", "Studeer " + 4 * course.getCredit() + " uur voor " + course.getName(), course, "expert.png", true,14400 * course.getCredit());
+			TimeStudied ts5 = new TimeStudied("TIME_STUDIED_" + course.name() + "_5", course.getName() + " pro", "Studeer " + 10 * course.getCredit() + " uur voor " + course.getName(), course, "pro.png", true,36000 * course.getCredit());
+			TimeStudied ts6 = new TimeStudied("TIME_STUDIED_" + course.name() + "_6", course.getName() + " zombie", "Studeer " + 35 * course.getCredit() + " uur voor " + course.getName(), course, "zombie.png", true,126000 * course.getCredit());
 			timeStudiedList.addAll(Arrays.asList(ts1,ts2,ts3,ts4,ts5,ts6));
 		}
 		return timeStudiedList;

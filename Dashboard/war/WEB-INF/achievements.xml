@@ -1,108 +1,67 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <achievements>
- 	<achievement>
+ 	<achievement type="TimeStudied">
        	<id>TIME_STUDIED_TOTAL_1</id>
        	<name>Studying noob</name>
        	<desc>Studeer 30 minuten in totaal.</desc>
        	<course></course>
        	<icon>noob.png</icon>
        	<visible>true</visible>
-       	<combo>false</combo>
-       	<needTime>true</needTime>
-       	<time>1800</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
+       	<seconds>1800</seconds>
    	</achievement>
-    <achievement>
+    <achievement type="TimeStudied">
         <id>TIME_STUDIED_TOTAL_2</id>
         <name>Studying novice</name>
         <desc>Studeer 3 uur in totaal.</desc>
         <course></course>
         <icon>novice.png</icon>
        	<visible>true</visible>
-       	<combo>false</combo>
-       	<needTime>true</needTime>
-       	<time>10800</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
+        <seconds>10800</seconds>
     </achievement>
-    <achievement>
+    <achievement type="TimeStudied">
         <id>TIME_STUDIED_TOTAL_3</id>
         <name>Studying apprentice</name>
         <desc>Studeer 12 uur in totaal.</desc>
         <course></course>
         <icon>apprentice.png</icon>
        	<visible>true</visible>
-       	<combo>false</combo>
-       	<needTime>true</needTime>
-       	<time>43200</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
+        <seconds>43200</seconds>
     </achievement>
-    <achievement>
+    <achievement type="TimeStudied">
         <id>TIME_STUDIED_TOTAL_4</id>
         <name>Studying expert</name>
         <desc>Studeer 60 uur in totaal.</desc>
         <course></course>
-        <icon>expert2.png</icon>
+        <icon>expert.png</icon>
        	<visible>true</visible>
-       	<combo>false</combo>
-       	<needTime>true</needTime>
-       	<time>216000</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
+        <seconds>216000</seconds>
     </achievement>
-    <achievement>
+    <achievement type="TimeStudied">
         <id>TIME_STUDIED_TOTAL_5</id>
         <name>Studying pro</name>
         <desc>Studeer 120 uur in totaal.</desc>
         <course></course>
         <icon>pro.png</icon>
        	<visible>true</visible>
-       	<combo>false</combo>
-       	<needTime>true</needTime>
-       	<time>432000</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
+        <seconds>432000</seconds>
     </achievement>
-    <achievement>
+    <achievement type="TimeStudied">
         <id>TIME_STUDIED_TOTAL_6</id>
         <name>Studying zombie</name>
         <desc>Studeer 600 uur in totaal.</desc>
         <course></course>
         <icon>zombie.png</icon>
        	<visible>true</visible>
-       	<combo>false</combo>
-       	<needTime>true</needTime>
-       	<time>2160000</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
+        <seconds>2160000</seconds>
     </achievement>
-    <achievement>
+    <achievement type="StudiedInPeriod">
         <id>STUDIED_IN_PERIOD_1</id>
         <name>Launch Day Student</name>
         <desc>Studeer op de launch day van de app.</desc>
         <course></course>
-        <icon>launch.png</icon>
+        <icon>kerst.png</icon>
        	<visible>true</visible>
-        <combo>false</combo>
-       	<needTime>false</needTime>
-       	<needNumber>true</needNumber>
-       	<number>1</number>
-       	<needPeriod>true</needPeriod>
-       	<start>
+        <start>
             <year>2010</year>
             <month>12</month>
             <day>25</day>
@@ -118,23 +77,16 @@
             <minute>0</minute>
             <second>1</second>
         </end>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
     </achievement>
-    <achievement>
+    <achievement type="RepeatingStudiedInPeriod">
         <id>REPEATING_STUDIED_IN_PERIOD_1</id>
         <name>Christmas Student</name>
         <desc>Studeer op Kerstmis.</desc>
         <course></course>
         <icon>kerst.png</icon>
        	<visible>true</visible>
-       	<combo>false</combo>
-       	<needTime>false</needTime>
-       	<needNumber>true</needNumber>
-       	<number>1</number>
-       	<needPeriod>true</needPeriod>
-       	<start>
-            <year>2010</year>
+        <start>
+            <year>2012</year>
             <month>12</month>
             <day>25</day>
             <hour>0</hour>
@@ -142,30 +94,23 @@
             <second>0</second>
         </start>
         <end>
-            <year>2010</year>
+            <year>2012</year>
             <month>12</month>
             <day>26</day>
             <hour>0</hour>
             <minute>0</minute>
             <second>1</second>
         </end>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>true</needRepeating>
-        <reccuring>yearly</reccuring>
+        <repeating>yearly</repeating>
     </achievement>
-    <achievement>
+    <achievement type="RepeatingStudiedInPeriod">
         <id>REPEATING_STUDIED_IN_PERIOD_2</id>
         <name>Night owl</name>
         <desc>Studeer 's nachts.</desc>
         <course></course>
-        <icon>batman.png</icon>
+        <icon>kerst.png</icon>
         <visible>true</visible>
-        <combo>false</combo>
-        <needTime>false</needTime>
-       	<needNumber>true</needNumber>
-       	<number>1</number>
-       	<needPeriod>true</needPeriod>
-       	<start>
+        <start>
             <year>2012</year>
             <month>01</month>
             <day>01</day>
@@ -181,192 +126,54 @@
             <minute>0</minute>
             <second>0</second>
         </end>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>true</needRepeating>
-        <reccuring>daily</reccuring>
+        <repeating>daily</repeating>
     </achievement>
-    <achievement>
+    <achievement type="FullCombined">
         <id>FULL_COMBINED_1</id>
         <name>Klaar voor de examens</name>
         <desc>Studeer op kerstmis en heb in totaal meer dan 600 uur gestudeerd.</desc>
         <course></course>
-        <icon>ready.png</icon>
+        <icon>kerst.png</icon>
         <visible>true</visible>
-        <combo>true</combo>
-        <needed>2</needed>
         <subachievement>REPEATING_STUDIED_IN_PERIOD_1</subachievement>
         <subachievement>TIME_STUDIED_TOTAL_6</subachievement>
     </achievement>
-    <achievement>
+    <achievement type="PartialCombined">
         <id>PARTIAL_COMBINED_1</id>
         <name>Half klaar</name>
         <desc>Oftewel op kerstmis gestudeerd oftewel meer dan 600 uur gestudeerd.</desc>
         <course></course>
-        <icon>semiReady.png</icon>
+        <icon>kerst.png</icon>
         <visible>true</visible>
-        <combo>true</combo>
-        <needed>1</needed>
         <subachievement>REPEATING_STUDIED_IN_PERIOD_1</subachievement>
         <subachievement>TIME_STUDIED_TOTAL_6</subachievement>
+        <amount>1</amount>
     </achievement>
-    <achievement>
+    <achievement type="Omni">
         <id>OMNI_1</id>
         <name>Twijfelaar</name>
         <desc>Je hebt 2 vakken op een dag gestudeerd.</desc>
         <course></course>
         <icon>omni.png</icon>
         <visible>true</visible>
-        <combo>false</combo>
-        <needTime>false</needTime>
-       	<needNumber>true</needNumber>
-       	<number>2</number>
-       	<needPeriod>true</needPeriod>
-       	<start>
-            <year>2012</year>
-            <month>01</month>
-            <day>01</day>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-        </start>
-        <end>
-            <year>2012</year>
-            <month>01</month>
-            <day>01</day>
-            <hour>23</hour>
-            <minute>59</minute>
-            <second>59</second>
-        </end>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>true</needRepeating>
-        <reccuring>daily</reccuring>
+        <amount>2</amount>
     </achievement>
-    <achievement>
+    <achievement type="Omni">
         <id>OMNI_2</id>
         <name>Omni student</name>
         <desc>Je hebt 3 vakken op een dag gestudeerd.</desc>
         <course></course>
-        <icon>omni2.png</icon>
+        <icon>omni.png</icon>
         <visible>true</visible>
-        <combo>false</combo>
-        <needTime>false</needTime>
-       	<needNumber>true</needNumber>
-       	<number>3</number>
-       	<needPeriod>true</needPeriod>
-       	<start>
-            <year>2012</year>
-            <month>01</month>
-            <day>01</day>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-        </start>
-        <end>
-            <year>2012</year>
-            <month>01</month>
-            <day>01</day>
-            <hour>23</hour>
-            <minute>59</minute>
-            <second>59</second>
-        </end>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>true</needRepeating>
-        <reccuring>daily</reccuring>
+        <amount>3</amount>
     </achievement>
-    <achievement>
+    <achievement type="Omni">
         <id>OMNI_3</id>
         <name>Bazinga!</name>
         <desc>Je hebt 5 vakken op een dag gestudeerd.</desc>
         <course></course>
         <icon>autism.png</icon>
         <visible>true</visible>
-        <combo>false</combo>
-        <needTime>false</needTime>
-       	<needNumber>true</needNumber>
-       	<number>5</number>
-       	<needPeriod>true</needPeriod>
-       	<start>
-            <year>2012</year>
-            <month>01</month>
-            <day>01</day>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-        </start>
-        <end>
-            <year>2012</year>
-            <month>01</month>
-            <day>01</day>
-            <hour>23</hour>
-            <minute>59</minute>
-            <second>59</second>
-        </end>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>true</needRepeating>
-        <reccuring>daily</reccuring>
-    </achievement>
-    <achievement>
-        <id>BLOK_1</id>
-        <name>Kerst Blokker</name>
-        <desc>Je hebt 150 uur in de kerst blok gestudeerd.</desc>
-        <course></course>
-        <icon>blokKerst.png</icon>
-        <visible>true</visible>
-        <combo>false</combo>
-        <needTime>true</needTime>
-        <time>540000</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>true</needPeriod>
-       	<start>
-            <year>2012</year>
-            <month>12</month>
-            <day>21</day>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-        </start>
-        <end>
-            <year>2013</year>
-            <month>01</month>
-            <day>13</day>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-        </end>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>true</needRepeating>
-        <reccuring>yearly</reccuring>
-    </achievement>
-    <achievement>
-        <id>BLOK_2</id>
-        <name>Juni Blokker</name>
-        <desc>Je hebt 150 uur in de juni blok gestudeerd.</desc>
-        <course></course>
-        <icon>blokJuni.png</icon>
-        <visible>true</visible>
-        <combo>false</combo>
-        <needTime>true</needTime>
-        <time>540000</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>true</needPeriod>
-       	<start>
-            <year>2012</year>
-            <month>06</month>
-            <day>1</day>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-        </start>
-        <end>
-            <year>2012</year>
-            <month>06</month>
-            <day>30</day>
-            <hour>0</hour>
-            <minute>0</minute>
-            <second>0</second>
-        </end>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>true</needRepeating>
-        <reccuring>yearly</reccuring>
+        <amount>5</amount>
     </achievement>
 </achievements>
