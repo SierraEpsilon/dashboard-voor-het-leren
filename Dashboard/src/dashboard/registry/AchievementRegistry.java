@@ -21,6 +21,7 @@ import dashboard.model.Course;
 import dashboard.model.Student;
 import dashboard.model.StudyMoment;
 import dashboard.model.NewAchievement;
+import dashboard.model.NewCombined;
 import dashboard.model.achievement.*;
 import dashboard.util.CalendarToDateConverter;
 
@@ -113,7 +114,8 @@ public class AchievementRegistry {
 			boolean visible = ae.getChildText("visible").equals("true");
 			NewAchievement achievement = new NewAchievement(id, name, desc, course, icon, visible);
 			if(ae.getChildText("combo").equals("true")){
-				ArrayList<Achievement> cAchievementList = new ArrayList<Achievement>();
+				int needed = Integer.valueOf(ae.getChildText("needed"));
+				ArrayList<NewAchievement> cAchievementList = new ArrayList<NewAchievement>();
 				for(Element c: ae.getChildren("subachievement")){
 					try{
 						cAchievementList.add(getByID(c.getText()));
@@ -121,6 +123,7 @@ public class AchievementRegistry {
 						e1.printStackTrace();
 					}
 				}
+				return new NewCombined(id,name,desc,course,icon,visible,cAchievementList,needed);
 			}
 			if(ae.getChildText("needTime").equals("true"))
 				achievement.addTimeRequirement(Long.valueOf(ae.getChildText("time")));
