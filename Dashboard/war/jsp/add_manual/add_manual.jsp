@@ -26,7 +26,7 @@ $("div#add_manual_jsp").bind( "mobileinit", function(){
 </script>	
 
 <script>
-$('#add_manual_jsp').bind("pageshow",function(){
+$('div#add_manual_jsp').bind("pageshow",function(){
 	$("#startdate").change(function(){
 		var start = $("#startdate").val();
 		if($("#enddate").val() == ''){
