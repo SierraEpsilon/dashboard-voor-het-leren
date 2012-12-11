@@ -97,8 +97,9 @@ public class TrackingServlet extends HttpServlet{
 		} else {//if the student was already studying
 			if(req.getParameter("submit").equals("Stop")){
 				try {
+					Student oldStudent = (Student) student.clone();
 					student.endStudying(new Date(), Integer.parseInt(req.getParameter("amount")),req.getParameter("kind"));
-					session.setAttribute("changedAchievements", AchievementRegistry.getChangedAchievements(student));
+					session.setAttribute("changedAchievements", AchievementRegistry.getChangedAchievements(student, oldStudent));
 					session.setAttribute("startTracking", null);
 					session.setAttribute("course", null);
 					resp.sendRedirect("/jsp/track/end.jsp");//end the current studymoment
@@ -112,6 +113,8 @@ public class TrackingServlet extends HttpServlet{
 					resp.sendRedirect("/jsp/error.jsp?msg=Ongeldig aantal!");
 				} catch (InvalidStudyMomentException e) {
 					resp.sendRedirect("/jsp/error.jsp?msg=Overlap");
+					e.printStackTrace();
+				} catch (CloneNotSupportedException e) {
 					e.printStackTrace();
 				}
 			} else if(req.getParameter("submit").equals("Cancel")){//cancel the study moment

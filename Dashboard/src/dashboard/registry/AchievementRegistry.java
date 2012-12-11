@@ -194,14 +194,11 @@ public class AchievementRegistry {
 		return started;
 	}
 	
-	public static ArrayList<Achievement> getChangedAchievements(Student student){
+	public static ArrayList<Achievement> getChangedAchievements(Student student, Student oldStudent){
 		ArrayList<Achievement> changedAchievements = new ArrayList<Achievement>();
-		ArrayList<StudyMoment> newList = student.getStudyMoments();
-		ArrayList<StudyMoment> oldList = new ArrayList<StudyMoment>();
-		oldList.addAll(newList.subList(0, newList.size() - 1));
 		for(Achievement achievement: achievementList){
 			if(student.getCourseList().contains(achievement.getCourse())){
-				if(achievement.getProgress(oldList)!=achievement.getProgress(newList)){
+				if(achievement.getProgress(oldStudent)!=achievement.getProgress(student)){
 					changedAchievements.add(achievement);
 				}
 			}

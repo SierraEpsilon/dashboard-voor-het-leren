@@ -192,7 +192,7 @@ public class Achievement implements Serializable {
 		return progress;
 	}
 
-	private float checkProgress(ArrayList<StudyMoment> moments) {
+	private float checkProgress(ArrayList<StudyMoment> moments,Student student) {
 		float progress = 0;
 		float parameters = 0;
 		if(needTime){
@@ -206,10 +206,13 @@ public class Achievement implements Serializable {
 			parameters++;
 		}
 		if(needLocations){
-			ArrayList<Location> locations = new ArrayList<Location>();
+			ArrayList<String> locations = new ArrayList<String>();
 			for(StudyMoment moment: moments)
-				if(!locations.contains(moment.getLocation()))
-					locations.add(moment.getLocation());
+				if(moment.getLocation() != null){
+					String alias = student.matchStarredLocation(moment.getLocation(), 1000).getAlias();
+					if(!locations.contains(alias))
+						locations.add(alias);
+				}
 			int numberOfLocations = locations.size();
 			progress += checkLocationsProgress(numberOfLocations);
 			parameters++;
@@ -248,11 +251,7 @@ public class Achievement implements Serializable {
 	}
 
 	public float getProgress(Student student){
-		return getProgress(student.getStudyMoments());
-	}
-	
-	public float getProgress(ArrayList<StudyMoment> studyMoments){
-		ArrayList<StudyMoment> moments = studyMoments;
+		ArrayList<StudyMoment> moments = (ArrayList<StudyMoment>)student.getStudyMoments().clone();
 		if(getCourse() != null)
 			moments = Statistics.filterMomentsByCourse(moments, getCourse());
 		if(needExpiration)
@@ -263,7 +262,7 @@ public class Achievement implements Serializable {
 				Date end = repeat.changeDate(getEndDate(), moment.getStart());
 				end = checkDiffDates(end, getStartDate(),getEndDate());
 				ArrayList<StudyMoment>localMoments = Statistics.getMomentsPeriod(moments, start, end);
-				if(checkProgress(localMoments) == 1)
+				if(checkProgress(localMoments,student) == 1)
 					return 1;
 			}
 			Date now = new Date();
@@ -271,10 +270,10 @@ public class Achievement implements Serializable {
 			Date end = repeat.changeDate(getEndDate(), now);
 			end = checkDiffDates(end, getStartDate(),getEndDate());
 			moments = Statistics.getMomentsPeriod(moments, start, end);
-			return checkProgress(moments);
+			return checkProgress(moments,student);
 		}
 		if(needPeriod)
 			moments = Statistics.getMomentsPeriod(moments, getStartDate(), getEndDate());
-		return checkProgress(moments);
+		return checkProgress(moments,student);
 	}
 }

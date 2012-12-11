@@ -250,6 +250,10 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		return studyMoments;
 	}
 	
+	public void setStudyMoments(ArrayList<StudyMoment> studyMoments) {
+		this.studyMoments = studyMoments;
+	}
+	
 	/**
 	 * @param moment
 	 * 	the moment you want to add
@@ -508,6 +512,17 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			return 0;
 		else
 			return -1;
+	}
+	
+	public Object clone() throws CloneNotSupportedException {
+		Student clone = null;
+		try {
+			clone = new Student(getFirstName(),getLastName(),getUserName(),getMail(),getPassword());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		clone.setStudyMoments(getStudyMoments());
+		return clone;
 	}
 	
 	/**
