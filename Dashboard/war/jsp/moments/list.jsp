@@ -23,7 +23,7 @@
 		Student student = (Student)session.getAttribute("student");
 	%>
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
-	<h1><%=student.getFirstName() + " " + student.getLastName()%></h1>
+	<h1>Studiemomenten</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 </div><!-- /header -->
 <div data-role="content">

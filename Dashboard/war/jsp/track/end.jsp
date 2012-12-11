@@ -32,7 +32,7 @@
 <div data-role="page">
 <div data-role="header" data-id='header' data-position='fixed'>
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid">Menu</a>
-	<h1>Tracking Happy</h1>
+	<h1>Tracken</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 </div><!-- /header -->
 <div data-role="content">

@@ -14,7 +14,7 @@
 <body>
 <div data-role="page" id="register_jsp">
 <div data-role="header" data-id='header' data-position="fixed">
-		<h1>Register</h1>
+		<h1>Registreren</h1>
 		<a href="/jsp/login/login.jsp" data-icon="back">Terug</a>
 </div><!-- /header -->
 <div data-role="content">

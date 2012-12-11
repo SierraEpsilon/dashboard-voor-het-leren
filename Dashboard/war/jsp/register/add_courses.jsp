@@ -31,7 +31,7 @@ $(document).bind("pageinit",function(){
 });
 </script>
 <div data-role="header" data-id='header' data-position="fixed">
-	<h1>Learnalyzer</h1>
+	<h1>Vakken kiezen</h1>
 </div><!-- /header -->
 <div data-role="content">
 <form id='myCourseForm' action="/register" method="post">

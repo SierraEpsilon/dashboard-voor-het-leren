@@ -16,7 +16,7 @@
 <body>
 <div data-role="page" id="track_stop_jsp">
 <div data-role="header" data-id='header' data-position="fixed">
-	<h1>Learnalyzer</h1>
+	<h1>Tracken</h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 </div><!-- /header -->
