@@ -46,6 +46,22 @@ public class Statistics {
 		return time;
 	}
 	
+	public static int getTotalPages(ArrayList<StudyMoment> moments){
+		int pages = 0;
+		for(StudyMoment moment : moments)
+			if(moment.getKind().equals("Theorie"))
+				pages += moment.getAmount();
+		return pages;
+	}
+	
+	public static int getTotalExcercices(ArrayList<StudyMoment> moments){
+		int excercices = 0;
+		for(StudyMoment moment : moments)
+			if(moment.getKind().equals("Oefeningen"))
+				excercices += moment.getAmount();
+		return excercices;
+	}
+	
 	/**
 	 * @param moments
 	 * 	the moments you want to use to get the time from
