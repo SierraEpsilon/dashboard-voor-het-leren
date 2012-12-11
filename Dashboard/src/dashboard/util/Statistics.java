@@ -59,14 +59,10 @@ public class Statistics {
 		calendar.set(Calendar.SECOND,0);
 		calendar.set(Calendar.MILLISECOND,0);
 		calendar.set(Calendar.DAY_OF_WEEK,calendar.MONDAY);
-		Date lastWeek = calendar.getTime();
-		Date nextWeek = new Date(lastWeek.getTime() + 604800000);
-		ArrayList<StudyMoment> weekMoments = new ArrayList<StudyMoment>();
-		for(StudyMoment moment : moments)
-			if(moment.getStart().before(nextWeek) &&
-			moment.getStart().after(lastWeek))
-				weekMoments.add(moment);
-		return weekMoments;
+		Date start = calendar.getTime();
+		calendar.add(Calendar.WEEK_OF_YEAR,1);
+		Date end = calendar.getTime();
+		return getMomentsPeriod(moments, start, end);
 	}
 	
 	/**
@@ -82,15 +78,27 @@ public class Statistics {
 		calendar.set(Calendar.SECOND,0);
 		calendar.set(Calendar.MILLISECOND,0);
 		calendar.set(Calendar.DAY_OF_MONTH,1);
-		Date lastMonth = calendar.getTime();
+		Date start = calendar.getTime();
 		calendar.add(calendar.MONTH,1);
-		Date nextMonth = calendar.getTime();
-		ArrayList<StudyMoment> monthMoments = new ArrayList<StudyMoment>();
+		Date end = calendar.getTime();
+		return getMomentsPeriod(moments, start, end);
+	}
+	
+	public static ArrayList<StudyMoment> getMomentsPeriod(ArrayList<StudyMoment> moments, Date start,Date end){
+		ArrayList<StudyMoment> goodMoments = new ArrayList<StudyMoment>();
 		for(StudyMoment moment : moments)
-			if(moment.getStart().before(nextMonth) &&
-			moment.getStart().after(lastMonth))
-				monthMoments.add(moment);
-		return monthMoments;
+			if(moment.getStart().before(end) &&
+			moment.getStart().after(start))
+				goodMoments.add(moment);
+		return goodMoments;
+	}
+	
+	public static ArrayList<StudyMoment> getMomentsUntil(ArrayList<StudyMoment> moments,Date end){
+		ArrayList<StudyMoment> goodMoments = new ArrayList<StudyMoment>();
+		for(StudyMoment moment : moments)
+			if(moment.getStart().before(end))
+				goodMoments.add(moment);
+		return goodMoments;
 	}
 	
 	/**

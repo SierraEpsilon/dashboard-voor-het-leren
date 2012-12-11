@@ -20,6 +20,7 @@ import dashboard.error.NoSuchAchievementException;
 import dashboard.model.Course;
 import dashboard.model.Student;
 import dashboard.model.StudyMoment;
+import dashboard.model.NewAchievement;
 import dashboard.model.achievement.*;
 import dashboard.util.CalendarToDateConverter;
 
@@ -97,6 +98,44 @@ public class AchievementRegistry {
 			} else {
 				return null;
 			}
+		}
+	}
+	
+	private static NewAchievement newGetAchievementFromElement(Element ae){
+		try{
+			return getByID(ae.getChildText("id"));
+		} catch(NoSuchAchievementException e){
+			String id = ae.getChildText("id");
+			String name = ae.getChildText("name");
+			String desc = ae.getChildText("desc");
+			Course course = CourseRegistry.getCourseByID(ae.getChildText("Course"));
+			String icon = ae.getChildText("icon");
+			boolean visible = ae.getChildText("visible").equals("true");
+			NewAchievement achievement = new NewAchievement(id, name, desc, course, icon, visible);
+			if(ae.getChildText("combo").equals("true")){
+				ArrayList<Achievement> cAchievementList = new ArrayList<Achievement>();
+				for(Element c: ae.getChildren("subachievement")){
+					try{
+						cAchievementList.add(getByID(c.getText()));
+					} catch (NoSuchAchievementException e1){
+						e1.printStackTrace();
+					}
+				}
+			}
+			if(ae.getChildText("needTime").equals("true"))
+				achievement.addTimeRequirement(Long.valueOf(ae.getChildText("time")));
+			if(ae.getChildText("needNumber").equals("true"))
+				achievement.addNumberRequirement(Integer.valueOf(ae.getChildText("number")));
+			if(ae.getChildText("needPeriod").equals("true")){
+				Date start = readDate(ae, "start");
+				Date end = readDate(ae, "end");
+				achievement.addPeriodRequirement(start, end);
+			}
+			if(ae.getChildText("needExpiration").equals("true"))
+				achievement.addExpirationRequirement(readDate(ae, "end"));
+			if(ae.getChildText("needRepeating").equals("true"))
+				achievement.addRepeatingRequirement(ae.getChildText("reccuring"));
+			return achievement;
 		}
 	}
 	
