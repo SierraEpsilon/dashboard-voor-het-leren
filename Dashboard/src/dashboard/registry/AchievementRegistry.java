@@ -83,6 +83,8 @@ public class AchievementRegistry {
 				achievement.addExpirationRequirement(readDate(ae, "end"));
 			if(ae.getChildText("needRepeating").equals("true"))
 				achievement.addRepeatingRequirement(ae.getChildText("reccuring"));
+			if(ae.getChildText("needLocations").equals("true"))
+				achievement.addLocationRequirement(Integer.valueOf(ae.getChildText("numberOfLocations")));
 			return achievement;
 		}
 	}

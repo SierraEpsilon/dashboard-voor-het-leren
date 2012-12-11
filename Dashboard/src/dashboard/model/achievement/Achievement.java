@@ -6,6 +6,7 @@ import java.util.Calendar;
 import java.util.Date;
 
 import dashboard.model.Course;
+import dashboard.model.Location;
 import dashboard.model.Student;
 import dashboard.model.StudyMoment;
 import dashboard.util.Statistics;
@@ -70,6 +71,8 @@ public class Achievement implements Serializable {
 	private Date endDate;
 	private boolean needRepeating;
 	private Repeat repeat;
+	private boolean needLocations;
+	private int numberOfLocations;
 	
 	
 	public Achievement(String id, String name, String desc, Course course, String icon, boolean visible){
@@ -101,6 +104,11 @@ public class Achievement implements Serializable {
 		needPeriod = true;
 		this.startDate = startDate;
 		this.endDate = endDate;
+	}
+	
+	public void addLocationRequirement(int numberOfLocations){
+		needLocations = true;
+		this.numberOfLocations = numberOfLocations;
 	}
 	
 	public void addRepeatingRequirement(String sortRepeat){
@@ -153,6 +161,10 @@ public class Achievement implements Serializable {
 		return endDate;
 	}
 	
+	public int getNumberOfLocations() {
+		return numberOfLocations;
+	}
+	
 	public float checkTimeProgress(long seconds){
 		float progress = 0;
 		float x = getTime();
@@ -170,6 +182,15 @@ public class Achievement implements Serializable {
 			progress = 1;
 		return progress;
 	}
+	
+	public float checkLocationsProgress(int numberOfLocations){
+		float progress = 0;
+		float x = getNumberOfLocations();
+		progress = numberOfLocations/x;
+		if(progress > 1)
+			progress = 1;
+		return progress;
+	}
 
 	private float checkProgress(ArrayList<StudyMoment> moments) {
 		float progress = 0;
@@ -182,6 +203,16 @@ public class Achievement implements Serializable {
 		if(needNumber){
 			int number = moments.size();
 			progress += checkNumberProgress(number);
+			parameters++;
+		}
+		if(needLocations){
+			ArrayList<Location> locations = new ArrayList<Location>();
+			for(StudyMoment moment: moments)
+				if(moment.getLocation() != null);
+				else if(!locations.contains(moment.getLocation()))
+					locations.add(moment.getLocation());
+			int numberOfLocations = locations.size();
+			progress += checkLocationsProgress(numberOfLocations);
 			parameters++;
 		}
 		progress = progress/parameters;

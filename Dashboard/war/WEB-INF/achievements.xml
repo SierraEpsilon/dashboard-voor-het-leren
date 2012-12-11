@@ -14,6 +14,7 @@
        	<needPeriod>false</needPeriod>
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
    	</achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_2</id>
@@ -29,6 +30,7 @@
        	<needPeriod>false</needPeriod>
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_3</id>
@@ -44,6 +46,7 @@
        	<needPeriod>false</needPeriod>
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_4</id>
@@ -59,6 +62,7 @@
        	<needPeriod>false</needPeriod>
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_5</id>
@@ -74,6 +78,7 @@
        	<needPeriod>false</needPeriod>
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_6</id>
@@ -89,6 +94,7 @@
        	<needPeriod>false</needPeriod>
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>STUDIED_IN_PERIOD_1</id>
@@ -120,6 +126,7 @@
         </end>
        	<needExpiration>false</needExpiration>
        	<needRepeating>false</needRepeating>
+       	<needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>REPEATING_STUDIED_IN_PERIOD_1</id>
@@ -152,6 +159,7 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>yearly</reccuring>
+        <needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>REPEATING_STUDIED_IN_PERIOD_2</id>
@@ -184,6 +192,7 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
+        <needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>FULL_COMBINED_1</id>
@@ -240,6 +249,7 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
+        <needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>OMNI_2</id>
@@ -272,6 +282,7 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
+        <needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>OMNI_3</id>
@@ -304,6 +315,7 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
+        <needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>BLOK_1</id>
@@ -336,6 +348,7 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>yearly</reccuring>
+        <needLocations>false</needLocations>
     </achievement>
     <achievement>
         <id>BLOK_2</id>
@@ -368,5 +381,38 @@
        	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>yearly</reccuring>
+        <needLocations>false</needLocations>
     </achievement>
+    <achievement>
+       	<id>LOCATION_1</id>
+       	<name>Explorer</name>
+       	<desc>Studeer in 3 verschillende plaatsen.</desc>
+       	<course></course>
+       	<icon>explorer.png</icon>
+       	<visible>true</visible>
+       	<combo>false</combo>
+       	<needTime>false</needTime>
+       	<needNumber>false</needNumber>
+       	<needPeriod>false</needPeriod>
+       	<needExpiration>false</needExpiration>
+       	<needRepeating>false</needRepeating>
+       	<needLocations>true</needLocations>
+       	<numberOfLocations>3</numberOfLocations>
+   	</achievement>
+   	<achievement>
+       	<id>LOCATION_2</id>
+       	<name>Traveler</name>
+       	<desc>Studeer in 5 verschillende plaatsen.</desc>
+       	<course></course>
+       	<icon>traveler.png</icon>
+       	<visible>true</visible>
+       	<combo>false</combo>
+       	<needTime>false</needTime>
+       	<needNumber>false</needNumber>
+       	<needPeriod>false</needPeriod>
+       	<needExpiration>false</needExpiration>
+       	<needRepeating>false</needRepeating>
+       	<needLocations>true</needLocations>
+       	<numberOfLocations>5</numberOfLocations>
+   	</achievement>
 </achievements>

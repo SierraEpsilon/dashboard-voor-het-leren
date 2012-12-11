@@ -71,6 +71,12 @@
 				out.println("<h4>Aantal gemaakte oefeningen:</h4>");
 		%>
 		<p><%=moment.getAmount()%></p>
+		<%
+			if(moment.getLocation() != null){
+				out.println("<h4>Locatie:</h4>");
+				out.println("<p>" + moment.getLocation().getAdres() + "</p>");
+			}
+		%>
 		<%name = moment.getStart().toString(); %>
 		<button  type='submit' data-inline='true' data-icon='delete' name='submit' value='remove_<%=name%>'>Verwijder</button>
 	</div>

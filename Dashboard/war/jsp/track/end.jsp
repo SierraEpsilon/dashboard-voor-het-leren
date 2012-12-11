@@ -71,6 +71,12 @@
 				out.println("<h4>Aantal gemaakte oefeningen:</h4>");
 		%>
 		<p><%=moment.getAmount()%></p>
+		<%
+			if(moment.getLocation()!= null){
+				out.println("<h4>Locatie:</h4>");
+				out.println("<p>" + moment.getLocation().getAlias() + ":</p>");
+			}
+		%>
 		<h3>U bent nu level:</h3>
 		<%
 			long lvlTime = Statistics.getTime(moment.getCourse(), student.getStudyMoments());
