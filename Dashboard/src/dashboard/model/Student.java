@@ -321,6 +321,18 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		OwnOfy.ofy().put(this);
 	}
 
+	public void setFriendList(ArrayList<String> friendList) {
+		this.friendList = friendList;
+	}
+	
+	public void setFriendRequests(ArrayList<String> friendRequests) {
+		this.friendRequests = friendRequests;
+	}
+	
+	public void setStarredLocations(ArrayList<Location> starredLocations) {
+		this.starredLocations = starredLocations;
+	}
+	
 	/**
 	  * @param course
 	 * 	the course you want to add
@@ -522,6 +534,10 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			e.printStackTrace();
 		}
 		clone.setStudyMoments((ArrayList<StudyMoment>) getStudyMoments().clone());
+		clone.setStarredLocations((ArrayList<Location>) starredLocations.clone());
+		clone.setFriendRequests((ArrayList<String>) friendRequests.clone());
+		clone.setFriendList((ArrayList<String>) getFriendList().clone());
+		setCourses((ArrayList<CourseContract>) getCourses().clone());
 		clone.setCurrentStudyMoment(getCurrentStudyMoment());
 		return clone;
 	}
