@@ -240,4 +240,8 @@ public class StudentRegistry {
 			enemyUser.removeFriend(rejector.getUserName());
 		}
 	}
+
+	public static int getTotalFriends(Student student) {
+		return student.getFriendList().size();
+	}
 }

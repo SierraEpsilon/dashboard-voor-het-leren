@@ -459,4 +459,26 @@
        	<needExercices>true</needExercices>
        	<numberOfExercices>150</numberOfExercices>
    	</achievement>
+   	<achievement>
+       	<id>FRIENDS_1</id>
+       	<name>Vriendelijk Gezicht</name>
+       	<desc>Je hebt al 3 vrienden.</desc>
+       	<course></course>
+       	<icon>friends.png</icon>
+       	<visible>true</visible>
+       	<combo>false</combo>
+       	<needFriends>true</needFriends>
+       	<numberOfFriends>3</numberOfFriends>
+   	</achievement>
+   		<achievement>
+       	<id>FRIENDS_2</id>
+       	<name>El Sympatico</name>
+       	<desc>Je hebt al 5 vrienden.</desc>
+       	<course></course>
+       	<icon>lotsFriends.png</icon>
+       	<visible>true</visible>
+       	<combo>false</combo>
+       	<needFriends>true</needFriends>
+       	<numberOfFriends>5</numberOfFriends>
+   	</achievement>
 </achievements>

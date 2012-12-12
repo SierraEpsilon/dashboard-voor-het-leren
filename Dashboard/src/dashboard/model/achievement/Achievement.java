@@ -9,6 +9,7 @@ import dashboard.model.Course;
 import dashboard.model.Location;
 import dashboard.model.Student;
 import dashboard.model.StudyMoment;
+import dashboard.registry.StudentRegistry;
 import dashboard.util.Statistics;
 
 public class Achievement implements Serializable {
@@ -77,6 +78,8 @@ public class Achievement implements Serializable {
 	private int numberOfPages;
 	private boolean needExercises;
 	private int numberOfExercises;
+	private boolean needFriends;
+	private int numberOfFriends;
 	
 	
 	public Achievement(String id, String name, String desc, Course course, String icon, boolean visible){
@@ -123,6 +126,11 @@ public class Achievement implements Serializable {
 	public void addExercicesRequirement(int numberOfexercices){
 		needExercises = true;
 		this.numberOfExercises = numberOfexercices;
+	}
+	
+	public void addFriendssRequirement(int numberOfFriends){
+		needFriends = true;
+		this.numberOfFriends = numberOfFriends;
 	}
 	
 	public void addRepeatingRequirement(String sortRepeat){
@@ -187,6 +195,10 @@ public class Achievement implements Serializable {
 		return numberOfExercises;
 	}
 	
+	public int getNumberOfFriends() {
+		return numberOfFriends;
+	}
+	
 	public float checkTimeProgress(long seconds){
 		float progress = 0;
 		float x = getTime();
@@ -232,6 +244,15 @@ public class Achievement implements Serializable {
 		return progress;
 	}
 
+	public float checkFriendsProgress(int numberOfFriends){
+		float progress = 0;
+		float x = getNumberOfFriends();
+		progress = numberOfFriends/x;
+		if(progress > 1)
+			progress = 1;
+		return progress;
+	}
+	
 	private float checkProgress(ArrayList<StudyMoment> moments,Student student) {
 		float progress = 0;
 		float parameters = 0;
@@ -252,6 +273,11 @@ public class Achievement implements Serializable {
 		}
 		if(needPages){
 			int number = Statistics.getTotalPages(moments);
+			progress += checkPagesProgress(number);
+			parameters++;
+		}
+		if(needFriends){
+			int number = StudentRegistry.getTotalFriends(student);
 			progress += checkPagesProgress(number);
 			parameters++;
 		}

@@ -89,6 +89,8 @@ public class AchievementRegistry {
 				achievement.addPagesRequirement(Integer.valueOf(ae.getChildText("numberOfPages")));
 			if(ae.getChildText("needExercices")!= null && ae.getChildText("needExercices").equals("true"))
 				achievement.addExercicesRequirement(Integer.valueOf(ae.getChildText("numberOfExercices")));
+			if(ae.getChildText("needFriends")!= null && ae.getChildText("needFriends").equals("true"))
+				achievement.addExercicesRequirement(Integer.valueOf(ae.getChildText("numberOfFriends")));
 			return achievement;
 		}
 	}
