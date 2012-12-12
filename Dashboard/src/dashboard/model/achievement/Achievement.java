@@ -128,7 +128,7 @@ public class Achievement implements Serializable {
 		this.numberOfExercises = numberOfexercices;
 	}
 	
-	public void addFriendssRequirement(int numberOfFriends){
+	public void addFriendsRequirement(int numberOfFriends){
 		needFriends = true;
 		this.numberOfFriends = numberOfFriends;
 	}
