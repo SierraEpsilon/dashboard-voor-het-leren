@@ -55,7 +55,8 @@ $("div#save_location_jsp").bind("pageshow",function(){
 		String zip = (request.getParameter("zip")==null) ? "" : request.getParameter("zip");
 		String city = (request.getParameter("city")==null) ? "" : request.getParameter("city");
 		String backurl = "/jsp/location/add_location.jsp?naam=" + naam + "&&straat=" + straat + "&&num=" + num + "&&zip=" + zip + "&&city=" + city;
-		
+		if(adres.endsWith("Belgi")){
+			adres = adres + "ë";}
 		out.println("<li>" + naam + " : " + adres + "</li>");
 	%>
 	</ul>

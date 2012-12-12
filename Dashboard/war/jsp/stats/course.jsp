@@ -51,9 +51,6 @@
 		</div>
 </div>
 </div><!-- /content -->
-<div data-role='footer' data-id="foo1" data-position="fixed">
-<a href="/jsp/menu.jsp" data-role="button" data-icon="grid">Menu</a>
-</div>
 
 </div><!-- /page -->
 </body>
