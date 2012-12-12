@@ -278,7 +278,7 @@ public class Achievement implements Serializable {
 		}
 		if(needFriends){
 			int number = StudentRegistry.getTotalFriends(student);
-			progress += checkPagesProgress(number);
+			progress += checkFriendsProgress(number);
 			parameters++;
 		}
 		if(needLocations){
