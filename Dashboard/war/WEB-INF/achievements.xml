@@ -10,13 +10,6 @@
        	<combo>false</combo>
        	<needTime>true</needTime>
        	<time>1800</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
    	</achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_2</id>
@@ -28,13 +21,6 @@
        	<combo>false</combo>
        	<needTime>true</needTime>
        	<time>10800</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_3</id>
@@ -46,13 +32,6 @@
        	<combo>false</combo>
        	<needTime>true</needTime>
        	<time>43200</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_4</id>
@@ -64,13 +43,6 @@
        	<combo>false</combo>
        	<needTime>true</needTime>
        	<time>216000</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_5</id>
@@ -82,13 +54,6 @@
        	<combo>false</combo>
        	<needTime>true</needTime>
        	<time>432000</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>TIME_STUDIED_TOTAL_6</id>
@@ -100,13 +65,6 @@
        	<combo>false</combo>
        	<needTime>true</needTime>
        	<time>2160000</time>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>STUDIED_IN_PERIOD_1</id>
@@ -116,7 +74,6 @@
         <icon>launch.png</icon>
        	<visible>true</visible>
         <combo>false</combo>
-       	<needTime>false</needTime>
        	<needNumber>true</needNumber>
        	<number>1</number>
        	<needPeriod>true</needPeriod>
@@ -136,11 +93,6 @@
             <minute>0</minute>
             <second>1</second>
         </end>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>HOLLYDAY_1</id>
@@ -150,7 +102,6 @@
         <icon>kerst.png</icon>
        	<visible>true</visible>
        	<combo>false</combo>
-       	<needTime>false</needTime>
        	<needNumber>true</needNumber>
        	<number>1</number>
        	<needPeriod>true</needPeriod>
@@ -170,12 +121,8 @@
             <minute>0</minute>
             <second>1</second>
         </end>
-       	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>yearly</reccuring>
-        <needLocations>false</needLocations>
-        <needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
     <id>HOLLYDAY_2</id>
@@ -185,7 +132,6 @@
         <icon>halloween.png</icon>
        	<visible>true</visible>
         <combo>false</combo>
-       	<needTime>false</needTime>
        	<needNumber>true</needNumber>
        	<number>1</number>
        	<needPeriod>true</needPeriod>
@@ -205,12 +151,8 @@
             <minute>0</minute>
             <second>1</second>
         </end>
-       	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
        	<reccuring>yearly</reccuring>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
     	<id>HOLLYDAY_3</id>
@@ -220,7 +162,6 @@
         <icon>easter.png</icon>
        	<visible>true</visible>
         <combo>false</combo>
-       	<needTime>false</needTime>
        	<needNumber>true</needNumber>
        	<number>1</number>
        	<needPeriod>true</needPeriod>
@@ -240,12 +181,8 @@
             <minute>0</minute>
             <second>1</second>
         </end>
-       	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
        	<reccuring>yearly</reccuring>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>HOLLYDAY_COMBO_1</id>
@@ -268,7 +205,6 @@
         <icon>batman.png</icon>
         <visible>true</visible>
         <combo>false</combo>
-        <needTime>false</needTime>
        	<needNumber>true</needNumber>
        	<number>1</number>
        	<needPeriod>true</needPeriod>
@@ -288,12 +224,8 @@
             <minute>0</minute>
             <second>0</second>
         </end>
-       	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
-        <needLocations>false</needLocations>
-        <needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>FULL_COMBINED_1</id>
@@ -327,7 +259,6 @@
         <icon>omni.png</icon>
         <visible>true</visible>
         <combo>false</combo>
-        <needTime>false</needTime>
        	<needNumber>true</needNumber>
        	<number>2</number>
        	<needPeriod>true</needPeriod>
@@ -347,12 +278,8 @@
             <minute>59</minute>
             <second>59</second>
         </end>
-       	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
-        <needLocations>false</needLocations>
-        <needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>OMNI_2</id>
@@ -362,7 +289,6 @@
         <icon>omni2.png</icon>
         <visible>true</visible>
         <combo>false</combo>
-        <needTime>false</needTime>
        	<needNumber>true</needNumber>
        	<number>3</number>
        	<needPeriod>true</needPeriod>
@@ -382,12 +308,8 @@
             <minute>59</minute>
             <second>59</second>
         </end>
-       	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
-        <needLocations>false</needLocations>
-        <needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>OMNI_3</id>
@@ -417,12 +339,8 @@
             <minute>59</minute>
             <second>59</second>
         </end>
-       	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>daily</reccuring>
-        <needLocations>false</needLocations>
-        <needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>BLOK_1</id>
@@ -434,7 +352,6 @@
         <combo>false</combo>
         <needTime>true</needTime>
         <time>540000</time>
-       	<needNumber>false</needNumber>
        	<needPeriod>true</needPeriod>
        	<start>
             <year>2012</year>
@@ -452,12 +369,8 @@
             <minute>0</minute>
             <second>0</second>
         </end>
-       	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>yearly</reccuring>
-        <needLocations>false</needLocations>
-        <needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
         <id>BLOK_2</id>
@@ -469,7 +382,6 @@
         <combo>false</combo>
         <needTime>true</needTime>
         <time>540000</time>
-       	<needNumber>false</needNumber>
        	<needPeriod>true</needPeriod>
        	<start>
             <year>2012</year>
@@ -487,12 +399,8 @@
             <minute>0</minute>
             <second>0</second>
         </end>
-       	<needExpiration>false</needExpiration>
        	<needRepeating>true</needRepeating>
         <reccuring>yearly</reccuring>
-        <needLocations>false</needLocations>
-        <needPages>false</needPages>
-       	<needExercices>false</needExercices>
     </achievement>
     <achievement>
        	<id>LOCATION_1</id>
@@ -502,15 +410,8 @@
        	<icon>explorer.png</icon>
        	<visible>true</visible>
        	<combo>false</combo>
-       	<needTime>false</needTime>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
        	<needLocations>true</needLocations>
        	<numberOfLocations>3</numberOfLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
    	</achievement>
    	<achievement>
        	<id>LOCATION_2</id>
@@ -520,15 +421,8 @@
        	<icon>traveler.png</icon>
        	<visible>true</visible>
        	<combo>false</combo>
-       	<needTime>false</needTime>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
        	<needLocations>true</needLocations>
        	<numberOfLocations>5</numberOfLocations>
-       	<needPages>false</needPages>
-       	<needExercices>false</needExercices>
    	</achievement>
    	<achievement>
        	<id>EXERCISE_1</id>
@@ -538,13 +432,6 @@
        	<icon>exercise.png</icon>
        	<visible>true</visible>
        	<combo>false</combo>
-       	<needTime>false</needTime>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
-       	<needPages>false</needPages>
        	<needExercices>true</needExercices>
        	<numberOfExercices>100</numberOfExercices>
    	</achievement>
@@ -556,15 +443,8 @@
        	<icon>theory.png</icon>
        	<visible>true</visible>
        	<combo>false</combo>
-       	<needTime>false</needTime>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
        	<needPages>true</needPages>
        	<numberOfPages>1000</numberOfPages>
-       	<needExercices>false</needExercices>
    	</achievement>
    	<achievement>
        	<id>READY_1</id>
@@ -574,12 +454,6 @@
        	<icon>trained.png</icon>
        	<visible>true</visible>
        	<combo>false</combo>
-       	<needTime>false</needTime>
-       	<needNumber>false</needNumber>
-       	<needPeriod>false</needPeriod>
-       	<needExpiration>false</needExpiration>
-       	<needRepeating>false</needRepeating>
-       	<needLocations>false</needLocations>
        	<needPages>true</needPages>
        	<numberOfPages>1500</numberOfPages>
        	<needExercices>true</needExercices>
