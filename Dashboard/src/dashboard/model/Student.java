@@ -16,6 +16,8 @@ import dashboard.error.InvalidAmountException;
 import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidEndDateException;
 import dashboard.error.InvalidPasswordException;
+import dashboard.error.InvalidFirstNameException;
+import dashboard.error.InvalidLastNameException;
 import dashboard.error.InvalidStudyMomentException;
 import dashboard.error.InvalidUserNameException;
 import dashboard.error.NameAlreadyInUseException;
@@ -71,17 +73,22 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * new.getMail() = mail
 	 */
 	public Student(String firstName, String lastName, String userName, String mail, String password)
-			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
+			throws InvalidUserNameException, InvalidEmailException, InvalidPasswordException, InvalidFirstNameException, InvalidLastNameException{
 		if(!isValidUserName(userName))
 			throw new InvalidUserNameException();
 		if(!isValidMail(mail))
 			throw new InvalidEmailException();
 		if(!isValidPassword(password))
 			throw new InvalidPasswordException();
+		if(!isValidFirstName(firstName))
+			throw new InvalidFirstNameException();
+		if(!isValidLastName(lastName))
+			throw new InvalidLastNameException();
 		this.userName = userName;
 		this.mail = mail;
 		this.password = password;
-		setFirstName(firstName);
+		this.firstName = firstName;
+		this.lastName = lastName;
 		setLastName(lastName);
 		convertEmptyArrayLists();
 		refresh();
@@ -92,8 +99,8 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		this.userName = userName;
 		this.mail = mail;
 		this.password = password;
-		setFirstName(firstName);
-		setLastName(lastName);
+		this.firstName = firstName;
+		this.lastName = lastName;
 		convertEmptyArrayLists();
 	}
 
@@ -112,7 +119,9 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * @post	the first name was changed
 	 * 	|	new.getFirstName() = firstName
 	 */
-	public void setFirstName(String firstName) {
+	public void setFirstName(String firstName) throws InvalidFirstNameException {
+		if(!isValidFirstName(firstName))
+			throw new InvalidFirstNameException();
 		this.firstName = firstName;
 		refresh();
 	}
@@ -133,7 +142,9 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 * @post	the last name was changed
 	 * 	|	new.getLastName() = lastName
 	 */
-	public void setLastName(String lastName) {
+	public void setLastName(String lastName) throws InvalidLastNameException {
+		if(!isValidLastName(lastName))
+			throw new InvalidLastNameException();
 		this.lastName = lastName;
 		refresh();
 	}
@@ -565,6 +576,16 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private boolean isValidUserName(String userName){
 		return 	(userName.length() > 5) && (userName.length() < 25) &&
 				(userName.matches("^[a-zA-Z_0-9]+$"));
+	}
+	
+	private boolean isValidFirstName(String firstName){
+		return 	(firstName.length() > 1) && (firstName.length() < 25) &&
+				(firstName.matches("^[a-zA-Z]+$"));
+	}
+	
+	private boolean isValidLastName(String lastName){
+		return 	(lastName.length() > 0) && (lastName.length() < 25) &&
+				(lastName.matches("^[a-zA-Z]+$"));
 	}
 
 	/**

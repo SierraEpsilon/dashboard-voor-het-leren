@@ -10,6 +10,8 @@ import dashboard.error.EmailInUseException;
 import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
+import dashboard.error.InvalidFirstNameException;
+import dashboard.error.InvalidLastNameException;
 import dashboard.error.NotFriendException;
 import dashboard.error.UserNameInUseException;
 import dashboard.model.Course;
@@ -37,6 +39,10 @@ public class StudentRegistry {
 		} catch (UserNameInUseException e) {
 			e.printStackTrace();
 		} catch (InvalidUserNameException e) {
+			e.printStackTrace();
+		} catch (InvalidFirstNameException e) {
+			e.printStackTrace();
+		} catch (InvalidLastNameException e) {
 			e.printStackTrace();
 		} catch (InvalidEmailException e) {
 			e.printStackTrace();
@@ -197,7 +203,7 @@ public class StudentRegistry {
 	 * 	the user was added to users
 	 * 	|	new.getUsers().contains(user)
 	 */
-	public static void addUser(String firstName, String lastName, String username, String mail, String password) throws EmailInUseException, UserNameInUseException, InvalidUserNameException, InvalidEmailException, InvalidPasswordException{
+	public static void addUser(String firstName, String lastName, String username, String mail, String password) throws EmailInUseException, UserNameInUseException, InvalidUserNameException, InvalidFirstNameException, InvalidLastNameException, InvalidEmailException, InvalidPasswordException{
 		if(isMailExisting(mail)) {
 			throw new EmailInUseException();
 		} else if(isUserNameExisting(username)){

@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dashboard.error.InvalidPasswordException;
+import dashboard.error.InvalidFirstNameException;
+import dashboard.error.InvalidLastNameException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.model.Student;
 import dashboard.util.RegistryInitializer;
@@ -45,10 +47,17 @@ public class SettingServlet extends HttpServlet {
 			if(firstName.equals("") || lastName.equals(""))
 				resp.sendRedirect("/jsp/settings/userinfo.jsp?msg=Vul alle velden in!");
 			else{
+				try{
 				student.setFirstName(firstName);
 				student.setLastName(lastName);
 				session.setAttribute("student",student);
 				resp.sendRedirect("/jsp/settings/message.jsp?msg=Naam");
+				} catch (InvalidFirstNameException e) {
+					resp.sendRedirect("/jsp/settings/userinfo.jsp?msg=De voornaam moet minimum 2 en maximum 24 letters bevatten!");;
+				}catch (InvalidLastNameException e) {
+					resp.sendRedirect("/jsp/settings/userinfo.jsp?msg=De voornaam moet minimum 2 en maximum 24 letters bevatten!");;
+				}
+				
 			}
 		} else if(action.equals("passchange")){
 			String pass1 = req.getParameter("pass1");

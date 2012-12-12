@@ -12,6 +12,8 @@ import dashboard.error.EmailInUseException;
 import dashboard.error.InvalidEmailException;
 import dashboard.error.InvalidPasswordException;
 import dashboard.error.InvalidUserNameException;
+import dashboard.error.InvalidFirstNameException;
+import dashboard.error.InvalidLastNameException;
 import dashboard.error.NoSuchCourseException;
 import dashboard.error.UserNameInUseException;
 import dashboard.model.CourseContract;
@@ -67,6 +69,10 @@ public class RegistrationServlet extends HttpServlet {
 			resp.sendRedirect("/jsp/register/register.jsp?msg=De gebruikersnaam " + username + " is reeds in gebruik!");
 		} catch (InvalidUserNameException e){
 			resp.sendRedirect("/jsp/register/register.jsp?msg=De gebruikersnaam " + username + " is ongeldig!");
+		} catch (InvalidFirstNameException e){
+			resp.sendRedirect("/jsp/register/register.jsp?msg=De voornaam moet minimum 2 en maximum 24 letters bevatten!");
+		} catch (InvalidLastNameException e){
+			resp.sendRedirect("/jsp/register/register.jsp?msg=De achternaam moet minimum 2 en maximum 24 letters bevatten!");
 		} catch (EmailInUseException e){
 			resp.sendRedirect("/jsp/register/register.jsp?msg=Email: " + email + " is reeds in gebruik!");
 		} catch (InvalidEmailException e){
