@@ -70,24 +70,24 @@ public class AchievementRegistry {
 				}
 				return new ComboAchievement(id,name,desc,course,icon,visible,cAchievementList,needed);
 			}
-			if(ae.getChildText("needTime").equals("true"))
+			if(ae.getChildText("needTime")!= null && ae.getChildText("needTime").equals("true"))
 				achievement.addTimeRequirement(Long.valueOf(ae.getChildText("time")));
-			if(ae.getChildText("needNumber").equals("true"))
+			if(ae.getChildText("needNumber")!= null && ae.getChildText("needNumber").equals("true"))
 				achievement.addNumberRequirement(Integer.valueOf(ae.getChildText("number")));
-			if(ae.getChildText("needPeriod").equals("true")){
+			if(ae.getChildText("needPeriod")!= null && ae.getChildText("needPeriod").equals("true")){
 				Date start = readDate(ae, "start");
 				Date end = readDate(ae, "end");
 				achievement.addPeriodRequirement(start, end);
 			}
-			if(ae.getChildText("needExpiration").equals("true"))
+			if(ae.getChildText("needExpiration")!= null && ae.getChildText("needExpiration").equals("true"))
 				achievement.addExpirationRequirement(readDate(ae, "end"));
-			if(ae.getChildText("needRepeating").equals("true"))
+			if(ae.getChildText("needRepeating")!= null && ae.getChildText("needRepeating").equals("true"))
 				achievement.addRepeatingRequirement(ae.getChildText("reccuring"));
-			if(ae.getChildText("needLocations").equals("true"))
+			if(ae.getChildText("needLocations")!= null && ae.getChildText("needLocations").equals("true"))
 				achievement.addLocationRequirement(Integer.valueOf(ae.getChildText("numberOfLocations")));
-			if(ae.getChildText("needPages").equals("true"))
+			if(ae.getChildText("needPages")!= null && ae.getChildText("needPages").equals("true"))
 				achievement.addPagesRequirement(Integer.valueOf(ae.getChildText("numberOfPages")));
-			if(ae.getChildText("needExercices").equals("true"))
+			if(ae.getChildText("needExercices")!= null && ae.getChildText("needExercices").equals("true"))
 				achievement.addExercicesRequirement(Integer.valueOf(ae.getChildText("numberOfExercices")));
 			return achievement;
 		}
