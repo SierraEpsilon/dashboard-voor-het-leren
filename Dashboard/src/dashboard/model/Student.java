@@ -33,6 +33,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	private String userName;
 	private String mail;
 	private String password;
+	private boolean isCloned;
 	@Serialized private StudyMoment currentStudyMoment;
 	@Serialized private ArrayList<String> friendList;
 	@Serialized private ArrayList<String> friendRequests;
@@ -83,9 +84,19 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		setFirstName(firstName);
 		setLastName(lastName);
 		convertEmptyArrayLists();
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 	
+	public void setInfo(String firstName, String lastName, String userName, String mail, String password){
+		isCloned = true;
+		this.userName = userName;
+		this.mail = mail;
+		this.password = password;
+		setFirstName(firstName);
+		setLastName(lastName);
+		convertEmptyArrayLists();
+	}
+
 	/**
 	 * @return	
 	 *	the first name of the student
@@ -103,7 +114,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	/**
@@ -124,7 +135,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	/**
@@ -172,7 +183,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		if(!isValidPassword(password))
 			throw new InvalidPasswordException();
 		this.password = password;
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	/**
@@ -203,7 +214,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setCurrentStudyMoment(StudyMoment currentStudyMoment) {
 		this.currentStudyMoment = currentStudyMoment;
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	/**
@@ -267,17 +278,17 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			throw new InvalidStudyMomentException();
 		if(getStudyMoments().isEmpty()){
 			getStudyMoments().add(moment);
-			OwnOfy.ofy().put(this);
+			refresh();
 			return;
 		}
 		for(int i = getStudyMoments().size() - 1; i!=-1; i--)
 			if(moment.getStart().after(getStudyMoments().get(i).getStart())){
 				getStudyMoments().add(i + 1, moment);
-				OwnOfy.ofy().put(this);
+				refresh();
 				return;
 			}
 		getStudyMoments().add(0, moment);
-		OwnOfy.ofy().put(this);
+		refresh();
 		return;
 	}
 
@@ -318,7 +329,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void setCourses(ArrayList<CourseContract> courses) {
 		this.courses = courses;
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	public void setFriendList(ArrayList<String> friendList) {
@@ -333,6 +344,9 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		this.starredLocations = starredLocations;
 	}
 	
+	public void setCloned() {
+		this.isCloned = true;
+	}
 	/**
 	  * @param course
 	 * 	the course you want to add
@@ -348,7 +362,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			}
 		}
 		getCourses().add(course);
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	/**
@@ -361,7 +375,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		for(CourseContract course : getCourses()){
 			if(course.getCourse().getName().equals(courseName)){
 				getCourses().remove(course);
-				OwnOfy.ofy().put(this);
+				refresh();
 				return;
 			}
 		}
@@ -370,7 +384,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 
 	public void removeMoment(String momentString){
 		getStudyMoments().remove(getMoment(momentString));
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 	
 	/**
@@ -390,7 +404,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 */
 	public void addFriend(String userName) {
 		getFriendList().add(userName);
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	/**
@@ -401,7 +415,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		if(!isAFriend(userName))
 			throw new NotFriendException();
 		friendList.remove(userName);
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	/**
@@ -433,13 +447,13 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 		if(getFriendRequests().contains(userName))
 			throw new AlreadyRequestedException();
 		getFriendRequests().add(userName);
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	public void removeRequest(String username){
 		if(getFriendRequests().contains(username))
 			getFriendRequests().remove(username);
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 
 	public int getRequestNumbers(){
@@ -469,7 +483,7 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	 		 throw(new NameAlreadyInUseException());}
 		}
 		getStarredLocations().add(location);
-		OwnOfy.ofy().put(this);
+		refresh();
 	}
 	
 	/**
@@ -528,17 +542,14 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 	
 	public Object clone() throws CloneNotSupportedException {
 		Student clone = null;
-		try {
-			clone = new Student(getFirstName(),getLastName(),getUserName(),getMail(),getPassword());
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		clone = new Student();
+		clone.setInfo(getFirstName(),getLastName(),getUserName(),getMail(),getPassword());
 		clone.setStudyMoments((ArrayList<StudyMoment>) getStudyMoments().clone());
 		clone.setStarredLocations((ArrayList<Location>) starredLocations.clone());
 		clone.setFriendRequests((ArrayList<String>) friendRequests.clone());
 		clone.setFriendList((ArrayList<String>) getFriendList().clone());
 		setCourses((ArrayList<CourseContract>) getCourses().clone());
-		clone.setCurrentStudyMoment(getCurrentStudyMoment());
+		clone.setCurrentStudyMoment(getCurrentStudyMoment());	
 		return clone;
 	}
 	
@@ -605,4 +616,8 @@ public class Student implements Comparable<Student>,Cloneable,Serializable {
 			return isValidMoment;
 	}
 
+	private void refresh(){
+		if(!isCloned)
+			OwnOfy.ofy().put(this);
+	}
 }
