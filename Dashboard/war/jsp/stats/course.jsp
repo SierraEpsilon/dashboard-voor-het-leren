@@ -28,7 +28,7 @@
 	$(window).resize(function(){drawGraph();});
 	</script>
 <div data-role="header" data-id="header" data-position="fixed">
-	<h1>Statistieken van <%=course%></h1>
+	<h1><%=course%></h1>
 	<a href="/logout" data-role="button" data-icon="back" class="ui-btn-right">Afmelden</a>
 	<a href="/jsp/menu.jsp" data-role="button" data-icon="grid" class="ui-btn-left">Menu</a>
 	<div data-role="navbar">
