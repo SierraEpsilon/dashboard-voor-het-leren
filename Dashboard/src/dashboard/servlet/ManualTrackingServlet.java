@@ -46,14 +46,16 @@ public class ManualTrackingServlet extends HttpServlet{
 			try {
 				startD = df.parse((String) req.getParameter("startdate") +" " + (String)req.getParameter("starttime") + ":00" );
 			} catch (ParseException e2) {
-				// TODO Auto-generated catch block
+				session.setAttribute("student", student);
+				resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Ongeldige data. Controleer of de begindatum van de vorm 'yyyy-MM-dd uu:mm' is!");
 				e2.printStackTrace();
 			}
 			Date endD = new Date();
 			try {
 				endD = df.parse((String) req.getParameter("enddate") +" " + (String) req.getParameter("endtime") + ":00" );
 			} catch (ParseException e2) {
-				// TODO Auto-generated catch block
+				session.setAttribute("student", student);
+				resp.sendRedirect("/jsp/add_manual/add_manual.jsp?msg=Ongeldige data. Controleer of de einddatum van de vorm 'yyyy-MM-dd uu:mm' is!");
 				e2.printStackTrace();
 			}
 			Date testDate = new Date();
