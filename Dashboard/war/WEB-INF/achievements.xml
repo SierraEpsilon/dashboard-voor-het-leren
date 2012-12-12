@@ -236,7 +236,7 @@
         <visible>true</visible>
         <combo>true</combo>
         <needed>2</needed>
-        <subachievement>REPEATING_STUDIED_IN_PERIOD_1</subachievement>
+        <subachievement>HOLLYDAY_1</subachievement>
         <subachievement>TIME_STUDIED_TOTAL_6</subachievement>
     </achievement>
     <achievement>
@@ -248,7 +248,7 @@
         <visible>true</visible>
         <combo>true</combo>
         <needed>1</needed>
-        <subachievement>REPEATING_STUDIED_IN_PERIOD_1</subachievement>
+        <subachievement>HOLLYDAY_1</subachievement>
         <subachievement>TIME_STUDIED_TOTAL_6</subachievement>
     </achievement>
     <achievement>
