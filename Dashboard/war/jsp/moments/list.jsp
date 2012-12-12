@@ -32,7 +32,8 @@
 		<ul data-role="listview" data-filter="true"  style="margin: 5px">
 		<%
 			ArrayList<StudyMoment> moments = student.getStudyMoments();
-			for(StudyMoment moment : moments){
+			for( int i = moments.size()-1; i < 0; i--){
+				StudyMoment = moments.get(i);
 				String name = moment.getStart().toString();
 				out.println("<li><a href='/jsp/moments/moment.jsp?mmt="+ name +"'>"+ name + "</a></li>");
 			}
