@@ -32,7 +32,7 @@
 		<ul data-role="listview" data-filter="true"  style="margin: 5px">
 		<%
 			ArrayList<StudyMoment> moments = student.getStudyMoments();
-			for( int i = moments.size()-1; i < 0; i--){
+			for(int i = moments.size() - 1; i < 0; i--){
 				StudyMoment moment = moments.get(i);
 				String name = moment.getStart().toString();
 				out.println("<li><a href='/jsp/moments/moment.jsp?mmt="+ name +"'>"+ name + "</a></li>");
