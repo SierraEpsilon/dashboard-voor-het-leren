@@ -331,10 +331,12 @@ public class Statistics {
 		ArrayList<Long> times = new ArrayList<Long>();
 		long maxTime = 0;
 		for(Student student : StudentRegistry.getUsers()){
-			long time = getTime(course, student.getStudyMoments());
-			times.add(time);
-			if(time > maxTime)
-				maxTime = time;
+			if(student.getCourses().contains(course)){
+				long time = getTime(course, student.getStudyMoments());
+				times.add(time);
+				if(time > maxTime)
+					maxTime = time;
+			}
 		}
 		for(int i=0; i < sections; i++){
 			timeMatrix[0][i] = ((i+1)*maxTime)/sections;
