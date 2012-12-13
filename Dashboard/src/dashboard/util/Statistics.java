@@ -331,7 +331,7 @@ public class Statistics {
 		ArrayList<Long> times = new ArrayList<Long>();
 		long maxTime = 0;
 		for(Student student : StudentRegistry.getUsers()){
-			if(student.getCourses().contains(course)){
+			if(student.getCourseList().contains(course)){
 				long time = getTime(course, student.getStudyMoments());
 				times.add(time);
 				if(time > maxTime)
