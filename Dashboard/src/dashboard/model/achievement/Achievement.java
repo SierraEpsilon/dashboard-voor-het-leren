@@ -285,9 +285,12 @@ public class Achievement implements Serializable {
 			ArrayList<String> locations = new ArrayList<String>();
 			for(StudyMoment moment: moments)
 				if(moment.getLocation() != null && !student.getStarredLocations().isEmpty() && student.getStarredLocations() != null){
-					String alias = student.matchStarredLocation(moment.getLocation(), 1000).getAlias();
-					if(!locations.contains(alias))
-						locations.add(alias);
+					Location match = student.matchStarredLocation(moment.getLocation(), 1000);
+					if(match != null){
+						String alias = match.getAlias();
+						if(!locations.contains(alias))
+							locations.add(alias);
+					}
 				}
 			int numberOfLocations = locations.size();
 			progress += checkLocationsProgress(numberOfLocations);

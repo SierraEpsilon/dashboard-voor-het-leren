@@ -104,15 +104,15 @@ public class TrackingServlet extends HttpServlet{
 					session.setAttribute("course", null);
 					resp.sendRedirect("/jsp/track/end.jsp");//end the current studymoment
 				} catch (NumberFormatException e) {
-					resp.sendRedirect("/jsp/error.jsp?msg=Ongeldig aantal!");
+					resp.sendRedirect("/jsp/util/error.jsp?msg=Ongeldig aantal!");
 				} catch (AlreadyEndedException e) {
-					resp.sendRedirect("/jsp/error.jsp?msg=Dit studiemoment werd reeds gestopt!");
+					resp.sendRedirect("/jsp/util/error.jsp?msg=Dit studiemoment werd reeds gestopt!");
 				} catch (InvalidEndDateException e) {
-					resp.sendRedirect("/jsp/error.jsp?msg=Ongeldige einddatum?");
+					resp.sendRedirect("/jsp/util/error.jsp?msg=Ongeldige einddatum?");
 				} catch (InvalidAmountException e) {
-					resp.sendRedirect("/jsp/error.jsp?msg=Ongeldig aantal!");
+					resp.sendRedirect("/jsp/util/error.jsp?msg=Ongeldig aantal!");
 				} catch (InvalidStudyMomentException e) {
-					resp.sendRedirect("/jsp/error.jsp?msg=Overlap");
+					resp.sendRedirect("/jsp/util/error.jsp?msg=Overlap");
 					e.printStackTrace();
 				} catch (CloneNotSupportedException e) {
 					e.printStackTrace();
@@ -124,10 +124,10 @@ public class TrackingServlet extends HttpServlet{
 					session.setAttribute("course", null);
 					resp.sendRedirect("/track");
 				} catch (NotStudyingException e) {
-					resp.sendRedirect("/jsp/error.jsp?msg=U was niet aan het studeren!");
+					resp.sendRedirect("/jsp/util/error.jsp?msg=U was niet aan het studeren!");
 				}
 			} else {
-				resp.sendRedirect("/jsp/error.jsp");
+				resp.sendRedirect("/jsp/util/error.jsp");
 			}
 		}
 	} 
